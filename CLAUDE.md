@@ -216,6 +216,7 @@ The current week's specific plan lives at `.claude/plans/streamed-marinating-lak
 |---|---|---|---|
 | W1 | 1A | Build slider primitives + SHM/Taylor/Riemann demos | ✅ Done |
 | W2 | 1A (expand) | DerivativeSecant, DampedOscillator, GaussianUncertainty, FourierSquareWave, QuantumWell, RCCharging demos | ✅ Done |
+| W2.5 | infra + design | git init + Learning Paths data + Landing/Courses redesign with paths, stats bar, area cards, embedded demo | ✅ Done (push pending) |
 | W3 | 1B | Auto-scored numeric questions | ⏳ Next |
 | W4 | 1C | Streak + daily challenge | ⏳ Planned |
 | W5 | 2D | First 3B1B-style animation | ⏳ Planned |
@@ -226,3 +227,29 @@ The current week's specific plan lives at `.claude/plans/streamed-marinating-lak
 3. Run `npm run build` to confirm site is healthy.
 4. Run the missing-lessons script: `for course in content/courses/*/; do ... done` (see "Known Pitfalls").
 5. Continue at the in-progress task per the table above.
+
+## Deployment
+
+Project is its own git repo (separate from parent `/Users/franco`).
+
+- **Branch**: `main`
+- **Hosting**: Vercel — auto-deploys on every push to `main`
+- **Env vars** (set in Vercel dashboard, NOT committed):
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Local secrets** live in `.env.local` (gitignored). Template at `.env.local.example` is committed.
+
+### Standard deploy workflow
+```bash
+git add -A
+git commit -m "..."
+git push                  # Vercel detects, builds, deploys (~2 min)
+```
+
+### Adding new env vars
+1. Add to `.env.local` locally.
+2. Add to Vercel project → Settings → Environment Variables.
+3. Redeploy if needed.
+
+### Branch / preview deploys
+Push to any non-`main` branch → Vercel builds a preview URL. Useful for reviewing big content changes before they go live.
