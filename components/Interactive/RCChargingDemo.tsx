@@ -46,7 +46,7 @@ export default function RCChargingDemo() {
         <span className="text-foreground">{fiveTau.toFixed(3)}</span> (≈99.3%)
       </div>
       <figcaption className="mt-3 text-sm text-muted-foreground italic">
-        Smaller τ → faster charging. Standard rule of thumb: capacitor "settled" after about 5τ.
+        Smaller τ → faster charging. Standard rule of thumb: capacitor &ldquo;settled&rdquo; after about 5τ.
       </figcaption>
     </figure>
   );

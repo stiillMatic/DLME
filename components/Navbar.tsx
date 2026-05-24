@@ -25,6 +25,7 @@ export default function Navbar() {
       setUser(session?.user ?? null)
     );
     return () => listener.subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function signOut() {

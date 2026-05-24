@@ -73,7 +73,7 @@ export default function GaussianUncertaintyDemo() {
         = ℏ/2 (minimum uncertainty, fixed)
       </div>
       <figcaption className="mt-3 text-sm text-muted-foreground italic">
-        Narrowing position automatically widens momentum. The product cannot fall below ℏ/2 — Heisenberg's bound.
+        Narrowing position automatically widens momentum. The product cannot fall below ℏ/2 — Heisenberg&rsquo;s bound.
       </figcaption>
     </figure>
   );
