@@ -1,0 +1,70 @@
+---
+title: Chapter 4 Practice — Laplace Transforms
+description: Practice on transforms, inverses, and IVP solutions.
+---
+
+# Chapter 4 Practice — Laplace Transforms
+
+<ExQ>
+**1.** Find $\mathcal{L}\{e^{-3t}\sin(2t)\}$.
+</ExQ>
+<ExA>
+$\mathcal{L}\{\sin 2t\} = 2/(s^2 + 4)$. Shift: $2/((s+3)^2 + 4)$.
+</ExA>
+
+<ExQ>
+**2.** Find $\mathcal{L}^{-1}\{1/(s^2 - 4)\}$.
+</ExQ>
+<ExA>
+$1/(s^2 - 4) = 1/((s-2)(s+2)) = (1/4)[1/(s-2) - 1/(s+2)]$.
+
+Inverse: $(e^{2t} - e^{-2t})/4 = \sinh(2t)/2$.
+</ExA>
+
+<ExQ>
+**3.** Solve $y' + 3y = e^{-2t}$, $y(0) = 0$ via Laplace.
+</ExQ>
+<ExA>
+$sY + 3Y = 1/(s+2) \Rightarrow Y = 1/[(s+2)(s+3)] = 1/(s+2) - 1/(s+3)$.
+
+$y(t) = e^{-2t} - e^{-3t}$.
+</ExA>
+
+<ExQ>
+**4.** Solve $y'' + 4y = \delta(t - 2)$, $y(0) = 0, y'(0) = 0$.
+</ExQ>
+<ExA>
+Laplace: $s^2 Y + 4Y = e^{-2s} \Rightarrow Y = e^{-2s}/(s^2 + 4)$.
+
+$\mathcal{L}^{-1}\{1/(s^2 + 4)\} = \sin(2t)/2$. With shift:
+
+$y(t) = (1/2)\sin(2(t-2))H(t-2)$.
+
+System is silent until $t = 2$, then oscillates.
+</ExA>
+
+<ExQ>
+**5. Engineering: Step response.** A first-order system $\dot y + 5y = u(t)$ with $u(t) = 10 H(t)$, $y(0) = 0$. Find $y(t)$.
+</ExQ>
+<ExA>
+$sY + 5Y = 10/s \Rightarrow Y = 10/[s(s+5)] = 2/s - 2/(s+5)$.
+
+$y(t) = 2(1 - e^{-5t})$.
+
+Settled to 2 (steady state). Time constant $\tau = 1/5 = 0.2$ s.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why does a "stable system" correspond to "all poles in the left half plane" (negative real parts)?
+</ExQ>
+<ExA>
+Each pole $s = a + ib$ in the partial-fraction expansion contributes $e^{(a+ib)t} = e^{at}(\cos bt + i\sin bt)$.
+
+If $a < 0$: the term decays — bounded response. Stable.
+
+If $a > 0$: term grows unboundedly. Unstable.
+
+If $a = 0$: marginal. Pure oscillation (centers).
+
+So all poles need $\text{Re}(s) < 0$ for asymptotic stability. This is the heart of pole-placement design in control engineering.
+</ExA>

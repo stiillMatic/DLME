@@ -1,0 +1,147 @@
+---
+title: Linear Momentum and Collisions
+description: Momentum is always conserved in collisions — the key invariant that lets us analyze impacts without knowing the messy forces involved.
+---
+
+# Linear Momentum and Collisions
+
+## The Big Picture
+
+**Momentum** $\mathbf{p} = m\mathbf{v}$ is the "quantity of motion." Newton's second law in its original form: $\mathbf{F} = d\mathbf{p}/dt$. The deep significance: in any isolated system (no external forces), **total momentum is conserved**. This makes collision analysis tractable — we don't need to know the messy contact forces, just before and after states.
+
+## Momentum
+
+$$\mathbf{p} = m\mathbf{v}$$
+
+A vector. Units: kg·m/s.
+
+For a system of particles: $\mathbf{P} = \sum m_i\mathbf{v}_i$.
+
+## Impulse-Momentum Theorem
+
+$$\mathbf{F}\Delta t = \Delta\mathbf{p}$$
+
+For variable force: $\mathbf{J} = \int\mathbf{F}\,dt = \Delta\mathbf{p}$ (impulse).
+
+Same change in momentum can come from large force for short time (collision) or small force for long time (push).
+
+## Conservation of Momentum
+
+For isolated system: $\mathbf{P}_i = \mathbf{P}_f$.
+
+**Always** true — collisions, explosions, internal interactions. Even if KE is lost to heat, momentum is preserved.
+
+## Types of Collisions
+
+| Type | Momentum | Kinetic Energy |
+|---|---|---|
+| Elastic | Conserved | Conserved |
+| Inelastic | Conserved | Some lost (heat, deformation) |
+| Perfectly inelastic | Conserved | Maximum loss (objects stick) |
+
+## Elastic Collision (1D)
+
+Object 1 ($m_1, v_1$) hits stationary object 2 ($m_2$). After:
+
+$$v_1' = \frac{m_1 - m_2}{m_1 + m_2}v_1, \quad v_2' = \frac{2m_1}{m_1 + m_2}v_1$$
+
+Special cases:
+- $m_1 = m_2$: $v_1' = 0$, $v_2' = v_1$ — energy fully transferred.
+- $m_1 \gg m_2$: $v_2' \approx 2v_1$ — light object kicked twice as fast.
+- $m_1 \ll m_2$: $v_1' \approx -v_1$ — bounce back at same speed.
+
+## Perfectly Inelastic
+
+Stuck together after collision:
+
+$$m_1 v_1 = (m_1 + m_2)v'$$
+
+$$v' = \frac{m_1 v_1}{m_1 + m_2}$$
+
+## Common Misconceptions
+
+**Misconception 1: "Momentum is just a fancy name for force."**
+
+Force is the *rate of change* of momentum. Different units, different concepts.
+
+**Misconception 2: "Momentum conservation requires no friction."**
+
+Conserved if no **external** forces. Internal friction (between colliding parts) is fine — that's internal momentum transfer.
+
+**Misconception 3: "Energy is conserved in all collisions."**
+
+KE conservation only in elastic. Generally KE is lost (to heat, sound, deformation). Momentum **always** conserved.
+
+## Engineering Connection
+
+- **Crumple zones in cars:** extend collision duration → reduce peak force on passengers.
+- **Recoil:** firing a gun → bullet forward, gun backward; momentum balance.
+- **Rocket equation:** continuous mass ejection drives rocket forward (Tsiolkovsky equation).
+- **Particle accelerators:** colliding beam experiments use momentum/energy conservation to identify products.
+- **Sports physics:** baseball bat, golf club — collision design for max momentum transfer.
+- **Forensic science:** crash reconstruction uses momentum conservation to infer pre-crash speeds.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** 2 kg ball at 5 m/s hits stationary 3 kg ball, sticks. Final velocity?
+</ExQ>
+<ExA>
+$p_i = 2\cdot 5 = 10$ kg·m/s.
+
+$p_f = (2+3)v' = 5v'$.
+
+$v' = 2$ m/s.
+
+KE before: $25$ J. After: $\tfrac{1}{2}\cdot 5\cdot 4 = 10$ J. Lost: 15 J (60% to heat/deformation).
+</ExA>
+
+<ExQ>
+**2.** Elastic head-on collision: $m_1 = 1$ kg at 4 m/s hits $m_2 = 3$ kg stationary. Final velocities?
+</ExQ>
+<ExA>
+$v_1' = (1-3)/(1+3)\cdot 4 = -2$ m/s (bounces back).
+
+$v_2' = 2(1)/(1+3)\cdot 4 = 2$ m/s.
+
+Check momentum: $1\cdot(-2) + 3\cdot 2 = 4$ ✓.
+
+Check KE: $\tfrac{1}{2}(1)(4) + \tfrac{1}{2}(3)(4) = 8$ J = $\tfrac{1}{2}(1)(16)$ ✓.
+</ExA>
+
+<ExQ>
+**3. Engineering: Crumple zone.** A car at 20 m/s crashes. Crumple zone extends impact from 0.05 s to 0.3 s. Force reduction factor?
+</ExQ>
+<ExA>
+Impulse: $J = m\Delta v$ (fixed).
+
+Force: $F = J/\Delta t$. Force ratio: $0.05/0.3 = 0.167 \approx 1/6$.
+
+So **force reduced by 6×**. That can be the difference between survivable and fatal — why crumple zones are mandatory.
+
+Modern airbags, seat belts, deformable bumpers all use this "extend the impact time" principle.
+</ExA>
+
+<ExQ>
+**4.** Rocket of mass 1000 kg ejects 10 kg/s gas at 2000 m/s. Thrust?
+</ExQ>
+<ExA>
+Thrust = rate of momentum ejection = $\dot m v_e = 10\cdot 2000 = 20000$ N = 20 kN.
+
+If rocket weight ~10 kN, has acceleration $\sim 1g$ initially. As fuel depletes, $m$ decreases and acceleration grows — Tsiolkovsky's insight.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does a baseball player follow through after hitting the ball?
+</ExQ>
+<ExA>
+Extending follow-through extends the bat-ball contact time. By impulse-momentum, longer contact → larger $\Delta p$ at same average force → ball leaves faster.
+
+Optimal swings aren't just hard-hitting — they're long-contact through the ball.
+
+Same principle: tennis players "follow through," golfers extend their swing, boxers don't stop at the target.
+
+In all cases: maximize $\int F\,dt$, not just peak $F$.
+</ExA>

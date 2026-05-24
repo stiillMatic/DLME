@@ -1,0 +1,58 @@
+---
+title: Chapter 3 Practice — Eigenvalues
+description: Practice on eigenvalue computation and SVD.
+---
+
+# Chapter 3 Practice — Eigenvalues
+
+<ExQ>
+**1.** Eigenvalues of $A = \begin{pmatrix}3 & 1\\ 0 & 2\end{pmatrix}$?
+</ExQ>
+<ExA>
+Triangular: eigenvalues are diagonal entries: 3 and 2.
+</ExA>
+
+<ExQ>
+**2.** Eigenvalues of $A = \begin{pmatrix}4 & -2\\ 1 & 1\end{pmatrix}$?
+</ExQ>
+<ExA>
+$\det(A - \lambda I) = (4-\lambda)(1-\lambda) - (-2)(1) = \lambda^2 - 5\lambda + 6 = 0$.
+
+$\lambda = 2, 3$.
+</ExA>
+
+<ExQ>
+**3.** Find eigenvector of $A = \begin{pmatrix}2&1\\0&3\end{pmatrix}$ for $\lambda = 3$.
+</ExQ>
+<ExA>
+$(A - 3I)\mathbf{v} = 0$: $\begin{pmatrix}-1 & 1\\ 0 & 0\end{pmatrix}\mathbf{v} = 0$.
+
+$-v_1 + v_2 = 0 \Rightarrow \mathbf{v} = (1, 1)^T$ (or any scalar multiple).
+</ExA>
+
+<ExQ>
+**4. Conceptual: SVD.** Why is SVD called "the swiss army knife of linear algebra"?
+</ExQ>
+<ExA>
+SVD works for *any* matrix (rectangular, singular, non-diagonalizable). It reveals:
+- Rank (number of nonzero singular values)
+- Range/null space (left/right singular vectors)
+- Best low-rank approximation (Eckart-Young)
+- Pseudo-inverse (for least squares)
+- Condition number ($\sigma_{\max}/\sigma_{\min}$)
+
+One decomposition unlocks many problems.
+</ExA>
+
+<ExQ>
+**5. Engineering.** A structural stiffness matrix has eigenvalues $k_1 = 100, k_2 = 250, k_3 = 500$ (N/m), with mass $m = 1$ kg per mode. Find natural frequencies in Hz.
+</ExQ>
+<ExA>
+$\omega_i = \sqrt{k_i/m}$.
+
+$\omega_1 = 10$ rad/s → $f_1 = 1.59$ Hz.
+$\omega_2 = \sqrt{250} \approx 15.8$ rad/s → 2.52 Hz.
+$\omega_3 = \sqrt{500} \approx 22.4$ rad/s → 3.56 Hz.
+
+Modal analysis result.
+</ExA>

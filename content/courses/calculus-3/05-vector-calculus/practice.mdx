@@ -1,0 +1,49 @@
+---
+title: Chapter 5 Practice — Vector Calculus
+description: Practice on vector fields and the fundamental theorems.
+---
+
+# Chapter 5 Practice — Vector Calculus
+
+<ExQ>
+**1.** $\mathbf{F} = (xy, yz, xz)$. Find $\nabla\cdot\mathbf{F}$.
+</ExQ>
+<ExA>
+$y + z + x = x + y + z$.
+</ExA>
+
+<ExQ>
+**2.** $\mathbf{F} = (z, x, y)$. Find $\nabla\times\mathbf{F}$.
+</ExQ>
+<ExA>
+$(\partial_y y - \partial_z x, \partial_z z - \partial_x y, \partial_x x - \partial_y z) = (1, 1, 1)$.
+</ExA>
+
+<ExQ>
+**3.** Use Green's theorem: $\oint_C(x^2 + y^2)\,dx + 2xy\,dy$ around square $[0,1]^2$ CCW.
+</ExQ>
+<ExA>
+$\partial Q/\partial x - \partial P/\partial y = 2y - 2y = 0$. Integral = 0.
+</ExA>
+
+<ExQ>
+**4. Engineering: Total flux.** Compute total flux of $\mathbf{F} = (x^3, y^3, z^3)$ through unit sphere.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{F} = 3x^2 + 3y^2 + 3z^2 = 3\rho^2$.
+
+$\iiint 3\rho^2\,dV = 3\int_0^{2\pi}\int_0^\pi\int_0^1 \rho^4\sin\phi\,d\rho\,d\phi\,d\theta = 3\cdot 2\pi\cdot 2\cdot 1/5 = 12\pi/5$.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is $\nabla\cdot(\nabla\times\mathbf{F}) = 0$ always?
+</ExQ>
+<ExA>
+By direct computation using Clairaut's theorem (mixed partials commute):
+
+$\nabla\cdot(\nabla\times\mathbf{F}) = \partial_x(\partial_y R - \partial_z Q) + \partial_y(\partial_z P - \partial_x R) + \partial_z(\partial_x Q - \partial_y P)$
+
+All terms cancel pairwise. Identically zero.
+
+**Physical:** any field expressible as a curl is automatically divergence-free. This is why magnetic fields ($\mathbf{B} = \nabla\times\mathbf{A}$) have no monopoles.
+</ExA>

@@ -1,0 +1,82 @@
+---
+title: Eigenvalues and Eigenvectors
+description: Finding eigenvalues and eigenvectors and understanding what they mean physically.
+---
+
+# Eigenvalues and Eigenvectors
+
+For a square matrix $A$, a non-zero vector $\mathbf{x}$ is an **eigenvector** with **eigenvalue** $\lambda$ if:
+
+$$A\mathbf{x} = \lambda \mathbf{x}$$
+
+The matrix only stretches or flips this vector — it doesn't rotate it.
+
+## Finding Eigenvalues
+
+Rearrange: $(A - \lambda I)\mathbf{x} = \mathbf{0}$. For non-trivial solutions, the matrix must be singular:
+
+$$\det(A - \lambda I) = 0$$
+
+This is the **characteristic equation**. Its roots are the eigenvalues.
+
+## Example
+
+$$A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}$$
+
+$$\det(A - \lambda I) = (4-\lambda)(3-\lambda) - (1)(2) = \lambda^2 - 7\lambda + 10 = 0$$
+
+$$(\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5,\ \lambda_2 = 2$$
+
+**Eigenvector for $\lambda_1 = 5$:** Solve $(A - 5I)\mathbf{x} = \mathbf{0}$:
+
+$$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \mathbf{x} = \mathbf{0} \implies \mathbf{x}_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$$
+
+## Physical Meaning in ME
+
+| Context | Eigenvalue meaning |
+|---|---|
+| Structural vibration ($K\mathbf{x} = \omega^2 M\mathbf{x}$) | $\omega^2$ = natural frequency squared |
+| Buckling ($K\mathbf{x} = \lambda K_g\mathbf{x}$) | $\lambda$ = buckling load factor |
+| Principal stresses (stress tensor) | Eigenvalues = $\sigma_1, \sigma_2, \sigma_3$ |
+| PCA in data analysis | Eigenvalues = variance captured per mode |
+
+## Properties
+
+- Symmetric matrices ($A = A^T$) always have **real** eigenvalues
+- Symmetric matrices have **orthogonal** eigenvectors
+- $\det(A) = \prod \lambda_i$ and $\text{trace}(A) = \sum \lambda_i$
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the eigenvalues of $A = \begin{pmatrix} 2 & -1 \\ -4 & 5 \end{pmatrix}$.
+</ExQ>
+<ExA>
+$$\det(A - \lambda I) = (2-\lambda)(5-\lambda) - (-1)(-4) = \lambda^2 - 7\lambda + 6 = 0$$
+
+$$(\lambda - 1)(\lambda - 6) = 0 \implies \boxed{\lambda_1 = 1,\ \lambda_2 = 6}$$
+</ExA>
+
+<ExQ>
+Verify that $\mathbf{x} = (1, 1)^T$ is an eigenvector of $A = \begin{pmatrix} 3 & 2 \\ 2 & 3 \end{pmatrix}$, and find the corresponding eigenvalue.
+</ExQ>
+<ExA>
+$$A\mathbf{x} = \begin{pmatrix} 3 & 2 \\ 2 & 3 \end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}5\\5\end{pmatrix} = 5\begin{pmatrix}1\\1\end{pmatrix}$$
+
+Yes, $\mathbf{x}$ is an eigenvector with eigenvalue $\boxed{\lambda = 5}$.
+</ExA>
+
+<ExQ>
+A structure has stiffness matrix $K = \begin{pmatrix} 5 & -2 \\ -2 & 2 \end{pmatrix}$ kN/mm and mass matrix $M = I$. Write the characteristic equation for the natural frequencies $\omega^2$.
+</ExQ>
+<ExA>
+The eigenvalue problem is $K\mathbf{x} = \omega^2 \mathbf{x}$, so we need $\det(K - \omega^2 I) = 0$:
+
+$$\det\begin{pmatrix} 5-\omega^2 & -2 \\ -2 & 2-\omega^2 \end{pmatrix} = (5-\omega^2)(2-\omega^2) - 4 = 0$$
+
+$$\omega^4 - 7\omega^2 + 6 = 0 \implies (\omega^2-1)(\omega^2-6) = 0$$
+
+Natural frequencies: $\omega_1 = 1\ \text{rad/s}$, $\omega_2 = \sqrt{6}\ \text{rad/s}$.
+</ExA>

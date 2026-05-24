@@ -1,0 +1,148 @@
+---
+title: Quantum Numbers and Electron Configuration
+description: Four quantum numbers fully specify each electron — and their pattern explains the structure of the periodic table.
+---
+
+# Quantum Numbers and Electron Configuration
+
+## The Big Picture
+
+In quantum mechanics, electrons aren't in orbits but **orbitals** — 3D regions of high probability. Each orbital is labeled by **quantum numbers** that derive from solving the Schrödinger equation for the atom. The way electrons fill these orbitals (the **electron configuration**) determines an atom's chemistry. The periodic table is literally a map of these configurations.
+
+## Four Quantum Numbers
+
+Each electron has a unique set:
+
+| Number | Symbol | Values | What it means |
+|---|---|---|---|
+| Principal | $n$ | 1, 2, 3, ... | Energy level (shell) |
+| Angular momentum | $\ell$ | 0 to $n-1$ | Subshell (s, p, d, f) |
+| Magnetic | $m_\ell$ | $-\ell$ to $+\ell$ | Orientation |
+| Spin | $m_s$ | $+1/2$ or $-1/2$ | Spin direction |
+
+## Subshells and Orbitals
+
+$\ell = 0$: **s** (1 orbital, holds 2 electrons)
+$\ell = 1$: **p** (3 orbitals, holds 6)
+$\ell = 2$: **d** (5 orbitals, holds 10)
+$\ell = 3$: **f** (7 orbitals, holds 14)
+
+Each orbital holds 2 electrons (opposite spins).
+
+## Three Filling Rules
+
+**1. Aufbau principle:** electrons fill lowest-energy orbitals first.
+
+Order: 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, ...
+
+(Note: 4s fills before 3d — energy crossover.)
+
+**2. Pauli exclusion:** no two electrons share all four quantum numbers. Max 2 per orbital (opposite spins).
+
+**3. Hund's rule:** within a subshell, electrons spread out (parallel spins) before pairing.
+
+## Electron Configurations
+
+| Element | Configuration | Shorthand |
+|---|---|---|
+| H (Z=1) | $1s^1$ | |
+| He (2) | $1s^2$ | |
+| Li (3) | $1s^2 2s^1$ | $[\text{He}]\,2s^1$ |
+| C (6) | $1s^2 2s^2 2p^2$ | $[\text{He}]\,2s^2 2p^2$ |
+| Na (11) | $[\text{Ne}]\,3s^1$ | |
+| Fe (26) | $[\text{Ar}]\,4s^2 3d^6$ | |
+
+Shorthand uses preceding noble gas.
+
+## Valence Electrons
+
+Outermost shell electrons. Determine chemistry.
+
+For main-group elements: group number gives valence count.
+- Group 1: 1 valence.
+- Group 2: 2.
+- Group 17: 7 (halogens).
+- Group 18: 8 (noble, full).
+
+Transition metals: more complex (d electrons can be involved).
+
+## Common Misconceptions
+
+**Misconception 1: "Electrons orbit the nucleus."**
+
+Old model. Electrons occupy probability clouds (orbitals). Position not well-defined (uncertainty principle).
+
+**Misconception 2: "All orbitals at the same n have the same energy."**
+
+In hydrogen (single electron): yes. In multi-electron atoms: subshells differ in energy (2s < 2p, 3s < 3p < 3d).
+
+**Misconception 3: "4s and 3d are interchangeable."**
+
+4s is slightly lower energy → fills first. But once filled, 4s electrons are more easily removed than 3d → first ionizations of transition metals lose 4s.
+
+## Engineering Connection
+
+- **Optical spectroscopy:** atomic transitions between configurations produce characteristic spectra → element identification (flame tests, ICP-OES).
+- **Atomic clocks:** specific electron transitions provide stable frequency references.
+- **Lasers:** population inversion between specific levels enables stimulated emission.
+- **Magnetism (ferromagnetism):** unpaired d-electron spins in Fe, Co, Ni → permanent magnetism.
+- **Catalysis:** d-electron flexibility in transition metals → variable bonding modes.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Electron configuration of oxygen (Z = 8)?
+</ExQ>
+<ExA>
+$1s^2 2s^2 2p^4$.
+
+Has 2 unpaired electrons in 2p (Hund's rule) — responsible for O₂'s paramagnetism.
+</ExA>
+
+<ExQ>
+**2.** Quantum numbers for an electron in 3p?
+</ExQ>
+<ExA>
+$n = 3$, $\ell = 1$, $m_\ell = -1, 0, $ or $+1$, $m_s = \pm 1/2$.
+
+3p has 3 orbitals × 2 spins = 6 possible electron states.
+</ExA>
+
+<ExQ>
+**3.** Why is iron ferromagnetic but copper isn't?
+</ExQ>
+<ExA>
+Fe (Z=26): $[\text{Ar}]\,4s^2 3d^6$. The 3d shell has 4 unpaired electrons → significant magnetic moment.
+
+Cu (Z=29): $[\text{Ar}]\,4s^1 3d^{10}$. 3d full → no unpaired electrons.
+
+Magnetic ordering (ferromagnetism) needs unpaired electron spins AND proper crystal structure for alignment. Fe satisfies both.
+</ExA>
+
+<ExQ>
+**4. Engineering: Sodium-vapor street lights.** Why are they yellow-orange?
+</ExQ>
+<ExA>
+Sodium's atomic emission has strong line at 589 nm (yellow-orange) — the famous "sodium D line."
+
+Originates from transition $3p \to 3s$ — the easily excited transition involving Na's lone valence electron.
+
+Highly efficient: most input energy goes into this single wavelength, not wasted as heat or other wavelengths. Why sodium-vapor lights are so energy-efficient (legacy technology, now LED-replaced).
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does Hund's rule reduce electron-electron repulsion?
+</ExQ>
+<ExA>
+Electrons in same orbital pair up (opposite spins) → close together → strong repulsion.
+
+Electrons in different orbitals of same subshell occupy different regions of space → farther apart → less repulsion.
+
+Plus: parallel spins lead to exchange-correlation effects that further lower energy ("exchange interaction" — quantum mechanical).
+
+So spreading out first (single occupancy across all orbitals of a subshell) before pairing is energetically favorable.
+
+This is why O has 2 unpaired electrons rather than 0 — Hund's rule beats pairing.
+</ExA>

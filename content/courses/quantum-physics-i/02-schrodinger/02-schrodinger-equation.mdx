@@ -1,0 +1,137 @@
+---
+title: Time-Dependent and Time-Independent Schrödinger Equations
+description: The equation of motion for quantum systems — and how separation of variables yields stationary states.
+---
+
+# Time-Dependent and Time-Independent Schrödinger Equations
+
+## The Big Picture
+
+The Schrödinger equation governs how wavefunctions evolve in time. It is the quantum analog of Newton's second law — replacing $F = ma$ for classical particles. The time-independent form arises by separation of variables and gives **stationary states** with definite energies. Solving the Schrödinger equation for various potentials reveals the structure of matter, atoms, molecules, and condensed phases.
+
+## Time-Dependent Schrödinger Equation
+
+$$i\hbar\frac{\partial\psi(x, t)}{\partial t} = \hat H\psi(x, t)$$
+
+For a single particle: $\hat H = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} + V(x)$.
+
+In words: rate of change of $\psi$ equals action of $\hat H$ on $\psi$ — quantum equation of motion.
+
+## Separation of Variables
+
+If $V(x)$ doesn't depend on time, look for solutions $\psi(x, t) = \phi(x)T(t)$.
+
+Substituting:
+$$\frac{i\hbar}{T}\frac{dT}{dt} = \frac{\hat H\phi}{\phi} = E$$
+
+(Separation constant $E$ — has units of energy.)
+
+This gives two equations:
+
+**Time:** $T(t) = e^{-iEt/\hbar}$.
+
+**Spatial (time-independent Schrödinger):**
+
+$$\hat H\phi(x) = E\phi(x)$$
+
+An **eigenvalue equation**. Solutions $\phi_n(x)$ with eigenvalues $E_n$ are **stationary states**.
+
+## Stationary States
+
+$\psi_n(x, t) = \phi_n(x)e^{-iE_n t/\hbar}$.
+
+$|\psi_n|^2 = |\phi_n|^2$ — probability density is time-independent.
+
+But the wavefunction itself oscillates in time (the phase $e^{-iEt/\hbar}$). This phase enables interference when states are superposed.
+
+## General Solution
+
+$\psi(x, t) = \sum_n c_n\phi_n(x)e^{-iE_n t/\hbar}$.
+
+Any initial wavefunction decomposes into eigenstates; each evolves with its own phase. Different energies → different phase rates → time-evolution.
+
+## Common Misconceptions
+
+**Misconception 1: "Stationary states don't move."**
+
+Probability density is stationary, but the wavefunction (with phase) evolves. This evolution matters when stationary states superpose.
+
+**Misconception 2: "$E$ is always real."**
+
+For bound states with Hermitian $H$, yes. Open systems (decay, resonances) can have complex $E$ → exponential decay of probability.
+
+**Misconception 3: "Schrödinger equation is derivable from classical mechanics."**
+
+It's not — Schrödinger essentially **postulated** it (guided by de Broglie and Hamilton-Jacobi). Its justification is empirical: it makes correct predictions.
+
+## Engineering Connection
+
+- **Semiconductor band structure:** Schrödinger equation in periodic potential → energy bands → conductors/insulators.
+- **Quantum cascade lasers:** designed energy levels using engineered quantum wells.
+- **Tunnel junction devices:** transmission probabilities from Schrödinger solutions.
+- **NMR spectroscopy:** measures transitions between Schrödinger eigenstates of nuclear spins.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** A free particle has $V = 0$. Plane-wave solution?
+</ExQ>
+<ExA>
+Try $\psi = e^{i(kx - \omega t)}$. $\hat H\psi = -(\hbar^2/2m)(-k^2)\psi = (\hbar^2 k^2/2m)\psi$.
+
+$i\hbar(-i\omega)\psi = \hbar\omega\psi$.
+
+So $\hbar\omega = \hbar^2 k^2/(2m) \Rightarrow E = p^2/(2m)$ ✓.
+
+Plane waves are eigenstates of momentum and energy for free particles.
+</ExA>
+
+<ExQ>
+**2.** Spatial part of stationary state has $E_1 = 1$ eV, $E_2 = 4$ eV. Time evolution of $\psi_1 + \psi_2$?
+</ExQ>
+<ExA>
+$\psi(t) = \phi_1 e^{-iE_1 t/\hbar} + \phi_2 e^{-iE_2 t/\hbar}$.
+
+$|\psi|^2 = |\phi_1|^2 + |\phi_2|^2 + 2\text{Re}[\phi_1^*\phi_2 e^{-i(E_2-E_1)t/\hbar}]$.
+
+Cross term oscillates with frequency $(E_2 - E_1)/\hbar = 3\,\text{eV}/\hbar$.
+
+Probability density oscillates at this **transition frequency** — basis of optical absorption.
+</ExA>
+
+<ExQ>
+**3. Engineering: Quantum well laser.** Energy difference between $n = 1$ and $n = 2$ states is 0.8 eV. Wavelength of emitted photon?
+</ExQ>
+<ExA>
+$\lambda = hc/\Delta E = 1240/0.8 = 1550$ nm.
+
+Telecom wavelength — used in fiber optic communications. Quantum well lasers are engineered to emit at specific wavelengths via well-width tuning.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does the time-dependent equation contain $i$ and the time-independent one doesn't?
+</ExQ>
+<ExA>
+The $i\hbar\partial_t$ in TDSE creates oscillation rather than decay — phases rotate.
+
+After separation: spatial equation $H\phi = E\phi$ has no $i$ because the eigenvalue $E$ is real (for bound states of Hermitian $H$). All the imaginary unit is absorbed into $e^{-iEt/\hbar}$.
+
+This is why stationary states have definite energy but oscillating phase: the same eigenvalue problem in time independent form.
+</ExA>
+
+<ExQ>
+**5.** Show that for a Hermitian Hamiltonian, energy eigenvalues are real.
+</ExQ>
+<ExA>
+$H\phi = E\phi$. Multiply on left by $\phi^*$ and integrate:
+
+$\int\phi^* H\phi\,dx = E\int|\phi|^2\,dx$.
+
+Hermitian property: $\int\phi^* H\phi\,dx = \int(H\phi)^*\phi\,dx = E^*\int|\phi|^2\,dx$.
+
+Comparing: $E = E^*$ → real.
+
+This is why bound-state energies are real numbers — observable quantities, eigenvalues of Hermitian operators. The mathematical structure guarantees physical sensibility.
+</ExA>

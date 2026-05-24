@@ -1,0 +1,39 @@
+{
+  "title": "Dynamics",
+  "description": "Kinematics and kinetics of particles and rigid bodies — governs the motion of machines, robots, and vehicles.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Dynamics", "Mechanics", "MIT 2.003"],
+  "chapters": [
+    {
+      "title": "Particle Kinematics",
+      "slug": "01-kinematics",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-rectilinear", "title": "Rectilinear and Curvilinear Motion", "order": 1 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Newton-Euler Equations",
+      "slug": "02-newton-euler",
+      "order": 2,
+      "lessons": []
+    },
+    {
+      "title": "Work-Energy and Impulse-Momentum",
+      "slug": "03-work-energy",
+      "order": 3,
+      "lessons": []
+    },
+    {
+      "title": "Vibrations",
+      "slug": "04-vibrations",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-free-vibration", "title": "Free Vibration of SDOF Systems", "order": 1 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 2 }
+      ]
+    }
+  ]
+}

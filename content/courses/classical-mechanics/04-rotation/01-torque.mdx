@@ -1,0 +1,135 @@
+---
+title: Torque and Rotational Inertia
+description: The rotational analogs of force and mass — what causes angular acceleration, and what resists it.
+---
+
+# Torque and Rotational Inertia
+
+## The Big Picture
+
+Newton's second law for rotation: **torque equals moment of inertia times angular acceleration**. Torque is the "twisting force" — depends on both force magnitude and where it's applied (lever arm). Moment of inertia is rotational mass — depends on how mass is distributed relative to the rotation axis. These two quantities govern every spinning system: gears, wheels, robotic arms, planets, atoms.
+
+## Torque
+
+$$\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}$$
+
+Magnitude: $\tau = rF\sin\theta = r_\perp F$, where $r_\perp$ is the **lever arm** (perpendicular distance from axis to line of force).
+
+**Key insight:** apply force far from axis (large $r$) or perpendicular ($\sin\theta = 1$) for max torque.
+
+Units: N·m.
+
+## Moment of Inertia
+
+$$I = \int r^2\,dm$$
+
+Resistance to angular acceleration. Depends on:
+- Mass distribution
+- Choice of axis
+
+For point mass: $I = mr^2$.
+
+Common solids (about symmetry axis):
+
+| Object | $I$ |
+|---|---|
+| Solid disk/cylinder | $\tfrac{1}{2}MR^2$ |
+| Hollow cylinder (thin shell) | $MR^2$ |
+| Solid sphere | $\tfrac{2}{5}MR^2$ |
+| Hollow sphere | $\tfrac{2}{3}MR^2$ |
+| Thin rod (about center) | $\tfrac{1}{12}ML^2$ |
+| Thin rod (about end) | $\tfrac{1}{3}ML^2$ |
+
+**Parallel axis theorem:** $I = I_{\text{cm}} + Md^2$ where $d$ is distance from center-of-mass axis to parallel axis.
+
+## Newton's Second Law for Rotation
+
+$$\tau = I\alpha$$
+
+Direct analog: $\tau \leftrightarrow F$, $I \leftrightarrow m$, $\alpha \leftrightarrow a$.
+
+For multiple torques: $\sum\tau = I\alpha$.
+
+## Rotational Kinematics
+
+Mirror linear: with $\theta$ replacing $x$, $\omega$ replacing $v$, $\alpha$ replacing $a$:
+
+$\omega = \omega_0 + \alpha t$
+$\theta = \omega_0 t + \tfrac{1}{2}\alpha t^2$
+$\omega^2 = \omega_0^2 + 2\alpha\theta$
+
+For constant angular acceleration.
+
+## Common Misconceptions
+
+**Misconception 1: "Heavier objects always have larger $I$."**
+
+Depends on distribution. A thin hoop of mass $M$ has $I = MR^2$, while a solid disk has $I = \tfrac{1}{2}MR^2$ — half. Mass at large $r$ contributes more.
+
+**Misconception 2: "Torque is force × distance."**
+
+It's force × *perpendicular* distance. Force along the radius (radial) has zero torque.
+
+**Misconception 3: "$I$ is intrinsic to an object."**
+
+Depends on the **axis** of rotation. A rod has different $I$ about its center vs. its end.
+
+## Engineering Connection
+
+- **Engine torque:** rotational analog of force — what an engine actually delivers.
+- **Wrenches with longer handles:** larger lever arm = same torque with less force.
+- **Flywheel energy storage:** large $I$ + high $\omega$ stores rotational KE.
+- **Gyroscopes:** $I\omega$ = angular momentum, resists changes in orientation.
+- **Robot arms:** $I$ varies with arm configuration; controllers must compensate.
+- **Ship stability:** moment of inertia about vertical axis affects rolling response.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Force 10 N applied perpendicular at 0.5 m from axis. Torque?
+</ExQ>
+<ExA>
+$\tau = 0.5\cdot 10 = 5$ N·m.
+</ExA>
+
+<ExQ>
+**2.** Solid disk 5 kg, radius 0.2 m. $I$ about center?
+</ExQ>
+<ExA>
+$I = \tfrac{1}{2}\cdot 5\cdot 0.04 = 0.1$ kg·m².
+</ExA>
+
+<ExQ>
+**3.** Torque 8 N·m on object with $I = 2$ kg·m². Angular acceleration?
+</ExQ>
+<ExA>
+$\alpha = \tau/I = 4$ rad/s².
+</ExA>
+
+<ExQ>
+**4. Engineering: Flywheel storage.** Steel disk, 1 m diameter, mass 500 kg, at 10000 rpm. Stored rotational KE?
+</ExQ>
+<ExA>
+$I = \tfrac{1}{2}MR^2 = 0.5\cdot 500\cdot 0.25 = 62.5$ kg·m².
+
+$\omega = 10000\cdot 2\pi/60 = 1047$ rad/s.
+
+$KE_{\text{rot}} = \tfrac{1}{2}I\omega^2 = 0.5\cdot 62.5\cdot 1047^2 = 3.43\times 10^7$ J = 9.5 kWh.
+
+Enough to power an average home for ~8 hours. Industrial flywheels store grid energy this way, with vacuum + magnetic bearings to minimize losses.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does a tightrope walker use a long pole?
+</ExQ>
+<ExA>
+Long pole increases their moment of inertia about the wire's axis.
+
+Any small angular acceleration (from wobble) gives only small $\Delta\omega$ — easier to correct.
+
+Mathematically: $\alpha = \tau/I$. Larger $I$ → smaller $\alpha$ for same disturbance → more stable.
+
+Same principle: figure skaters extend arms (high $I$, slow spin) or pull in (low $I$, fast spin) to control rotation. Gymnasts use this constantly.
+</ExA>

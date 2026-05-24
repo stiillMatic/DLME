@@ -1,0 +1,341 @@
+---
+title: Chain Rule and Implicit Differentiation
+description: Differentiating compositions — the most-used and most-misunderstood rule in calculus.
+---
+
+# Chain Rule and Implicit Differentiation
+
+## The Big Picture
+
+Most real-world functions are *compositions*: a quantity depends on something that depends on something else. Position depends on time; the spring force depends on position; energy depends on the spring force. The chain rule lets you differentiate these chains by linking together the derivatives of each step. It is the single most-used rule in calculus, and the one most students misapply. Master it, and the rest of differentiation feels easy.
+
+## Intuition First — Rates Multiply Through Chains
+
+Imagine three gears connected in a row. The first gear turns at 10 rpm. Gear 2 spins 3× faster than gear 1. Gear 3 spins 2× faster than gear 2.
+
+How fast does gear 3 spin? You don't add: you **multiply**: $10 \times 3 \times 2 = 60$ rpm.
+
+The chain rule is the calculus version of this. If $y$ depends on $u$, and $u$ depends on $x$, then the rate at which $y$ changes per unit change in $x$ is the *product*:
+
+$$\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$$
+
+In Leibniz notation it's almost obvious — the $du$'s seem to "cancel" (treat them like fractions and they do). This is one reason Leibniz notation has stuck around.
+
+## From Zero to the Definition
+
+Suppose $y = f(g(x))$. Let's compute $dy/dx$ from the limit definition.
+
+Define $u = g(x)$ and $\Delta u = g(x+h) - g(x)$. Then $y$ at $x+h$ is $f(u + \Delta u)$.
+
+$$\frac{f(g(x+h)) - f(g(x))}{h} = \frac{f(u+\Delta u) - f(u)}{\Delta u}\cdot\frac{\Delta u}{h}$$
+
+(Multiplying and dividing by $\Delta u$.) As $h \to 0$, $\Delta u \to 0$ as well (assuming $g$ is continuous). The first factor $\to f'(u) = f'(g(x))$, the second $\to g'(x)$. Result:
+
+$$\boxed{\frac{d}{dx}f(g(x)) = f'(g(x))\cdot g'(x)}$$
+
+In Leibniz notation: $\dfrac{dy}{dx} = \dfrac{dy}{du}\dfrac{du}{dx}$.
+
+## The Recipe
+
+To differentiate $f(g(x))$:
+1. Differentiate the **outer** function, leaving the inner function alone: $f'(g(x))$
+2. Multiply by the derivative of the **inner** function: $g'(x)$
+
+**Example:** $\dfrac{d}{dx}\sin(x^2)$.
+
+Outer: $\sin(\cdot)$, derivative is $\cos(\cdot)$. Apply at $x^2$: $\cos(x^2)$.
+
+Inner: $x^2$, derivative is $2x$.
+
+Multiply: $\cos(x^2)\cdot 2x = 2x\cos(x^2)$.
+
+## Worked Examples
+
+**Example 1.** Differentiate $h(x) = (3x^2 + 1)^4$.
+
+Outer: $(\cdot)^4$, derivative is $4(\cdot)^3$. Apply: $4(3x^2+1)^3$.
+
+Inner: $3x^2+1$, derivative is $6x$.
+
+$$h'(x) = 4(3x^2+1)^3\cdot 6x = 24x(3x^2+1)^3$$
+
+**Example 2.** Differentiate $h(x) = e^{-x^2}$ (the Gaussian).
+
+Outer: $e^{(\cdot)}$, derivative is $e^{(\cdot)}$. Apply: $e^{-x^2}$.
+
+Inner: $-x^2$, derivative is $-2x$.
+
+$$h'(x) = e^{-x^2}\cdot(-2x) = -2x\,e^{-x^2}$$
+
+**Example 3.** Triple chain — differentiate $h(x) = \sin(\cos(x^2))$.
+
+Three layers: $\sin$ outside, $\cos$ middle, $x^2$ inside. Apply chain rule three times:
+
+$$h'(x) = \cos(\cos(x^2))\cdot(-\sin(x^2))\cdot 2x$$
+
+The pattern: derivative of outermost (with everything inside untouched) × derivative of next layer (everything *its* inside untouched) × ... × derivative of innermost.
+
+## Implicit Differentiation
+
+Sometimes a relation isn't given in the form $y = f(x)$ but as an equation like $x^2 + y^2 = 25$ (a circle). We can still find $dy/dx$ by **implicit differentiation**: differentiate both sides with respect to $x$, treating $y$ as an unknown function $y(x)$ and using the chain rule when $y$ appears.
+
+$$\frac{d}{dx}[x^2 + y^2] = \frac{d}{dx}[25]$$
+
+$$2x + 2y\cdot\frac{dy}{dx} = 0$$
+
+The $2y \cdot dy/dx$ comes from chain rule: $d/dx[y^2] = 2y\cdot y'$.
+
+Solve: $\dfrac{dy}{dx} = -\dfrac{x}{y}$.
+
+This works even when we can't (or don't want to) solve for $y$ explicitly.
+
+## Common Misconceptions
+
+**Misconception 1: "$\dfrac{d}{dx}\sin(x^2) = \cos(x^2)$."**
+
+This is the most common chain-rule mistake. You must multiply by the derivative of the inner function. Correct answer: $2x\cos(x^2)$.
+
+**Misconception 2: "I can absorb the inner derivative into the outer derivative."**
+
+No — they multiply *separately*. Each step contributes a factor.
+
+**Misconception 3: "When functions are nested, just differentiate from the outside and stop."**
+
+You differentiate from outside, but you also descend through every layer until you reach the variable of differentiation. Stop too early and you'll be off by a factor of the inner derivative(s).
+
+**Misconception 4: "Implicit differentiation gives a different derivative than explicit."**
+
+It gives the *same* derivative. The "implicit" answer is just expressed in terms of $y$ rather than $x$. Both are correct; sometimes one is cleaner than the other.
+
+**Misconception 5: "I should always solve for $y$ first to make differentiation easier."**
+
+Often easier *not* to. For $x^2 + y^2 = 25$, solving gives $y = \pm\sqrt{25 - x^2}$, then differentiation gets messy. Implicit is faster.
+
+## Application: Related Rates
+
+The chain rule is the heart of **related rates** problems: when one quantity changes, what's the rate of change of another quantity that depends on it?
+
+**Example:** A spherical balloon is inflated so $dV/dt = 5$ cm³/s. How fast is the radius growing when $r = 3$ cm?
+
+$V = \tfrac{4}{3}\pi r^3$. Differentiate both sides with respect to time (chain rule because $r$ depends on $t$):
+
+$$\frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}$$
+
+Solve: $\dfrac{dr}{dt} = \dfrac{dV/dt}{4\pi r^2} = \dfrac{5}{4\pi(9)} = \dfrac{5}{36\pi} \approx 0.044$ cm/s.
+
+## Engineering Connection
+
+The chain rule is *everywhere*:
+
+- **Backpropagation** in deep learning is *literally* the chain rule applied recursively through every layer of the network. A 50-layer network = 50 nested function compositions, each contributing a factor in the gradient computation.
+- **Heat transfer** with temperature-dependent properties: $k(T)$, where $T(x)$, gives $dk/dx = (dk/dT)(dT/dx)$ — direct chain rule.
+- **Time-of-flight calculations** in fluid dynamics: a parcel's temperature changes due to its position and the spatially varying field, giving rise to the *material derivative* $D/Dt = \partial/\partial t + v\cdot\nabla$ — multivariable chain rule in disguise.
+- **Sensitivity analysis:** how does an output $y$ change when an input $x$ changes? If $y = f(g(h(x)))$ (a chain of transformations), the chain rule decomposes the sensitivity into stage-wise sensitivities — useful in design optimization.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Differentiate $f(x) = (2x + 5)^7$.
+</ExQ>
+<ExA>
+Outer: $(\cdot)^7 \to 7(\cdot)^6$. Inner: $2x+5 \to 2$.
+$$f'(x) = 7(2x+5)^6 \cdot 2 = 14(2x+5)^6$$
+</ExA>
+
+<ExQ>
+Differentiate $g(x) = \cos(3x)$.
+</ExQ>
+<ExA>
+Outer: $\cos\to-\sin$. Inner: $3x \to 3$.
+$$g'(x) = -\sin(3x)\cdot 3 = -3\sin(3x)$$
+</ExA>
+
+### Application
+
+<ExQ>
+Differentiate $h(x) = e^{\sin x}$.
+</ExQ>
+<ExA>
+Outer: $e^{(\cdot)} \to e^{(\cdot)}$. Inner: $\sin x \to \cos x$.
+$$h'(x) = e^{\sin x}\cos x$$
+</ExA>
+
+<ExQ>
+Differentiate $f(x) = \sqrt{1 + x^2}$.
+</ExQ>
+<ExA>
+Rewrite: $f = (1+x^2)^{1/2}$.
+
+Outer: $(\cdot)^{1/2} \to \frac{1}{2}(\cdot)^{-1/2}$. Inner: $1+x^2 \to 2x$.
+
+$$f'(x) = \frac{1}{2}(1+x^2)^{-1/2}\cdot 2x = \frac{x}{\sqrt{1+x^2}}$$
+</ExA>
+
+<ExQ>
+Use implicit differentiation to find $dy/dx$ for $x^3 + y^3 = 6xy$ at the point $(3, 3)$.
+</ExQ>
+<ExA>
+Differentiate both sides:
+$$3x^2 + 3y^2\,\frac{dy}{dx} = 6y + 6x\,\frac{dy}{dx}$$
+
+Group $dy/dx$ terms:
+$$\frac{dy}{dx}(3y^2 - 6x) = 6y - 3x^2 \implies \frac{dy}{dx} = \frac{6y-3x^2}{3y^2-6x} = \frac{2y-x^2}{y^2-2x}$$
+
+At $(3, 3)$: $\dfrac{6 - 9}{9 - 6} = \dfrac{-3}{3} = \boxed{-1}$
+</ExA>
+
+### Challenge
+
+<ExQ>
+A 5-meter ladder leans against a wall. The bottom slides away at 0.5 m/s. How fast is the top sliding down when the bottom is 3 m from the wall?
+</ExQ>
+<ExA>
+Let $x$ = distance from wall to bottom, $y$ = height of top. Constraint: $x^2 + y^2 = 25$.
+
+Differentiate w.r.t. $t$: $2x\dfrac{dx}{dt} + 2y\dfrac{dy}{dt} = 0$.
+
+Given: $dx/dt = 0.5$ m/s. When $x = 3$: $y = \sqrt{25-9} = 4$.
+
+$$\frac{dy}{dt} = -\frac{x}{y}\cdot\frac{dx}{dt} = -\frac{3}{4}(0.5) = -0.375\ \text{m/s}$$
+
+Top is sliding down at $\boxed{0.375}$ m/s. (Negative sign indicates downward.)
+</ExA>
+
+<ExQ>
+A neural network has output $y = \sigma(w_2 \cdot \sigma(w_1 x + b_1) + b_2)$ where $\sigma(z) = 1/(1+e^{-z})$. Compute $dy/dw_1$ symbolically using the chain rule. (This is a tiny version of backpropagation.)
+</ExQ>
+<ExA>
+Let $z_1 = w_1 x + b_1$, $a_1 = \sigma(z_1)$, $z_2 = w_2 a_1 + b_2$, $y = \sigma(z_2)$.
+
+Chain: $\dfrac{dy}{dw_1} = \dfrac{dy}{dz_2}\cdot\dfrac{dz_2}{da_1}\cdot\dfrac{da_1}{dz_1}\cdot\dfrac{dz_1}{dw_1}$
+
+Each factor:
+- $dy/dz_2 = \sigma'(z_2) = \sigma(z_2)(1-\sigma(z_2))$
+- $dz_2/da_1 = w_2$
+- $da_1/dz_1 = \sigma'(z_1) = \sigma(z_1)(1-\sigma(z_1))$
+- $dz_1/dw_1 = x$
+
+$$\frac{dy}{dw_1} = \sigma'(z_2)\cdot w_2\cdot \sigma'(z_1)\cdot x$$
+
+This is exactly what backpropagation computes — **the chain rule walked layer by layer through the network**, multiplying the local gradients.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $f$ and $g$ are both differentiable, then $\dfrac{d}{dx}[f(g(x))] = f'(g(x)) g'(x)$. Justify why the product structure (not just $f'(g(x))$) is essential.
+</ExQ>
+<ExA>
+**True** — this is the chain rule.
+
+Why $g'(x)$ is essential: without it, the answer is dimensionally wrong. Try $h(x) = (3x)^2 = 9x^2$, so $h'(x) = 18x$. Compare to "incorrect" $f'(g(x)) = 2(3x) = 6x$. The factor of 3 is missing — exactly the inner derivative.
+
+Geometrically, when $x$ changes by $\Delta x$, the inner function $g$ changes by $g'(x)\Delta x$, which is the *input change* to $f$. Then the output of $f$ changes by $f'(g)\cdot[g'(x)\Delta x]$. Multiplying by $g'(x)$ accounts for the input scaling.
+</ExA>
+
+<ExQ>
+**Find the inner function.** For each function, identify what to call $u$ (inner function) before applying chain rule:
+(a) $\cos(x^3 + 1)$
+(b) $e^{\sqrt{x}}$
+(c) $\ln(\sin x)$
+(d) $(\sin x)^4$
+</ExQ>
+<ExA>
+(a) $u = x^3 + 1$ (inside the cosine)
+(b) $u = \sqrt{x}$ (the exponent)
+(c) $u = \sin x$ (inside the log)
+(d) $u = \sin x$ (the base)
+
+Identifying $u$ is the first cognitive step. Practiced students do this almost reflexively: "what is the function being applied last?"
+</ExA>
+
+<ExQ>
+**Counterexample.** Give an example where $\dfrac{d}{dx}[f(g(x))]$ exists but $g'(x)$ does NOT exist at some point. (Hint: a constant outer function.)
+</ExQ>
+<ExA>
+Take $f(u) = 5$ (constant) and $g(x) = |x|$.
+
+Then $f(g(x)) = 5$ everywhere, and $\dfrac{d}{dx}[f(g(x))] = 0$ even at $x = 0$.
+
+But $g'(0)$ does not exist (sharp corner of $|x|$).
+
+So the chain rule formula $f'(g(x))g'(x) = 0\cdot \text{undefined}$ technically requires interpretation — but the composite is still differentiable because $f'$ multiplies away the trouble.
+
+This subtle case appears in piecewise-defined engineering models.
+</ExA>
+
+<ExQ>
+**Implicit conceptual.** The equation $\sin(xy) = x + y$ defines $y$ implicitly as a function of $x$. Without solving, what is the relationship between $dy/dx$ at any point and the slopes of the curves $\sin(xy) = c$ for varying $c$?
+</ExQ>
+<ExA>
+Implicit differentiation: $\cos(xy)\cdot(y + xy') = 1 + y'$.
+
+The slope $dy/dx$ at a point depends on the values $x, y$ AND $\cos(xy)$. As $c$ varies (different level curves), the slopes change accordingly.
+
+Geometric meaning: implicit equations define **families of curves** (level sets of $F(x, y) = c$). Each member has its own slopes — implicit differentiation gives them all in one shot, without needing to solve for $y$ in each case.
+
+This is enormously useful in engineering: equilibrium curves, isobars, isotherms — all are level sets of some governing function.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Pressure-temperature.** A gas obeys $PV = nRT$ at constant volume. If temperature rises at rate $dT/dt = 5$ K/s, find $dP/dt$ at the moment when $T = 300$ K and $P = 100$ kPa.
+</ExQ>
+<ExA>
+At constant $V$: $P = nR T/V$, so $P/T = nR/V$ is constant.
+
+Differentiate: $\dfrac{dP}{dt} = \dfrac{P}{T}\cdot\dfrac{dT}{dt}$ (since $nR/V = P/T$).
+
+$$\dfrac{dP}{dt} = \frac{100\text{ kPa}}{300\text{ K}}\cdot 5\text{ K/s} = \boxed{1.67\text{ kPa/s}}$$
+
+This is Gay-Lussac's law in differential form. The chain rule combined with the gas law gives a real-time link between $T$ and $P$ rates — useful for pressure-relief design in heated vessels.
+</ExA>
+
+<ExQ>
+**Surface area / radius.** A growing bubble has radius $r(t) = (1 + 2t)^{1/2}$ mm. Find the rate of change of its surface area $A = 4\pi r^2$ at $t = 4$ s.
+</ExQ>
+<ExA>
+$A(t) = 4\pi(1 + 2t)$. (Since $r^2 = 1 + 2t$.)
+
+$\dfrac{dA}{dt} = 4\pi\cdot 2 = 8\pi$ mm²/s ≈ 25.13 mm²/s.
+
+This is *constant* — surface area grows linearly with time! Even though radius grows like $\sqrt{t}$, area grows like $r^2 \propto t$.
+
+Lesson: chain rule reveals that *seemingly nonlinear* relationships can have surprisingly simple time-dependence. Always check.
+</ExA>
+
+<ExQ>
+**Multi-stage.** A spring is connected to a moving cart whose position is $x(t) = A\sin(\omega t)$. The spring force is $F = -kx$. Power delivered to the cart is $P = Fv$ where $v = dx/dt$. Find $P(t)$ explicitly.
+</ExQ>
+<ExA>
+$x = A\sin(\omega t)$, $v = A\omega\cos(\omega t)$, $F = -kA\sin(\omega t)$.
+
+$$P(t) = Fv = -kA\sin(\omega t)\cdot A\omega\cos(\omega t) = -\dfrac{kA^2\omega}{2}\sin(2\omega t)$$
+
+(Using $\sin\theta\cos\theta = \tfrac{1}{2}\sin 2\theta$.)
+
+Power oscillates at *twice* the motion frequency, with zero time-average. Spring is conservative → no net work over a cycle, but instantaneous power swings positive (compression) and negative (rebound). Crucial for understanding energy flow in oscillating systems.
+</ExA>
+
+<ExQ>
+**Implicit + chain.** A production process satisfies $x^3 + xy^2 = y^3 + 5$. If $x$ is increasing at $dx/dt = 0.2$ units/min, find $dy/dt$ at the point $(1, 2)$.
+</ExQ>
+<ExA>
+Differentiate the equation w.r.t. $t$:
+$3x^2\dot x + \dot x y^2 + 2xy\dot y = 3y^2\dot y$
+
+Group $\dot y$ terms:
+$3x^2\dot x + \dot x y^2 = 3y^2\dot y - 2xy\dot y$
+$\dot x(3x^2 + y^2) = \dot y(3y^2 - 2xy)$
+
+At $(1, 2)$: $\dot x \cdot (3 + 4) = \dot y\cdot(12 - 4)$, i.e., $7\dot x = 8\dot y$.
+
+$\dot y = \dfrac{7\dot x}{8} = \dfrac{7(0.2)}{8} = \boxed{0.175\text{ units/min}}$
+
+Implicit relations between dependent quantities are everywhere in process engineering — chain rule is the workhorse.
+</ExA>

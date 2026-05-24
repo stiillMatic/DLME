@@ -1,0 +1,110 @@
+---
+title: 3D Coordinates and Distance
+description: Extending the Cartesian system to three dimensions — the foundation for all multivariable calculus.
+---
+
+# 3D Coordinates and Distance
+
+## The Big Picture
+
+Before doing calculus in 3D, we need a coordinate system to describe points, distances, and basic shapes. The 3D Cartesian system $(x, y, z)$ is the most common, but cylindrical $(r, \theta, z)$ and spherical $(\rho, \phi, \theta)$ coordinates are essential for problems with axial or origin-centered symmetry. Choosing the right coordinate system can transform a hard integral into a routine one.
+
+## The 3D Cartesian System
+
+A point in 3D: $(x, y, z)$. Origin at $(0, 0, 0)$. Three axes mutually perpendicular, oriented by **right-hand rule**.
+
+**Distance formula:**
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}$$
+
+(3D Pythagoras — extension of 2D distance.)
+
+**Sphere of radius $R$ centered at $(a, b, c)$:**
+$$(x-a)^2 + (y-b)^2 + (z-c)^2 = R^2$$
+
+**Plane through $(x_0, y_0, z_0)$ with normal $(a, b, c)$:**
+$$a(x-x_0) + b(y-y_0) + c(z-z_0) = 0$$
+
+## Cylindrical Coordinates
+
+$x = r\cos\theta$, $y = r\sin\theta$, $z = z$.
+
+Use when the problem has rotational symmetry around the $z$-axis (cylinders, paraboloids, cones).
+
+## Spherical Coordinates
+
+$x = \rho\sin\phi\cos\theta$, $y = \rho\sin\phi\sin\theta$, $z = \rho\cos\phi$.
+
+- $\rho$: distance from origin (≥ 0)
+- $\phi$: angle from $+z$-axis (in $[0, \pi]$) — **polar angle**
+- $\theta$: azimuthal angle in $xy$-plane
+
+Use when the problem has spherical symmetry (point sources, balls, planets).
+
+## Common Misconceptions
+
+**Misconception 1: "Cylindrical $r$ is the same as spherical $\rho$."**
+
+Different! In cylindrical, $r$ is distance from the $z$-axis (perpendicular). In spherical, $\rho$ is distance from origin. They coincide only in the $xy$-plane ($\phi = \pi/2$).
+
+**Misconception 2: "Always use Cartesian."**
+
+Symmetry should drive coordinate choice. Spherical for spheres, cylindrical for cylinders, Cartesian for boxes. Wrong choice = unnecessary algebra.
+
+**Misconception 3: "$(\rho, \phi, \theta)$ ordering is universal."**
+
+Some texts use $(r, \theta, \phi)$ or $(\rho, \theta, \phi)$ with $\theta$ as polar. Always state your convention. Physics often uses different convention than math!
+
+## Engineering Connection
+
+- **Robotic kinematics:** end-effector position naturally cylindrical or spherical depending on arm geometry.
+- **CFD around bodies:** flow past sphere → spherical coordinates; flow past cylinder → cylindrical.
+- **Antenna patterns:** spherical coordinates for radiation directionality.
+- **Astronomical observations:** RA/Dec is essentially spherical.
+- **Polar diagrams in materials science:** stereographic projections from spherical coordinates.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Distance between $(1, 2, 3)$ and $(4, 6, 7)$?
+</ExQ>
+<ExA>
+$\sqrt{9 + 16 + 16} = \sqrt{41} \approx 6.40$.
+</ExA>
+
+<ExQ>
+**2.** Sphere through origin with radius 5 centered at $(0, 0, 5)$. Equation?
+</ExQ>
+<ExA>
+$x^2 + y^2 + (z-5)^2 = 25$.
+</ExA>
+
+<ExQ>
+**3.** Convert $(2, 2, 3)$ Cartesian to cylindrical.
+</ExQ>
+<ExA>
+$r = \sqrt{4+4} = 2\sqrt 2$, $\theta = \pi/4$, $z = 3$.
+</ExA>
+
+<ExQ>
+**4. Engineering: GPS.** Two points on Earth (radius 6371 km) at $(\phi_1, \theta_1)$ and $(\phi_2, \theta_2)$ in spherical. Distance formula uses arc length, not Cartesian. Why?
+</ExQ>
+<ExA>
+GPS distance is along the surface (Earth's surface is curved). Cartesian distance "tunnels" through Earth.
+
+For two points: arc length = $R\cdot\arccos[\sin\phi_1\sin\phi_2\cos(\theta_1-\theta_2) + \cos\phi_1\cos\phi_2]$ (great circle distance).
+
+Pure Cartesian would underestimate ~ for distant points (e.g., NY to Tokyo: tunnel ~10000 km vs surface ~10800 km).
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the polar angle $\phi$ measured from the $+z$-axis (in math), not from the equator (as in geography)?
+</ExQ>
+<ExA>
+Convention. In math/physics, $\phi$ from $+z$ means $\phi = 0$ at north pole, $\phi = \pi$ at south pole. Equator is $\phi = \pi/2$.
+
+In geography, latitude is measured from equator: equator = 0, poles = ±90°.
+
+Lat = $\pi/2 - \phi$ (in radians). Always state which convention.
+</ExA>

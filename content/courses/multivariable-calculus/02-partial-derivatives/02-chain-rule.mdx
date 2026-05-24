@@ -1,0 +1,174 @@
+---
+title: Multivariable Chain Rule
+description: How to differentiate composite functions of several variables — the foundation of backpropagation, sensitivity analysis, and coordinate transformations.
+---
+
+# Multivariable Chain Rule
+
+## The Big Picture
+
+In single-variable calculus, the chain rule lets us differentiate compositions: if $y$ depends on $u$ and $u$ depends on $x$, the rates *multiply*. In multivariable calculus, the chain rule becomes richer: variables can depend on multiple intermediates, and intermediates on multiple inputs. The mechanism that handles this is the **multivariable chain rule**, expressed as a sum of products. It is the engine behind backpropagation in neural networks, the material derivative in fluid dynamics, and the change of variables in any coordinate transformation.
+
+## Intuition First — Multiple Paths of Influence
+
+If a function depends on $x$ and $y$, and both $x$ and $y$ depend on $t$, then $f$ changes with $t$ via *two* paths: through $x$ AND through $y$. The total change is the sum of contributions:
+
+$$\frac{df}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}$$
+
+Each term is a "channel" of influence. The chain rule sums all channels.
+
+## The Formula
+
+For $f(x, y)$ where $x = x(t)$ and $y = y(t)$:
+
+$$\frac{df}{dt} = f_x\,\dot x + f_y\,\dot y = \nabla f\cdot\dot{\mathbf{r}}$$
+
+where $\dot{\mathbf{r}} = \langle\dot x, \dot y\rangle$ is the velocity along the path.
+
+For more variables, just add terms.
+
+## Tree Diagrams
+
+A useful mental model:
+
+```
+      f
+     / \
+    x   y
+    |   |
+    t   t
+```
+
+Each path from $f$ to $t$ contributes one term: $f_x \cdot dx/dt$ from the left path, $f_y \cdot dy/dt$ from the right.
+
+For $f(x, y)$ where $x = x(s, t)$ and $y = y(s, t)$:
+
+$$\frac{\partial f}{\partial s} = f_x\,x_s + f_y\,y_s, \quad \frac{\partial f}{\partial t} = f_x\,x_t + f_y\,y_t$$
+
+This is exactly the matrix-vector product:
+
+$$\nabla_s f = J^T \nabla_x f$$
+
+where $J$ is the Jacobian of $(x, y)$ with respect to $(s, t)$.
+
+## Application: Coordinate Transformations
+
+Want to convert between Cartesian $(x, y)$ and polar $(r, \theta)$? The chain rule does it.
+
+Given $f(x, y)$, $x = r\cos\theta$, $y = r\sin\theta$:
+
+$$f_r = f_x\cos\theta + f_y\sin\theta$$
+$$f_\theta = -f_x r\sin\theta + f_y r\cos\theta$$
+
+This is the basis of writing PDEs in different coordinate systems (cylindrical, spherical, etc.).
+
+## Application: Implicit Functions
+
+If $F(x, y) = 0$ defines $y$ implicitly as a function of $x$, differentiate via chain rule:
+
+$$F_x + F_y\,\frac{dy}{dx} = 0 \implies \frac{dy}{dx} = -\frac{F_x}{F_y}$$
+
+This is the core idea of implicit differentiation, generalized.
+
+## Common Misconceptions
+
+**Misconception 1: "$df/dt = (\partial f/\partial x)(dx/dt)$ — just one term."**
+
+If $f$ depends on multiple variables that all depend on $t$, **all paths contribute**. Forgetting one term is the most common chain-rule error in multivariable calculus.
+
+**Misconception 2: "Mixed partials and the chain rule are unrelated."**
+
+They're closely related. The mixed second partial $f_{xy}$ involves applying $\partial/\partial y$ to $\partial f/\partial x$, which can require chain rule if there are intermediate variables.
+
+**Misconception 3: "I should just plug in $x(t)$ and $y(t)$ into $f$ then take ordinary derivative."**
+
+This works in principle, but for complicated $f$ or when $x(t), y(t)$ are themselves implicit, the chain rule is much faster.
+
+## Engineering Connection
+
+- **Backpropagation:** in neural networks, gradient with respect to weights is computed by the multivariable chain rule walked backward through the network, layer by layer.
+- **Material derivative in fluid dynamics:** if a fluid property $\phi$ depends on time and the position $\mathbf{x}(t)$ of a fluid parcel:
+$$\frac{D\phi}{Dt} = \frac{\partial\phi}{\partial t} + \mathbf{v}\cdot\nabla\phi$$
+This is the chain rule applied to a moving frame.
+- **Sensitivity analysis:** how does an output depend on a design parameter that affects multiple intermediate quantities? Sum of chain-rule terms.
+- **Lagrangian mechanics:** transforming generalized coordinates uses multivariable chain rule extensively.
+
+---
+
+## Practice Problems
+
+<ExQ>
+For $f(x, y) = x^2 y$ with $x = t^2$, $y = e^t$, find $df/dt$.
+</ExQ>
+<ExA>
+$f_x = 2xy$, $f_y = x^2$. $\dot x = 2t$, $\dot y = e^t$.
+
+$\dfrac{df}{dt} = (2xy)(2t) + (x^2)(e^t) = 4xyt + x^2 e^t$
+
+Plug in $x, y$: $= 4t^2 e^t \cdot t + t^4 e^t = 4t^3 e^t + t^4 e^t = t^3 e^t(4 + t)$.
+</ExA>
+
+<ExQ>
+$z = x^2 + y^2$, $x = s + t$, $y = s - t$. Find $\partial z/\partial s$ and $\partial z/\partial t$.
+</ExQ>
+<ExA>
+$z_x = 2x$, $z_y = 2y$. $x_s = 1, y_s = 1, x_t = 1, y_t = -1$.
+
+$\partial z/\partial s = 2x(1) + 2y(1) = 2(x + y) = 2(2s) = 4s$.
+
+$\partial z/\partial t = 2x(1) + 2y(-1) = 2(x - y) = 2(2t) = 4t$.
+
+(Check: $z = (s+t)^2 + (s-t)^2 = 2s^2 + 2t^2$, so $z_s = 4s$, $z_t = 4t$. ✓)
+</ExA>
+
+<ExQ>
+A function $T(x, y, z)$ has $\nabla T = \langle 2, -3, 1\rangle$ at point $P$. A particle moves through $P$ with velocity $\mathbf{v} = \langle 1, 1, 1\rangle$. Find $dT/dt$ along the particle's path.
+</ExQ>
+<ExA>
+$dT/dt = \nabla T\cdot\mathbf{v} = 2 - 3 + 1 = 0$.
+
+The temperature is *not changing* along the particle's path at this instant — the velocity is perpendicular to the temperature gradient.
+</ExA>
+
+<ExQ>
+**Engineering: Material derivative.** Temperature in a flowing fluid is $T(x, y, t) = T_0 + 5t - 2x$. Velocity is $\mathbf{v} = \langle 3, 0\rangle$. Find $DT/Dt$ — the rate of temperature change felt by a fluid parcel.
+</ExQ>
+<ExA>
+Material derivative: $DT/Dt = \partial T/\partial t + \mathbf{v}\cdot\nabla T$.
+
+$\partial T/\partial t = 5$, $\nabla T = \langle -2, 0\rangle$.
+
+$\mathbf{v}\cdot\nabla T = 3\cdot(-2) + 0 = -6$.
+
+$DT/Dt = 5 + (-6) = -1$.
+
+Even though $T$ is increasing in time at any fixed point ($\partial T/\partial t > 0$), a fluid parcel moving in the $+x$ direction experiences a *decreasing* temperature because it's being convected into colder regions faster than the field is heating up.
+
+This is the heart of advection-vs-diffusion analysis in fluid mechanics.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does the chain rule need a *sum* of products rather than a single product?
+</ExQ>
+<ExA>
+Because changes in $f$ propagate through *multiple paths*. If $f$ depends on $x$ and $y$, and both depend on $t$, then $f$ changes via the $x$-path AND the $y$-path simultaneously. The total change is the sum of independent contributions.
+
+Geometrically: the gradient $\nabla f$ has multiple components, and a change in $t$ moves us in some direction $(\dot x, \dot y)$. The dot product (sum of products) is exactly how a vector projects onto a direction.
+
+Forgetting any path = ignoring one channel of influence.
+</ExA>
+
+<ExQ>
+**Backprop snippet.** Given $z = w x + b$, $a = \sigma(z)$, $L = (a - y)^2$, use the chain rule to find $\partial L/\partial w$.
+</ExQ>
+<ExA>
+$\partial L/\partial w = (\partial L/\partial a)(\partial a/\partial z)(\partial z/\partial w)$
+
+- $\partial L/\partial a = 2(a - y)$
+- $\partial a/\partial z = \sigma'(z) = a(1-a)$ (sigmoid)
+- $\partial z/\partial w = x$
+
+$\partial L/\partial w = 2(a - y)\cdot a(1-a)\cdot x$
+
+This is the gradient computed by backpropagation for one weight in one layer. The neural network forward pass is $z \to a \to L$; the backward pass computes the chain product.
+</ExA>

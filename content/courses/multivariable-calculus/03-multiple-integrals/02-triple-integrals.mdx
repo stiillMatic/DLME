@@ -1,0 +1,152 @@
+---
+title: Triple Integrals and Change of Variables
+description: Integrating over 3D regions, plus the Jacobian — the engine that lets us switch between coordinate systems.
+---
+
+# Triple Integrals and Change of Variables
+
+## The Big Picture
+
+Triple integrals extend integration to 3D — computing volumes, masses, and field totals over solid regions. The change-of-variables formula (with the Jacobian determinant) is the master tool that lets us transform between coordinate systems, choosing whichever makes the geometry simplest. Cylindrical and spherical coordinates aren't just conveniences; they're essential for problems with cylindrical or spherical symmetry that would be intractable in Cartesian coordinates.
+
+## Triple Integrals
+
+For a function $f(x, y, z)$ over a 3D region $E$:
+
+$$\iiint_E f\,dV = \int\!\!\int\!\!\int_E f(x, y, z)\,dz\,dy\,dx$$
+
+(With appropriate limits.) Six orderings are possible; pick whichever's easiest.
+
+**Volume:** $\iiint_E 1\,dV = \text{volume}(E)$.
+
+**Mass with density $\rho$:** $M = \iiint_E\rho\,dV$.
+
+## Change of Variables
+
+When transforming to new coordinates $(u, v, w) = T(x, y, z)$:
+
+$$\iiint_E f(x, y, z)\,dV = \iiint_{E'} f(T^{-1}(u, v, w))\cdot|J|\,du\,dv\,dw$$
+
+where the **Jacobian** $J = \det\!\left(\dfrac{\partial(x, y, z)}{\partial(u, v, w)}\right)$ is the determinant of the matrix of partial derivatives.
+
+**Why $|J|$?** It's the local volume scaling factor. A small box $du\,dv\,dw$ maps to a parallelepiped with volume $|J|\,du\,dv\,dw$ in the original coordinates.
+
+## Cylindrical Coordinates
+
+$x = r\cos\theta$, $y = r\sin\theta$, $z = z$.
+
+$dV = r\,dr\,d\theta\,dz$ (the Jacobian is $r$).
+
+Use when geometry has rotational symmetry around the $z$-axis (cylinders, paraboloids, cones).
+
+## Spherical Coordinates
+
+$x = \rho\sin\phi\cos\theta$, $y = \rho\sin\phi\sin\theta$, $z = \rho\cos\phi$.
+
+Here $\rho \geq 0$ is the distance from origin, $\phi \in [0, \pi]$ is the polar angle from $+z$-axis, $\theta \in [0, 2\pi)$ is the azimuthal angle.
+
+$dV = \rho^2\sin\phi\,d\rho\,d\phi\,d\theta$.
+
+Use for spheres, balls, ice cream cones, anything with origin-centered symmetry.
+
+## Worked Example — Sphere Volume
+
+Volume of a sphere of radius $R$:
+
+$$V = \int_0^{2\pi}\int_0^\pi\int_0^R \rho^2\sin\phi\,d\rho\,d\phi\,d\theta = 2\pi\cdot 2\cdot\frac{R^3}{3} = \frac{4}{3}\pi R^3$$
+
+Computed in seconds with spherical; would be a beast in Cartesian.
+
+## Common Misconceptions
+
+**Misconception 1: "I can ignore the Jacobian when changing variables."**
+
+Forgetting $|J|$ produces wrong answers (often by orders of magnitude). It's the volume scaling factor — non-negotiable.
+
+**Misconception 2: "Spherical $\rho^2\sin\phi$ is hard to remember."**
+
+Mnemonic: think of an infinitesimal "wedge" at distance $\rho$, polar angle $\phi$. Its size grows as $\rho^2$ (surface area on sphere of radius $\rho$) and shrinks at the poles by $\sin\phi$ (zero at the pole, max at equator).
+
+**Misconception 3: "Mixing up $\phi$ and $\theta$ doesn't matter."**
+
+It does, especially because conventions differ between math and physics! In math: $\phi$ is polar (from $+z$), $\theta$ is azimuthal. In physics: often the opposite. **Always state your convention.**
+
+**Misconception 4: "Use spherical for any rotational problem."**
+
+Spherical is for **point** symmetry (around origin). Cylindrical is for **axial** symmetry (around an axis). They're different — choose based on the problem's symmetry.
+
+## Engineering Connection
+
+- **Center of mass of solid:** $\bar{\mathbf{r}} = \dfrac{1}{M}\iiint_E\rho\mathbf{r}\,dV$ — design of vehicles, tools, robotic links.
+- **Moment of inertia tensor:** $I_{ij} = \iiint_E\rho(x_k x_k\delta_{ij} - x_i x_j)\,dV$ — needed for rigid-body dynamics.
+- **Volume integration of stress:** total force $\mathbf{F} = \iiint_E\nabla\cdot\boldsymbol{\sigma}\,dV$ — basis of finite element analysis.
+- **Heat capacity of irregular bodies:** total energy stored = $\iiint_E\rho c_p T\,dV$.
+- **Probability:** for joint distributions in 3 variables, the integral over a region gives the probability of being in that region.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Evaluate $\displaystyle\iiint_B z\,dV$ where $B = [0,1]^3$.
+</ExQ>
+<ExA>
+$$\int_0^1\int_0^1\int_0^1 z\,dz\,dy\,dx = 1\cdot 1\cdot\frac{1}{2} = \boxed{\frac{1}{2}}$$
+</ExA>
+
+<ExQ>
+Use cylindrical coordinates to find the volume inside the cylinder $x^2 + y^2 = 4$ between $z = 0$ and $z = 5$.
+</ExQ>
+<ExA>
+$V = \int_0^{2\pi}\int_0^2\int_0^5 r\,dz\,dr\,d\theta = 2\pi\cdot 2\cdot 5 = \boxed{20\pi \approx 62.83}$.
+
+(Or just $\pi r^2 h = 4\pi\cdot 5 = 20\pi$. ✓)
+</ExA>
+
+<ExQ>
+Use spherical coordinates to evaluate $\displaystyle\iiint_B(x^2 + y^2 + z^2)\,dV$ where $B$ is the unit ball.
+</ExQ>
+<ExA>
+$x^2 + y^2 + z^2 = \rho^2$, $dV = \rho^2\sin\phi\,d\rho\,d\phi\,d\theta$.
+
+$$\int_0^{2\pi}\int_0^\pi\int_0^1\rho^4\sin\phi\,d\rho\,d\phi\,d\theta = 2\pi\cdot 2\cdot\frac{1}{5} = \frac{4\pi}{5}$$
+</ExA>
+
+<ExQ>
+**Engineering: Moment of inertia.** Compute the moment of inertia of a uniform solid cylinder of radius $R$, height $h$, and density $\rho$ about its central axis: $I_z = \iiint_E\rho(x^2 + y^2)\,dV$.
+</ExQ>
+<ExA>
+Cylindrical: $x^2 + y^2 = r^2$, $dV = r\,dr\,d\theta\,dz$.
+
+$I_z = \int_0^h\int_0^{2\pi}\int_0^R\rho\cdot r^2\cdot r\,dr\,d\theta\,dz$
+$= \rho\cdot h\cdot 2\pi\cdot\frac{R^4}{4} = \frac{\pi\rho h R^4}{2}$
+
+Mass $M = \rho V = \rho\pi R^2 h$, so $I_z = \tfrac{1}{2}MR^2$ — the standard formula.
+
+This is the foundation of rotational dynamics: every rotating shaft uses this.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is the Jacobian $\rho^2\sin\phi$ for spherical coordinates equal to zero on the polar axis ($\phi = 0$ or $\pi$)?
+</ExQ>
+<ExA>
+At $\phi = 0$ or $\pi$, the points lie on the $z$-axis, where $\theta$ is *undefined* — every value of $\theta$ gives the same point. The volume element collapses to zero because rotating around the polar axis at the pole doesn't sweep out any volume.
+
+The Jacobian factor $\sin\phi$ correctly captures this geometric fact. It also tells us spherical coordinates have a *coordinate singularity* at the poles — sometimes problematic in numerical work, addressed by switching to local coordinates near poles.
+</ExA>
+
+<ExQ>
+**Multi-step.** Find the volume of the region inside the sphere $x^2 + y^2 + z^2 = 4$ and above the cone $z = \sqrt{x^2 + y^2}$.
+</ExQ>
+<ExA>
+Cone in spherical: $\rho\cos\phi = \rho\sin\phi \Rightarrow \tan\phi = 1 \Rightarrow \phi = \pi/4$.
+
+So region: $\rho \in [0, 2]$, $\phi \in [0, \pi/4]$, $\theta \in [0, 2\pi]$.
+
+$V = \int_0^{2\pi}\int_0^{\pi/4}\int_0^2\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$
+$= 2\pi\cdot[1 - \cos(\pi/4)]\cdot\frac{8}{3}$
+$= \dfrac{16\pi}{3}(1 - \sqrt 2/2)$
+$\approx \dfrac{16\pi}{3}(0.293) \approx 4.91$
+
+Spherical coordinates make this geometric problem trivial.
+</ExA>

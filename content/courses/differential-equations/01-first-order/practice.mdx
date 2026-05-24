@@ -1,0 +1,76 @@
+---
+title: Chapter 1 Practice — First-Order ODEs
+description: Mixed practice on separable, linear, and modeling problems.
+---
+
+# Chapter 1 Practice — First-Order ODEs
+
+<ExQ>
+**1.** Solve $y' = 3y$, $y(0) = 5$.
+</ExQ>
+<ExA>
+Separable: $y = 5 e^{3t}$.
+</ExA>
+
+<ExQ>
+**2.** Solve $y' = (1 + y^2)/(1 + x^2)$.
+</ExQ>
+<ExA>
+Separable: $\arctan y = \arctan x + C$, i.e., $y = \tan(\arctan x + C)$. Or use $\tan(A + B)$ formula.
+</ExA>
+
+<ExQ>
+**3.** Solve $y' + 2y = e^{-x}$, $y(0) = 0$.
+</ExQ>
+<ExA>
+$\mu = e^{2x}$. $(e^{2x}y)' = e^x \Rightarrow e^{2x}y = e^x + C \Rightarrow y = e^{-x} + C e^{-2x}$.
+
+IC: $C = -1$. $y = e^{-x} - e^{-2x}$.
+</ExA>
+
+<ExQ>
+**4.** Find equilibria and stability of $y' = y(1 - y)$.
+</ExQ>
+<ExA>
+Equilibria: $y = 0$ and $y = 1$. Linearization $f'(y) = 1 - 2y$. $f'(0) = 1 > 0$ (unstable), $f'(1) = -1 < 0$ (stable). Logistic.
+</ExA>
+
+<ExQ>
+**5. Engineering.** A radioactive material has half-life 5 years. After how many years is 5% remaining?
+</ExQ>
+<ExA>
+$N(t) = N_0(1/2)^{t/5}$. Set to $0.05$: $0.05 = (1/2)^{t/5}$, $t/5 = \log_2(20) \approx 4.32$, $t \approx 21.6$ years.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why doesn't $y' = y^{1/2}$ have a unique solution through $(0, 0)$?
+</ExQ>
+<ExA>
+The right-hand side $f(y) = \sqrt y$ is not Lipschitz at $y = 0$ (its derivative blows up). The Picard-Lindelöf theorem fails, and uniqueness is lost.
+
+Indeed, both $y \equiv 0$ and $y = (t/2)^2$ satisfy the ODE with $y(0) = 0$. **Non-Lipschitz RHS** can produce non-unique solutions.
+</ExA>
+
+<ExQ>
+**7. Multi-step. Tank.** Tank holds 100 L brine with $S_0 = 10$ kg salt. Brine of concentration 0.05 kg/L flows in at 5 L/min; mixed flows out at 5 L/min. Find $S(t)$.
+</ExQ>
+<ExA>
+$dS/dt = (5)(0.05) - (5)(S/100) = 0.25 - S/20$.
+
+Linear: $\mu = e^{t/20}$, $S = 5 + Ce^{-t/20}$. IC: $S(0) = 10 \Rightarrow C = 5$.
+
+$S(t) = 5 + 5 e^{-t/20}$.
+
+Steady state: 5 kg.
+</ExA>
+
+<ExQ>
+**8. Conceptual.** Why does the integrating factor "magically" make the LHS into a derivative of a product?
+</ExQ>
+<ExA>
+By construction: $\mu = e^{\int p\,dx}$ has $\mu' = \mu p$.
+
+Then $(\mu y)' = \mu' y + \mu y' = \mu p y + \mu y' = \mu(y' + py)$.
+
+So multiplying $y' + py = q$ by $\mu$ gives $\mu(y' + py) = \mu q$, i.e., $(\mu y)' = \mu q$. The LHS is now an exact derivative — by design. No magic, just choosing $\mu$ to satisfy the product rule.
+</ExA>

@@ -1,0 +1,75 @@
+---
+title: SVD Applications — Noise Filtering and Data Compression
+description: Using truncated SVD to remove noise from signals and compress data in engineering systems.
+---
+
+# SVD Applications: Noise Filtering and Data Compression
+
+The SVD $A = \sum_{i=1}^r \sigma_i \mathbf{u}_i\mathbf{v}_i^T$ separates a matrix into ranked components. Large $\sigma_i$ capture meaningful structure; small $\sigma_i$ often represent noise.
+
+## Low-Rank Approximation (Eckart–Young Theorem)
+
+The best rank-$k$ approximation to $A$ (in both the 2-norm and Frobenius norm) is:
+
+$$A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i\mathbf{v}_i^T$$
+
+**No other rank-$k$ matrix is closer to $A$** — the SVD gives the optimal compression.
+
+Approximation error: $\|A - A_k\| = \sigma_{k+1}$
+
+## Noise Filtering in Linear Systems
+
+Suppose we measure $\mathbf{b} = A\mathbf{x}_{\text{true}} + \boldsymbol{\eta}$ where $\boldsymbol{\eta}$ is noise. Naïve inversion amplifies noise by $1/\sigma_{\min}$.
+
+**Truncated pseudo-inverse:** ignore singular values below a threshold $\varepsilon$:
+
+$$A^+_k = \sum_{i:\,\sigma_i > \varepsilon} \frac{1}{\sigma_i}\mathbf{v}_i\mathbf{u}_i^T$$
+
+This trades a small bias (from truncation) for much smaller variance (noise amplification) — the classical **regularization** tradeoff.
+
+## Application: Structural Health Monitoring
+
+A sensor array measures $\mathbf{b}(t) = A\mathbf{s}(t) + \boldsymbol{\eta}(t)$ where $\mathbf{s}$ are structural mode shapes and $\boldsymbol{\eta}$ is measurement noise. SVD separates the dominant structural modes (large $\sigma_i$) from noise (small $\sigma_i$), enabling clean modal identification.
+
+## Application: Image Compression
+
+An $m \times n$ grayscale image is a matrix $A$. Its rank-$k$ SVD stores $k(m+n+1)$ numbers instead of $mn$ — compression ratio $mn / k(m+n)$.
+
+For a $512 \times 512$ image ($mn = 262{,}144$):
+- $k = 50$: stores $50 \times 1025 = 51{,}250$ values — **80% compression** with visually acceptable quality
+
+## Connection to Deep Learning
+
+Neural network weight matrices are often approximately low-rank. SVD-based compression (keeping top-$k$ singular components) can reduce model size by 10–100× with minimal accuracy loss — important for deploying models on embedded systems in mechanical engineering applications.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Matrix $A = \begin{pmatrix}4&3\\8&6\end{pmatrix}$ has rank 1. Find its SVD and verify that $A_1 = A$.
+</ExQ>
+<ExA>
+Note $A = \mathbf{u}_1 \sigma_1 \mathbf{v}_1^T$. Factor: $A = \begin{pmatrix}1\\2\end{pmatrix}(4, 3)$ — columns are proportional.
+
+$$\mathbf{u} = \frac{1}{\sqrt{5}}\begin{pmatrix}1\\2\end{pmatrix}, \quad \mathbf{v} = \frac{1}{5}\begin{pmatrix}4\\3\end{pmatrix} \times \frac{5}{\sqrt{5}\cdot\sigma_1}$$
+
+$\sigma_1^2 = \lambda_1(A^TA)$: $A^TA = \begin{pmatrix}80&60\\60&45\end{pmatrix}$, trace = 125, det = 0.
+
+$\sigma_1 = \sqrt{125} = 5\sqrt{5}$, $\sigma_2 = 0$ (rank 1 confirmed).
+
+$A = A_1$ trivially, since only one non-zero singular value.
+</ExA>
+
+<ExQ>
+Why does truncated SVD regularization reduce noise amplification? Explain the trade-off between $k$ too small and $k$ too large.
+</ExQ>
+<ExA>
+When inverting $A$, singular values become $1/\sigma_i$ in $A^+$. A very small $\sigma_i$ (from noise) becomes a very large $1/\sigma_i$ — amplifying any noise in the right singular direction.
+
+**$k$ too small:** Aggressive truncation — removes noise but also loses real signal. Biased solution.
+
+**$k$ too large:** Includes noisy components — small $\sigma_i$ amplify noise. High variance solution.
+
+**Optimal $k$:** Balance point where the signal-to-noise ratio changes. In practice, plot singular values and look for a "knee" — the gap between signal and noise singular values.
+</ExA>

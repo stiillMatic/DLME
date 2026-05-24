@@ -1,0 +1,214 @@
+---
+title: Partial Derivatives and the Gradient
+description: Generalizing differentiation to multivariable functions — and discovering the gradient, the "compass" of multivariable calculus.
+---
+
+# Partial Derivatives and the Gradient
+
+## The Big Picture
+
+In single-variable calculus, the derivative tells you the rate of change at a point. In multivariable calculus, that question becomes more nuanced: rate of change *in which direction?* Partial derivatives answer this for the coordinate axes; the **gradient** packages all of them together into a vector that points "uphill" — the direction of steepest increase. The gradient is the single most important object in multivariable calculus, appearing in optimization, gradient descent for machine learning, fluid potential flow, and electromagnetic fields.
+
+## Intuition First — Walking on a Hillside
+
+Imagine you're standing on a hillside. You ask: "If I take a step east, how much higher am I?" That's $\partial f/\partial x$. "If I take a step north?" That's $\partial f/\partial y$.
+
+But what if you want to know the **direction of fastest ascent**? Combine these into a vector $\nabla f = \langle \partial f/\partial x, \partial f/\partial y\rangle$. The gradient points exactly in the steepest-uphill direction, and its magnitude tells you *how* steep.
+
+The gradient is a compass: it always points "uphill on $f$".
+
+## Partial Derivatives
+
+For a function $f(x, y)$, the partial derivative with respect to $x$ is:
+
+$$\frac{\partial f}{\partial x}(a, b) = \lim_{h\to 0}\frac{f(a+h, b) - f(a, b)}{h}$$
+
+**Treat $y$ as constant** and differentiate as if it were a single-variable function.
+
+**Notation:** $\partial f/\partial x = f_x = D_x f$.
+
+**Example.** $f(x, y) = x^2 y + \sin y$.
+
+$f_x = 2xy$ (treating $y$ as a constant).
+$f_y = x^2 + \cos y$ (treating $x$ as a constant).
+
+## Higher-Order Partials
+
+$$f_{xx} = \frac{\partial^2 f}{\partial x^2}, \quad f_{xy} = \frac{\partial^2 f}{\partial y\partial x}, \quad f_{yy} = \frac{\partial^2 f}{\partial y^2}$$
+
+**Clairaut's theorem:** if $f$ is sufficiently smooth, mixed partials commute: $f_{xy} = f_{yx}$.
+
+This isn't trivial — it relies on continuity of second partials. For pathological functions, mixed partials can disagree.
+
+## The Gradient
+
+$$\nabla f(\mathbf{x}) = \left\langle\frac{\partial f}{\partial x_1},\ \frac{\partial f}{\partial x_2},\ \ldots,\ \frac{\partial f}{\partial x_n}\right\rangle$$
+
+Properties:
+
+1. **Direction of steepest ascent:** $\nabla f$ points in the direction in which $f$ increases fastest.
+2. **Magnitude = rate of steepest ascent:** $\|\nabla f\|$ is the rate of change in that direction.
+3. **Perpendicular to level sets:** $\nabla f$ is orthogonal to the level curves $f = c$.
+
+## Directional Derivative
+
+The rate of change of $f$ in direction of unit vector $\hat{\mathbf{u}}$:
+
+$$D_{\hat{\mathbf{u}}}f = \nabla f \cdot \hat{\mathbf{u}} = \|\nabla f\|\cos\theta$$
+
+Maximum when $\theta = 0$ (along $\nabla f$), minimum when $\theta = \pi$ (against $\nabla f$).
+
+## Tangent Plane and Linearization
+
+Near a point $(a, b)$, $f(x, y)$ is approximated by its tangent plane:
+
+$$L(x, y) = f(a, b) + f_x(a, b)(x - a) + f_y(a, b)(y - b)$$
+
+This is the linear approximation — extends the single-variable tangent line to a tangent plane in 3D.
+
+## Common Misconceptions
+
+**Misconception 1: "Partial derivatives are total derivatives."**
+
+A partial derivative measures change with **one variable held fixed**. The total derivative accounts for all variables changing together via the chain rule (next lesson).
+
+**Misconception 2: "$f_{xy} = f_{yx}$ always."**
+
+True for nice (smooth) functions, *not* for arbitrary ones. Pathological counterexamples exist where $f_{xy}(0,0) \neq f_{yx}(0,0)$ — but they're rare in engineering.
+
+**Misconception 3: "The gradient is a scalar like the slope of a line."**
+
+The gradient is a **vector** in the input space. Its magnitude is a scalar (the rate of steepest ascent), but the gradient itself includes direction.
+
+**Misconception 4: "$\nabla f = 0$ means $f$ is at a max or min."**
+
+It means $f$ has a *critical point* there. Could be max, min, or saddle. Need second-derivative test to classify.
+
+## Engineering Connection
+
+- **Heat transfer:** the temperature gradient $\nabla T$ drives heat flow: $\mathbf{q} = -k\nabla T$ (Fourier's law in 3D).
+- **Fluid dynamics:** velocity potential $\phi$ has $\mathbf{v} = \nabla\phi$ for irrotational flow.
+- **Electrostatics:** electric field $\mathbf{E} = -\nabla V$, where $V$ is the potential.
+- **Optimization & machine learning:** gradient descent updates parameters as $\mathbf{w}_{n+1} = \mathbf{w}_n - \alpha\nabla L$ to minimize loss $L$.
+- **Stress analysis:** the tensor $\partial u_i/\partial x_j$ is the deformation gradient — central to all continuum mechanics.
+
+The gradient connects mathematics to physics: nature often "follows the gradient" (heat flows down it, charges accelerate along it, optimizers walk against it).
+
+---
+
+## Practice Problems
+
+### Mechanical Drills
+
+<ExQ>
+Find $f_x$ and $f_y$ for $f(x, y) = x^2 + 3xy + y^3$.
+</ExQ>
+<ExA>
+$f_x = 2x + 3y$, $f_y = 3x + 3y^2$.
+</ExA>
+
+<ExQ>
+Find $\nabla f$ for $f(x, y) = e^{x}\cos y$ at the point $(0, \pi/2)$.
+</ExQ>
+<ExA>
+$f_x = e^x\cos y$, $f_y = -e^x\sin y$.
+
+At $(0, \pi/2)$: $f_x = 0$, $f_y = -1$. So $\nabla f = \langle 0, -1\rangle$.
+</ExA>
+
+<ExQ>
+For $f(x, y) = x^3 y - 2y^2 + xy$, verify Clairaut's theorem: $f_{xy} = f_{yx}$.
+</ExQ>
+<ExA>
+$f_x = 3x^2 y + y$, $f_{xy} = 3x^2 + 1$.
+
+$f_y = x^3 - 4y + x$, $f_{yx} = 3x^2 + 1$.
+
+Equal ✓.
+</ExA>
+
+<ExQ>
+Find the directional derivative of $f(x, y) = x^2 + y^2$ at $(1, 1)$ in the direction $\hat{\mathbf{u}} = \langle 3/5, 4/5\rangle$.
+</ExQ>
+<ExA>
+$\nabla f = \langle 2x, 2y\rangle$. At $(1, 1)$: $\nabla f = \langle 2, 2\rangle$.
+
+$D_{\hat{\mathbf{u}}}f = \langle 2, 2\rangle\cdot\langle 3/5, 4/5\rangle = 6/5 + 8/5 = 14/5 = 2.8$.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $\nabla f(P) = \mathbf{0}$, then $f$ has a local extremum at $P$.
+</ExQ>
+<ExA>
+**False.** $\nabla f = \mathbf{0}$ identifies a *critical point*, but it could be a max, min, or **saddle point**.
+
+Counterexample: $f(x, y) = x^2 - y^2$ has $\nabla f = \langle 2x, -2y\rangle = \mathbf{0}$ at $(0, 0)$. But $f$ is positive in $x$-direction, negative in $y$-direction — a saddle.
+
+Always classify with second-derivative test or examine behavior in different directions.
+</ExA>
+
+<ExQ>
+**Reasoning.** If $f(x, y)$ has gradient $\nabla f = \langle 3, 4\rangle$ at a point, what is the direction of steepest *descent*?
+</ExQ>
+<ExA>
+Steepest descent direction is $-\nabla f = \langle -3, -4\rangle$.
+
+Unit vector: $-\nabla f/\|\nabla f\| = \langle -3/5, -4/5\rangle$.
+
+This is exactly the direction gradient descent algorithms move in machine learning.
+</ExA>
+
+<ExQ>
+**Geometric.** A surface is given by $z = f(x, y)$, with level curves $f = c$ in the $xy$-plane. Why is $\nabla f$ perpendicular to these level curves?
+</ExQ>
+<ExA>
+Along a level curve, $f$ is constant, so $df/ds = 0$. By the multivariable chain rule (next lesson), $df/ds = \nabla f\cdot\mathbf{T}$ where $\mathbf{T}$ is the tangent to the curve.
+
+So $\nabla f\cdot\mathbf{T} = 0$ — they're perpendicular.
+
+Visually: gradient points "uphill," level curves are "contours of equal altitude" — naturally perpendicular.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Heat flow direction.** Temperature in a slab is $T(x, y) = 100 - x^2 - 2y^2$. Find the direction of heat flow at $(2, 1)$ (heat flows opposite to $\nabla T$).
+</ExQ>
+<ExA>
+$\nabla T = \langle -2x, -4y\rangle$. At $(2, 1)$: $\nabla T = \langle -4, -4\rangle$.
+
+Heat flow direction: $-\nabla T = \langle 4, 4\rangle$, i.e., toward larger $x$ and $y$ — but this gives the direction of *decreasing* $T$, where heat is going.
+
+Wait, $T$ decreases as $x$, $y$ grow (the function has a max at origin). So heat flows AWAY from origin, in direction $\langle 4, 4\rangle$. Magnitude: $\|\nabla T\| = 4\sqrt 2$, so the heat flux is $|q| = k\cdot 4\sqrt 2$ for thermal conductivity $k$.
+</ExA>
+
+<ExQ>
+**Gradient descent step.** A loss function $L(w_1, w_2) = (w_1 - 2)^2 + 3(w_2 - 1)^2$ is to be minimized. Starting at $(0, 0)$ with learning rate $\alpha = 0.1$, find the next point.
+</ExQ>
+<ExA>
+$\nabla L = \langle 2(w_1 - 2), 6(w_2 - 1)\rangle$.
+
+At $(0, 0)$: $\nabla L = \langle -4, -6\rangle$.
+
+Update: $\mathbf{w}_{\text{new}} = \mathbf{w} - \alpha\nabla L = \langle 0 - 0.1(-4), 0 - 0.1(-6)\rangle = \langle 0.4, 0.6\rangle$.
+
+After one step, we've moved toward the minimum at $(2, 1)$. Each step moves us closer; convergence depends on $\alpha$.
+</ExA>
+
+<ExQ>
+**Linearization.** A pump's pressure is $P(Q, N) = 50 - 0.5 Q^2 + 0.1 N^2$ kPa where $Q$ is flow rate and $N$ is RPM. Use the tangent plane at $(Q, N) = (2, 10)$ to estimate $P(2.1, 10.5)$.
+</ExQ>
+<ExA>
+$P(2, 10) = 50 - 2 + 10 = 58$.
+
+$P_Q = -Q$, $P_Q(2, 10) = -2$.
+$P_N = 0.2 N$, $P_N(2, 10) = 2$.
+
+$L(Q, N) = 58 - 2(Q - 2) + 2(N - 10)$.
+
+$L(2.1, 10.5) = 58 - 2(0.1) + 2(0.5) = 58 - 0.2 + 1 = 58.8$ kPa.
+
+Compare exact: $P(2.1, 10.5) = 50 - 0.5(4.41) + 0.1(110.25) = 50 - 2.205 + 11.025 = 58.82$. Linearization gives 58.80 — accurate to 0.02 kPa.
+</ExA>

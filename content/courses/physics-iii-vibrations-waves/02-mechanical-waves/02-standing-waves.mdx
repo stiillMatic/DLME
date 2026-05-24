@@ -1,0 +1,127 @@
+---
+title: Standing Waves and Boundary Conditions
+description: When traveling waves meet boundaries, they interfere to form stationary patterns — the basis of musical instruments and resonant cavities.
+---
+
+# Standing Waves and Boundary Conditions
+
+## The Big Picture
+
+A **standing wave** is a stationary oscillation pattern formed by interference of two waves traveling in opposite directions. Standing waves emerge whenever waves are confined — strings between fixed points, sound in pipes, electromagnetic fields in cavities. They have discrete allowed frequencies (the **normal modes**), each a "natural way" the system likes to vibrate. This discreteness is the seed of quantum mechanics.
+
+## Intuition First — Constructive Interference Locked in Place
+
+Imagine a wave traveling right hitting a wall and reflecting back. The right-mover and left-mover superpose:
+
+$$y(x, t) = A\sin(kx - \omega t) + A\sin(kx + \omega t) = 2A\sin(kx)\cos(\omega t)$$
+
+The position dependence $\sin(kx)$ is **fixed in space**; the time dependence $\cos(\omega t)$ is uniform. The wave doesn't travel — it oscillates in place.
+
+Some positions ($\sin(kx) = 0$) never move — **nodes**.
+Others ($\sin(kx) = \pm 1$) oscillate with maximum amplitude — **antinodes**.
+
+## Normal Modes on a Fixed String
+
+For string of length $L$, fixed at both ends: $y(0, t) = y(L, t) = 0$.
+
+The first BC requires the standing wave form $\sin(kx)\cos(\omega t)$.
+The second BC requires $\sin(kL) = 0 \Rightarrow kL = n\pi$ for $n = 1, 2, 3, \ldots$
+
+**Allowed wavelengths:** $\lambda_n = 2L/n$.
+
+**Allowed frequencies:** $f_n = nc/(2L)$.
+
+The lowest, $f_1 = c/(2L)$, is the **fundamental**. Higher modes are **harmonics**.
+
+## Boundary Conditions
+
+| Boundary type | Mathematical form |
+|---|---|
+| Fixed (rigid) | $y = 0$ |
+| Free (open) | $\partial y/\partial x = 0$ |
+
+**Open pipe (both ends open):** $\lambda_n = 2L/n$, same as fixed string.
+**Closed-open pipe:** $\lambda_n = 4L/(2n-1)$ — only odd harmonics.
+
+This is why a clarinet (closed-open) sounds different from a flute (open-open) of the same length.
+
+## Energy in a Standing Wave
+
+Energy oscillates between kinetic and potential — but stays in place. Real strings continually transfer energy to the surrounding air (radiation), so the standing wave gradually decays. Q-factor of a string can be ~1000.
+
+## Common Misconceptions
+
+**Misconception 1: "Standing waves don't carry energy."**
+
+Energy is *stored* but not *transported* in an ideal standing wave. Real systems leak energy through boundaries (sound radiation) or damping.
+
+**Misconception 2: "Only the fundamental exists."**
+
+All harmonics can be excited simultaneously. The combination determines **timbre** — why a violin and trumpet at the same fundamental pitch sound different.
+
+**Misconception 3: "Modes only at integer multiples."**
+
+Only for ideal 1D strings with simple BCs. Real strings have slight stiffness causing **inharmonicity**. 2D drumheads and 3D cavities have non-integer modal ratios.
+
+## Engineering Connection
+
+- **Musical instruments:** strings, pipes, drums — all standing-wave systems with carefully shaped boundary conditions.
+- **Microwave ovens:** standing waves in a metal cavity; rotating turntable to even out hot spots.
+- **Lasers:** standing wave between mirrors picks out specific frequencies → coherent light.
+- **Building resonances:** structures have natural standing-wave modes; avoid driving frequencies near these.
+- **Optical fibers:** transverse modes are standing waves; single-mode fibers carry only the fundamental.
+- **Atomic structure:** electron "orbitals" are essentially standing-wave solutions to the Schrödinger equation.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** String, $L = 1$ m, $c = 200$ m/s. Fundamental frequency?
+</ExQ>
+<ExA>
+$f_1 = c/(2L) = 100$ Hz.
+
+Harmonics: 100, 200, 300, ... Hz.
+</ExA>
+
+<ExQ>
+**2.** Open-open pipe length 0.5 m, $c = 343$ m/s. First three resonant frequencies?
+</ExQ>
+<ExA>
+$f_n = nc/(2L) = n\cdot 343$ Hz.
+
+So 343, 686, 1029 Hz.
+</ExA>
+
+<ExQ>
+**3. Engineering: Concert hall.** Hall length 30 m, $c = 343$ m/s. Lowest standing wave frequency?
+</ExQ>
+<ExA>
+Treating as open-open (idealization): $f_1 = 343/60 \approx 5.7$ Hz.
+
+This is below human hearing (20 Hz minimum), but the room modes do interact with bass instruments and PA systems. Modal analysis is critical for concert hall acoustic design.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does a clarinet (closed-open pipe) play an octave lower than a flute (open-open) of the same length?
+</ExQ>
+<ExA>
+Open-open: $f_1 = c/(2L)$.
+Closed-open: $f_1 = c/(4L)$.
+
+The closed-open fundamental is **half** the open-open — one octave lower.
+
+Geometrically: closed-open standing wave has 1/4 wavelength in the pipe (node at closed end, antinode at open). Open-open has 1/2 wavelength. Same wavelength relationship as the famous "Helmholtz resonator" → "open pipe" distinction.
+</ExA>
+
+<ExQ>
+**5.** A string is plucked at its center. Which harmonics are excited?
+</ExQ>
+<ExA>
+Plucking at $L/2$ produces an initial shape with a peak at $L/2$. Only modes with **antinodes at $L/2$** are strongly excited.
+
+Mode $n$ has antinode at $L/2$ when $\sin(n\pi/2) = 1$, i.e., **odd $n$**: $n = 1, 3, 5, \ldots$.
+
+So mainly odd harmonics. Even harmonics are absent (because they have nodes at $L/2$). This gives a characteristic timbre — and why guitarists pluck different positions for different sounds.
+</ExA>

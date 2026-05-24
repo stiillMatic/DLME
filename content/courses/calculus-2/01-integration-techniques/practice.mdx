@@ -1,0 +1,57 @@
+---
+title: Chapter 1 Practice — Integration Techniques
+description: Practice on trig substitution and improper integrals.
+---
+
+# Chapter 1 Practice — Integration Techniques
+
+<ExQ>
+**1.** Compute $\int\dfrac{dx}{\sqrt{9-x^2}}$.
+</ExQ>
+<ExA>
+$x = 3\sin\theta$. Result: $\arcsin(x/3) + C$.
+</ExA>
+
+<ExQ>
+**2.** Compute $\int\dfrac{x\,dx}{\sqrt{x^2+1}}$. (Also doable by $u$-sub.)
+</ExQ>
+<ExA>
+$u$-sub: $u = x^2+1, du = 2x\,dx$. $\int (1/2)u^{-1/2}\,du = \sqrt u = \sqrt{x^2+1} + C$.
+</ExA>
+
+<ExQ>
+**3.** Evaluate $\int_0^\infty xe^{-x^2}\,dx$.
+</ExQ>
+<ExA>
+$u = -x^2$, $du = -2x\,dx$. $\int_0^\infty xe^{-x^2}\,dx = -\frac{1}{2}\int_0^{-\infty}e^u\,du = \frac{1}{2}[1 - 0] = 1/2$.
+</ExA>
+
+<ExQ>
+**4.** Does $\int_0^1 \ln x\,dx$ converge?
+</ExQ>
+<ExA>
+$\ln x \to -\infty$ as $x\to 0^+$ — improper.
+
+$\int\ln x\,dx = x\ln x - x$. Limit: $\lim_{a\to 0^+}[x\ln x - x]_a^1 = (0 - 1) - (0 - 0) = -1$.
+
+Converges to $-1$. ($x\ln x \to 0$ as $x\to 0^+$ — known limit.)
+</ExA>
+
+<ExQ>
+**5. Engineering.** Probability density $p(x) = \lambda e^{-\lambda x}$ for $x \geq 0$. Verify $\int_0^\infty p\,dx = 1$.
+</ExQ>
+<ExA>
+$\int_0^\infty\lambda e^{-\lambda x}\,dx = [-e^{-\lambda x}]_0^\infty = 0 - (-1) = 1$ ✓.
+
+Exponential distribution. Mean: $1/\lambda$. Used in reliability engineering for time-to-failure.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why does $\int_0^1 1/x^p\,dx$ converge for $p < 1$ but $\int_1^\infty 1/x^p\,dx$ converge for $p > 1$?
+</ExQ>
+<ExA>
+For $x \in [0, 1]$: smaller $p$ means slower blow-up at origin → integrable.
+For $x \in [1, \infty]$: larger $p$ means faster decay at infinity → integrable.
+
+Both regions need the function to decay "fast enough" relative to the unbounded part of the domain. The threshold $p = 1$ is the critical case (logarithmic divergence in both).
+</ExA>

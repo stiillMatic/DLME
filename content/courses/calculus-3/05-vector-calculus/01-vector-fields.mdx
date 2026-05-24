@@ -1,0 +1,115 @@
+---
+title: Vector Fields, Divergence, and Curl
+description: Functions assigning a vector to each point in space — and the two fundamental differential operators on them.
+---
+
+# Vector Fields, Divergence, and Curl
+
+## The Big Picture
+
+A **vector field** assigns a vector to each point in space — wind velocity, fluid flow, electric field, gravitational force. **Divergence** measures local "spreading" (sources/sinks). **Curl** measures local rotation. Together with the gradient, they form the toolkit of vector calculus, and they appear directly in physical laws (Maxwell's equations, Navier-Stokes, etc.).
+
+## Vector Field
+
+$$\mathbf{F}(x, y, z) = \langle P(x,y,z), Q(x,y,z), R(x,y,z)\rangle$$
+
+Examples:
+- Constant flow: $\mathbf{F} = \langle 1, 0, 0\rangle$.
+- Radial: $\mathbf{F} = \langle x, y, z\rangle$ (outward).
+- Rotational: $\mathbf{F} = \langle -y, x, 0\rangle$ (counterclockwise around $z$-axis).
+
+## Divergence
+
+$$\nabla\cdot\mathbf{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$
+
+A **scalar** field. Measures local outflow rate per unit volume.
+
+- $\nabla\cdot\mathbf{F} > 0$: source (field flowing outward).
+- $\nabla\cdot\mathbf{F} < 0$: sink.
+- $\nabla\cdot\mathbf{F} = 0$: solenoidal/divergence-free.
+
+## Curl
+
+$$\nabla\times\mathbf{F} = \det\begin{pmatrix}\hat{\mathbf{i}}&\hat{\mathbf{j}}&\hat{\mathbf{k}}\\ \partial_x&\partial_y&\partial_z\\ P&Q&R\end{pmatrix}$$
+
+A **vector** field. Measures local rotation: a paddle wheel placed in the field rotates fastest about the curl direction.
+
+$\nabla\times\mathbf{F} = \mathbf{0}$: irrotational.
+
+## Useful Identities
+
+- $\nabla\times(\nabla f) = \mathbf{0}$ — gradient fields are irrotational.
+- $\nabla\cdot(\nabla\times\mathbf{F}) = 0$ — curl fields are divergence-free.
+- $\nabla\cdot(f\mathbf{F}) = \nabla f\cdot\mathbf{F} + f\nabla\cdot\mathbf{F}$ — product rule for divergence.
+
+## Common Misconceptions
+
+**Misconception 1: "Divergence and curl are abstract math."**
+
+They have direct physical meaning. Divergence: net outflow. Curl: rotation. In Maxwell's equations, both appear with concrete physical interpretations.
+
+**Misconception 2: "$\nabla\times\mathbf{F} = 0$ means $\mathbf{F}$ is constant."**
+
+Means $\mathbf{F}$ is a *gradient field*: $\mathbf{F} = \nabla\phi$ for some potential $\phi$. Could vary widely in space.
+
+**Misconception 3: "Curl exists only in 3D."**
+
+In 2D, "curl" is a scalar (the $z$-component). In 4+D, more complex generalizations exist (using exterior derivatives).
+
+## Engineering Connection
+
+- **Fluid mechanics:** $\nabla\cdot\mathbf{v} = 0$ for incompressible flow; $\boldsymbol\omega = \nabla\times\mathbf{v}$ is vorticity.
+- **Electromagnetism:** Maxwell's equations use both div and curl explicitly.
+- **Heat flow:** $\mathbf{q} = -k\nabla T$ is a gradient field; div $\mathbf{q}$ relates to heat sources.
+- **Stress analysis:** Cauchy's equation $\nabla\cdot\boldsymbol\sigma + \mathbf{f} = 0$ for static equilibrium.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\mathbf{F} = (x^2, y^2, z^2)$. Find $\nabla\cdot\mathbf{F}$.
+</ExQ>
+<ExA>
+$2x + 2y + 2z$.
+</ExA>
+
+<ExQ>
+**2.** $\mathbf{F} = (-y, x, 0)$. Find $\nabla\times\mathbf{F}$.
+</ExQ>
+<ExA>
+$(\partial_y\cdot 0 - \partial_z\cdot x, \partial_z\cdot(-y) - \partial_x\cdot 0, \partial_x\cdot x - \partial_y\cdot(-y))$ = $(0, 0, 2)$.
+
+Constant rotation around $+z$ axis with magnitude 2.
+</ExA>
+
+<ExQ>
+**3.** Verify $\nabla\times(\nabla f) = \mathbf{0}$ for $f = x^2 y$.
+</ExQ>
+<ExA>
+$\nabla f = (2xy, x^2, 0)$.
+
+$\nabla\times = (\partial_y\cdot 0 - \partial_z\cdot x^2, \ldots) = (0, 0, 2x - 2x) = (0, 0, 0)$ ✓.
+</ExA>
+
+<ExQ>
+**4. Engineering: Incompressible flow.** Verify $\mathbf{v} = (y, -x, 0)$ is incompressible.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{v} = 0 + 0 + 0 = 0$ ✓.
+
+This is rigid rotation. Standard incompressible flow.
+
+For real fluid flows, $\nabla\cdot\mathbf{v} = 0$ enforces mass conservation.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is $\nabla\cdot\mathbf{B} = 0$ for any magnetic field?
+</ExQ>
+<ExA>
+**Physical:** no magnetic monopoles. Field lines have no sources/sinks; they always form closed loops.
+
+**Mathematical:** $\mathbf{B} = \nabla\times\mathbf{A}$ for some vector potential $\mathbf{A}$. Identity: $\nabla\cdot(\nabla\times\mathbf{A}) = 0$.
+
+So magnetic fields are intrinsically "divergence-free" — one of Maxwell's equations.
+</ExA>

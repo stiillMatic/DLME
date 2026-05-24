@@ -1,0 +1,146 @@
+---
+title: Magnetic Force and Field
+description: The force on moving charges from magnetic fields — perpendicular to velocity, never doing work, yet steering everything from motors to particle accelerators.
+---
+
+# Magnetic Force and Field
+
+## The Big Picture
+
+Magnetic fields exert force on **moving charges**. Unlike electric force (along $\mathbf{E}$), magnetic force is **perpendicular** to both velocity and field — leading to circular motion and the operation of every electric motor. Understanding magnetic forces is essential for designing motors, generators, mass spectrometers, MRI machines, and particle accelerators.
+
+## Lorentz Force
+
+For a charge $q$ moving with velocity $\mathbf{v}$ in field $\mathbf{B}$:
+
+$$\mathbf{F} = q\mathbf{v}\times\mathbf{B}$$
+
+Magnitude: $F = qvB\sin\theta$.
+
+Direction: right-hand rule. Always perpendicular to $\mathbf{v}$ AND $\mathbf{B}$.
+
+**Stationary charge:** no magnetic force (B doesn't act unless v ≠ 0).
+
+## Magnetic Force on Current-Carrying Wire
+
+A wire of length $L$ carrying current $I$ in field $\mathbf{B}$:
+
+$$\mathbf{F} = I\mathbf{L}\times\mathbf{B}$$
+
+This is the force that turns motors. Magnitude: $F = BIL\sin\theta$.
+
+## Sources of Magnetic Field
+
+**Long straight wire:** field circulates around wire, magnitude $B = \mu_0 I/(2\pi r)$.
+
+**Solenoid (long coil):** uniform interior field $B = \mu_0 n I$, where $n$ is turns/length.
+
+**Circular loop, center:** $B = \mu_0 I/(2R)$.
+
+$\mu_0 = 4\pi\times 10^{-7}$ T·m/A (permeability of free space).
+
+## Magnetic Field Units
+
+**Tesla (T)** = N/(A·m). Common reference points:
+- Earth's field: ~50 μT
+- Refrigerator magnet: ~10 mT
+- MRI scanner: 1.5-7 T
+- Strongest sustained lab field: ~45 T
+- Pulsed (microseconds): ~1000 T
+
+## Charged Particle in Uniform B
+
+Constant magnetic force perpendicular to motion → **circular motion**.
+
+Radius: $r = mv/(qB)$ (cyclotron radius).
+
+Period: $T = 2\pi m/(qB)$ — independent of speed!
+
+This is why cyclotrons work — particles complete each loop in the same time regardless of energy.
+
+## Key Property: No Work
+
+Magnetic force is **perpendicular** to velocity → does no work → kinetic energy unchanged.
+
+Only direction changes. Speed is conserved.
+
+This is why mass spectrometers can sort particles by mass without changing their energy.
+
+## Common Misconceptions
+
+**Misconception 1: "Magnetic field pulls iron."**
+
+Indirectly — the field magnetizes iron (aligning atomic moments), then the now-magnetized iron experiences a force. Pure magnetic force only on moving charges or current loops.
+
+**Misconception 2: "Magnetic field pushes north toward north."**
+
+The force is on charges/currents, not on "north" or "south" alone (no magnetic monopoles exist). Two magnets attract/repel because their currents interact.
+
+**Misconception 3: "Magnetic field accelerates charges."**
+
+Changes direction, not speed. KE unchanged. Only changing magnetic fields can do work (via the induced E field — Faraday's law).
+
+## Engineering Connection
+
+- **Electric motors:** current in coil + permanent magnet → torque on rotor.
+- **Generators:** rotating coil in magnetic field induces EMF.
+- **Mass spectrometers:** ions deflected by B; mass-dependent radius separates species.
+- **Particle accelerators (LHC, cyclotrons):** B bends beams; E accelerates.
+- **MRI:** strong B aligns nuclear spins; RF pulses tip them, signals decode tissue type.
+- **Magnetic levitation (maglev trains):** repulsive B between train and track.
+- **Hard drives (legacy):** read/write heads sense magnetic regions on platter.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Electron at $10^6$ m/s perpendicular to $B = 0.01$ T. Force?
+</ExQ>
+<ExA>
+$F = qvB = 1.6\times 10^{-19}\cdot 10^6\cdot 0.01 = 1.6\times 10^{-15}$ N.
+
+Tiny force — but acts on tiny electron mass → significant acceleration.
+</ExA>
+
+<ExQ>
+**2.** Wire 1 m long, 5 A current, perpendicular to $B = 0.5$ T. Force?
+</ExQ>
+<ExA>
+$F = BIL = 0.5\cdot 5\cdot 1 = 2.5$ N. The mechanical foundation of motors.
+</ExA>
+
+<ExQ>
+**3.** Proton 1 keV kinetic energy in $B = 0.5$ T. Cyclotron radius?
+</ExQ>
+<ExA>
+$KE = \tfrac{1}{2}mv^2 \Rightarrow v = \sqrt{2KE/m} = \sqrt{2\cdot 1.6\times 10^{-16}/1.67\times 10^{-27}} \approx 4.4\times 10^5$ m/s.
+
+$r = mv/(qB) = 1.67\times 10^{-27}\cdot 4.4\times 10^5/(1.6\times 10^{-19}\cdot 0.5) \approx 9.2$ mm.
+
+Small radius — protons curve tightly in lab fields. This is the principle of compact cyclotrons.
+</ExA>
+
+<ExQ>
+**4. Engineering: Solenoid actuator.** 1000 turns, 5 cm long, 2 A current. Field inside?
+</ExQ>
+<ExA>
+$n = 1000/0.05 = 20000$ turns/m.
+
+$B = \mu_0 nI = 4\pi\times 10^{-7}\cdot 20000\cdot 2 \approx 0.050$ T.
+
+Enough to actuate a relay or small valve. Industrial solenoids reach ~0.5-1 T with iron cores.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are mass spectrometers shaped like a circle (or arc)?
+</ExQ>
+<ExA>
+Ions enter perpendicular to $\mathbf{B}$, undergo circular motion with radius $r = mv/(qB)$.
+
+Different masses → different radii → spatial separation. Detector at fixed radius collects only one mass-to-charge ratio.
+
+By scanning the field $B$ or accelerating voltage, you sweep through different masses → spectrum.
+
+The arc shape is dictated by physics. Same principle in any particle separator.
+</ExA>

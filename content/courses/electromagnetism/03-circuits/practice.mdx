@@ -1,0 +1,52 @@
+---
+title: Chapter 3 Practice — Circuit Fundamentals
+description: Practice on Ohm's law, RC and RL circuits.
+---
+
+# Chapter 3 Practice — Circuit Fundamentals
+
+<ExQ>
+**1.** Resistor 100 Ω, current 0.5 A. Voltage and power?
+</ExQ>
+<ExA>
+$V = IR = 50$ V. $P = VI = 25$ W.
+</ExA>
+
+<ExQ>
+**2.** Simplify: 6 Ω in series with parallel combination of 4 Ω and 12 Ω.
+</ExQ>
+<ExA>
+Parallel: $4\cdot 12/(4 + 12) = 3$ Ω.
+
+Total: $6 + 3 = 9$ Ω.
+</ExA>
+
+<ExQ>
+**3. RC time constant.** $R = 1$ kΩ, $C = 100$ μF. Time constant?
+</ExQ>
+<ExA>
+$\tau = RC = 1000\cdot 10^{-4} = 0.1$ s = 100 ms.
+</ExA>
+
+<ExQ>
+**4. Engineering: Power transmission.** A 1 km wire of resistance 0.1 Ω/km carries 100 A or 1000 V at 10 A. Compare power losses.
+</ExQ>
+<ExA>
+$R_{\text{wire}} = 0.1$ Ω.
+
+Case 1 (100 A): $P_{\text{loss}} = I^2 R = 1000$ W.
+Case 2 (10 A): $P_{\text{loss}} = 10$ W — 100× less.
+
+Same power transferred, but high voltage minimizes losses. This is the fundamental reason for high-voltage transmission lines.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does an inductor "resist" current changes but allow steady current?
+</ExQ>
+<ExA>
+$V = L\,dI/dt$. Steady current → $dI/dt = 0$ → $V = 0$ across inductor (acts as a wire).
+
+Sudden current change → large $dI/dt$ → large back-EMF → opposes the change.
+
+This is why inductors smooth current in power supplies and oppose ripple.
+</ExA>

@@ -1,0 +1,79 @@
+---
+title: Differentiability and the Cauchy–Riemann Equations
+description: When is a complex function differentiable? The Cauchy–Riemann equations are the key condition.
+---
+
+# Differentiability and the Cauchy–Riemann Equations
+
+A function $f(z) = u(x,y) + iv(x,y)$ is **complex differentiable** at $z_0$ if the limit
+
+$$f'(z_0) = \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}$$
+
+exists and is **independent of the direction** in which $\Delta z \to 0$.
+
+This is far more restrictive than real differentiability.
+
+## Cauchy–Riemann Equations
+
+$f = u + iv$ is differentiable at $z_0 = x_0 + iy_0$ if and only if the partial derivatives exist there and satisfy:
+
+$$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \qquad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$$
+
+When satisfied, the derivative is:
+
+$$f'(z) = \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x}$$
+
+## Analytic Functions
+
+$f$ is **analytic** (holomorphic) in a region if it is complex differentiable at every point of the region. Analytic functions are the central objects of complex analysis.
+
+**Standard analytic functions:**
+
+| Function | $f(z)$ | Notes |
+|---|---|---|
+| Polynomials | $z^n$ | Analytic everywhere |
+| Exponential | $e^z = e^x(\cos y + i\sin y)$ | Analytic everywhere |
+| $\log z$ | $\ln r + i\theta$ | Analytic except at $z=0$ and branch cut |
+| $\sin z$, $\cos z$ | via $e^{iz}$ | Analytic everywhere |
+
+## Checking Analyticity
+
+**Example:** Is $f(z) = z^2$ analytic?
+
+$f(x+iy) = (x+iy)^2 = (x^2-y^2) + 2xyi$, so $u = x^2-y^2$, $v = 2xy$.
+
+$$\frac{\partial u}{\partial x} = 2x = \frac{\partial v}{\partial y} \checkmark, \qquad \frac{\partial u}{\partial y} = -2y = -\frac{\partial v}{\partial x} = -2x \checkmark$$
+
+**Example:** Is $f(z) = \bar{z} = x - iy$ analytic?
+
+$u = x$, $v = -y$: $\partial u/\partial x = 1 \neq -1 = \partial v/\partial y$. **Not analytic.**
+
+---
+
+## Practice Problems
+
+<ExQ>
+Verify that $f(z) = e^z$ satisfies the Cauchy–Riemann equations, and find $f'(z)$.
+</ExQ>
+<ExA>
+$e^z = e^x\cos y + ie^x\sin y$, so $u = e^x\cos y$, $v = e^x\sin y$.
+
+$$\frac{\partial u}{\partial x} = e^x\cos y = \frac{\partial v}{\partial y} \checkmark, \quad \frac{\partial u}{\partial y} = -e^x\sin y = -\frac{\partial v}{\partial x} \checkmark$$
+
+$$f'(z) = \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} = e^x\cos y + ie^x\sin y = e^z$$
+
+So $(e^z)' = e^z$ — same as the real case.
+</ExA>
+
+<ExQ>
+Show that $f(z) = |z|^2 = x^2 + y^2$ is not analytic anywhere except at $z = 0$.
+</ExQ>
+<ExA>
+$u = x^2+y^2$, $v = 0$.
+
+C–R: $\partial u/\partial x = 2x$ must equal $\partial v/\partial y = 0$. This requires $x = 0$.
+
+$\partial u/\partial y = 2y$ must equal $-\partial v/\partial x = 0$. This requires $y = 0$.
+
+Both conditions hold only at $z = 0$. Therefore $f$ is differentiable only at the origin and **not analytic anywhere**.
+</ExA>

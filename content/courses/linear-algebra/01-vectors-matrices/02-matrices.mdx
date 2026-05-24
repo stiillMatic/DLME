@@ -1,0 +1,161 @@
+---
+title: Matrix Operations
+description: Addition, scalar multiplication, transpose — the basic algebra of matrices and what each operation geometrically does.
+---
+
+# Matrix Operations
+
+## The Big Picture
+
+A **matrix** packages a collection of numbers in a rectangular grid. But it's more than bookkeeping: matrices represent **linear transformations**, **data tables**, **stiffness coefficients**, **probability transitions**, and more. The operations on matrices — addition, scalar multiplication, transpose — define how these objects combine, and each has a precise geometric and computational meaning. Master these, and the rest of linear algebra unfolds naturally.
+
+## Intuition First — Matrices as Recipes
+
+Think of a matrix as a "recipe" with rows of ingredients and columns of operations. A 3×3 matrix might encode "stresses on a cube face" — three faces, three components. A neural network's weight matrix encodes "how much each input contributes to each output."
+
+Two matrices can be combined if their recipes are compatible. Adding matrices = combining ingredient lists. Scaling = multiplying every ingredient by a factor. Transposing = swapping what's a row and what's a column.
+
+## Notation
+
+An $m \times n$ matrix $A$ has $m$ rows and $n$ columns:
+
+$$A = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & & \ddots & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} \end{pmatrix}$$
+
+Entry $a_{ij}$: row $i$, column $j$. Sometimes written $[A]_{ij}$.
+
+## Matrix Addition
+
+Defined **only for same-size matrices**. Entry-wise:
+
+$$[A + B]_{ij} = a_{ij} + b_{ij}$$
+
+**Properties:**
+- Commutative: $A + B = B + A$
+- Associative: $(A + B) + C = A + (B + C)$
+- Zero matrix: $A + 0 = A$
+
+## Scalar Multiplication
+
+$$[cA]_{ij} = c\,a_{ij}$$
+
+Multiply every entry by $c$. Used to rescale linear transformations or convert units.
+
+## Transpose
+
+$A^T$ swaps rows and columns:
+
+$$[A^T]_{ij} = a_{ji}$$
+
+If $A$ is $m \times n$, then $A^T$ is $n \times m$.
+
+**Properties:**
+- $(A^T)^T = A$
+- $(A + B)^T = A^T + B^T$
+- $(cA)^T = cA^T$
+- $(AB)^T = B^T A^T$ (note the **order reverses**)
+
+## Special Matrices
+
+| Type | Property |
+|---|---|
+| Square | $m = n$ |
+| Symmetric | $A = A^T$ (only for square) |
+| Skew-symmetric | $A = -A^T$ (diagonal must be 0) |
+| Diagonal | only diagonal entries nonzero |
+| Identity $I$ | diagonal of 1s, rest 0 |
+| Zero | all entries 0 |
+
+## Common Misconceptions
+
+**Misconception 1: "$A + B$ is defined for any two matrices."**
+
+Sizes must match. A $2\times 3$ plus a $3\times 2$ is undefined.
+
+**Misconception 2: "$(AB)^T = A^T B^T$."**
+
+No! The order reverses: $(AB)^T = B^T A^T$. Forgetting this is a frequent source of errors in derivations.
+
+**Misconception 3: "Symmetric is the same as diagonal."**
+
+Diagonal matrices are always symmetric, but symmetric matrices can have nonzero off-diagonal entries (as long as $a_{ij} = a_{ji}$). E.g., $\begin{pmatrix}1&2\\2&3\end{pmatrix}$ is symmetric but not diagonal.
+
+## Engineering Connection
+
+- **Stress tensor** is a symmetric matrix (Cauchy's tensor): $\sigma_{ij} = \sigma_{ji}$.
+- **Stiffness matrix** in FEA is symmetric and positive-definite for elastic structures.
+- **Moment of inertia tensor** of a rigid body is symmetric.
+- **Adjacency matrix** of a (undirected) graph is symmetric.
+- **Neural network weights** are typically rectangular (input dim ≠ output dim).
+- **Data matrix** (rows = samples, columns = features) — transpose flips the orientation.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** $A = \begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix}$, $B = \begin{pmatrix}5 & 6\\ 7 & 8\end{pmatrix}$. Compute $A + B$ and $A^T$.
+</ExQ>
+<ExA>
+$A + B = \begin{pmatrix}6 & 8\\ 10 & 12\end{pmatrix}$, $A^T = \begin{pmatrix}1 & 3\\ 2 & 4\end{pmatrix}$.
+</ExA>
+
+<ExQ>
+**2.** Compute $3A - 2B$ for the matrices above.
+</ExQ>
+<ExA>
+$3A = \begin{pmatrix}3&6\\9&12\end{pmatrix}$, $2B = \begin{pmatrix}10&12\\14&16\end{pmatrix}$.
+
+$3A - 2B = \begin{pmatrix}-7&-6\\-5&-4\end{pmatrix}$.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** Is $A = \begin{pmatrix}1 & 2 & 3\\ 2 & 5 & 6\\ 3 & 6 & 8\end{pmatrix}$ symmetric? Skew-symmetric?
+</ExQ>
+<ExA>
+Check $a_{ij} = a_{ji}$: $a_{12} = 2 = a_{21}$ ✓, $a_{13} = 3 = a_{31}$ ✓, $a_{23} = 6 = a_{32}$ ✓.
+
+**Symmetric**. Not skew-symmetric (diagonal entries are nonzero).
+</ExA>
+
+<ExQ>
+**4.** Decompose $A = \begin{pmatrix}1 & 4\\ 2 & 3\end{pmatrix}$ into a symmetric part $S$ and skew-symmetric part $K$.
+</ExQ>
+<ExA>
+Standard formulas: $S = \tfrac{1}{2}(A + A^T)$, $K = \tfrac{1}{2}(A - A^T)$.
+
+$A^T = \begin{pmatrix}1 & 2\\ 4 & 3\end{pmatrix}$.
+
+$S = \tfrac{1}{2}\begin{pmatrix}2 & 6\\ 6 & 6\end{pmatrix} = \begin{pmatrix}1 & 3\\ 3 & 3\end{pmatrix}$.
+
+$K = \tfrac{1}{2}\begin{pmatrix}0 & 2\\ -2 & 0\end{pmatrix} = \begin{pmatrix}0 & 1\\ -1 & 0\end{pmatrix}$.
+
+Verify: $S + K = A$ ✓.
+
+**Engineering meaning:** in continuum mechanics, this decomposition splits the velocity gradient into **strain rate** (symmetric $S$) and **vorticity** (skew $K$).
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** If $A = A^T$ and $B = B^T$, then $AB = (AB)^T$. Justify.
+</ExQ>
+<ExA>
+**False in general.** Counterexample: $A = \begin{pmatrix}1&0\\0&2\end{pmatrix}$, $B = \begin{pmatrix}0&1\\1&0\end{pmatrix}$.
+
+$AB = \begin{pmatrix}0&1\\2&0\end{pmatrix}$, $(AB)^T = \begin{pmatrix}0&2\\1&0\end{pmatrix}$. Different.
+
+**Correct rule:** $(AB)^T = B^T A^T = BA$. So $AB = (AB)^T$ iff $AB = BA$ (the matrices commute). Symmetry is preserved under products only when matrices commute.
+</ExA>
+
+<ExQ>
+**6.** Show that for any rectangular matrix $A$, the product $A^TA$ is always symmetric.
+</ExQ>
+<ExA>
+$(A^TA)^T = A^T(A^T)^T = A^TA$ ✓.
+
+So **regardless of $A$**, the matrix $A^TA$ (Gram matrix) is symmetric. This fact is the foundation of least squares regression and the normal equations.
+</ExA>

@@ -1,0 +1,131 @@
+---
+title: Surface Integrals and Stokes' Theorem
+description: Integrating over surfaces — flux through membranes — and the 3D generalization of Green's theorem.
+---
+
+# Surface Integrals and Stokes' Theorem
+
+## The Big Picture
+
+Surface integrals add up a quantity over a 2D surface in 3D — the analog of double integrals on flat regions, but for curved surfaces. The most important is **flux**: the rate at which a vector field crosses a surface (heat flow through a wall, fluid mass through a pipe section, electric flux through a closed surface in Gauss's law). **Stokes' theorem** is the deep generalization of Green's theorem to 3D: a surface integral of curl equals a line integral around the boundary.
+
+## Surface Integral of a Scalar Field
+
+For a parametric surface $S: \mathbf{r}(u, v)$, $(u, v) \in D$:
+
+$$\iint_S f\,dS = \iint_D f(\mathbf{r}(u, v))\,\|\mathbf{r}_u\times\mathbf{r}_v\|\,dA$$
+
+The factor $\|\mathbf{r}_u\times\mathbf{r}_v\|$ is the local area scaling — analogous to $r$ in polar.
+
+## Flux of a Vector Field
+
+The flux of $\mathbf{F}$ through $S$ with unit normal $\hat{\mathbf{n}}$:
+
+$$\iint_S\mathbf{F}\cdot\hat{\mathbf{n}}\,dS = \iint_S\mathbf{F}\cdot d\mathbf{S}$$
+
+Parametrically, $d\mathbf{S} = (\mathbf{r}_u\times\mathbf{r}_v)\,du\,dv$.
+
+**Physical meaning:** the rate at which "stuff" carried by $\mathbf{F}$ flows through $S$ in the direction of $\hat{\mathbf{n}}$.
+
+## Stokes' Theorem
+
+For an oriented surface $S$ with boundary curve $\partial S$ (oriented consistently with the surface normal by right-hand rule):
+
+$$\iint_S(\nabla\times\mathbf{F})\cdot d\mathbf{S} = \oint_{\partial S}\mathbf{F}\cdot d\mathbf{r}$$
+
+The flux of curl through a surface = circulation around its boundary.
+
+This generalizes Green's theorem (Green = Stokes restricted to flat surfaces in the $xy$-plane).
+
+## Curl
+
+For $\mathbf{F} = \langle P, Q, R\rangle$:
+
+$$\nabla\times\mathbf{F} = \left\langle\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z},\ \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x},\ \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right\rangle$$
+
+Curl measures **local rotation** of the field. A paddle wheel placed in the field would spin if there's nonzero curl at that point.
+
+## Common Misconceptions
+
+**Misconception 1: "Surface integral = double integral."**
+
+A double integral is over a flat 2D region in $\mathbb{R}^2$. A surface integral is over a curved surface in $\mathbb{R}^3$. Different — and the surface integral has a Jacobian factor accounting for surface bending.
+
+**Misconception 2: "Choice of normal direction doesn't matter."**
+
+Choosing $-\hat{\mathbf{n}}$ flips the sign of flux. By convention: outward normal for closed surfaces. For Stokes' theorem, the normal must be consistent with the boundary curve orientation by the right-hand rule.
+
+**Misconception 3: "Curl is a scalar."**
+
+In 3D, curl is a **vector**. In 2D, the only meaningful component is the $z$-component (a scalar). Be precise about dimension.
+
+**Misconception 4: "Stokes' theorem requires a flat surface."**
+
+Just oriented and bounded. Any surface with the right boundary works — that's why Stokes' is so powerful: many different surfaces with the same boundary give the same line integral.
+
+## Engineering Connection
+
+- **Heat transfer:** $\dot{Q} = \iint_S\mathbf{q}\cdot d\mathbf{S}$ — total heat flow through a surface.
+- **Fluid flow rate:** $\dot{V} = \iint_S\mathbf{v}\cdot d\mathbf{S}$ — volumetric flow through a cross-section.
+- **Electromagnetic theory:** Faraday's law: $\oint\mathbf{E}\cdot d\mathbf{r} = -d/dt\iint\mathbf{B}\cdot d\mathbf{S}$ — induced EMF from changing magnetic flux.
+- **Vorticity in fluid mechanics:** $\boldsymbol{\omega} = \nabla\times\mathbf{v}$; circulation around a closed loop = flux of vorticity through any spanning surface (Stokes).
+- **Wing lift:** Kutta-Joukowski says lift is proportional to circulation, computed via Stokes from vorticity in the flow.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the surface area of the upper hemisphere $x^2 + y^2 + z^2 = R^2$, $z \geq 0$, using parametric form.
+</ExQ>
+<ExA>
+Spherical: $\mathbf{r}(\phi, \theta) = R(\sin\phi\cos\theta, \sin\phi\sin\theta, \cos\phi)$, $\phi \in [0, \pi/2]$, $\theta \in [0, 2\pi]$.
+
+$\|\mathbf{r}_\phi\times\mathbf{r}_\theta\| = R^2\sin\phi$.
+
+Area $= \int_0^{2\pi}\int_0^{\pi/2}R^2\sin\phi\,d\phi\,d\theta = 2\pi R^2[-\cos\phi]_0^{\pi/2} = 2\pi R^2$ ✓ (half of $4\pi R^2$).
+</ExA>
+
+<ExQ>
+Compute the flux of $\mathbf{F} = \langle x, y, z\rangle$ through the upper hemisphere of radius $R$, with outward normal.
+</ExQ>
+<ExA>
+On the sphere, the outward normal is $\hat{\mathbf{n}} = \mathbf{r}/R$, and $\mathbf{F} = \mathbf{r}$. So $\mathbf{F}\cdot\hat{\mathbf{n}} = \|\mathbf{r}\|^2/R = R$.
+
+Flux $= R\cdot\text{area} = R\cdot 2\pi R^2 = 2\pi R^3$.
+</ExA>
+
+<ExQ>
+Use Stokes' theorem to evaluate $\oint_C\mathbf{F}\cdot d\mathbf{r}$ where $\mathbf{F} = \langle -y, x, 0\rangle$ and $C$ is the unit circle in the $xy$-plane.
+</ExQ>
+<ExA>
+$\nabla\times\mathbf{F} = \langle 0, 0, 2\rangle$.
+
+By Stokes: $\oint = \iint_S(\nabla\times\mathbf{F})\cdot d\mathbf{S}$ where $S$ is the disk in $xy$-plane with $\hat{\mathbf{n}} = \hat{\mathbf{k}}$.
+
+$\iint_S 2\,dS = 2\pi$ (twice the disk area).
+
+(Direct computation: $\mathbf{r}(t) = (\cos t, \sin t, 0)$, $\mathbf{F}\cdot d\mathbf{r}/dt = -y(-\sin t) + x\cos t = \sin^2 t + \cos^2 t = 1$, integral over $[0, 2\pi]$ gives $2\pi$. ✓)
+</ExA>
+
+<ExQ>
+**Engineering: Heat flux.** A heat flow vector field $\mathbf{q} = \langle 0, 0, -k(T_h - T_c)/L\rangle$ describes 1D heat flow through a wall. Compute the total heat rate through a square area $A$ on the wall.
+</ExQ>
+<ExA>
+$\hat{\mathbf{n}} = \hat{\mathbf{k}}$ (outward normal). $\mathbf{q}\cdot\hat{\mathbf{n}} = -k(T_h - T_c)/L$.
+
+Flux: $\iint_S\mathbf{q}\cdot d\mathbf{S} = -k(T_h - T_c)A/L$.
+
+Negative means heat flows in $-\hat{\mathbf{k}}$ direction (from hot to cold side). Magnitude $kA(T_h-T_c)/L$ matches Fourier's law.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does Stokes' theorem produce the same answer for any surface bounded by $C$?
+</ExQ>
+<ExA>
+The line integral $\oint_C\mathbf{F}\cdot d\mathbf{r}$ depends only on the boundary curve $C$, not on the surface. So any surface $S$ with $\partial S = C$ must give the same $\iint_S\nabla\times\mathbf{F}\cdot d\mathbf{S}$.
+
+Mathematically, this means $\nabla\times\mathbf{F}$ has *zero divergence* (which is always true), so its flux through any closed surface is zero — and the difference between two surfaces sharing $C$ forms a closed surface.
+
+This is **why** physical quantities like vorticity flux and EMF are independent of the chosen surface — they're really about the boundary.
+</ExA>

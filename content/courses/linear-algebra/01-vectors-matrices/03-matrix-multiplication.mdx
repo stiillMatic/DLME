@@ -1,0 +1,168 @@
+---
+title: Matrix Multiplication and Inverse
+description: How matrices compose, why the rule has the form it does, and the matrix inverse — undoing a linear transformation.
+---
+
+# Matrix Multiplication and Inverse
+
+## The Big Picture
+
+Matrix multiplication isn't entry-wise — it's the **composition of linear transformations**. Two transformations applied in sequence become a single transformation, represented by the product of their matrices. The matrix inverse "undoes" a transformation — when it exists. Understanding why the multiplication rule looks the way it does (and when an inverse exists) is the gateway to all of linear algebra.
+
+## Intuition First — Multiplication = Composition
+
+Imagine two machines: machine $B$ takes input $\mathbf{x}$ and produces output $B\mathbf{x}$. Machine $A$ takes that output and produces $A(B\mathbf{x})$.
+
+Doing both machines in sequence is the same as having a single combined machine that takes $\mathbf{x}$ directly to $A(B\mathbf{x})$. This combined machine's matrix is $AB$.
+
+So matrix multiplication exists *because* we want to compose transformations.
+
+## The Rule
+
+For $A$ of size $m\times n$ and $B$ of size $n\times p$, the product $AB$ is $m\times p$:
+
+$$[AB]_{ij} = \sum_{k=1}^n a_{ik}\,b_{kj}$$
+
+Entry $(i, j)$ of $AB$ = dot product of row $i$ of $A$ with column $j$ of $B$.
+
+**Why this rule?** Each column of $B$ is a vector. Multiplying $A$ by that column transforms it (linear combination of $A$'s columns). The result becomes a column of $AB$.
+
+## Worked Example
+
+$$A = \begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix}, \quad B = \begin{pmatrix}5 & 6\\ 7 & 8\end{pmatrix}$$
+
+$$AB = \begin{pmatrix}1\cdot 5 + 2\cdot 7 & 1\cdot 6 + 2\cdot 8\\ 3\cdot 5 + 4\cdot 7 & 3\cdot 6 + 4\cdot 8\end{pmatrix} = \begin{pmatrix}19 & 22\\ 43 & 50\end{pmatrix}$$
+
+## Critical Properties
+
+| Property | Statement |
+|---|---|
+| Associative | $(AB)C = A(BC)$ |
+| Distributive | $A(B + C) = AB + AC$ |
+| **NOT commutative** | $AB \neq BA$ in general |
+| Identity | $AI = IA = A$ |
+| Transpose | $(AB)^T = B^T A^T$ |
+
+Non-commutativity is *the* defining feature of matrix algebra. Rotation followed by translation is *not* the same as translation followed by rotation.
+
+## The Matrix Inverse
+
+For a **square** matrix $A$, the inverse $A^{-1}$ satisfies:
+
+$$AA^{-1} = A^{-1}A = I$$
+
+When $A^{-1}$ exists, $A$ is called **invertible** or **nonsingular**.
+
+**Existence:** $A^{-1}$ exists iff $\det(A) \neq 0$ iff columns are linearly independent iff $A$ has full rank.
+
+**2x2 formula:** For $A = \begin{pmatrix}a & b\\ c & d\end{pmatrix}$:
+
+$$A^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\ -c & a\end{pmatrix}$$
+
+**Properties:**
+- $(A^{-1})^{-1} = A$
+- $(AB)^{-1} = B^{-1}A^{-1}$ (order reverses!)
+- $(A^T)^{-1} = (A^{-1})^T$
+
+## Common Misconceptions
+
+**Misconception 1: "Matrix multiplication is entry-wise like addition."**
+
+No. Entry-wise multiplication is called the **Hadamard product** ($A \odot B$) and is rarely the natural operation. Standard matrix product is row-times-column.
+
+**Misconception 2: "$AB = 0$ implies $A = 0$ or $B = 0$."**
+
+False. Two nonzero matrices can multiply to zero. Example: $\begin{pmatrix}1&0\\0&0\end{pmatrix}\begin{pmatrix}0&0\\0&1\end{pmatrix} = \begin{pmatrix}0&0\\0&0\end{pmatrix}$.
+
+This is unlike ordinary numbers — matrix algebra has **zero divisors**.
+
+**Misconception 3: "Every matrix has an inverse."**
+
+Only square matrices with $\det \neq 0$ are invertible. Rectangular matrices have *pseudo-inverses* (covered later) but not true inverses.
+
+**Misconception 4: "$(AB)^{-1} = A^{-1}B^{-1}$."**
+
+Wrong order: $(AB)^{-1} = B^{-1}A^{-1}$. Same reversal as transpose.
+
+## Engineering Connection
+
+- **Composition of rotations/transformations in robotics:** each joint contributes a transformation matrix; multiply them in order to get the end-effector pose.
+- **Solving linear systems** $Ax = b$ via $x = A^{-1}b$ (conceptually — numerically we use better methods).
+- **Inverse kinematics:** find joint angles producing a desired pose — requires (pseudo-)inversion.
+- **Filter inversion:** undoing a convolution corresponds to inverting a Toeplitz matrix.
+- **Neural network forward pass:** each layer is a matrix multiplication composed with a nonlinearity.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Compute $\begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix}\begin{pmatrix}2 & 0\\ 1 & 3\end{pmatrix}$.
+</ExQ>
+<ExA>
+Row × column:
+$\begin{pmatrix}1\cdot 2 + 2\cdot 1 & 1\cdot 0 + 2\cdot 3\\ 3\cdot 2 + 4\cdot 1 & 3\cdot 0 + 4\cdot 3\end{pmatrix} = \begin{pmatrix}4 & 6\\ 10 & 12\end{pmatrix}$.
+</ExA>
+
+<ExQ>
+**2.** Find $A^{-1}$ for $A = \begin{pmatrix}3 & 1\\ 5 & 2\end{pmatrix}$.
+</ExQ>
+<ExA>
+$\det = 6 - 5 = 1$. $A^{-1} = \begin{pmatrix}2 & -1\\ -5 & 3\end{pmatrix}$.
+
+Verify: $AA^{-1} = \begin{pmatrix}6-5 & -3+3\\ 10-10 & -5+6\end{pmatrix} = I$ ✓.
+</ExA>
+
+### Application
+
+<ExQ>
+**3. Rotation composition.** Two 2D rotations: $R_1$ by $30°$, then $R_2$ by $60°$. Show $R_2 R_1 = R_3$ where $R_3$ is rotation by $90°$.
+</ExQ>
+<ExA>
+$R(\theta) = \begin{pmatrix}\cos\theta & -\sin\theta\\ \sin\theta & \cos\theta\end{pmatrix}$.
+
+$R_2 R_1$ has entry (1,1): $\cos 60°\cos 30° - \sin 60°\sin 30° = \cos(60° + 30°) = \cos 90° = 0$.
+
+By the angle-sum identities, $R_2 R_1 = R(60° + 30°) = R(90°)$ ✓.
+
+**General fact:** rotation matrices satisfy $R(\alpha)R(\beta) = R(\alpha + \beta)$ — multiplication = angle addition. This is why composition of rotations is a single rotation.
+</ExA>
+
+<ExQ>
+**4.** Show that $(AB)^{-1} = B^{-1}A^{-1}$ assuming both $A^{-1}$ and $B^{-1}$ exist.
+</ExQ>
+<ExA>
+We need to show that $(B^{-1}A^{-1})(AB) = I$.
+
+$(B^{-1}A^{-1})(AB) = B^{-1}(A^{-1}A)B = B^{-1}IB = B^{-1}B = I$ ✓.
+
+So $B^{-1}A^{-1}$ is the inverse of $AB$.
+
+**Intuition:** to undo "apply $A$ then $B$", you must "undo $B$ then undo $A$" — the reverse order. Like taking off socks then shoes: shoes off first, socks off second.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** If $A$ and $B$ are both invertible, then $A + B$ is invertible. Justify.
+</ExQ>
+<ExA>
+**False.** Counterexample: $A = I$, $B = -I$. Both invertible, but $A + B = 0$ (zero matrix) is not invertible.
+
+Lesson: inverse-ness is preserved under multiplication but **not** addition. There's no simple formula for $(A + B)^{-1}$.
+</ExA>
+
+<ExQ>
+**6.** Find two nonzero $2\times 2$ matrices $A$ and $B$ with $AB = 0$.
+</ExQ>
+<ExA>
+$A = \begin{pmatrix}1 & 0\\ 0 & 0\end{pmatrix}$, $B = \begin{pmatrix}0 & 0\\ 0 & 1\end{pmatrix}$.
+
+$AB = \begin{pmatrix}0 & 0\\ 0 & 0\end{pmatrix}$.
+
+**Geometric interpretation:** $A$ projects onto the $x$-axis (kills $y$-component); $B$ projects onto $y$-axis. Sequential application kills everything.
+
+This is why ordinary algebraic intuition ("if a product is zero, a factor must be zero") **fails** for matrices.
+</ExA>

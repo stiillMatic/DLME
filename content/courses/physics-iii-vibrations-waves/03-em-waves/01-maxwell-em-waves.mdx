@@ -1,0 +1,140 @@
+---
+title: Maxwell's Equations and EM Waves
+description: Maxwell's four equations predict the existence of electromagnetic waves traveling at the speed of light — unifying electricity, magnetism, and optics.
+---
+
+# Maxwell's Equations and EM Waves
+
+## The Big Picture
+
+Maxwell's four equations are the foundation of classical electromagnetism. Combining them yields a wave equation for the electric and magnetic fields — predicting electromagnetic waves that travel at speed $c = 1/\sqrt{\mu_0\varepsilon_0}$, the speed of light. This unification of electricity, magnetism, and optics was one of the greatest triumphs in physics. EM waves carry radio, light, X-rays, gamma rays — all the same physical phenomenon at different frequencies.
+
+## Maxwell's Equations (Vacuum, No Sources)
+
+$$\nabla\cdot\mathbf E = 0 \qquad \nabla\cdot\mathbf B = 0$$
+$$\nabla\times\mathbf E = -\frac{\partial \mathbf B}{\partial t} \qquad \nabla\times\mathbf B = \mu_0\varepsilon_0\frac{\partial\mathbf E}{\partial t}$$
+
+In words:
+1. **Gauss for E:** no charges → no field divergence.
+2. **Gauss for B:** no magnetic monopoles, ever.
+3. **Faraday:** changing B creates circulating E.
+4. **Ampère-Maxwell:** changing E creates circulating B.
+
+The last two equations couple E and B, allowing self-sustaining waves.
+
+## Deriving the Wave Equation
+
+Take curl of Faraday's law:
+
+$$\nabla\times(\nabla\times\mathbf E) = -\frac{\partial}{\partial t}\nabla\times\mathbf B = -\mu_0\varepsilon_0\frac{\partial^2\mathbf E}{\partial t^2}$$
+
+Vector identity: $\nabla\times(\nabla\times\mathbf E) = \nabla(\nabla\cdot\mathbf E) - \nabla^2\mathbf E = -\nabla^2\mathbf E$ (using Gauss).
+
+So:
+
+$$\boxed{\nabla^2\mathbf E = \mu_0\varepsilon_0\frac{\partial^2\mathbf E}{\partial t^2}}$$
+
+A wave equation. Speed: $c = 1/\sqrt{\mu_0\varepsilon_0} \approx 3\times 10^8$ m/s.
+
+This **same** number as the experimentally measured speed of light was Maxwell's "Aha" moment in 1864.
+
+## Plane Wave Solutions
+
+A traveling plane wave:
+$$\mathbf E(x, t) = \mathbf E_0\cos(kx - \omega t)$$
+
+with $\omega/k = c$. By Faraday's law, the magnetic field is:
+$$\mathbf B(x, t) = \mathbf B_0\cos(kx - \omega t), \quad |\mathbf B_0| = |\mathbf E_0|/c$$
+
+**Structure:** $\mathbf E$, $\mathbf B$, and direction of propagation $\hat{\mathbf k}$ are **mutually perpendicular** — a right-handed triad.
+
+## Energy and Poynting Vector
+
+Energy density:
+$$u = \tfrac{1}{2}\varepsilon_0 E^2 + \frac{1}{2\mu_0}B^2 = \varepsilon_0 E^2$$
+(equal partition between E and B fields).
+
+Energy flux (Poynting vector):
+$$\mathbf S = \frac{1}{\mu_0}\mathbf E\times\mathbf B$$
+
+Time-averaged for sinusoidal wave: $\langle S\rangle = \tfrac{1}{2}\varepsilon_0 c E_0^2$.
+
+## Common Misconceptions
+
+**Misconception 1: "EM waves need a medium."**
+
+The pre-1900 hypothetical "ether" doesn't exist. EM waves propagate in vacuum because the fields themselves carry the dynamics — no medium required.
+
+**Misconception 2: "E and B in phase = special case."**
+
+For freely propagating waves in vacuum, E and B are *always* in phase (peaks at same time/place). In media or near boundaries, they can be phase-shifted.
+
+**Misconception 3: "Speed of light is just a number."**
+
+It's the **conversion factor** between space and time in spacetime, the **maximum signal speed** in nature, and the **fundamental coupling** between electric and magnetic phenomena. Far from arbitrary.
+
+## Engineering Connection
+
+- **Radio/TV transmission:** antennas radiate EM waves; receivers detect them. Antenna design depends on wavelength.
+- **Wireless communication:** WiFi (2.4/5 GHz), 5G (mm-wave) all EM waves.
+- **Fiber optics:** EM waves in dielectric waveguides.
+- **Microwave heating:** 2.45 GHz absorbed by water molecules → dielectric heating.
+- **Solar panels:** convert EM energy (sunlight) to electricity via photoelectric effect.
+- **Radar:** transmit EM pulse, time return for distance.
+- **Medical imaging:** X-rays, MRI use different EM frequencies.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Light frequency 6×10¹⁴ Hz. Wavelength?
+</ExQ>
+<ExA>
+$\lambda = c/f = 3\times 10^8/(6\times 10^{14}) = 5\times 10^{-7}$ m = 500 nm. Green light.
+</ExA>
+
+<ExQ>
+**2.** EM wave has $E_0 = 100$ V/m. Find $B_0$.
+</ExQ>
+<ExA>
+$B_0 = E_0/c = 100/(3\times 10^8) \approx 3.33\times 10^{-7}$ T.
+</ExA>
+
+<ExQ>
+**3. Engineering: Solar irradiance.** Sun delivers $\sim 1361$ W/m² to Earth (solar constant). What's the peak E field?
+</ExQ>
+<ExA>
+$\langle S\rangle = \tfrac{1}{2}\varepsilon_0 c E_0^2$.
+
+$E_0 = \sqrt{2\langle S\rangle/(\varepsilon_0 c)} = \sqrt{2\cdot 1361/(8.854\times 10^{-12}\cdot 3\times 10^8)}$
+
+$= \sqrt{2722/(2.656\times 10^{-3})} = \sqrt{1.025\times 10^6} \approx 1013$ V/m.
+
+So at Earth's atmosphere, sunlight has E field of ~1 kV/m peak. Enough to drive solar panels.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does Maxwell's displacement current term ($\partial\mathbf E/\partial t$ in Ampère's law) matter?
+</ExQ>
+<ExA>
+Without it, Ampère's law would say $\nabla\times\mathbf B = 0$ in vacuum (no current). Then taking curl of Faraday gives $\nabla^2\mathbf E = 0$ — no wave!
+
+Maxwell added the displacement current to complete the symmetry: changing $\mathbf E$ creates $\mathbf B$ just as changing $\mathbf B$ creates $\mathbf E$.
+
+This term is what makes E and B mutually self-sustaining → traveling waves possible. Without it, no light, no radio, no EM waves. Maxwell's deepest insight.
+</ExA>
+
+<ExQ>
+**5.** Show that the wave equation gives the same speed for E and B fields.
+</ExQ>
+<ExA>
+Take curl of Ampère's law (vacuum):
+$\nabla\times(\nabla\times\mathbf B) = \mu_0\varepsilon_0\partial_t(\nabla\times\mathbf E) = -\mu_0\varepsilon_0\partial_t^2\mathbf B$.
+
+LHS by identity: $-\nabla^2\mathbf B$ (using $\nabla\cdot\mathbf B = 0$).
+
+So $\nabla^2\mathbf B = \mu_0\varepsilon_0\partial_t^2\mathbf B$ — same wave equation, same speed $c$.
+
+E and B fields propagate together as the same wave. Their relationship $|B| = |E|/c$ ties them inseparably.
+</ExA>

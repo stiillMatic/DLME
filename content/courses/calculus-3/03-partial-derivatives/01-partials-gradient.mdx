@@ -1,0 +1,124 @@
+---
+title: Partial Derivatives and the Gradient
+description: Differentiation for functions of several variables — and the gradient as the multivariable derivative.
+---
+
+# Partial Derivatives and the Gradient
+
+## The Big Picture
+
+For functions of multiple variables, "the derivative" is replaced by **partial derivatives** (one per variable) and the **gradient** (a vector packaging all of them). The gradient is the multivariable analog of the derivative — it points "uphill" on the function and gives the rate of change in any direction. Mastering partials and gradients unlocks optimization, sensitivity analysis, and machine learning.
+
+## Partial Derivative
+
+For $f(x, y)$, the partial w.r.t. $x$ is:
+
+$$\frac{\partial f}{\partial x} = \lim_{h\to 0}\frac{f(x+h, y) - f(x, y)}{h}$$
+
+Treat all other variables as constants — differentiate normally.
+
+**Example:** $f(x, y) = x^2 y + \sin(xy)$.
+
+$f_x = 2xy + y\cos(xy)$, $f_y = x^2 + x\cos(xy)$.
+
+## Higher-Order Partials
+
+$f_{xx} = \partial^2 f/\partial x^2$, $f_{xy} = \partial^2 f/\partial y\partial x$, etc.
+
+**Clairaut's theorem:** for sufficiently smooth functions, $f_{xy} = f_{yx}$. Mixed partials commute.
+
+## The Gradient
+
+$$\nabla f = \left\langle\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right\rangle$$
+
+A *vector field* — at each point, a vector.
+
+**Properties:**
+1. Direction of steepest ascent of $f$.
+2. Magnitude $\|\nabla f\|$ = rate of steepest ascent.
+3. Perpendicular to level sets $f = c$.
+
+## Tangent Plane
+
+For surface $z = f(x, y)$ near $(a, b)$:
+
+$$z = f(a, b) + f_x(a, b)(x-a) + f_y(a, b)(y-b)$$
+
+This is the *linearization* of $f$.
+
+## Common Misconceptions
+
+**Misconception 1: "Partials measure total change."**
+
+Partial = change with one variable held fixed. **Total** change requires the chain rule (next lesson) summing all partial contributions.
+
+**Misconception 2: "$\nabla f = 0$ means max or min."**
+
+Means *critical point*. Could also be saddle. Need second-derivative test.
+
+**Misconception 3: "The gradient is a function value."**
+
+The gradient is a *vector*. Has direction and magnitude. Different from a scalar function.
+
+## Engineering Connection
+
+- **Heat flux:** $\mathbf{q} = -k\nabla T$ — Fourier's law in differential form.
+- **Fluid potential flow:** $\mathbf{v} = \nabla\phi$ for irrotational flow.
+- **Electric field:** $\mathbf{E} = -\nabla V$ from electric potential.
+- **Optimization & ML:** gradient descent updates against $\nabla L$ to minimize loss.
+- **Stress tensor:** components are partials of displacement field.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $f(x, y) = x^2 + 3xy - y^3$. Find $f_x, f_y$.
+</ExQ>
+<ExA>
+$f_x = 2x + 3y$, $f_y = 3x - 3y^2$.
+</ExA>
+
+<ExQ>
+**2.** $\nabla f$ for $f = e^{x}\cos y$ at $(0, 0)$.
+</ExQ>
+<ExA>
+$f_x = e^x\cos y = 1$, $f_y = -e^x\sin y = 0$.
+
+$\nabla f(0, 0) = (1, 0)$.
+</ExA>
+
+<ExQ>
+**3.** Verify $f_{xy} = f_{yx}$ for $f = x^2y - y^3 + e^{xy}$.
+</ExQ>
+<ExA>
+$f_x = 2xy + ye^{xy}$. $f_{xy} = 2x + e^{xy} + xy e^{xy}$.
+
+$f_y = x^2 - 3y^2 + xe^{xy}$. $f_{yx} = 2x + e^{xy} + xy e^{xy}$.
+
+Equal ✓.
+</ExA>
+
+<ExQ>
+**4. Engineering: Heat sink.** $T(x, y) = 100 e^{-(x^2+y^2)/4}$ °C. Find direction of fastest cooling at $(1, 0)$.
+</ExQ>
+<ExA>
+$\nabla T = -100 e^{-(x^2+y^2)/4}\cdot (x/2, y/2)$.
+
+At $(1, 0)$: $-100 e^{-1/4}\cdot(0.5, 0) = -38.94(0.5, 0) = (-19.47, 0)$.
+
+Steepest *increase* is in $-\hat x$ direction. Steepest *decrease* (fastest cooling) is $+\hat x$ direction (away from origin).
+
+Heat flows from hot to cold, i.e., $-\nabla T$ direction = $+\hat x$ — outward from the hottest point.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the gradient perpendicular to level curves?
+</ExQ>
+<ExA>
+On a level curve $f = c$, $f$ is constant. So directional derivative along the curve = 0.
+
+Directional derivative = $\nabla f\cdot\hat{\mathbf{u}}_{\text{tangent}}$ = 0 means $\nabla f\perp$ tangent.
+
+Geometrically: gradient points "uphill," level curves are "constant altitude" — naturally perpendicular.
+</ExA>

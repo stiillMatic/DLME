@@ -1,0 +1,83 @@
+---
+title: Fourier's Law and Thermal Resistance
+description: The governing law of heat conduction and the thermal resistance analogy.
+---
+
+# Fourier's Law of Heat Conduction
+
+Heat flows from hot to cold. The rate of heat flow by conduction through a material is:
+
+$$\dot{Q} = -kA\frac{dT}{dx}$$
+
+where:
+- $\dot{Q}$ = heat transfer rate (W)
+- $k$ = thermal conductivity (W/m·K)
+- $A$ = cross-sectional area (m²)
+- $dT/dx$ = temperature gradient (K/m)
+
+The minus sign ensures heat flows in the direction of decreasing temperature.
+
+## Thermal Conductivities
+
+| Material | $k$ (W/m·K) |
+|---|---|
+| Diamond | 2000 |
+| Copper | 400 |
+| Aluminum | 237 |
+| Steel (carbon) | 50 |
+| Glass | 1.0 |
+| Wood | 0.15 |
+| Air | 0.025 |
+| Aerogel | 0.015 |
+
+## 1D Steady-State Conduction: Flat Wall
+
+For a wall of thickness $L$, thermal conductivity $k$, area $A$, with temperatures $T_1$ and $T_2$:
+
+$$\dot{Q} = \frac{kA}{L}(T_1 - T_2) = \frac{T_1 - T_2}{R_{\text{cond}}}$$
+
+**Thermal resistance:**
+
+$$R_{\text{cond}} = \frac{L}{kA} \quad \left(\text{K/W}\right)$$
+
+## Thermal Resistance Analogy
+
+Heat flow $\leftrightarrow$ Electric current; Temperature difference $\leftrightarrow$ Voltage; Thermal resistance $\leftrightarrow$ Electrical resistance.
+
+**Series resistances** (composite wall): $R_{\text{total}} = R_1 + R_2 + R_3$
+
+**Parallel resistances**: $\frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2}$
+
+## Composite Wall Example
+
+A wall consists of: 10 cm brick ($k = 0.7$ W/m·K) + 5 cm insulation ($k = 0.04$ W/m·K) + 1 cm drywall ($k = 0.17$ W/m·K). For $A = 1$ m²:
+
+$$R_{\text{total}} = \frac{0.1}{0.7} + \frac{0.05}{0.04} + \frac{0.01}{0.17} = 0.143 + 1.25 + 0.059 = 1.45\ \text{K/W}$$
+
+---
+
+## Practice Problems
+
+<ExQ>
+A steel plate ($k = 50$ W/m·K) is 20 mm thick and has area 0.5 m². One face is at 200°C, the other at 50°C. Find the heat transfer rate.
+</ExQ>
+<ExA>
+$$\dot{Q} = \frac{kA(T_1 - T_2)}{L} = \frac{50 \times 0.5 \times (200 - 50)}{0.02} = \frac{50 \times 0.5 \times 150}{0.02} = \boxed{187{,}500\ \text{W} = 187.5\ \text{kW}}$$
+</ExA>
+
+<ExQ>
+A composite wall (1 m² area) has two layers in series: Layer 1 is 5 cm aluminum ($k = 237$ W/m·K), Layer 2 is 3 cm glass ($k = 1.0$ W/m·K). The outer temperatures are 100°C and 20°C. Find the total heat flux and the interface temperature.
+</ExQ>
+<ExA>
+Thermal resistances:
+$$R_1 = \frac{0.05}{237 \times 1} = 2.11 \times 10^{-4}\ \text{K/W}, \quad R_2 = \frac{0.03}{1.0 \times 1} = 0.03\ \text{K/W}$$
+
+$$R_{\text{total}} \approx 0.0302\ \text{K/W}$$
+
+$$\dot{Q} = \frac{100 - 20}{0.0302} = \boxed{2649\ \text{W}}$$
+
+Interface temperature (after layer 1):
+$$T_{\text{int}} = 100 - \dot{Q} \times R_1 = 100 - 2649 \times 2.11\times10^{-4} \approx \boxed{99.4°\text{C}}$$
+
+(Almost all resistance is in the glass layer.)
+</ExA>

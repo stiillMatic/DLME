@@ -1,0 +1,118 @@
+---
+title: Free Vibration of SDOF Systems
+description: The natural oscillation of a single-degree-of-freedom system — the heart of vibration analysis.
+---
+
+# Free Vibration of SDOF Systems
+
+## The Big Picture
+
+A **single-degree-of-freedom (SDOF)** system — one mass, one spring, possibly one damper — is the canonical oscillating system in mechanics. Its response to initial conditions reveals natural frequency, damping ratio, and decay characteristics. Real structures (cars, buildings, machines) often reduce to SDOF approximations for first-order analysis. Understanding free vibration deeply prepares you for forced response, multi-DOF analysis, and modal techniques.
+
+## Equation of Motion
+
+$$m\ddot x + c\dot x + kx = 0$$
+
+Define:
+- $\omega_n = \sqrt{k/m}$ — natural frequency (rad/s)
+- $\zeta = c/(2\sqrt{km})$ — damping ratio (dimensionless)
+
+Equation becomes: $\ddot x + 2\zeta\omega_n\dot x + \omega_n^2 x = 0$.
+
+## Solution by Damping Ratio
+
+**Undamped ($\zeta = 0$):**
+$$x(t) = A\cos(\omega_n t) + B\sin(\omega_n t)$$
+
+**Underdamped ($\zeta < 1$):**
+$$x(t) = e^{-\zeta\omega_n t}[A\cos(\omega_d t) + B\sin(\omega_d t)]$$
+where $\omega_d = \omega_n\sqrt{1-\zeta^2}$ is the **damped natural frequency**.
+
+**Critically damped ($\zeta = 1$):**
+$$x(t) = (A + Bt)e^{-\omega_n t}$$
+Fastest non-oscillatory return to equilibrium.
+
+**Overdamped ($\zeta > 1$):**
+$$x(t) = A e^{r_1 t} + B e^{r_2 t}$$
+With both $r_1, r_2 < 0$, slow decay.
+
+## Logarithmic Decrement
+
+For underdamped vibration, the ratio of successive peaks:
+
+$$\delta = \ln\frac{x_n}{x_{n+1}} = \frac{2\pi\zeta}{\sqrt{1-\zeta^2}}$$
+
+Used to *measure* damping experimentally — count peaks, ratio amplitudes.
+
+## Common Misconceptions
+
+**Misconception 1: "Damping always reduces frequency."**
+
+Critically damped and overdamped systems don't oscillate at all — no frequency. Underdamped systems have $\omega_d < \omega_n$, but the reduction is small for typical $\zeta$ (< 0.1).
+
+**Misconception 2: "Critical damping = no oscillation = best."**
+
+Critical damping is *fastest* settling without overshoot. But sometimes you *want* small overshoot (e.g., for fast response). Underdamped with $\zeta \approx 0.7$ often optimal in control.
+
+**Misconception 3: "Damping coefficient $c$ tells you the damping ratio."**
+
+$c$ alone doesn't — you need $m$ and $k$ to compute $\zeta$. Same $c$ on a stiff vs soft spring gives very different damping behavior.
+
+## Engineering Connection
+
+- **Vehicle suspensions:** target $\zeta \approx 0.3$–$0.5$ for ride comfort.
+- **Building seismic design:** structural damping ($\zeta \approx 0.05$ for steel) — important for earthquake response.
+- **Galloping power lines:** undamped oscillation at $\omega_n$ can cause failure; dampers added.
+- **Watch escapement (mechanical):** oscillator with very low damping for precise timekeeping.
+- **Modal analysis of structures:** each mode is essentially a SDOF system.
+
+---
+
+## Practice Problems
+
+<ExQ>
+$m = 2$ kg, $k = 200$ N/m, $c = 0$. Find $\omega_n$ and period.
+</ExQ>
+<ExA>
+$\omega_n = \sqrt{100} = 10$ rad/s. $T = 2\pi/10 = 0.628$ s.
+</ExA>
+
+<ExQ>
+$m = 1, k = 100, c = 10$. Find $\zeta$ and classify.
+</ExQ>
+<ExA>
+$\omega_n = 10$. $\zeta = 10/(2\cdot 10) = 0.5$. **Underdamped**.
+
+$\omega_d = 10\sqrt{0.75} = 8.66$ rad/s.
+</ExA>
+
+<ExQ>
+**Engineering: Car suspension.** $m = 1500$ kg per wheel-corner, $k = 100$ kN/m. Find required $c$ for critical damping.
+</ExQ>
+<ExA>
+$c_{\text{crit}} = 2\sqrt{km} = 2\sqrt{1500\cdot 10^5} = 24{,}495$ N·s/m.
+
+For target $\zeta = 0.3$ (typical): $c = 0.3\cdot 24495 \approx 7350$ N·s/m.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does increasing damping *not* improve seismic safety beyond a point?
+</ExQ>
+<ExA>
+Up to a point, more damping → less oscillation → less stress.
+
+Beyond critical damping, you get slow exponential decay — structure can't return to rest fast enough between aftershocks. Also: very stiff dampers transmit forces directly to other parts of the structure.
+
+Optimal $\zeta$ for seismic typically 0.05–0.15 in buildings.
+</ExA>
+
+<ExQ>
+**Multi-step.** Underdamped system: amplitude drops from 1 to 0.5 in 5 cycles. Find $\zeta$.
+</ExQ>
+<ExA>
+Log dec per cycle: $\delta = (1/5)\ln 2 = 0.1386$.
+
+$\delta = 2\pi\zeta/\sqrt{1-\zeta^2}$. For small $\zeta$: $\zeta \approx \delta/(2\pi) = 0.022$.
+
+(About 2.2% damping — consistent with steel structures.)
+</ExA>

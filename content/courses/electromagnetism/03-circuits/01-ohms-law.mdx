@@ -1,0 +1,115 @@
+---
+title: Ohm's Law, Resistance, and Power
+description: The fundamental relationship between voltage, current, and resistance — the cornerstone of circuit analysis.
+---
+
+# Ohm's Law, Resistance, and Power
+
+## The Big Picture
+
+Most electrical circuits — from light bulbs to power grids — obey **Ohm's law**: voltage equals current times resistance, $V = IR$. This linear relationship, combined with Kirchhoff's laws (current and voltage), enables analysis of every linear circuit. Adding **power** ($P = VI$), we can size components, predict heating, and design power systems. Master these three relationships and the basics of circuit analysis become routine.
+
+## Ohm's Law
+
+$$V = IR$$
+
+For a linear ("ohmic") device: doubling voltage doubles current. The resistance $R$ (units: ohms, Ω) is the proportionality constant.
+
+For a wire: $R = \rho L/A$ where $\rho$ is **resistivity** (material property), $L$ length, $A$ cross-section.
+
+## Electric Power
+
+Power dissipated by a resistor:
+
+$$P = VI = I^2 R = V^2/R$$
+
+Units: watts (W).
+
+For circuits, this power becomes heat (resistors), light (LEDs, less efficiently incandescents), kinetic energy (motors).
+
+## Series and Parallel Resistance
+
+**Series:** $R_{\text{eq}} = R_1 + R_2 + \cdots$ (current same; voltages add).
+
+**Parallel:** $1/R_{\text{eq}} = 1/R_1 + 1/R_2 + \cdots$ (voltage same; currents add).
+
+## Kirchhoff's Laws
+
+**KCL (Current Law):** sum of currents into any node = 0. (Conservation of charge.)
+
+**KVL (Voltage Law):** sum of voltages around any closed loop = 0. (Conservation of energy.)
+
+These two laws allow analysis of arbitrarily complex networks.
+
+## Common Misconceptions
+
+**Misconception 1: "Voltage flows through a circuit."**
+
+*Current* flows through; *voltage* is a difference between points. Voltage exists across components, current exists through them.
+
+**Misconception 2: "Higher voltage = more dangerous."**
+
+What matters for safety is current through the body. High voltage is needed to push significant current through the body's resistance, but extremely high voltage with very low current (static electricity) is harmless.
+
+**Misconception 3: "All conductors obey Ohm's law."**
+
+Linear ohmic conductors do, but diodes, transistors, and semiconductors don't — their $V$-$I$ relationship is nonlinear. Many circuit elements deliberately exploit non-Ohmic behavior.
+
+## Engineering Connection
+
+- **Wire sizing:** larger gauge wire = larger area = lower R = less power loss in long runs.
+- **Power transmission:** high voltage minimizes $I^2 R$ losses ($P_{\text{loss}} = I^2 R$ for given power $P = VI$).
+- **Heaters:** intentional resistive dissipation — toasters, electric heaters, defrosters.
+- **Voltage dividers:** simple sensors and reference voltages from series resistors.
+- **Current limiting:** resistors prevent damage to LEDs and semiconductors.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** A 12 V battery powers a 4 Ω resistor. Find current and power.
+</ExQ>
+<ExA>
+$I = V/R = 3$ A. $P = VI = 36$ W.
+</ExA>
+
+<ExQ>
+**2.** Three resistors in series: 10, 20, 30 Ω, across 6 V. Total $R$, $I$, voltage across each.
+</ExQ>
+<ExA>
+$R_{\text{eq}} = 60$ Ω. $I = 6/60 = 0.1$ A.
+
+$V_1 = 1$ V, $V_2 = 2$ V, $V_3 = 3$ V. (Sum 6 V ✓.)
+</ExA>
+
+<ExQ>
+**3.** Two resistors in parallel: 6 and 12 Ω.
+</ExQ>
+<ExA>
+$1/R = 1/6 + 1/12 = 3/12 \Rightarrow R = 4$ Ω.
+</ExA>
+
+<ExQ>
+**4. Engineering: Wire heating.** A 100 m copper wire of diameter 2 mm carries 10 A. Resistivity $\rho = 1.7\times 10^{-8}$ Ω·m. Find resistance and power dissipated.
+</ExQ>
+<ExA>
+$A = \pi(10^{-3})^2 = 3.14\times 10^{-6}$ m².
+
+$R = \rho L/A = 1.7\times 10^{-8}\cdot 100/3.14\times 10^{-6} = 0.541$ Ω.
+
+$P = I^2 R = 100\cdot 0.541 = 54.1$ W lost in wire heating.
+
+This is why high-voltage transmission is used: same power at higher V means lower I and far less loss.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does parallel combination always give R smaller than the smallest individual?
+</ExQ>
+<ExA>
+Multiple paths for current → higher conductance → lower resistance.
+
+Adding any path can only increase total conductance ($G_{\text{total}} = \sum G_i$, all positive). Therefore $R = 1/G_{\text{total}}$ shrinks below the smallest $R_i = 1/G_{\text{max}}$.
+
+Series adds (resistance), parallel "adds" (conductance) — duality.
+</ExA>

@@ -1,0 +1,107 @@
+---
+title: Double Integrals
+description: Integrating over 2D regions — area, volume, mass, and total quantities in the plane.
+---
+
+# Double Integrals
+
+## The Big Picture
+
+A single integral computes "area under a curve." A **double integral** computes "volume under a surface" — or any total quantity over a 2D region. The mechanics: build infinitesimal rectangles, sum (integrate) over each variable. Fubini's theorem says the order of integration doesn't matter (for nice functions), but choosing a good order can dramatically simplify calculations.
+
+## Definition and Iterated Integral
+
+$$\iint_R f(x, y)\,dA = \lim_{n\to\infty}\sum f(x_i^*, y_j^*)\Delta A$$
+
+For region $R = \{(x,y) : a \leq x \leq b, g_1(x) \leq y \leq g_2(x)\}$:
+
+$$\iint_R f\,dA = \int_a^b\int_{g_1(x)}^{g_2(x)}f(x,y)\,dy\,dx$$
+
+Or swap the order if more convenient.
+
+## Polar Coordinates
+
+For circular regions: $x = r\cos\theta, y = r\sin\theta, dA = r\,dr\,d\theta$.
+
+$$\iint_R f\,dA = \int_{\theta_1}^{\theta_2}\int_{r_1(\theta)}^{r_2(\theta)}f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$
+
+The factor $r$ is the polar Jacobian — essential!
+
+## Applications
+
+| Quantity | Integral |
+|---|---|
+| Area of $R$ | $\iint_R\,dA$ |
+| Volume under $z = f(x, y)$ | $\iint_R f\,dA$ |
+| Mass with density $\sigma$ | $\iint_R\sigma\,dA$ |
+| Center of mass $\bar x$ | $\frac{1}{M}\iint x\sigma\,dA$ |
+| Moment of inertia | $\iint(x^2+y^2)\sigma\,dA$ |
+
+## Common Misconceptions
+
+**Misconception 1: "Limits are constant."**
+
+For regions other than rectangles, inner limits depend on outer variable. Determining them requires sketching the region.
+
+**Misconception 2: "Order doesn't matter for limits."**
+
+Convergence is independent of order (Fubini), but limit *expressions* depend on order. Some integrals have elementary form in one order but not the other.
+
+**Misconception 3: "Polar always easier."**
+
+Polar shines when region is circular AND integrand has nice polar form. For a square region with $\sin x$, polar makes things worse.
+
+## Engineering Connection
+
+- **Mass of a plate** with non-uniform density.
+- **Centroid of irregular cross-section** (for beam bending neutral axis location).
+- **Heat transferred** through a surface element.
+- **Total fluid flow rate** through a 2D cross-section: $\dot V = \iint v_n\,dA$.
+- **Probability over 2D distributions** in statistics.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\iint_R xy\,dA$ for $R = [0, 2]\times[0, 3]$.
+</ExQ>
+<ExA>
+$\int_0^2 x\,dx \cdot \int_0^3 y\,dy = 2\cdot 4.5 = 9$.
+</ExA>
+
+<ExQ>
+**2.** Area of region between $y = x$ and $y = x^2$ on $[0, 1]$.
+</ExQ>
+<ExA>
+$\int_0^1\int_{x^2}^x dy\,dx = \int_0^1(x - x^2)\,dx = 1/2 - 1/3 = 1/6$.
+</ExA>
+
+<ExQ>
+**3.** Use polar: $\iint_D (x^2+y^2)\,dA$ over disk $x^2+y^2 \leq 4$.
+</ExQ>
+<ExA>
+$\int_0^{2\pi}\int_0^2 r^2\cdot r\,dr\,d\theta = 2\pi\cdot 4 = 8\pi$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Plate.** Triangle with vertices (0,0), (1,0), (0,1), density $\sigma(x,y) = x + y$. Find total mass.
+</ExQ>
+<ExA>
+$M = \int_0^1\int_0^{1-x}(x+y)\,dy\,dx = \int_0^1[xy + y^2/2]_0^{1-x}\,dx$
+
+$= \int_0^1[x(1-x) + (1-x)^2/2]\,dx = \int_0^1[x - x^2 + (1-x)^2/2]\,dx$
+
+$= 1/2 - 1/3 + 1/6 = 1/3$ kg.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does the polar Jacobian factor $r$ appear in $dA = r\,dr\,d\theta$?
+</ExQ>
+<ExA>
+Geometric: a "wedge" of width $dr$ and angle $d\theta$ at distance $r$ has area $\approx r\,dr\,d\theta$ (arc length × thickness).
+
+Algebraic: $|\det\partial(x,y)/\partial(r,\theta)| = |\det\begin{pmatrix}\cos\theta&-r\sin\theta\\ \sin\theta & r\cos\theta\end{pmatrix}| = r$.
+
+Either view: ignore the $r$ and you'd weight inner points equally with outer points — wrong.
+</ExA>

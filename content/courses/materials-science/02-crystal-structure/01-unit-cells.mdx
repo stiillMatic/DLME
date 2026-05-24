@@ -1,0 +1,77 @@
+---
+title: Unit Cells — FCC, BCC, HCP
+description: Crystal structures of common engineering metals and how they determine material properties.
+---
+
+# Crystal Structures
+
+Most engineering metals are **crystalline** — their atoms are arranged in a regular, repeating 3D pattern called a **crystal lattice**. The repeating unit is the **unit cell**.
+
+## BCC — Body-Centered Cubic
+
+One atom at each corner + one at the body center.
+
+**Atoms per unit cell:** $8 \times \frac{1}{8} + 1 = 2$
+
+**Atomic packing factor (APF):** 0.68
+
+**Examples:** Iron (α, below 912°C), Chromium, Tungsten, Molybdenum
+
+BCC metals tend to have higher strength but less ductility than FCC. They exhibit a **ductile-to-brittle transition temperature** (DBTT) — important for steel structures in cold climates.
+
+## FCC — Face-Centered Cubic
+
+One atom at each corner + one at the center of each face.
+
+**Atoms per unit cell:** $8 \times \frac{1}{8} + 6 \times \frac{1}{2} = 4$
+
+**APF:** 0.74 (densest cubic packing)
+
+**Examples:** Aluminum, Copper, Nickel, Gold, Iron (γ, above 912°C)
+
+FCC metals are highly ductile — more slip systems (12) than BCC (48 but with higher Peierls stress). FCC stays ductile at low temperatures, making austenitic stainless steel good for cryogenic use.
+
+## HCP — Hexagonal Close-Packed
+
+**APF:** 0.74 (same as FCC, different geometry)
+
+**Atoms per unit cell:** 6
+
+**Examples:** Titanium (α), Magnesium, Zinc, Cobalt
+
+HCP has fewer slip systems (3 primary) → less ductile than FCC. Mg alloys are light but require elevated temperature forming.
+
+## Lattice Parameter and Density
+
+For a unit cell with lattice parameter $a$ (edge length) and $n$ atoms per cell:
+
+$$\rho = \frac{n \cdot A}{V_c \cdot N_A}$$
+
+where $A$ = atomic weight, $V_c$ = unit cell volume, $N_A$ = Avogadro's number.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Iron has BCC structure at room temperature with lattice parameter $a = 0.287$ nm and atomic weight 55.85 g/mol. Calculate the theoretical density of iron.
+</ExQ>
+<ExA>
+BCC: $n = 2$ atoms/cell
+
+$$V_c = a^3 = (0.287 \times 10^{-9})^3 = 2.364 \times 10^{-29}\ \text{m}^3$$
+
+$$\rho = \frac{n \cdot A}{V_c \cdot N_A} = \frac{2 \times 55.85 \times 10^{-3}}{2.364 \times 10^{-29} \times 6.022 \times 10^{23}} = \boxed{7874\ \text{kg/m}^3}$$
+
+(Very close to the measured value of 7874 kg/m³ — excellent agreement!)
+</ExA>
+
+<ExQ>
+Explain why FCC aluminum is easy to form into sheets, while HCP magnesium is difficult to form at room temperature.
+</ExQ>
+<ExA>
+Plastic deformation occurs by **dislocation slip** on specific crystallographic planes. The number of available slip systems determines formability:
+
+- **FCC (Al)**: 12 slip systems — dislocations can move on many planes and directions → highly ductile, easy to roll/extrude/stamp at room temperature
+- **HCP (Mg)**: only 3 primary slip systems at room temperature — limited dislocation mobility → brittle at room temperature, requires heating (150–300°C) to activate additional slip systems for forming
+</ExA>

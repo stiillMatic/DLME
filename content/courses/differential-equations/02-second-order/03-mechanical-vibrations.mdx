@@ -1,0 +1,85 @@
+---
+title: Mechanical Vibrations
+description: Applying second-order ODEs to model spring-mass-damper systems.
+---
+
+# Mechanical Vibrations
+
+The spring-mass-damper system is the prototype problem of dynamics and control:
+
+$$m\ddot{x} + c\dot{x} + kx = F(t)$$
+
+where $m$ = mass, $c$ = damping coefficient, $k$ = spring stiffness, $F(t)$ = forcing function.
+
+## Free Undamped Vibration ($c = 0$, $F = 0$)
+
+$$m\ddot{x} + kx = 0 \implies \ddot{x} + \omega_n^2 x = 0$$
+
+**Natural frequency:** $\omega_n = \sqrt{k/m}$ (rad/s), $f_n = \omega_n/(2\pi)$ (Hz)
+
+**General solution:**
+
+$$x(t) = A\cos(\omega_n t) + B\sin(\omega_n t)$$
+
+Constants $A$, $B$ from initial conditions $x(0)$ and $\dot{x}(0)$.
+
+## Damped Free Vibration
+
+Define **damping ratio** $\zeta = c/(2\sqrt{km})$. Three cases:
+
+| Case | Condition | Behavior |
+|---|---|---|
+| Underdamped | $\zeta < 1$ | Oscillates, amplitude decays |
+| Critically damped | $\zeta = 1$ | Fastest return to rest, no oscillation |
+| Overdamped | $\zeta > 1$ | Slow exponential return |
+
+**Underdamped solution** ($\zeta < 1$):
+
+$$x(t) = e^{-\zeta\omega_n t}\left(A\cos\omega_d t + B\sin\omega_d t\right)$$
+
+where $\omega_d = \omega_n\sqrt{1-\zeta^2}$ is the **damped natural frequency**.
+
+## Forced Vibration and Resonance
+
+With $F(t) = F_0\cos(\Omega t)$, the steady-state amplitude is:
+
+$$X = \frac{F_0/k}{\sqrt{(1-r^2)^2 + (2\zeta r)^2}}, \quad r = \Omega/\omega_n$$
+
+**Resonance** occurs near $r = 1$ ($\Omega \approx \omega_n$). With no damping, amplitude $\to \infty$ — a critical design constraint.
+
+## Engineering Relevance
+
+- Rotating machinery must avoid operating at natural frequencies
+- Damping ratio design: car suspensions target $\zeta \approx 0.3$–$0.5$
+- Seismic isolation systems exploit large mass and low $\omega_n$
+
+---
+
+## Practice Problems
+
+<ExQ>
+A 2 kg mass is connected to a spring of stiffness 200 N/m. Find the natural frequency in rad/s and Hz. If released from $x_0 = 0.1$ m at rest, write $x(t)$.
+</ExQ>
+<ExA>
+$$\omega_n = \sqrt{k/m} = \sqrt{200/2} = 10\ \text{rad/s}, \quad f_n = 10/(2\pi) \approx 1.59\ \text{Hz}$$
+
+Initial conditions: $x(0) = 0.1$ m, $\dot{x}(0) = 0$.
+
+$$x(t) = A\cos(10t) + B\sin(10t)$$
+$$x(0) = A = 0.1, \quad \dot{x}(0) = 10B = 0 \implies B = 0$$
+
+$$\boxed{x(t) = 0.1\cos(10t)\ \text{m}}$$
+</ExA>
+
+<ExQ>
+A system has $m = 1$ kg, $k = 100$ N/m, $c = 4$ N·s/m. Find the damping ratio $\zeta$ and classify the motion.
+</ExQ>
+<ExA>
+$$\omega_n = \sqrt{100/1} = 10\ \text{rad/s}$$
+
+$$\zeta = \frac{c}{2\sqrt{km}} = \frac{4}{2\sqrt{100 \cdot 1}} = \frac{4}{20} = 0.2$$
+
+Since $\zeta = 0.2 < 1$, the system is **underdamped** — it will oscillate with decaying amplitude.
+
+Damped natural frequency: $\omega_d = 10\sqrt{1 - 0.04} \approx 9.8\ \text{rad/s}$.
+</ExA>

@@ -1,0 +1,123 @@
+---
+title: Fundamental Theorems — Green, Stokes, Divergence
+description: The three great theorems of vector calculus — connecting boundary integrals to interior integrals.
+---
+
+# Fundamental Theorems: Green, Stokes, Divergence
+
+## The Big Picture
+
+The three classical theorems of vector calculus all share the same structure: an integral over a boundary equals an integral of a derivative over the interior. This is the multivariable generalization of the Fundamental Theorem of Calculus. They aren't just abstract math — they ARE the conservation laws of physics in their natural form.
+
+## Green's Theorem (2D)
+
+For positively oriented closed curve $C$ enclosing region $D$ in the plane:
+
+$$\oint_C P\,dx + Q\,dy = \iint_D\left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)\,dA$$
+
+The integrand on the right is the (scalar) 2D curl. So:
+
+$$\oint_C\mathbf{F}\cdot d\mathbf{r} = \iint_D(\nabla\times\mathbf{F})\cdot\hat{\mathbf{k}}\,dA$$
+
+Circulation around boundary = total curl inside.
+
+## Stokes' Theorem (3D)
+
+For oriented surface $S$ with boundary curve $\partial S$:
+
+$$\oint_{\partial S}\mathbf{F}\cdot d\mathbf{r} = \iint_S(\nabla\times\mathbf{F})\cdot d\mathbf{S}$$
+
+Circulation around boundary = flux of curl through surface.
+
+3D generalization of Green's theorem.
+
+## Divergence Theorem (Gauss)
+
+For closed surface $\partial V$ enclosing volume $V$, outward normal:
+
+$$\oiint_{\partial V}\mathbf{F}\cdot d\mathbf{S} = \iiint_V\nabla\cdot\mathbf{F}\,dV$$
+
+Outward flux through surface = total divergence (net source) inside.
+
+## Unifying View
+
+All three theorems say: **integral of "boundary" = integral of "derivative on interior."**
+
+In differential geometry, all are special cases of the **generalized Stokes' theorem**: $\int_{\partial M}\omega = \int_M d\omega$.
+
+## Common Misconceptions
+
+**Misconception 1: "These are independent results."**
+
+They're all variations of the same underlying principle. Divergence theorem is "Gauss = Stokes for closed surfaces in 3D."
+
+**Misconception 2: "Stokes only works for simple shapes."**
+
+Works for any oriented surface with consistent boundary. Surface can be complex; only orientation matters.
+
+**Misconception 3: "Divergence theorem requires outward normal."**
+
+Yes — that's the convention. Inward normal flips sign, giving incorrect physics. Always state convention.
+
+## Engineering Connection
+
+- **Conservation of mass (continuity equation):** $\partial\rho/\partial t + \nabla\cdot(\rho\mathbf{v}) = 0$ — apply div theorem to control volume.
+- **Maxwell's equations:** Gauss's law, Ampère's law are instances of these theorems.
+- **Heat equation derivation:** apply div theorem to heat flux to get the PDE form.
+- **Finite element method:** divergence theorem converts strong-form PDEs to weak-form integrals.
+- **Reynolds transport theorem:** bridge between Lagrangian and Eulerian fluid descriptions.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Use Green: $\oint_C(y\,dx + x\,dy)$ around unit circle.
+</ExQ>
+<ExA>
+$\partial Q/\partial x - \partial P/\partial y = 1 - 1 = 0$. Integral = $\iint_D 0\,dA = 0$.
+
+(Alternatively: field is conservative with potential $xy$.)
+</ExA>
+
+<ExQ>
+**2.** Divergence theorem: flux of $\mathbf{F} = (x, y, z)$ through unit sphere.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{F} = 3$.
+
+Flux $= 3\cdot V_{\text{sphere}} = 3\cdot 4\pi/3 = 4\pi$.
+</ExA>
+
+<ExQ>
+**3.** Stokes: $\oint_C(y\,dx - x\,dy + z\,dz)$ for $C$ = unit circle in $xy$-plane CCW.
+</ExQ>
+<ExA>
+$\nabla\times\mathbf{F} = (0, 0, -2)$ (curl).
+
+By Stokes, integral = $\iint_S(\nabla\times\mathbf{F})\cdot\hat{\mathbf{k}}\,dA = -2\pi$ over unit disk.
+</ExA>
+
+<ExQ>
+**4. Engineering: Continuity.** Apply div theorem to $\mathbf{F} = \rho\mathbf{v}$ to derive integral form of mass conservation.
+</ExQ>
+<ExA>
+$\oiint\rho\mathbf{v}\cdot d\mathbf{S} = \iiint\nabla\cdot(\rho\mathbf{v})\,dV$
+
+In differential form: $\partial\rho/\partial t + \nabla\cdot(\rho\mathbf{v}) = 0$.
+
+Integrating over volume: rate of mass loss = net outward mass flow.
+
+This is the integral form of mass conservation, derived from div theorem applied to mass flux.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does Stokes' theorem give the same answer for any surface bounded by $C$?
+</ExQ>
+<ExA>
+The line integral $\oint_C\mathbf{F}\cdot d\mathbf{r}$ depends only on $C$. So $\iint_S\nabla\times\mathbf{F}\cdot d\mathbf{S}$ must too.
+
+Mathematically, this requires $\nabla\cdot(\nabla\times\mathbf{F}) = 0$ — which is always true.
+
+Physically: surface flux of curl is invariant under deformation of surface (with fixed boundary). This invariance is essential for the consistency of Faraday's law and similar EM relations.
+</ExA>

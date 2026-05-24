@@ -1,0 +1,45 @@
+---
+title: Chapter 1 Practice — Vectors and Matrices
+description: Practice on vectors, dot product, matrix operations.
+---
+
+# Chapter 1 Practice — Vectors and Matrices
+
+<ExQ>
+**1.** $\mathbf{u} = (2, -1, 3)$, $\mathbf{v} = (1, 4, -2)$. Find $\mathbf{u}\cdot\mathbf{v}$.
+</ExQ>
+<ExA>
+$2 - 4 - 6 = -8$.
+</ExA>
+
+<ExQ>
+**2.** Compute $AB$ where $A = \begin{pmatrix}1&2\\3&4\end{pmatrix}$, $B = \begin{pmatrix}5&6\\7&8\end{pmatrix}$.
+</ExQ>
+<ExA>
+$AB = \begin{pmatrix}19 & 22\\ 43 & 50\end{pmatrix}$.
+</ExA>
+
+<ExQ>
+**3.** Find inverse of $A = \begin{pmatrix}2&1\\1&1\end{pmatrix}$.
+</ExQ>
+<ExA>
+$\det A = 1$. $A^{-1} = \begin{pmatrix}1 & -1\\ -1 & 2\end{pmatrix}$.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why are $\mathbf{u}\cdot\mathbf{v} = 0$ vectors said to be orthogonal?
+</ExQ>
+<ExA>
+$\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\|\mathbf{v}\|\cos\theta$. Zero implies $\cos\theta = 0$, i.e., $\theta = 90°$ — perpendicular.
+
+This generalizes to higher dimensions where "perpendicular" can't be visualized, but inner-product = 0 still defines orthogonality.
+</ExA>
+
+<ExQ>
+**5. Engineering.** A robot arm with three joints has Jacobian $J = 3\times 3$ matrix relating joint velocities to end-effector velocity. Why must $\det J \neq 0$ for the arm to move freely?
+</ExQ>
+<ExA>
+$\det J = 0$ means $J$ is singular — some directions of end-effector motion are unreachable from joint motions. This is a **kinematic singularity**.
+
+Examples: when arm is fully extended, can't pull "in" along the line of extension. Designers avoid trajectories that pass near singular configurations.
+</ExA>

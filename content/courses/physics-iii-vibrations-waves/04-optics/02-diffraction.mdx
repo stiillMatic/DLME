@@ -1,0 +1,137 @@
+---
+title: Diffraction and Resolution
+description: Light bends around obstacles — diffraction limits what we can see and resolve, from telescopes to microscopes to lithography.
+---
+
+# Diffraction and Resolution
+
+## The Big Picture
+
+**Diffraction** is the bending of waves around obstacles or through openings. Far from being a quirk, it sets fundamental limits on resolution in every imaging system — telescopes, microscopes, chip lithography, your eye. Knowing the diffraction limit tells you what's achievable; pushing past it requires deep tricks (super-resolution microscopy, immersion lithography). Diffraction is *the* limit physics imposes on imaging.
+
+## Single-Slit Diffraction
+
+Light through a slit of width $a$ produces a diffraction pattern with central bright peak and weaker side lobes.
+
+**Position of first minimum:**
+
+$$\sin\theta = \lambda/a$$
+
+The angular width of the central peak: $\Delta\theta \approx 2\lambda/a$.
+
+**Larger slits ⇒ narrower diffraction** (less spreading).
+**Smaller slits ⇒ broader diffraction** (more spreading).
+
+This is a wave-mechanical version of the Heisenberg uncertainty principle.
+
+## Circular Aperture
+
+For a circular hole (e.g., telescope objective) of diameter $D$:
+
+$$\sin\theta = 1.22\lambda/D \quad \text{(first minimum)}$$
+
+This is the **Airy disk**. The 1.22 factor comes from solving Bessel functions for the first zero.
+
+## Resolution Limit (Rayleigh Criterion)
+
+Two point sources are **just resolvable** when the central maximum of one falls on the first minimum of the other. Angular separation:
+
+$$\theta_{\min} = 1.22\lambda/D$$
+
+For a telescope with $D = 1$ m, $\lambda = 550$ nm: $\theta_{\min} \approx 7\times 10^{-7}$ rad ≈ 0.14 arcsec.
+
+## Numerical Aperture (NA) and Microscopes
+
+For microscopes: resolution $\approx \lambda/(2\,\text{NA})$ where NA is the numerical aperture.
+
+Visible light microscopes: NA ~ 1.4 (oil immersion), $\lambda \sim 500$ nm → resolution ~ 180 nm. Cannot see smaller details directly.
+
+**Beating the diffraction limit:**
+- Electron microscopes ($\lambda \sim 0.01$ nm)
+- X-ray crystallography
+- Super-resolution fluorescence (STED, STORM)
+
+## Diffraction Gratings
+
+Many parallel slits with spacing $d$ produce sharp peaks at:
+
+$$d\sin\theta = m\lambda$$
+
+Used in spectrometers to separate wavelengths. Higher-order $m$ gives more dispersion.
+
+## Common Misconceptions
+
+**Misconception 1: "Diffraction matters only for very small apertures."**
+
+Diffraction occurs at every aperture, but is significant when $\lambda$ is comparable to $a$. For visible light through a 1 mm hole, diffraction angle ~ $5\times 10^{-4}$ rad — small but measurable. For radio waves through a building doorway, diffraction is dramatic.
+
+**Misconception 2: "Bigger telescope just collects more light."**
+
+It also gives better **resolution** by $D^{-1}$ scaling. Hubble (2.4 m) sees details ~ 0.05 arcsec; James Webb (6.5 m) ~ 0.02 arcsec at same wavelength.
+
+**Misconception 3: "Diffraction limit is absolute."**
+
+Classical limit; modern microscopy techniques (STED, PALM, STORM) routinely beat it by exploiting photophysics. Limit is for **linear** imaging — nonlinear methods can do better.
+
+## Engineering Connection
+
+- **Camera lenses:** small aperture ($\beta$ stop) gives sharp deep focus *until* diffraction takes over (~f/16 for modern sensors).
+- **Lithography:** Intel chips made with EUV light ($\lambda = 13.5$ nm) to push diffraction-limited features down to ~10 nm.
+- **Radio telescopes:** very long baseline interferometry (VLBI) synthesizes virtual apertures of Earth-diameter — sharper than any single telescope.
+- **Acoustics:** speaker directionality depends on $\lambda/D$. Subwoofers (long $\lambda$) are omnidirectional; tweeters are directional.
+- **Radar:** small antennas + short wavelength → fine angular resolution.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Single slit $a = 0.1$ mm, $\lambda = 600$ nm. First minimum angle?
+</ExQ>
+<ExA>
+$\sin\theta = 600\times 10^{-9}/10^{-4} = 6\times 10^{-3}$.
+
+$\theta \approx 6\times 10^{-3}$ rad ≈ 0.34°.
+</ExA>
+
+<ExQ>
+**2.** Telescope $D = 0.5$ m, $\lambda = 550$ nm. Resolution?
+</ExQ>
+<ExA>
+$\theta = 1.22\cdot 550\times 10^{-9}/0.5 \approx 1.34\times 10^{-6}$ rad ≈ 0.28 arcsec.
+</ExA>
+
+<ExQ>
+**3. Engineering: Hubble vs Earth telescope.** Hubble has $D = 2.4$ m, $\lambda = 550$ nm. Best ground telescope (without adaptive optics) limited by atmospheric seeing $\sim 1$ arcsec. Compare resolutions.
+</ExQ>
+<ExA>
+Hubble: $\theta = 1.22\cdot 550\times 10^{-9}/2.4 \approx 2.8\times 10^{-7}$ rad ≈ 0.058 arcsec.
+
+Ground: ~1 arcsec.
+
+Hubble has ~17× better resolution. Even though giant ground telescopes (10 m class) would be diffraction-limited to ~0.015 arcsec, atmosphere ruins this without adaptive optics.
+
+This is why we put telescopes in space.
+</ExA>
+
+<ExQ>
+**4. Engineering: Photolithography.** EUV at $\lambda = 13.5$ nm. With NA = 0.33, what's the minimum feature size?
+</ExQ>
+<ExA>
+Resolution: $\lambda/(2\,\text{NA}) = 13.5/(0.66) \approx 20$ nm.
+
+EUV lithography enables 7 nm and 5 nm CMOS nodes through this physics. Pushing to smaller required higher NA and clever pattern doubling/quadrupling tricks.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are bigger telescopes built primarily to improve resolution, not just collect more light?
+</ExQ>
+<ExA>
+Light collection scales as $D^2$ — area. Useful for faint objects.
+
+Resolution scales as $D^{-1}$ — angular sharpness. Useful for *distinguishing* close objects.
+
+At a certain point, light collection plateaus (we can integrate longer), but resolution remains forever bounded by aperture. Distant exoplanet imaging, galactic structure, gravitational lensing — all resolution-limited science.
+
+That's why every next-generation telescope is bigger: the resolution improvement is what enables new discoveries.
+</ExA>

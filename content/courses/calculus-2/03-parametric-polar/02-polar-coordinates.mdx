@@ -1,0 +1,113 @@
+---
+title: Polar Coordinates and Polar Curves
+description: An alternative coordinate system that simplifies problems with circular symmetry.
+---
+
+# Polar Coordinates and Polar Curves
+
+## The Big Picture
+
+Cartesian coordinates $(x, y)$ are great for rectangles. **Polar coordinates** $(r, \theta)$ are better when the geometry involves circles, spirals, or rotational symmetry. Many curves have ugly Cartesian equations but elegant polar ones — circles, spirals, cardioids. Calculus in polar (slopes, area, arc length) requires modified formulas with the right Jacobian factors.
+
+## Conversion
+
+$$x = r\cos\theta, \quad y = r\sin\theta$$
+$$r = \sqrt{x^2 + y^2}, \quad \theta = \arctan(y/x)$$
+
+(Beware: $\arctan$ has limited range; need to consider quadrant.)
+
+## Polar Curves
+
+Equation: $r = f(\theta)$.
+
+| Curve | Polar equation |
+|---|---|
+| Circle of radius $a$, centered at origin | $r = a$ |
+| Circle through origin, radius $a$ | $r = 2a\cos\theta$ (centered at $(a, 0)$) |
+| Cardioid | $r = a(1 + \cos\theta)$ |
+| Rose with $n$ petals (odd $n$) | $r = a\cos(n\theta)$ |
+| Archimedean spiral | $r = a\theta$ |
+
+## Calculus in Polar
+
+**Tangent slope:** Use parametric form with $\theta$:
+$x = r\cos\theta$, $y = r\sin\theta$, $dy/dx = (y'_\theta)/(x'_\theta)$.
+
+**Area enclosed by polar curve from $\theta_1$ to $\theta_2$:**
+$$A = \frac{1}{2}\int_{\theta_1}^{\theta_2} r^2\,d\theta$$
+
+**Arc length:**
+$$L = \int_{\theta_1}^{\theta_2}\sqrt{r^2 + (dr/d\theta)^2}\,d\theta$$
+
+The factors come from the polar Jacobian.
+
+## Common Misconceptions
+
+**Misconception 1: "Negative $r$ means imaginary."**
+
+Negative $r$ means the point is in the *opposite* direction along the angle ray. Sometimes useful for tracing curves; sometimes excluded by convention. State clearly.
+
+**Misconception 2: "Polar area uses $r\,d\theta$ alone."**
+
+The factor of $1/2$ AND $r^2$ are essential. Sectors of a circle: area $= \tfrac{1}{2}r^2\theta$. Polar area generalizes this.
+
+**Misconception 3: "Cartesian and polar give different results."**
+
+For a fixed region, both coordinate systems give the same numerical answer. Polar is just often *easier* — fewer terms, simpler boundaries.
+
+## Engineering Connection
+
+- **Antenna patterns:** radiation patterns naturally polar (gain vs angle).
+- **Robotic arm workspace:** circular reach often easiest in polar.
+- **Spiral grooves (records, springs, screw threads):** $r = a\theta$ describes them.
+- **Wind rose diagrams:** wind direction and frequency in polar.
+- **Astronomical orbits:** ellipses around focal point (Sun) — Kepler equations natural in polar.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Convert $(x, y) = (1, 1)$ to polar.
+</ExQ>
+<ExA>
+$r = \sqrt 2, \theta = \pi/4$.
+</ExA>
+
+<ExQ>
+**2.** Convert $r = 2\cos\theta$ to Cartesian.
+</ExQ>
+<ExA>
+Multiply by $r$: $r^2 = 2r\cos\theta \Rightarrow x^2 + y^2 = 2x \Rightarrow (x-1)^2 + y^2 = 1$.
+
+Circle of radius 1 centered at $(1, 0)$.
+</ExA>
+
+<ExQ>
+**3.** Area enclosed by $r = 2 + 2\cos\theta$ (cardioid).
+</ExQ>
+<ExA>
+$A = \tfrac{1}{2}\int_0^{2\pi}(2+2\cos\theta)^2\,d\theta = 2\int_0^{2\pi}(1 + 2\cos\theta + \cos^2\theta)\,d\theta$
+
+$\int_0^{2\pi}1\,d\theta = 2\pi$. $\int\cos\theta = 0$. $\int\cos^2\theta = \pi$.
+
+$A = 2(2\pi + 0 + \pi) = 6\pi$.
+</ExA>
+
+<ExQ>
+**4.** Arc length of $r = e^\theta$ from $\theta = 0$ to $2\pi$ (logarithmic spiral).
+</ExQ>
+<ExA>
+$dr/d\theta = e^\theta$. $\sqrt{r^2 + (r')^2} = \sqrt{2}e^\theta$.
+
+$L = \sqrt 2\int_0^{2\pi}e^\theta\,d\theta = \sqrt 2(e^{2\pi} - 1) \approx 754.7$.
+</ExA>
+
+<ExQ>
+**5. Engineering: Cardioid microphone.** A cardioid mic has sensitivity pattern $r(\theta) = 1 + \cos\theta$. Compute the angular range where sensitivity exceeds 0.5.
+</ExQ>
+<ExA>
+$1 + \cos\theta \geq 0.5 \Rightarrow \cos\theta \geq -0.5 \Rightarrow |\theta| \leq 2\pi/3 = 120°$.
+
+So the mic is sensitive in a 240° forward arc, with reduced (or zero) pickup behind. Standard for vocal mics rejecting feedback.
+</ExA>

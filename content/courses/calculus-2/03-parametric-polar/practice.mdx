@@ -1,0 +1,64 @@
+---
+title: Chapter 3 Practice — Parametric and Polar
+description: Practice on parametric curves and polar coordinates.
+---
+
+# Chapter 3 Practice — Parametric and Polar
+
+<ExQ>
+**1.** Eliminate parameter: $x = 3\cos t, y = 4\sin t$.
+</ExQ>
+<ExA>
+$x/3 = \cos t, y/4 = \sin t$. Square and add: $x^2/9 + y^2/16 = 1$. Ellipse.
+</ExA>
+
+<ExQ>
+**2.** Find $dy/dx$ for $x = t^3, y = t^2$ at $t = 1$.
+</ExQ>
+<ExA>
+$dx/dt = 3t^2 = 3$. $dy/dt = 2t = 2$.
+
+$dy/dx = 2/3$.
+</ExA>
+
+<ExQ>
+**3.** Convert $r = 1/(1 + \cos\theta)$ to Cartesian.
+</ExQ>
+<ExA>
+$r(1 + \cos\theta) = 1 \Rightarrow r + r\cos\theta = 1 \Rightarrow \sqrt{x^2+y^2} = 1 - x$.
+
+Square: $x^2 + y^2 = 1 - 2x + x^2 \Rightarrow y^2 = 1 - 2x$.
+
+Parabola.
+</ExA>
+
+<ExQ>
+**4.** Area inside $r = 4\sin\theta$.
+</ExQ>
+<ExA>
+This is a circle (radius 2, center $(0, 2)$). Area = $4\pi$.
+
+Verify via polar integral: $A = \tfrac{1}{2}\int_0^\pi 16\sin^2\theta\,d\theta = 8\int_0^\pi\sin^2\theta\,d\theta = 8\cdot\pi/2 = 4\pi$ ✓.
+</ExA>
+
+<ExQ>
+**5. Engineering: Spiral antenna.** Logarithmic spiral $r = e^{\theta/10}$ from $\theta = 0$ to $\theta = 4\pi$. Find length.
+</ExQ>
+<ExA>
+$dr/d\theta = e^{\theta/10}/10$.
+
+$r^2 + (r')^2 = e^{\theta/5}(1 + 1/100) = (101/100)e^{\theta/5}$.
+
+$L = \sqrt{101/100}\int_0^{4\pi}e^{\theta/10}\,d\theta = 1.005\cdot 10\cdot[e^{\theta/10}]_0^{4\pi} = 10.05(e^{0.4\pi} - 1) \approx 25.5$.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why is the polar area formula $\tfrac{1}{2}r^2\,d\theta$ instead of just $r\,d\theta$?
+</ExQ>
+<ExA>
+$r\,d\theta$ would have wrong units (length, not area).
+
+Each infinitesimal "wedge" with angle $d\theta$ and radius $r$ has area $\tfrac{1}{2}r^2 d\theta$ — half-base × height for a thin triangle approximation. Like a sector area $\tfrac{1}{2}r^2\theta$ infinitesimalized.
+
+The factor 1/2 is essential — same as in triangle area $\tfrac{1}{2}bh$.
+</ExA>

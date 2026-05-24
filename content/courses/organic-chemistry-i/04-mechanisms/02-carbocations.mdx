@@ -1,0 +1,142 @@
+---
+title: Carbocation Stability and Rearrangements
+description: Why some carbocations are stable while others are fleeting — and how they sometimes shape-shift via hydride shifts and methyl migrations.
+---
+
+# Carbocation Stability and Rearrangements
+
+## The Big Picture
+
+A **carbocation** is a positively charged carbon — short on electrons, very reactive. The stability of a carbocation determines whether SN1/E1 reactions can happen at all, and what side products to expect. Carbocations sometimes **rearrange** — migrating hydrogens or methyl groups to form more stable species — leading to unexpected products. Recognizing rearrangement-prone substrates is a key skill.
+
+## Stability Order
+
+$$\text{tertiary} > \text{secondary} > \text{primary} \gg \text{methyl}$$
+
+Special: **allyl** (CH₂=CHCH₂⁺) and **benzyl** (PhCH₂⁺) cations are stabilized by resonance — comparable to or exceeding tertiary stability.
+
+## Why Tertiary is More Stable
+
+Two effects:
+
+**1. Inductive effect:** alkyl groups are slightly electron-donating, partially neutralizing positive charge.
+
+**2. Hyperconjugation:** adjacent C–H σ bonds overlap with empty p orbital on cation, donating electron density.
+
+More adjacent alkyl groups → more hyperconjugation and induction → more stable cation.
+
+## Resonance Stabilization
+
+Allyl cation: $\text{CH}_2=\text{CHCH}_2^+ \leftrightarrow \text{CH}_2^+\text{-CH=CH}_2$.
+
+Charge delocalized over two carbons. Each "resonance structure" contributes ~50%. Highly stabilized.
+
+Benzyl: charge delocalized into the aromatic ring (4 resonance structures).
+
+## Rearrangements
+
+Less stable cations sometimes rearrange to more stable ones via:
+
+**Hydride shift:** an H with bonding electrons moves to adjacent C⁺.
+**Methyl shift:** a CH₃ with bonding electrons moves.
+
+Both happen on the picosecond timescale.
+
+**Example:** 2° cation adjacent to 3° carbon often rearranges:
+
+CH₃-CH⁺-C(CH₃)₃ → CH₃-CH₂-C⁺(CH₃)₃ (no, that's not stable... wait — the 3° one would need to lose H)
+
+Actually: in (CH₃)₂CH-CH⁺-CH₃ (a 2°), a hydride from adjacent C can migrate to form (CH₃)₂C⁺-CH₂-CH₃ (3°) — more stable.
+
+## Common Misconceptions
+
+**Misconception 1: "Methyl shifts are rare."**
+
+Common in SN1/E1 conditions where rearrangement to tertiary is thermodynamically favored.
+
+**Misconception 2: "Rearrangement only happens slowly."**
+
+Migrations are fast (picosecond) — happens DURING the reaction, not after. Products reflect the rearranged cation.
+
+**Misconception 3: "Stable cations don't rearrange."**
+
+Tertiary cations are stable — no driver to rearrange (no better cation available). They proceed to product directly.
+
+## Engineering Connection
+
+- **Petroleum refining:** carbocation rearrangements in catalytic cracking convert straight-chain to branched alkanes (higher octane).
+- **Synthetic chemistry:** anticipating rearrangements avoids unwanted products.
+- **Terpene biosynthesis:** all-trans isoprene polymerization with cation rearrangements builds complex natural products (steroids, terpenes).
+- **Acid-catalyzed processes:** ethanol → ethylene, isomerization of alkanes, etc.
+- **Friedel-Crafts alkylation:** carbocation electrophile rearranges, leading to mixtures.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Rank: primary, secondary, tertiary, allylic cation by stability.
+</ExQ>
+<ExA>
+Allylic ≈ tertiary > secondary > primary.
+
+(Resonance can rival or beat hyperconjugation/induction.)
+</ExA>
+
+<ExQ>
+**2.** Will 1-bromo-2,2-dimethylpropane undergo SN1?
+</ExQ>
+<ExA>
+Primary substrate → SN1 would form primary cation → unstable.
+
+BUT: the cation can rearrange. After ionization, hydride or methyl shift from the adjacent C (which has 3 methyls) gives a tertiary cation.
+
+So: ionization is followed by **rapid rearrangement**, then nucleophilic attack → rearranged products.
+
+This is the classic "1-bromo-2,2-dimethylpropane" gotcha — looks like it shouldn't undergo SN1, but does via rearrangement.
+</ExA>
+
+<ExQ>
+**3.** What product when 3-methyl-2-bromobutane treated with H₂O in heat?
+</ExQ>
+<ExA>
+Original cation: 2°, adjacent to 3° carbon. Hydride shift to give 3° cation:
+
+CH₃-CH(Br)-CH(CH₃)₂ → CH₃-CH⁺-CH(CH₃)₂ → (CH₃)₃C⁺-CH₃ (after shift).
+
+Water attacks the more stable 3° cation → CH₃-C(OH)(CH₃)-CH₃ (2-methyl-2-butanol).
+
+Major product is **rearranged**, not the direct SN1 product (2-methyl-3-butanol).
+
+Diagnostic: organic chemistry exam favorite.
+</ExA>
+
+<ExQ>
+**4. Engineering: Octane improvement.** Why are branched alkanes (e.g., isooctane) preferred to straight-chain alkanes (n-octane) in gasoline?
+</ExQ>
+<ExA>
+Octane rating measures resistance to engine knock (premature detonation).
+
+Branched alkanes burn more uniformly → higher octane rating (isooctane = 100, n-octane = −20).
+
+In refining, **isomerization** uses acid catalysis. Straight-chain alkanes form secondary cations that rearrange (hydride/methyl shifts) to branched isomers.
+
+Lewis-acid catalysts (zeolites) accelerate cation chemistry in industrial reactors. Modern gasoline depends on this.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** A reaction gives an unexpected product. How can you tell if rearrangement is responsible?
+</ExQ>
+<ExA>
+Compare expected (direct) product carbon skeleton with observed.
+
+Rearrangement signs:
+- **Carbon skeleton changed**: methyl group has shifted positions.
+- **More-substituted center has new bond**: cation went to tertiary or stable spot.
+
+Other tests:
+- Isotope labeling (where did each H/C end up?)
+- Trapping with fast nucleophiles can intercept primary cation before rearrangement.
+
+Rearrangement is the "smoking gun" for cation intermediates. SN2 (concerted, no cation) doesn't show this behavior.
+</ExA>

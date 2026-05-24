@@ -1,0 +1,145 @@
+---
+title: Solving IVPs with Laplace Transforms
+description: The full Laplace recipe for solving initial-value problems — and using it for problems involving step inputs and impulses.
+---
+
+# Solving IVPs with Laplace Transforms
+
+## The Big Picture
+
+The Laplace transform's true power emerges when solving initial-value problems with discontinuous or impulsive forcing — situations where time-domain methods become messy. Step functions, ramps, and Dirac deltas are routinely modeled in control systems, mechanical impacts, and electrical switching. Laplace handles them naturally as algebraic terms in $s$. This lesson combines the basic transform with the advanced features that make it indispensable in engineering.
+
+## The Recipe
+
+1. **Take Laplace** of both sides of the ODE.
+2. **Substitute initial conditions** wherever derivative terms produce $f(0), f'(0)$.
+3. **Solve algebraically** for $Y(s)$.
+4. **Inverse transform** (via tables + partial fractions + completing the square).
+
+## Step Functions
+
+The Heaviside step $H(t - a)$ is 1 for $t \geq a$, 0 otherwise. Used to model "switching on" inputs.
+
+$\mathcal{L}\{H(t - a)\} = e^{-as}/s$.
+
+**Time shift property:**
+$$\mathcal{L}\{f(t - a)H(t - a)\} = e^{-as}F(s)$$
+
+**Inverse:** $\mathcal{L}^{-1}\{e^{-as}F(s)\} = f(t-a)H(t-a)$.
+
+## Dirac Deltas (Impulses)
+
+$\mathcal{L}\{\delta(t - a)\} = e^{-as}$.
+
+Models instantaneous impulse inputs — hammer strikes, lightning, etc. The response to $\delta(t)$ is the system's **impulse response**, which encodes everything about the LTI system.
+
+## Convolution
+
+For two functions $f, g$:
+
+$$(f * g)(t) = \int_0^t f(\tau)g(t-\tau)\,d\tau$$
+
+**Property:** $\mathcal{L}\{f * g\} = F(s)G(s)$.
+
+In an LTI system with impulse response $h(t)$ and input $u(t)$, output:
+
+$$y(t) = (h * u)(t) = \int_0^t h(t-\tau)u(\tau)\,d\tau$$
+
+This is **convolution = multiplication in $s$-domain** — the algebraic heart of system theory.
+
+## Worked Example: Step Input
+
+Solve $y'' + 3y' + 2y = 4 H(t)$, $y(0) = 0$, $y'(0) = 0$.
+
+Laplace: $s^2 Y + 3sY + 2Y = 4/s \Rightarrow Y = 4/[s(s+1)(s+2)]$.
+
+**Partial fractions:** $Y = 2/s - 4/(s+1) + 2/(s+2)$.
+
+Inverse: $y(t) = 2 - 4e^{-t} + 2 e^{-2t}$.
+
+Steady state: $y(\infty) = 2$. Transient dies out exponentially. Standard step-response shape.
+
+## Worked Example: Delta Input
+
+Solve $y'' + y = \delta(t - 1)$, $y(0) = 0$, $y'(0) = 0$.
+
+Laplace: $s^2 Y + Y = e^{-s} \Rightarrow Y = e^{-s}/(s^2 + 1)$.
+
+Inverse: $y(t) = \sin(t-1)\cdot H(t - 1)$.
+
+Before $t = 1$: $y = 0$ (no input). After $t = 1$: oscillation begins. The impulse "kicks" the oscillator at $t = 1$.
+
+## Common Misconceptions
+
+**Misconception 1: "Initial conditions belong to the homogeneous solution."**
+
+In Laplace, ICs are naturally absorbed into the transformed algebra. There's no separation of homogeneous and particular — just one $Y(s)$ to invert.
+
+**Misconception 2: "Heaviside step functions are exotic."**
+
+They're the most common forcing in control systems — every switch, every step input. Mastering Laplace with step functions is essential.
+
+**Misconception 3: "Convolution is just an integral."**
+
+It's a fundamental operation: it represents the **smoothing of an input through a system**. The shape of $h(t)$ (impulse response) determines how inputs are processed.
+
+## Engineering Connection
+
+- **Step response of control systems:** Laplace gives the exact $y(t)$ for $u(t) = u_0 H(t)$, used to characterize rise time, settling time, overshoot.
+- **Impulse response of mechanical systems:** the shock response of a beam to a hammer impact.
+- **Convolution as filtering:** signal processing uses convolutions to apply filters.
+- **Fault analysis in circuits:** sudden switching or short-circuit modeled as step in source.
+- **Transient analysis in power systems:** impulse responses determine if disturbances grow or decay.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Solve $y' + 2y = 0$, $y(0) = 3$ using Laplace.
+</ExQ>
+<ExA>
+$sY - 3 + 2Y = 0 \Rightarrow Y = 3/(s+2)$.
+
+$y(t) = 3 e^{-2t}$.
+</ExA>
+
+<ExQ>
+Solve $y'' + y = 1$ with $y(0) = 0$, $y'(0) = 0$.
+</ExQ>
+<ExA>
+$s^2 Y + Y = 1/s \Rightarrow Y = 1/[s(s^2 + 1)] = 1/s - s/(s^2 + 1)$.
+
+$y(t) = 1 - \cos t$. Oscillation around the new equilibrium $y = 1$.
+</ExA>
+
+<ExQ>
+Use convolution: find $\mathcal{L}^{-1}\{1/[(s+1)(s+2)]\}$.
+</ExQ>
+<ExA>
+$f = e^{-t}$, $g = e^{-2t}$, so the inverse is $(f * g)(t) = \int_0^t e^{-\tau}e^{-2(t-\tau)}\,d\tau = e^{-2t}\int_0^t e^{\tau}\,d\tau = e^{-2t}(e^t - 1) = e^{-t} - e^{-2t}$.
+
+(Same answer via partial fractions: $1/(s+1) - 1/(s+2)$.)
+</ExA>
+
+<ExQ>
+**Engineering: Hammer impact.** A spring-mass system $\ddot y + y = \delta(t)$ with $y(0) = 0, y'(0) = 0$. Find $y(t)$.
+</ExQ>
+<ExA>
+Laplace: $s^2 Y + Y = 1 \Rightarrow Y = 1/(s^2 + 1)$.
+
+$y(t) = \sin(t)$ for $t > 0$.
+
+The impulse imparts unit momentum at $t = 0$, then the oscillator oscillates indefinitely. Without damping, oscillation persists forever.
+</ExA>
+
+<ExQ>
+**Conceptual.** A system has transfer function $H(s) = 1/(s + 2)$. What is its impulse response, and what does the pole at $s = -2$ mean physically?
+</ExQ>
+<ExA>
+Impulse response: $h(t) = e^{-2t}H(t)$.
+
+The pole at $s = -2$ → exponential decay with rate 2/s, time constant 0.5 s. Negative real part → stable. Magnitude tells you decay rate.
+
+In Bode plot terms: corner frequency at $\omega = 2$ rad/s. This is how engineers read system behavior off the pole-zero map without ever computing $h(t)$ explicitly.
+</ExA>

@@ -1,0 +1,164 @@
+---
+title: Divergence Theorem
+description: The 3D analog of Green's theorem — relating volume integrals to flux through bounding surfaces. The conservation laws of physics in disguise.
+---
+
+# Divergence Theorem
+
+## The Big Picture
+
+The divergence theorem (also called Gauss's theorem) is the 3D version of Green's: it relates a flux integral through a closed surface to a volume integral over the interior. This is the mathematical engine behind **all conservation laws in physics** — mass, charge, energy, momentum, fluid flow. If you can integrate over a region, you can also integrate over its boundary, and vice versa. Understanding this duality is essential for finite element methods, computational fluid dynamics, and electromagnetic theory.
+
+## Intuition First — Sources and Sinks
+
+Imagine a fluid flowing through a closed region. The total **outflow** (flux out through the boundary) must equal the total **production rate** inside (sources minus sinks).
+
+Mathematically, this is:
+
+$$\underbrace{\oiint_S\mathbf{F}\cdot d\mathbf{S}}_{\text{net outflow}} = \underbrace{\iiint_V\nabla\cdot\mathbf{F}\,dV}_{\text{total source rate}}$$
+
+The **divergence** $\nabla\cdot\mathbf{F}$ measures local source/sink density. Positive divergence = source; negative = sink.
+
+This is conservation of mass for an incompressible fluid: zero divergence means whatever flows in must flow out.
+
+## Divergence
+
+For $\mathbf{F} = \langle P, Q, R\rangle$:
+
+$$\nabla\cdot\mathbf{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$
+
+A scalar quantity at each point.
+
+**Solenoidal (divergence-free):** $\nabla\cdot\mathbf{F} = 0$. Examples: incompressible fluid velocity, magnetic field $\mathbf{B}$.
+
+## Statement of the Divergence Theorem
+
+For a closed surface $S$ enclosing volume $V$, with outward unit normal $\hat{\mathbf{n}}$:
+
+$$\oiint_S\mathbf{F}\cdot\hat{\mathbf{n}}\,dS = \iiint_V\nabla\cdot\mathbf{F}\,dV$$
+
+Equivalently, the boundary term equals the body term — converts a 2D integral to a 3D integral and vice versa.
+
+## Worked Example
+
+Compute the flux of $\mathbf{F} = \langle x, y, z\rangle$ through the unit sphere.
+
+**Direct method (surface integral):** $\mathbf{F}\cdot\hat{\mathbf{n}} = (\mathbf{r}\cdot\mathbf{r})/\|\mathbf{r}\| = 1$ on the sphere. Flux = $1\cdot 4\pi = 4\pi$.
+
+**Via divergence theorem:** $\nabla\cdot\mathbf{F} = 1 + 1 + 1 = 3$. Volume of unit ball = $4\pi/3$. Flux = $3\cdot 4\pi/3 = 4\pi$. ✓
+
+The theorem reduced a surface calculation to a trivial volume calculation.
+
+## Vector Field Theorems Family
+
+| Theorem | Region | Formula |
+|---|---|---|
+| FTC for line integrals | Curve $C: A\to B$ | $\int_C\nabla f\cdot d\mathbf{r} = f(B) - f(A)$ |
+| Green's theorem | Plane region | $\oint_C\mathbf{F}\cdot d\mathbf{r} = \iint_D(\nabla\times\mathbf{F})_z\,dA$ |
+| Stokes' theorem | Surface | $\oint_{\partial S}\mathbf{F}\cdot d\mathbf{r} = \iint_S(\nabla\times\mathbf{F})\cdot d\mathbf{S}$ |
+| Divergence theorem | Volume | $\oiint_{\partial V}\mathbf{F}\cdot d\mathbf{S} = \iiint_V\nabla\cdot\mathbf{F}\,dV$ |
+
+These are all **boundary = interior** statements. The unifying generalization is the *generalized Stokes' theorem* in differential forms.
+
+## Common Misconceptions
+
+**Misconception 1: "Divergence theorem applies to any surface."**
+
+Only **closed** surfaces. For open surfaces, use Stokes (which connects to a line integral on the boundary curve).
+
+**Misconception 2: "Divergence is the same as curl."**
+
+Both involve partial derivatives, but divergence is a *scalar* (sum) and curl is a *vector* (cross-product structure). They measure completely different things: divergence = expansion/source; curl = rotation.
+
+**Misconception 3: "Theorem fails if $\mathbf{F}$ has a singularity inside $V$."**
+
+Yes — must use care. Near a point source, $\nabla\cdot\mathbf{F}$ may be infinite (Dirac delta), and we use *limits* or *distributions* to handle it. This gives the famous result for an isolated point charge: flux of $\mathbf{E}$ = $q/\varepsilon_0$ (Gauss's law).
+
+**Misconception 4: "Outward normal is just convention."**
+
+It's a sign convention with physical meaning. Outward normal makes positive flux = "stuff leaving the volume." Inverting the normal flips the sign of every result.
+
+## Engineering Connection
+
+- **Conservation of mass (continuity):** $\dfrac{\partial\rho}{\partial t} + \nabla\cdot(\rho\mathbf{v}) = 0$ — applied to a control volume + divergence theorem gives the integral form: rate of mass accumulation = net mass flow in.
+- **Gauss's law:** $\oiint\mathbf{E}\cdot d\mathbf{S} = Q_{\text{enc}}/\varepsilon_0$ — derives from divergence theorem applied to $\nabla\cdot\mathbf{E} = \rho/\varepsilon_0$.
+- **Heat conduction:** total heat leaving a region = net heat sources inside (heat equation in integral form).
+- **Finite Element / Volume Methods:** discretize PDEs by applying divergence theorem to small control volumes — converts derivatives to fluxes through cell faces.
+- **Reynolds transport theorem:** the bridge between Lagrangian (particle-based) and Eulerian (field-based) descriptions of fluid mechanics — relies on divergence theorem.
+
+The divergence theorem isn't just math; it's the *language* in which conservation laws are expressed.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Verify the divergence theorem for $\mathbf{F} = \langle x, y, z\rangle$ over the unit cube $[0, 1]^3$.
+</ExQ>
+<ExA>
+**Volume side:** $\nabla\cdot\mathbf{F} = 3$, $V = 1$, so $\iiint_V\nabla\cdot\mathbf{F}\,dV = 3$.
+
+**Surface side:** sum flux over 6 faces.
+
+On $z = 1$: $\hat{\mathbf{n}} = \hat{\mathbf{k}}$, $\mathbf{F}\cdot\hat{\mathbf{n}} = z = 1$. Flux = 1.
+
+On $z = 0$: $\hat{\mathbf{n}} = -\hat{\mathbf{k}}$, $\mathbf{F}\cdot\hat{\mathbf{n}} = -z = 0$. Flux = 0.
+
+By symmetry, $x = 0, 1$ and $y = 0, 1$ each contribute analogously: total 1 + 0 + 1 + 0 + 1 + 0 = 3 ✓
+</ExA>
+
+<ExQ>
+Use divergence theorem to compute the flux of $\mathbf{F} = \langle x^3, y^3, z^3\rangle$ through the unit sphere.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{F} = 3x^2 + 3y^2 + 3z^2 = 3\rho^2$ in spherical.
+
+Volume integral over unit ball:
+$\iiint_V 3\rho^2\,dV = 3\int_0^{2\pi}\int_0^\pi\int_0^1\rho^2\cdot\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$
+$= 3\cdot 2\pi\cdot 2\cdot \frac{1}{5} = \dfrac{12\pi}{5}$
+
+Direct surface computation would be much harder.
+</ExA>
+
+<ExQ>
+A vector field models fluid flow $\mathbf{v} = \langle 0, 0, z\rangle$. Compute the volumetric flow rate through the surface of a cube $[0, 1]^3$ in two ways.
+</ExQ>
+<ExA>
+**Via divergence:** $\nabla\cdot\mathbf{v} = 1$, volume = 1, total flux = 1.
+
+**Via surface (z=0 and z=1):** flux through z=1: $\mathbf{v}\cdot\hat{\mathbf{n}} = z = 1$, area 1, flux = 1. Through z=0: $\mathbf{v}\cdot\hat{\mathbf{n}} = -z = 0$.
+
+Side faces contribute 0 (no $z$-component flow through them).
+
+Total: 1 + 0 = 1 ✓.
+
+**Physical:** the fluid is "stretching" upward at rate 1 per unit volume — net outflow equals net source.
+</ExA>
+
+<ExQ>
+**Engineering: Gauss's law.** A point charge $q$ is at the origin. Using the divergence theorem applied to a closed surface enclosing the charge, derive Gauss's law: $\oiint\mathbf{E}\cdot d\mathbf{S} = q/\varepsilon_0$.
+</ExQ>
+<ExA>
+For a point charge: $\mathbf{E} = \dfrac{q}{4\pi\varepsilon_0}\dfrac{\hat{\mathbf{r}}}{r^2}$.
+
+Direct flux through sphere of radius $R$: $\mathbf{E}\cdot\hat{\mathbf{n}} = \dfrac{q}{4\pi\varepsilon_0 R^2}$, area $4\pi R^2$, flux $= q/\varepsilon_0$.
+
+Through any other closed surface enclosing the charge: same answer (because outside the charge, $\nabla\cdot\mathbf{E} = 0$, and the difference between two surfaces is a divergence-free volume).
+
+For multiple charges: superposition gives $\oiint\mathbf{E}\cdot d\mathbf{S} = Q_{\text{enc}}/\varepsilon_0$ — Gauss's law.
+
+This is one of Maxwell's equations, derived from divergence theorem + properties of the Coulomb field.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is the divergence of $\mathbf{B}$ (magnetic field) always zero?
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{B} = 0$ everywhere — one of Maxwell's equations.
+
+**Physical interpretation:** there are no magnetic monopoles. Magnetic field lines are closed loops; they have no source or sink.
+
+By divergence theorem: $\oiint_S\mathbf{B}\cdot d\mathbf{S} = 0$ for any closed surface — total magnetic flux through any closed surface is zero.
+
+If magnetic monopoles existed, $\nabla\cdot\mathbf{B}$ would be proportional to monopole density (analog of Gauss's law). Their non-existence is a fundamental fact of nature.
+</ExA>

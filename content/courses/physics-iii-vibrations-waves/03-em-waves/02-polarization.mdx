@@ -1,0 +1,124 @@
+---
+title: Polarization and Energy Transport
+description: The vector nature of EM waves — different orientations of the E field create distinct polarization states.
+---
+
+# Polarization and Energy Transport
+
+## The Big Picture
+
+Unlike sound (a scalar pressure wave), light is a **vector** wave with two perpendicular polarization states. Polarization affects how light interacts with materials: polarizers, glare reduction, LCD displays, fiber optics, and quantum cryptography all depend on it. Understanding polarization completes the basic picture of EM wave physics.
+
+## Linear Polarization
+
+For wave traveling in $+\hat{x}$: $\mathbf E$ lies in $yz$-plane. Two independent directions:
+- $\hat{y}$-polarized: $\mathbf E = E_0\hat{y}\cos(kx - \omega t)$
+- $\hat{z}$-polarized: $\mathbf E = E_0\hat{z}\cos(kx - \omega t)$
+
+Linear polarization at angle $\theta$ from $\hat y$: $\mathbf E = E_0(\hat y\cos\theta + \hat z\sin\theta)\cos(kx - \omega t)$.
+
+## Circular Polarization
+
+Combine perpendicular components with 90° phase shift:
+
+$$\mathbf E = E_0[\hat y\cos(kx - \omega t) \pm \hat z\sin(kx - \omega t)]$$
+
+The tip of $\mathbf E$ traces a circle in the $yz$-plane — at a fixed location, the field rotates as a function of time.
+
+**Right or left circular** depending on rotation sense.
+
+## Elliptical Polarization
+
+General case: arbitrary amplitudes and phase. The tip traces an ellipse.
+
+Linear and circular are special cases of elliptical.
+
+## Polarizers and Malus's Law
+
+A polarizer transmits only one polarization component. For linear input at angle $\theta$ to polarizer axis, transmitted intensity:
+
+$$I = I_0\cos^2\theta$$
+
+Two crossed polarizers (90° apart): no transmission.
+Three polarizers at 0°, 45°, 90°: transmission ≈ 25% (counterintuitively nonzero!).
+
+## Unpolarized Light
+
+Sunlight, incandescent bulbs: random superposition of all polarizations. A single polarizer transmits half (by symmetry).
+
+## Common Misconceptions
+
+**Misconception 1: "Polarization is a property of all waves."**
+
+Only transverse waves can be polarized (sound — longitudinal — cannot). EM waves are transverse, so they have polarization.
+
+**Misconception 2: "A polarizer blocks 100% of perpendicular polarization."**
+
+Real polarizers have finite extinction ratio. Ideal Malus's law assumes perfect polarizers.
+
+**Misconception 3: "Three polarizers can't transmit more than two."**
+
+Three polarizers at intermediate angles **do** transmit more than two crossed polarizers — a striking demonstration of how each polarizer "resets" the polarization state.
+
+## Engineering Connection
+
+- **LCD screens:** light passes through 2 crossed polarizers; liquid crystal twists polarization to control transmission per pixel.
+- **Polarized sunglasses:** block horizontal polarization (sunlight reflected off water/road is horizontally polarized).
+- **3D movies (old style):** circularly polarized projection; each eye sees one circular polarization.
+- **Stress analysis (photoelasticity):** polarized light through stressed plastic reveals stress patterns.
+- **Quantum cryptography (BB84):** uses polarization states as quantum bits, exploiting that measurement disturbs polarization.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Unpolarized light, intensity 100 W/m². Through one polarizer?
+</ExQ>
+<ExA>
+Half passes: 50 W/m².
+</ExA>
+
+<ExQ>
+**2.** Two polarizers at 60°. Linearly polarized input (along first) at $I_0 = 80$ W/m². Output?
+</ExQ>
+<ExA>
+$I = I_0\cos^2 60° = 80\cdot 0.25 = 20$ W/m².
+</ExA>
+
+<ExQ>
+**3.** Three polarizers at 0°, 45°, 90°. Unpolarized input intensity $I_0$. Output?
+</ExQ>
+<ExA>
+After P1: $I_0/2$ (linear polarization along P1).
+
+After P2 at 45° from P1: $(I_0/2)\cos^2 45° = I_0/4$.
+
+After P3 at 90° from P1, 45° from P2: $(I_0/4)\cos^2 45° = I_0/8$.
+
+Final: $I_0/8 = 12.5\%$. Three polarizers transmit more than zero crossed pair — startling but mathematically clear.
+</ExA>
+
+<ExQ>
+**4. Engineering: LCD calculation.** A pixel uses 2 crossed polarizers and a liquid crystal that rotates polarization by $\theta$. Find $\theta$ for 50% transmission.
+</ExQ>
+<ExA>
+Light passes P1 (polarized along P1). Crystal rotates by $\theta$. P2 axis 90° from P1, so angle from rotated light to P2 axis is $(90 - \theta)°$.
+
+Transmission: $\cos^2(90 - \theta) = \sin^2\theta$.
+
+For 50%: $\sin^2\theta = 0.5 \Rightarrow \theta = 45°$.
+
+LCD bias controls the crystal rotation, varying transmission per pixel. Display contrast = polarizer extinction ratio × LCD modulation.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are sunglasses polarized horizontally (blocking horizontal)?
+</ExQ>
+<ExA>
+Light reflecting off horizontal surfaces (water, roads) at glancing angle has **horizontal polarization** preferentially (Brewster's angle physics).
+
+By blocking horizontal, polarized sunglasses cut glare more effectively than equal-intensity neutral filters. You see less reflected light but normal light unimpeded.
+
+Same principle protects fishermen from glare while enabling them to see beneath water surface.
+</ExA>

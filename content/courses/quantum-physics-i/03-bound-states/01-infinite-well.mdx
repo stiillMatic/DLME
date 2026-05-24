@@ -1,0 +1,171 @@
+---
+title: Particle in an Infinite Square Well
+description: The simplest bound state — solving Schrödinger for an infinite-walled box reveals the origin of quantized energy.
+---
+
+# Particle in an Infinite Square Well
+
+## The Big Picture
+
+The infinite square well is the simplest 1D bound system: a particle confined between two infinite walls. Despite its simplicity, it illustrates *every* essential quantum feature: quantized energies, normalized stationary states, orthogonality, completeness. It's also the textbook example for quantum dots, quantum wires, and engineered nanostructures.
+
+## Setup
+
+Potential: $V(x) = 0$ for $0 < x < L$; $V(x) = \infty$ outside.
+
+Wavefunction must be zero outside (no probability of being where energy is infinite).
+
+Inside the well: $-\dfrac{\hbar^2}{2m}\phi''(x) = E\phi(x)$.
+
+This is the harmonic equation $\phi'' = -k^2\phi$ with $k = \sqrt{2mE}/\hbar$.
+
+## Boundary Conditions
+
+$\phi(0) = 0$ and $\phi(L) = 0$ (continuity with the zero wavefunction outside).
+
+General solution: $\phi(x) = A\sin(kx) + B\cos(kx)$.
+
+$\phi(0) = 0 \Rightarrow B = 0$.
+
+$\phi(L) = A\sin(kL) = 0 \Rightarrow kL = n\pi$ for integer $n = 1, 2, 3, \ldots$
+
+So $k_n = n\pi/L$, and:
+
+$$\boxed{E_n = \frac{\hbar^2\pi^2 n^2}{2mL^2}}$$
+
+Energies are **discrete** and grow as $n^2$.
+
+Normalized wavefunctions:
+
+$$\phi_n(x) = \sqrt{\frac{2}{L}}\sin\!\left(\frac{n\pi x}{L}\right)$$
+
+## Try It — Climb the Energy Ladder
+
+<QuantumWellDemo />
+
+## Key Features
+
+| Feature | Manifestation |
+|---|---|
+| Quantization | Only specific energies allowed |
+| Zero-point energy | $E_1 \neq 0$ — particle can't be at rest |
+| Number of nodes | $\phi_n$ has $n - 1$ interior nodes |
+| Orthogonality | $\int\phi_n^*\phi_m\,dx = \delta_{nm}$ |
+| Completeness | Any $\psi$ on $[0, L]$ decomposes as $\sum c_n\phi_n$ |
+
+## Worked Example: Photon Emission
+
+Electron in a 1 nm well transitions from $n = 2$ to $n = 1$.
+
+$\Delta E = E_2 - E_1 = (4 - 1)\dfrac{\hbar^2\pi^2}{2m L^2} = 3\dfrac{\hbar^2\pi^2}{2m L^2}$.
+
+Plug numbers: $\Delta E \approx 3\cdot 6\times 10^{-20}\text{ J}\cdot \ldots$ — calculate.
+
+This is the basis for emission/absorption from quantum dots — controllable by well size.
+
+## Comparison with Free Particle
+
+Free particle: continuous spectrum, any $E > 0$.
+Confined particle: discrete spectrum, $E_n = n^2 E_1$ with gaps.
+
+**Confinement creates quantization.** This generalizes: any bound state in any potential has discrete energies.
+
+## Common Misconceptions
+
+**Misconception 1: "$n = 0$ should be allowed."**
+
+$n = 0$ gives $\phi = 0$ everywhere — not a state (zero norm). The lowest state is $n = 1$ with $E_1 \neq 0$.
+
+**Misconception 2: "Infinite well is unrealistic."**
+
+It's an idealization, but a very useful one. Real semiconductor heterojunctions create finite wells that approximate this; the lowest few states are close to the infinite-well predictions.
+
+**Misconception 3: "Energy levels equally spaced."**
+
+Spacings grow: $E_{n+1} - E_n = (2n + 1)E_1$. So $E_2 - E_1 = 3E_1$, $E_3 - E_2 = 5E_1$, etc.
+
+(In contrast, harmonic oscillator has equal spacings $\hbar\omega$.)
+
+## Engineering Connection
+
+- **Quantum dots:** "0D" wells in 3 directions. Discrete spectrum gives bright, tunable colors.
+- **Quantum wires:** 1D confinement, 2D free motion.
+- **Quantum well lasers:** electrons confined in growth direction, free in plane → tunable lasers.
+- **Cubic boxes** in 3D used for free electron gas in metals (Sommerfeld model).
+- **Nanocrystal display technology:** quantum dot TVs use size-dependent emission.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Electron in 0.5 nm well. $E_1$ in eV?
+</ExQ>
+<ExA>
+$E_1 = \hbar^2\pi^2/(2m_e L^2)$.
+
+$= (1.055\times 10^{-34})^2\pi^2/(2\cdot 9.11\times 10^{-31}\cdot (5\times 10^{-10})^2)$
+$\approx 1.099\times 10^{-67}\cdot 9.87/(4.56\times 10^{-49}) \approx 2.38\times 10^{-19}$ J.
+
+In eV: $\approx 1.49$ eV.
+</ExA>
+
+<ExQ>
+**2.** What's the probability the particle in the ground state is in $[0, L/4]$?
+</ExQ>
+<ExA>
+$P = \int_0^{L/4}(2/L)\sin^2(\pi x/L)\,dx = (2/L)\int_0^{L/4}(1-\cos(2\pi x/L))/2\,dx$
+
+$= (1/L)[x - L\sin(2\pi x/L)/(2\pi)]_0^{L/4}$
+
+$= (1/L)[L/4 - L\sin(\pi/2)/(2\pi)] = 1/4 - 1/(2\pi) \approx 0.091$ = 9.1%.
+</ExA>
+
+<ExQ>
+**3. Engineering: CdSe quantum dot.** Effective masses $m_e^* = 0.13 m_e$, $m_h^* = 0.45 m_e$. Dot radius 3 nm. Estimate first electron-hole transition energy (use $L = 2R$ as effective width, bulk gap $E_g = 1.74$ eV).
+</ExQ>
+<ExA>
+Confinement adds to bulk gap. For each carrier, $E_1 = \hbar^2\pi^2/(2m^* L^2)$.
+
+$L = 6$ nm.
+
+$E_1^e = \hbar^2\pi^2/(2\cdot 0.13 m_e\cdot 36\times 10^{-18})$. Compute via $E_1$ for free electron at L=1 nm $\sim 0.376$ eV, scale: $0.376/(0.13\cdot 36) \approx 0.080$ eV.
+
+$E_1^h \approx 0.376/(0.45\cdot 36) \approx 0.023$ eV.
+
+Total transition: $E_g + E_1^e + E_1^h \approx 1.74 + 0.08 + 0.023 \approx 1.84$ eV.
+
+Wavelength: $1240/1.84 \approx 674$ nm — red emission. Matches red CdSe quantum dot.
+
+Smaller dots → larger confinement energy → bluer emission. Color is **size-controlled**.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does the ground-state energy $E_1$ increase as well width decreases?
+</ExQ>
+<ExA>
+$E_1 \propto 1/L^2$.
+
+Heuristic via uncertainty: confining particle to $\Delta x = L$ requires $\Delta p \geq \hbar/L$. Kinetic energy $\sim p^2/(2m)\sim \hbar^2/(2mL^2)$.
+
+Tighter confinement → higher uncertainty in momentum → higher kinetic energy.
+
+This is why nanostructures have observable confinement effects: at $L \sim$ nm, $E_1$ becomes substantial fraction of eV, easily measurable.
+</ExA>
+
+<ExQ>
+**5.** Verify orthogonality: $\int_0^L\phi_n^*\phi_m\,dx = 0$ for $n\neq m$.
+</ExQ>
+<ExA>
+$\int_0^L(2/L)\sin(n\pi x/L)\sin(m\pi x/L)\,dx$.
+
+Product-to-sum: $\sin A\sin B = [\cos(A-B) - \cos(A+B)]/2$.
+
+$= (1/L)\int_0^L[\cos((n-m)\pi x/L) - \cos((n+m)\pi x/L)]\,dx$.
+
+Each integral $\int_0^L\cos(k\pi x/L)\,dx = [L/(k\pi)]\sin(k\pi) = 0$ for nonzero integer $k$.
+
+So orthogonal for $n \neq m$. (For $n = m$, the first integral becomes $L$ and we get $\int|\phi_n|^2 = 1$ — normalization.)
+
+Orthogonality means stationary states are independent — essential for expanding arbitrary $\psi$ as $\sum c_n\phi_n$.
+</ExA>

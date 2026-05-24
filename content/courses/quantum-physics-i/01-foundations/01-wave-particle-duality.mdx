@@ -1,0 +1,130 @@
+---
+title: Wave-Particle Duality
+description: At small enough scales, matter and light blur the distinction between particle and wave — the foundational mystery of quantum mechanics.
+---
+
+# Wave-Particle Duality
+
+## The Big Picture
+
+Classical physics treated light as a wave and matter as particles. By 1925, both pictures had broken down. Light shows particle-like behavior (photoelectric effect, Compton scattering). Matter shows wave-like behavior (electron diffraction). The resolution: **everything is a wave AND particle**, exhibiting one or the other depending on how you measure. This is the entry point to quantum mechanics — the most successful physical theory ever, but also the most philosophically strange.
+
+## Light as Particles: The Photon
+
+Einstein (1905) explained the photoelectric effect by proposing light comes in discrete packets — **photons** — with energy:
+
+$$E = hf = \hbar\omega$$
+
+where $h = 6.626\times 10^{-34}$ J·s (Planck's constant) and $\hbar = h/(2\pi)$.
+
+Each photon also carries momentum:
+
+$$p = h/\lambda = \hbar k$$
+
+**Photoelectric effect:** light ejects electrons from metal only if $hf$ exceeds work function $W$. Intensity doesn't matter — only frequency. This contradicts classical wave theory but is natural for particles.
+
+## Matter as Waves: de Broglie
+
+De Broglie (1924) proposed the inverse: matter is also wave-like, with:
+
+$$\lambda = h/p$$
+
+For everyday objects, $\lambda$ is absurdly small (e.g., a 70 kg person walking at 1 m/s has $\lambda \approx 10^{-35}$ m). But for electrons, $\lambda \sim$ atomic dimensions — and they should diffract.
+
+**Davisson-Germer (1927):** electrons scattered off nickel crystal showed diffraction patterns — confirming matter waves.
+
+## Quantization of Energy
+
+Bound systems (atoms, oscillators) have **discrete** allowed energies — like standing waves on a string with fixed BCs.
+
+This was Bohr's insight (1913) for the hydrogen atom: electron orbits with quantized angular momentum $L = n\hbar$.
+
+A wider view: matter waves in confined regions form standing waves; only specific wavelengths fit, giving discrete energies.
+
+## Common Misconceptions
+
+**Misconception 1: "Wave and particle alternately."**
+
+Photons and electrons are *always* quantum objects. We don't see them switching between modes — we measure either wave-like or particle-like aspects depending on our apparatus. The full quantum description (wavefunction) contains both aspects simultaneously.
+
+**Misconception 2: "Bigger objects don't have wavefunctions."**
+
+They do, but $\lambda \propto 1/m$ becomes microscopic. Quantum effects exist for everything but only matter for small/light objects (or extremely cold conditions).
+
+**Misconception 3: "Quantum mechanics is just statistics."**
+
+Not classical statistics. Quantum probabilities arise from interfering complex amplitudes — fundamentally different from random ignorance. Measurement irreversibly changes the state.
+
+## Engineering Connection
+
+- **Solar cells:** photoelectric effect converts photons to electrons in semiconductors.
+- **Lasers:** stimulated emission — coherent photon production.
+- **Electron microscopes:** matter-wave imaging, $\lambda$ thousands× shorter than light → atomic resolution.
+- **Quantum dots in displays:** size-dependent quantized emission frequencies.
+- **Photovoltaics:** band gap engineering uses photon energy quantization.
+- **Atomic clocks:** transitions between quantized energy levels give precise time references.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Photon of frequency $5\times 10^{14}$ Hz. Energy in eV?
+</ExQ>
+<ExA>
+$E = hf = 6.626\times 10^{-34}\cdot 5\times 10^{14} = 3.31\times 10^{-19}$ J.
+
+Divide by $1.6\times 10^{-19}$ J/eV: $E \approx 2.07$ eV.
+
+(Visible green light — energies $\sim 1.5-3$ eV are absorbed by molecular electrons → human vision.)
+</ExA>
+
+<ExQ>
+**2.** Electron with kinetic energy 100 eV. de Broglie wavelength?
+</ExQ>
+<ExA>
+$KE = p^2/(2m)$, so $p = \sqrt{2m KE}$.
+
+$KE = 100\cdot 1.6\times 10^{-19} = 1.6\times 10^{-17}$ J.
+
+$p = \sqrt{2\cdot 9.11\times 10^{-31}\cdot 1.6\times 10^{-17}} \approx 5.4\times 10^{-24}$ kg·m/s.
+
+$\lambda = h/p = 6.626\times 10^{-34}/5.4\times 10^{-24} \approx 1.23\times 10^{-10}$ m = 0.123 nm.
+
+Comparable to atomic spacing → electrons diffract from crystals (basis of electron microscopy).
+</ExA>
+
+<ExQ>
+**3. Engineering: Solar cell.** Silicon has band gap 1.12 eV. What wavelength range does it absorb?
+</ExQ>
+<ExA>
+Photon energy must exceed band gap: $hc/\lambda \geq 1.12$ eV.
+
+$\lambda \leq hc/(1.12\,\text{eV}) = 1240/1.12 \approx 1107$ nm.
+
+Silicon absorbs from UV through near-IR (~1100 nm). Sunlight beyond 1100 nm is wasted. This is why multi-junction cells (different band gaps) achieve higher efficiency.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why don't we see ordinary objects (e.g., baseballs) diffracting?
+</ExQ>
+<ExA>
+$\lambda = h/(mv)$. Baseball mass 0.15 kg, $v = 40$ m/s: $\lambda \approx 10^{-34}$ m.
+
+This is 25 orders of magnitude smaller than the baseball itself. Diffraction angle through any opening: completely negligible.
+
+Quantum effects are visible only when $\lambda$ is comparable to system size. For everyday objects, $\lambda$ is unobservably small.
+</ExA>
+
+<ExQ>
+**5.** Show that for a photon, energy and momentum satisfy $E = pc$.
+</ExQ>
+<ExA>
+$E = hf$ and $p = h/\lambda$. For light, $c = f\lambda$, so $f = c/\lambda$.
+
+$E/p = hf/(h/\lambda) = f\lambda = c$.
+
+Thus $E = pc$. Photons are massless: this satisfies the relativistic $E^2 = (pc)^2 + (mc^2)^2$ with $m = 0$.
+
+(For massive particles: $E^2 = p^2c^2 + m^2c^4$. Non-relativistic limit gives $E \approx mc^2 + p^2/(2m)$.)
+</ExA>

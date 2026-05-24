@@ -1,0 +1,81 @@
+---
+title: Projection Tensors and Orthogonal Projection
+description: Projecting vectors onto subspaces — the foundation of least-squares and structural decomposition.
+---
+
+# Projection Tensors and Orthogonal Projection
+
+A **projection** is a linear map $P: V \to V$ satisfying $P^2 = P$. Applying it twice gives the same result as once — you're already on the target subspace.
+
+## Projection onto a Line
+
+To project vector $\mathbf{b}$ onto the direction of unit vector $\hat{\mathbf{a}}$:
+
+$$\text{proj}_{\hat{\mathbf{a}}}\,\mathbf{b} = (\hat{\mathbf{a}} \cdot \mathbf{b})\hat{\mathbf{a}} = \hat{\mathbf{a}}\hat{\mathbf{a}}^T \mathbf{b}$$
+
+The **projection matrix** is:
+
+$$P = \hat{\mathbf{a}}\hat{\mathbf{a}}^T = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}}$$
+
+Check: $P^2 = \hat{\mathbf{a}}(\hat{\mathbf{a}}^T\hat{\mathbf{a}})\hat{\mathbf{a}}^T = \hat{\mathbf{a}}\hat{\mathbf{a}}^T = P$ ✓
+
+The **complementary projection** $Q = I - P$ projects onto the orthogonal complement.
+
+## Projection onto a Subspace
+
+To project onto the column space of a matrix $A$ (whose columns are linearly independent):
+
+$$P = A(A^TA)^{-1}A^T$$
+
+- $P\mathbf{b}$ is the closest vector to $\mathbf{b}$ in $\text{col}(A)$
+- The residual $\mathbf{b} - P\mathbf{b}$ is orthogonal to every column of $A$
+
+## Properties of Orthogonal Projections
+
+For an orthogonal projection matrix $P$:
+- $P^2 = P$ (idempotent)
+- $P^T = P$ (symmetric)
+- Eigenvalues are 0 and 1 only
+- $\|P\mathbf{b}\| \leq \|\mathbf{b}\|$
+
+## Application: Gram–Schmidt Orthogonalization
+
+Given linearly independent vectors $\{\mathbf{a}_1, \ldots, \mathbf{a}_k\}$, build an orthonormal basis:
+
+$$\mathbf{q}_1 = \frac{\mathbf{a}_1}{\|\mathbf{a}_1\|}$$
+
+$$\tilde{\mathbf{a}}_2 = \mathbf{a}_2 - (\mathbf{a}_2\cdot\mathbf{q}_1)\mathbf{q}_1, \quad \mathbf{q}_2 = \frac{\tilde{\mathbf{a}}_2}{\|\tilde{\mathbf{a}}_2\|}$$
+
+Each step removes the component already captured by previous vectors.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the projection matrix $P$ that projects onto the line spanned by $\mathbf{a} = (1, 2, 2)^T$.
+</ExQ>
+<ExA>
+$$\|\mathbf{a}\|^2 = 1 + 4 + 4 = 9$$
+
+$$P = \frac{\mathbf{a}\mathbf{a}^T}{\mathbf{a}^T\mathbf{a}} = \frac{1}{9}\begin{pmatrix}1\\2\\2\end{pmatrix}\begin{pmatrix}1&2&2\end{pmatrix} = \frac{1}{9}\begin{pmatrix}1&2&2\\2&4&4\\2&4&4\end{pmatrix}$$
+
+Verify $P^2 = P$: each entry scales by $1/9 \times 9/9 = 1/9$ — confirmed.
+</ExA>
+
+<ExQ>
+Project $\mathbf{b} = (1, 1, 1)^T$ onto the column space of $A = \begin{pmatrix}1&0\\1&1\\0&1\end{pmatrix}$.
+</ExQ>
+<ExA>
+$$A^TA = \begin{pmatrix}2&1\\1&2\end{pmatrix}, \quad (A^TA)^{-1} = \frac{1}{3}\begin{pmatrix}2&-1\\-1&2\end{pmatrix}$$
+
+$$A^T\mathbf{b} = \begin{pmatrix}2\\2\end{pmatrix}$$
+
+$$\hat{\mathbf{x}} = (A^TA)^{-1}A^T\mathbf{b} = \frac{1}{3}\begin{pmatrix}2\\2\end{pmatrix}$$
+
+$$\mathbf{p} = A\hat{\mathbf{x}} = \begin{pmatrix}1&0\\1&1\\0&1\end{pmatrix}\frac{1}{3}\begin{pmatrix}2\\2\end{pmatrix} = \frac{1}{3}\begin{pmatrix}2\\4\\2\end{pmatrix}$$
+
+Residual: $\mathbf{b} - \mathbf{p} = \frac{1}{3}(1, -1, 1)^T$. Check orthogonality with columns of $A$:
+
+$\mathbf{a}_1 \cdot (1,-1,1) = 1-1+0 = 0$ ✓, $\mathbf{a}_2 \cdot (1,-1,1) = 0-1+1 = 0$ ✓
+</ExA>

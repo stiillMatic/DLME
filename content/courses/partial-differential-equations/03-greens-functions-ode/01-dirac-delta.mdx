@@ -1,0 +1,79 @@
+---
+title: The Dirac Delta Function
+description: A generalized function that represents a point force, point heat source, or unit impulse — the foundation of Green's function theory.
+---
+
+# The Dirac Delta Function
+
+The Dirac delta "function" $\delta(x - x_0)$ is not a function in the classical sense — it is a **generalized function** (distribution) defined by its action on test functions:
+
+$$\int_{-\infty}^{\infty} f(x)\,\delta(x - x_0)\,dx = f(x_0)$$
+
+It is zero everywhere except at $x_0$, and its "integral" is 1:
+
+$$\delta(x - x_0) = 0 \text{ for } x \neq x_0, \qquad \int_{-\infty}^{\infty}\delta(x - x_0)\,dx = 1$$
+
+## Intuition: Unit Impulse
+
+Think of $\delta(x-x_0)$ as the limit of a rectangular pulse of width $\varepsilon$ and height $1/\varepsilon$ as $\varepsilon \to 0$. It concentrates all its "mass" at $x_0$.
+
+**Engineering representations:**
+- A point force of 1 N applied at $x_0$ along a beam
+- A point heat source of 1 W at location $x_0$
+- A unit impulse at time $t_0$ in a dynamic system
+
+## Properties
+
+$$\delta(-x) = \delta(x) \qquad \text{(even)}$$
+
+$$\delta(ax) = \frac{1}{|a|}\delta(x)$$
+
+$$f(x)\delta(x-x_0) = f(x_0)\delta(x-x_0)$$
+
+**Derivative of delta** (integration by parts):
+
+$$\int f(x)\,\delta'(x-x_0)\,dx = -f'(x_0)$$
+
+## Relationship to the Heaviside Function
+
+The Heaviside step function $H(x-x_0)$ (= 0 for $x < x_0$, = 1 for $x > x_0$) satisfies:
+
+$$\frac{d}{dx}H(x-x_0) = \delta(x-x_0)$$
+
+This connects impulsive loading to step loading in beam theory.
+
+## Why This Matters: Point Loads on Beams
+
+The deflection $w(x)$ of a beam under a concentrated load $P$ at $x_0$ satisfies:
+
+$$EI\frac{d^4w}{dx^4} = P\,\delta(x - x_0)$$
+
+Solving this with appropriate BCs gives the Green's function of the beam — the deflection due to a unit point load, from which the response to any distributed loading follows by integration.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Evaluate $\displaystyle\int_0^5 (x^2 + 3x)\,\delta(x - 2)\,dx$.
+</ExQ>
+<ExA>
+The point $x_0 = 2$ is inside the interval $(0, 5)$, so:
+
+$$\int_0^5(x^2+3x)\,\delta(x-2)\,dx = (2^2 + 3\cdot 2) = 4 + 6 = \boxed{10}$$
+</ExA>
+
+<ExQ>
+A simply supported beam of length $L$ carries a concentrated load $P$ at $x = a$. The bending moment diagram has a "kink" at $x = a$ and the shear force has a jump. Show that these are consistent with $EI w'''' = P\delta(x-a)$.
+</ExQ>
+<ExA>
+Integrate $EIw'''' = P\delta(x-a)$ across $x = a$:
+
+$$EI[w''']_{x=a^-}^{x=a^+} = P$$
+
+The jump in $w'''$ equals $P/(EI)$ — a jump in shear force $V = EIw'''$ of magnitude $P$ at the load point. ✓
+
+Integrating again: $w''$ (proportional to bending moment $M$) is **continuous** at $x=a$ — the moment has a kink (slope change) but no jump. ✓
+
+These are exactly the classical beam boundary conditions at an internal point load.
+</ExA>

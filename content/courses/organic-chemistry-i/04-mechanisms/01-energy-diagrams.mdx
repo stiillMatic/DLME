@@ -1,0 +1,146 @@
+---
+title: Energy Diagrams and Transition States
+description: Plotting energy along the reaction path — the visual language for explaining rate, equilibrium, and selectivity.
+---
+
+# Energy Diagrams and Transition States
+
+## The Big Picture
+
+A **reaction coordinate diagram** plots energy as the system moves from reactants to products. Peaks are **transition states** (high-energy bottlenecks); valleys are **intermediates** (metastable species). The shape of this diagram tells you everything about reaction rate, selectivity, and reversibility. Reading energy diagrams fluently is a core organic chemistry skill.
+
+## Anatomy of a Diagram
+
+- **x-axis**: reaction coordinate (progress from reactants to products)
+- **y-axis**: free energy $G$
+
+Key features:
+- **Reactants and products**: minima at start and end
+- **Transition state (‡)**: top of barrier
+- **Intermediates**: minima between transition states
+- **Activation energy** $E_a$: from reactants to TS
+- **Reaction energy** $\Delta G$: from reactants to products
+
+## Single-step vs Multi-step
+
+**SN2 (concerted):** one TS, no intermediate.
+**SN1 (stepwise):** two TS's, one intermediate (carbocation).
+
+For multi-step:
+- **Rate-determining step (RDS)**: the slowest step (highest TS).
+- Pre-equilibrium can occur if barrier returning is similar or higher.
+
+## Arrhenius Equation
+
+$$k = A e^{-E_a/RT}$$
+
+Rate constant grows exponentially with temperature. Rule of thumb: rate doubles per 10 K increase (for $E_a \sim 50$ kJ/mol).
+
+Logarithmic form: $\ln k = \ln A - E_a/(RT)$. Plot $\ln k$ vs $1/T$ to extract $E_a$.
+
+## Hammond Postulate
+
+The TS resembles whichever side is closer in energy:
+- **Exothermic reaction**: TS resembles reactants ("early TS").
+- **Endothermic reaction**: TS resembles products ("late TS").
+
+For SN1: cation intermediate is endothermic → TS resembles cation. Carbocation stability determines TS stability determines rate. This is why tertiary substrates accelerate SN1.
+
+## Kinetic vs Thermodynamic Control
+
+When multiple products form:
+- **Kinetic control**: lower-barrier product dominates at low T, short time.
+- **Thermodynamic control**: lower-energy product dominates at high T, equilibrium.
+
+Often different! Classic example: Diels-Alder selectivity, 1,2 vs 1,4 addition.
+
+## Common Misconceptions
+
+**Misconception 1: "$E_a$ is the energy stored in the bond."**
+
+$E_a$ is the energy needed to **reach the transition state** — the bond energy needed to break partially as the new bond forms.
+
+**Misconception 2: "Lower $\Delta G$ = faster reaction."**
+
+$\Delta G$ controls equilibrium, $E_a$ controls rate. An exergonic reaction can be slow if barrier is high; an endergonic reaction can be fast if barrier is low.
+
+**Misconception 3: "Catalysts change $\Delta G$."**
+
+Catalysts lower $E_a$ but **don't change** $\Delta G$ — they affect rate, not equilibrium. Both forward and reverse rates accelerate equally.
+
+## Engineering Connection
+
+- **Process design:** target the rate-determining step for optimization.
+- **Catalysis:** lower the activation energy of the RDS → faster turnover.
+- **Selectivity:** parallel pathways with different barriers → use temperature/conditions to favor desired product.
+- **Reaction safety:** know exothermic reactions and their activation barriers to prevent runaway.
+- **Drug stability:** Arrhenius extrapolation from accelerated aging studies predicts shelf life.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Rate constant doubles when T increases from 300 K to 310 K. $E_a$?
+</ExQ>
+<ExA>
+Arrhenius ratio: $\ln 2 = E_a/R\cdot(1/300 - 1/310)/$ ... 
+
+$E_a = R\ln 2/(1/300 - 1/310) = 8.314\cdot 0.693/(0.0001075) \approx 53600$ J/mol = 53.6 kJ/mol.
+
+Typical for organic reactions.
+</ExA>
+
+<ExQ>
+**2.** SN1 reaction: which is rate-determining, ionization or nucleophile attack?
+</ExQ>
+<ExA>
+**Ionization** (carbocation formation) is the slow, rate-determining step. Carbocation is high energy, so the barrier to form it is large.
+
+Nucleophile attack on the cation is fast (the cation is reactive).
+
+This is why SN1 rate is independent of nucleophile concentration — the RDS doesn't involve the nucleophile.
+</ExA>
+
+<ExQ>
+**3. Engineering: Drug shelf life.** A drug degrades at rate $k = 10^{-7}$ s⁻¹ at 25°C, $E_a = 80$ kJ/mol. Time to 10% degradation at 4°C (refrigerated)?
+</ExQ>
+<ExA>
+Find $k$ at 4°C (277 K): $\ln(k_2/k_1) = -E_a/R(1/T_2 - 1/T_1)$.
+
+$1/277 - 1/298 = 2.55\times 10^{-4}$.
+
+$\ln(k_2/k_1) = -80000/8.314\cdot 2.55\times 10^{-4} \approx -2.45$.
+
+$k_2/k_1 = e^{-2.45} \approx 0.086$.
+
+$k_2 \approx 8.6\times 10^{-9}$ s⁻¹.
+
+Time for 10% degradation: $0.1/k_2 \approx 1.16\times 10^7$ s ≈ 4.5 months.
+
+Refrigeration extends life ~12× (would have been ~12 days at 25°C). Why drugs are stored cold.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why doesn't increasing temperature always increase yield?
+</ExQ>
+<ExA>
+Higher T speeds up **all** reactions — including reverse and competing reactions.
+
+If desired product is kinetically favored but thermodynamically unstable, higher T can flip selectivity to a competing thermodynamic product.
+
+Also: higher T shifts unfavorable equilibria (Le Chatelier) → may decrease yield of exergonic products.
+
+Process engineers balance T for: rate (need it high enough), selectivity (avoid side products), and equilibrium yield (don't push wrong direction).
+</ExA>
+
+<ExQ>
+**5.** A reaction has two parallel paths: kinetic product with $E_a = 50$ kJ/mol, thermodynamic with $E_a = 80$ kJ/mol but lower final energy. At low T and short time, which dominates?
+</ExQ>
+<ExA>
+**Kinetic** (lower $E_a$ → faster path). At low T, kinetic product is "trapped" because reverse reactions and equilibration are slow.
+
+At high T or long times, thermodynamic product becomes accessible — system equilibrates to lower-energy product.
+
+This is **kinetic vs thermodynamic control**. Classic example: bromination of cyclopentadiene gives 1,2-product (kinetic) at low T, 1,4-product (thermodynamic) at high T.
+</ExA>

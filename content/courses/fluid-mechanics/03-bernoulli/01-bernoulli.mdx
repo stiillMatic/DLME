@@ -1,0 +1,70 @@
+---
+title: Bernoulli's Equation
+description: Conservation of energy along a streamline — the most-used equation in fluid mechanics.
+---
+
+# Bernoulli's Equation
+
+For steady, incompressible, inviscid flow along a streamline:
+
+$$P + \frac{1}{2}\rho v^2 + \rho g z = \text{constant}$$
+
+where $P$ = pressure, $\rho$ = density, $v$ = velocity, $z$ = elevation.
+
+Equivalently, between two points 1 and 2 on the same streamline:
+
+$$P_1 + \frac{1}{2}\rho v_1^2 + \rho g z_1 = P_2 + \frac{1}{2}\rho v_2^2 + \rho g z_2$$
+
+## Physical Interpretation
+
+- **Pressure term** $P$: flow work per unit volume
+- **Kinetic term** $\frac{1}{2}\rho v^2$: kinetic energy per unit volume
+- **Potential term** $\rho g z$: gravitational potential per unit volume
+
+When velocity increases, pressure decreases — and vice versa. This is why airplane wings generate lift.
+
+## Continuity Equation
+
+For incompressible flow in a pipe:
+
+$$A_1 v_1 = A_2 v_2 = \dot{V} = \text{const}$$
+
+Smaller pipe area → higher velocity. Combined with Bernoulli → lower pressure.
+
+## Venturi Meter
+
+A Venturi meter measures flow rate using a constriction. At the throat (section 2):
+
+$$\dot{V} = A_2 \sqrt{\frac{2(P_1 - P_2)/\rho}{1 - (A_2/A_1)^2}}$$
+
+## Pitot Tube
+
+Measures flow velocity by stagnating the flow ($v_2 = 0$, same elevation):
+
+$$P_{\text{stag}} - P_{\text{static}} = \frac{1}{2}\rho v^2 \implies v = \sqrt{\frac{2\Delta P}{\rho}}$$
+
+Used on every commercial aircraft.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Water flows through a pipe that narrows from diameter 10 cm to 5 cm. The inlet velocity is 2 m/s and inlet pressure is 150 kPa. Find the velocity and pressure at the narrow section ($\rho = 1000$ kg/m³, same elevation).
+</ExQ>
+<ExA>
+**Continuity:** $A_1 v_1 = A_2 v_2$
+
+$$\frac{\pi(0.1)^2}{4}(2) = \frac{\pi(0.05)^2}{4} v_2 \implies v_2 = 2 \times \frac{(0.1)^2}{(0.05)^2} = \boxed{8\ \text{m/s}}$$
+
+**Bernoulli** (same elevation):
+
+$$P_2 = P_1 + \frac{1}{2}\rho(v_1^2 - v_2^2) = 150{,}000 + \frac{1}{2}(1000)(4 - 64) = 150{,}000 - 30{,}000 = \boxed{120\ \text{kPa}}$$
+</ExA>
+
+<ExQ>
+A pitot tube on an aircraft measures a stagnation pressure of 101.8 kPa and static pressure of 100 kPa. Find the airspeed ($\rho_{\text{air}} = 1.225$ kg/m³).
+</ExQ>
+<ExA>
+$$v = \sqrt{\frac{2\Delta P}{\rho}} = \sqrt{\frac{2 \times 1800}{1.225}} = \sqrt{2939} \approx \boxed{54.2\ \text{m/s}} \approx 195\ \text{km/h}$$
+</ExA>

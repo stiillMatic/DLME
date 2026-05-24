@@ -1,0 +1,49 @@
+{
+  "title": "Organic Chemistry I",
+  "description": "Structure, bonding, stereochemistry, and reactions of organic molecules — based on MIT 5.12.",
+  "level": "intermediate",
+  "area": "Chemistry",
+  "tags": ["Chemistry", "Organic", "MIT 5.12"],
+  "chapters": [
+    {
+      "title": "Structure and Bonding",
+      "slug": "01-structure-bonding",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-hybridization", "title": "Hybridization and Molecular Geometry", "order": 1 },
+        { "slug": "02-resonance", "title": "Resonance and Electron Delocalization", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Alkanes and Stereochemistry",
+      "slug": "02-alkanes-stereochemistry",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-conformations", "title": "Conformations of Alkanes and Cycloalkanes", "order": 1 },
+        { "slug": "02-stereochemistry", "title": "Chirality and Stereoisomerism", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Substitution and Elimination Reactions",
+      "slug": "03-reactions",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-sn1-sn2", "title": "SN1 and SN2 Mechanisms", "order": 1 },
+        { "slug": "02-e1-e2", "title": "E1 and E2 Eliminations", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Reaction Mechanisms and Energy Diagrams",
+      "slug": "04-mechanisms",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-energy-diagrams", "title": "Energy Diagrams and Transition States", "order": 1 },
+        { "slug": "02-carbocations", "title": "Carbocation Stability and Rearrangements", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

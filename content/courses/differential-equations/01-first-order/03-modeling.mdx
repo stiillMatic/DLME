@@ -1,0 +1,152 @@
+---
+title: Modeling with First-Order ODEs
+description: How to translate physical situations into ODEs — the bridge from word problems to mathematics.
+---
+
+# Modeling with First-Order ODEs
+
+## The Big Picture
+
+The hardest part of using ODEs in engineering isn't *solving* them — it's *setting them up*. Modeling is the art of translating physical principles (conservation, rate laws, equilibrium) into mathematical equations. Once the ODE is written, solution techniques take over. Get the modeling right, and the rest of analysis follows. Get it wrong, and no amount of algebraic skill will save you.
+
+## A Structured Approach
+
+1. **Identify the unknown** — what quantity changes over time/space?
+2. **Apply a balance law** — conservation of mass, energy, momentum, or charge.
+3. **Express rates** — what makes the unknown change?
+4. **Write the ODE** — equate accumulation rate with net flow + sources.
+5. **State initial/boundary conditions** — what's the state at $t = 0$ (or boundary)?
+6. **Solve and interpret** — check units, limits, asymptotic behavior.
+
+## Common Patterns
+
+| Phenomenon | Equation |
+|---|---|
+| Exponential decay/growth | $dy/dt = ky$ |
+| Newton's cooling | $dT/dt = -k(T - T_\infty)$ |
+| Logistic growth | $dP/dt = rP(1 - P/K)$ |
+| Drag-limited fall | $m\,dv/dt = mg - cv$ (or $cv^2$) |
+| Mixing tank | $dS/dt = (\text{rate in}) - (\text{rate out})$ |
+| RC charging | $RC\,dV/dt + V = V_{\text{source}}$ |
+
+Recognizing patterns from physical setup is half the battle.
+
+## Worked Example — Population with Harvesting
+
+A fish population $P(t)$ grows logistically, but fishermen harvest at constant rate $h$:
+
+$$\frac{dP}{dt} = rP\!\left(1 - \frac{P}{K}\right) - h$$
+
+Equilibria: set $dP/dt = 0$, get $rP - rP^2/K - h = 0$.
+
+Solving the quadratic: $P^* = K/2 \pm K\sqrt{1 - 4h/(rK)}/2$.
+
+Two equilibria if $h < rK/4$ (a stable upper, unstable lower). Beyond $h = rK/4$, the equilibria merge — population crashes to zero. This **bifurcation** at $h_{\text{critical}} = rK/4$ is the **maximum sustainable yield**.
+
+This is why fisheries science exists: the math gives a hard limit on harvest before collapse.
+
+## Worked Example — RL Circuit with AC Source
+
+$L\,dI/dt + RI = V_0\sin(\omega t)$
+
+Linear first-order with sinusoidal forcing. Use integrating factor $\mu = e^{Rt/L}$.
+
+Long-time (steady-state) solution: $I_p(t) = (V_0/Z)\sin(\omega t - \phi)$ where impedance $Z = \sqrt{R^2 + \omega^2 L^2}$ and phase $\tan\phi = \omega L/R$.
+
+The current lags the voltage by $\phi$. This is the classical AC analysis result — derived from a first-order ODE.
+
+## Common Misconceptions
+
+**Misconception 1: "Bigger ODE = better model."**
+
+Often a simpler model captures the dominant physics. Adding terms like nonlinear drag or temperature-dependent properties can be necessary, but only when they actually matter. Start simple.
+
+**Misconception 2: "Initial conditions are afterthoughts."**
+
+ICs are part of the model. Different ICs give different solutions. In real engineering, the IC encodes everything that happened *before* you started observing.
+
+**Misconception 3: "Dimensional analysis is just a check."**
+
+It's a *constraint* on the model. Every equation must be dimensionally consistent — and in fact, dimensionless groups (Reynolds number, Biot number) often reveal universal structure that the dimensioned equation hides.
+
+**Misconception 4: "All physical models are first-order."**
+
+Many are, especially when they involve relaxation toward equilibrium. But oscillatory systems (springs, pendulums, RLC circuits) are second-order — and have qualitatively different behavior (oscillation, resonance).
+
+## Engineering Connection
+
+ODE modeling is the **language** of engineering analysis. Examples:
+- Heat sink design: find time to cool to acceptable temperature.
+- Reactor design: predict pressure/concentration evolution.
+- Vehicle suspensions: model spring-damper response.
+- Drug delivery: predict concentration-time profiles.
+- Population dynamics: ecology, epidemiology.
+
+In each case: write the conservation law, get an ODE, solve, interpret.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A coffee cup at 80°C is in a 20°C room. After 5 minutes, $T = 60$°C. Find the cooling constant $k$ and the temperature at $t = 10$ min.
+</ExQ>
+<ExA>
+Newton's cooling: $T = 20 + (80 - 20)e^{-kt} = 20 + 60 e^{-kt}$.
+
+At $t = 5$: $60 = 20 + 60 e^{-5k} \Rightarrow e^{-5k} = 2/3 \Rightarrow k = \ln(3/2)/5 \approx 0.0811$ /min.
+
+At $t = 10$: $T = 20 + 60(2/3)^2 = 20 + 60(4/9) = 20 + 26.67 = 46.67$°C.
+</ExA>
+
+<ExQ>
+**Engineering: Drug elimination.** A drug enters the bloodstream at constant rate $r_0$ mg/min, and is eliminated at rate $kC$ where $C$ is current concentration (mg/L) and $k$ is rate constant. The bloodstream volume is $V$ (L). Find $C(t)$ given $C(0) = 0$.
+</ExQ>
+<ExA>
+$V\,dC/dt = r_0 - k V C$ (rate in - rate out × volume).
+
+Or per liter: $dC/dt = r_0/V - kC$. Linear first-order with $\mu = e^{kt}$.
+
+$C(t) = (r_0/(kV))(1 - e^{-kt})$
+
+Steady state: $C_\infty = r_0/(kV)$. Time to reach 99%: $t \approx 4.6/k$.
+
+This pharmacokinetic model is used to design drug dosing schedules.
+</ExA>
+
+<ExQ>
+**Free fall with linear drag.** $m\,dv/dt = mg - cv$, $v(0) = 0$. Find $v(t)$. What is the terminal velocity?
+</ExQ>
+<ExA>
+Linear ODE: $v' + (c/m)v = g$. $\mu = e^{ct/m}$.
+
+$v(t) = mg/c\cdot(1 - e^{-ct/m})$.
+
+Terminal velocity: $v_\infty = mg/c$ (as $t\to\infty$).
+
+After 1 time-constant ($t = m/c$): $v \approx 0.63 v_\infty$. Standard parachute problem.
+</ExA>
+
+<ExQ>
+**Setup only.** A draining tank: water level $h(t)$ in a cylindrical tank of cross-section $A$. The drain has area $a$ and Torricelli's law says outflow speed = $\sqrt{2gh}$. Set up the ODE for $h(t)$ — don't solve.
+</ExQ>
+<ExA>
+Volume balance: $A\,dh/dt = -a\sqrt{2gh}$ (negative because draining).
+
+Or: $dh/dt = -(a/A)\sqrt{2gh}$ — separable.
+
+(Solution: $\sqrt h = \sqrt{h_0} - (a/A)\sqrt{g/2}\,t$, so $h(t) \propto (\sqrt{h_0} - \alpha t)^2$.)
+
+The setup is the harder skill — it requires identifying mass conservation as the driving principle.
+</ExA>
+
+<ExQ>
+**Conceptual.** When modeling a process, why is it useful to non-dimensionalize the ODE first?
+</ExQ>
+<ExA>
+Non-dimensionalization reveals universal structure. The Reynolds number, Biot number, etc., are dimensionless ratios that determine the *qualitative* behavior of the system.
+
+Two systems with the same dimensionless number behave the same — even if their absolute scales differ enormously. This is why a 1-cm wind-tunnel model can predict full-size aircraft behavior.
+
+Practically: non-dimensional ODEs have fewer parameters, are easier to solve, and reveal which terms are important in different regimes.
+</ExA>

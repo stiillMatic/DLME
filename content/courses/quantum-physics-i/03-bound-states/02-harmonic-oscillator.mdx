@@ -1,0 +1,142 @@
+---
+title: Quantum Harmonic Oscillator
+description: The most important toy model in physics — exactly solvable, universally applicable near every equilibrium.
+---
+
+# Quantum Harmonic Oscillator
+
+## The Big Picture
+
+Any system near a stable equilibrium looks quadratic to leading order, so the harmonic oscillator (HO) is the **universal model** of small oscillations. Quantum mechanically, its spectrum and wavefunctions are exactly solvable — and the structure (equally spaced levels, zero-point energy, Hermite polynomial wavefunctions) provides the mathematical scaffolding for quantum field theory, molecular vibrations, phonons, photons, and more.
+
+## Setup
+
+$V(x) = \tfrac{1}{2}m\omega^2 x^2$. Schrödinger equation:
+
+$$-\dfrac{\hbar^2}{2m}\phi'' + \dfrac{1}{2}m\omega^2 x^2\phi = E\phi$$
+
+## Energy Spectrum
+
+$$\boxed{E_n = \hbar\omega(n + 1/2), \quad n = 0, 1, 2, \ldots}$$
+
+**Key features:**
+- **Equally spaced** levels (unlike infinite well).
+- **Zero-point energy** $E_0 = \hbar\omega/2 > 0$ — vibration persists at $T = 0$.
+
+## Wavefunctions
+
+$$\phi_n(x) = \frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4} H_n(\xi)e^{-\xi^2/2}$$
+
+where $\xi = x\sqrt{m\omega/\hbar}$ and $H_n$ is the $n$-th **Hermite polynomial**:
+
+- $H_0(\xi) = 1$
+- $H_1(\xi) = 2\xi$
+- $H_2(\xi) = 4\xi^2 - 2$
+- $H_3(\xi) = 8\xi^3 - 12\xi$
+
+Ground state $\phi_0$: Gaussian centered at origin.
+
+## Ladder Operators (Elegant Algebra)
+
+Define $\hat a = \sqrt{m\omega/(2\hbar)}(\hat x + i\hat p/(m\omega))$, $\hat a^\dagger = \text{Hermitian conjugate}$.
+
+Then:
+- $[\hat a, \hat a^\dagger] = 1$
+- $\hat H = \hbar\omega(\hat a^\dagger\hat a + 1/2)$
+- $\hat a^\dagger$ raises state ($|n\rangle \to \sqrt{n+1}|n+1\rangle$)
+- $\hat a$ lowers state ($|n\rangle \to \sqrt n|n-1\rangle$)
+
+This is the **algebraic method** — solve the entire spectrum from operator commutators alone.
+
+## Quantum Numbers as "Particles"
+
+Each excitation of HO can be viewed as a **quantum particle**:
+- Electromagnetic field: each photon = HO excitation at frequency $\omega$.
+- Solid lattice vibrations: phonons = HO excitations.
+- Phenomenological "boson" creation: $\hat a^\dagger$ creates a boson.
+
+This is the seed of **quantum field theory** — fields are infinite collections of harmonic oscillators.
+
+## Common Misconceptions
+
+**Misconception 1: "$E_n$ is the energy at level $n$."**
+
+$E_n$ is the **total** energy of the $n$-th state — kinetic + potential. The expectation values satisfy $\langle KE\rangle = \langle PE\rangle = E_n/2$ (virial theorem).
+
+**Misconception 2: "Classical limit corresponds to large $n$."**
+
+True numerically, but probability distributions are different: classical = uniform near turning points, quantum = highly oscillatory but envelope approaches classical. **Correspondence principle**: as $n\to\infty$, observable probabilities match classical predictions (after averaging).
+
+**Misconception 3: "Particle is always in one stationary state."**
+
+Coherent states $\alpha\sum_n(\alpha^n/\sqrt{n!})|n\rangle$ are superpositions that behave most "classically." Quantum optics uses these extensively (e.g., laser light is in a coherent state).
+
+## Engineering Connection
+
+- **Phonons in solids:** every solid is a collection of harmonic oscillators (phonons) — sets thermal conductivity, sound speed, specific heat.
+- **Laser cavities:** electromagnetic field modes are quantum HOs.
+- **Cantilevers in AFM:** classical HOs, but with quantum corrections at low T (zero-point + thermal).
+- **Cooling traps for ions/atoms:** harmonic confinement; quantum HO ground state achieved at sub-microKelvin.
+- **Specific heat at low T:** Einstein and Debye models treat solids as collections of HOs.
+- **Quantum field theory:** the very fabric of the standard model.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** HO with $\omega = 10^{14}$ rad/s. Zero-point energy in eV?
+</ExQ>
+<ExA>
+$E_0 = \hbar\omega/2 = 1.055\times 10^{-34}\cdot 10^{14}/2 = 5.27\times 10^{-21}$ J.
+
+In eV: $\approx 0.033$ eV.
+
+(Typical molecular vibration: $\omega\sim 10^{14}$ rad/s, $\Delta E\sim 0.1$ eV. Detectable as IR absorption.)
+</ExA>
+
+<ExQ>
+**2.** What's $\langle x\rangle$ in any energy eigenstate of HO?
+</ExQ>
+<ExA>
+$\phi_n(x)$ has definite parity (even or odd in $x$). So $|\phi_n|^2$ is even, and $x|\phi_n|^2$ is odd.
+
+$\langle x\rangle = 0$ — center of mass is at origin by symmetry. (Even at high $n$, even though the wavefunction oscillates rapidly, the mean position is 0.)
+</ExA>
+
+<ExQ>
+**3. Engineering: Optical phonon.** Diamond optical phonon: $\omega \approx 2.5\times 10^{14}$ rad/s. Energy of one phonon?
+</ExQ>
+<ExA>
+$E = \hbar\omega = 1.055\times 10^{-34}\cdot 2.5\times 10^{14} \approx 2.64\times 10^{-20}$ J ≈ 165 meV.
+
+Phonon spectroscopy (Raman) measures these — fingerprint of crystal lattice.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why are HO energy levels equally spaced, unlike infinite-well levels?
+</ExQ>
+<ExA>
+HO: levels $\hbar\omega(n + 1/2)$ — gaps $\hbar\omega$, equal.
+
+Square well: levels $\propto n^2$ — gaps grow as $(2n+1)$.
+
+Different potentials → different spectra. Linear restoring force ($V \propto x^2$) gives the unique property of uniform spacing. This is *why* HO states are useful for "counting" particles in QFT — each excitation costs the same energy.
+</ExA>
+
+<ExQ>
+**5.** Use ladder operators to compute $\langle x^2\rangle$ in ground state.
+</ExQ>
+<ExA>
+$\hat x = \sqrt{\hbar/(2m\omega)}(\hat a + \hat a^\dagger)$.
+
+$\hat x^2 = (\hbar/(2m\omega))(\hat a^2 + \hat a^{\dagger 2} + \hat a\hat a^\dagger + \hat a^\dagger\hat a)$.
+
+In ground state $|0\rangle$: $\hat a|0\rangle = 0$, so $\hat a^2|0\rangle = 0$ and $\hat a^\dagger\hat a|0\rangle = 0$. Only $\hat a\hat a^\dagger|0\rangle = |0\rangle + \hat a^\dagger\hat a|0\rangle = |0\rangle$.
+
+$\langle x^2\rangle = \hbar/(2m\omega)$.
+
+So $\Delta x = \sqrt{\hbar/(2m\omega)}$. Similarly $\Delta p = \sqrt{m\omega\hbar/2}$.
+
+Product: $\Delta x\Delta p = \hbar/2$ — saturates uncertainty! Ground state is **minimum uncertainty** state.
+</ExA>

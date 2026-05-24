@@ -1,0 +1,60 @@
+---
+title: Loss Functions
+description: Quantifying how wrong your network is — the objective it minimises.
+---
+
+# Loss Functions
+
+A loss function measures the **distance between prediction and ground truth**. Training minimises this number.
+
+## MSE — Mean Squared Error
+
+For regression problems (predicting a continuous value like stress or displacement):
+
+$$
+\mathcal{L}_{\text{MSE}} = \frac{1}{N} \sum_{i=1}^{N} (\hat{y}_i - y_i)^2
+$$
+
+- Penalises large errors quadratically
+- Units are (output units)²
+
+```python
+import torch.nn as nn
+
+criterion = nn.MSELoss()
+loss = criterion(predictions, targets)
+```
+
+## MAE — Mean Absolute Error
+
+$$
+\mathcal{L}_{\text{MAE}} = \frac{1}{N} \sum_{i=1}^{N} |\hat{y}_i - y_i|
+$$
+
+- More robust to outliers than MSE
+- Gradient is constant (no quadratic scaling)
+
+## Cross-Entropy — Classification
+
+For predicting a class label (e.g., fatigue failure mode):
+
+$$
+\mathcal{L}_{\text{CE}} = -\sum_{c} y_c \log(\hat{p}_c)
+$$
+
+```python
+criterion = nn.CrossEntropyLoss()
+loss = criterion(logits, class_indices)
+```
+
+## Choosing the Right Loss
+
+| Problem | Loss |
+|---|---|
+| Regression | MSELoss or L1Loss (MAE) |
+| Binary classification | BCEWithLogitsLoss |
+| Multi-class | CrossEntropyLoss |
+
+## ME Example
+
+Training a surrogate model for FEA: your loss is MSE on the predicted nodal displacement field vs. the full FEA solution. Minimising this loss means the surrogate learns to mimic the FEA solver.

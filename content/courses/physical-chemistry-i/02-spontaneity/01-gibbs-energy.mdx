@@ -1,0 +1,145 @@
+---
+title: Gibbs Free Energy and Spontaneity
+description: Combining enthalpy and entropy into a single criterion for whether reactions proceed at constant temperature and pressure.
+---
+
+# Gibbs Free Energy and Spontaneity
+
+## The Big Picture
+
+At constant T and P (the usual chemistry conditions), the criterion for spontaneity is $\Delta G < 0$, where **Gibbs free energy** $G = H - TS$. This single quantity packages the competition between enthalpy (energy minimization) and entropy (disorder maximization) into one universal test. Whenever you see "Will this reaction happen?" — Gibbs is the answer.
+
+## Definition
+
+$$G = H - TS$$
+
+For a process at constant T:
+
+$$\Delta G = \Delta H - T\Delta S$$
+
+**Spontaneity:**
+- $\Delta G < 0$: spontaneous
+- $\Delta G = 0$: equilibrium
+- $\Delta G > 0$: non-spontaneous (reverse is spontaneous)
+
+## Four Cases
+
+| $\Delta H$ | $\Delta S$ | Behavior |
+|---|---|---|
+| < 0 | > 0 | Always spontaneous |
+| > 0 | < 0 | Never spontaneous |
+| < 0 | < 0 | Spontaneous at low T |
+| > 0 | > 0 | Spontaneous at high T |
+
+Crossover temperature: $T = \Delta H/\Delta S$. At this T, $\Delta G = 0$ (equilibrium).
+
+## Standard Gibbs Energy
+
+$\Delta G^\circ$ refers to reaction at standard states (1 bar gas, 1 M solute, pure liquid/solid). Tabulated for many reactions.
+
+For reaction $aA + bB \to cC + dD$ at non-standard conditions:
+
+$$\Delta G = \Delta G^\circ + RT\ln Q$$
+
+where $Q = \dfrac{[C]^c[D]^d}{[A]^a[B]^b}$ is the **reaction quotient**.
+
+At equilibrium $\Delta G = 0$, so $\Delta G^\circ = -RT\ln K$.
+
+## Useful Work
+
+$\Delta G$ = maximum non-expansion (electrical, etc.) work obtainable from a process at constant T, P.
+
+- Combustion: only $\Delta H$ is realized as heat (assuming no work device).
+- Fuel cell: up to $\Delta G$ realized as electricity.
+
+So fuel cells are more efficient than combustion engines (which are Carnot-limited).
+
+## Common Misconceptions
+
+**Misconception 1: "$\Delta G < 0$ means fast reaction."**
+
+Only means *possible*. Kinetic barriers can make $\Delta G < 0$ reactions slow (diamond → graphite, glucose oxidation in body without enzyme).
+
+**Misconception 2: "Standard states are 25°C."**
+
+Standard states refer to **composition/state** (1 bar, 1 M, etc.), not temperature. Tables often given at 25°C but $\Delta G^\circ$ depends on T.
+
+**Misconception 3: "$\Delta G$ is the energy of the reaction."**
+
+$\Delta G$ is the *maximum useful work* — usually less than $\Delta H$ (some energy spent on entropy contribution).
+
+## Engineering Connection
+
+- **Fuel cells:** electrical work = $-\Delta G$.
+- **Batteries:** voltage $E^\circ = -\Delta G^\circ/(nF)$.
+- **Catalysis:** can't change $\Delta G$, only accelerate approach.
+- **Process design:** $\Delta G$ analysis tells you which direction to push equilibrium.
+- **Drug design:** binding free energies $\Delta G_{\text{bind}}$ determine drug efficacy.
+- **Phase diagrams:** equilibrium lines are where $\Delta G = 0$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\Delta H = -100$ kJ, $\Delta S = -200$ J/K. Spontaneous at 300 K? At 600 K?
+</ExQ>
+<ExA>
+At 300 K: $\Delta G = -100 - 300(-0.200) = -100 + 60 = -40$ kJ. **Spontaneous.**
+
+At 600 K: $\Delta G = -100 + 120 = +20$ kJ. **Non-spontaneous.**
+
+Crossover at $T = 100/0.2 = 500$ K. Below: spontaneous; above: not.
+
+Typical of exothermic reactions with $\Delta S < 0$ (like ammonia synthesis).
+</ExA>
+
+<ExQ>
+**2.** $\Delta G^\circ = -10$ kJ. $K$ at 25°C?
+</ExQ>
+<ExA>
+$\ln K = -\Delta G^\circ/RT = 10000/(8.314\cdot 298) = 4.04$.
+
+$K = e^{4.04} \approx 56.7$.
+
+Modest $\Delta G^\circ$ gives $K \sim 10^{1-2}$. Strong drive ($\Delta G^\circ < -30$ kJ) gives $K > 10^5$.
+</ExA>
+
+<ExQ>
+**3. Engineering: Fuel cell.** Hydrogen-oxygen fuel cell: $\Delta G^\circ = -237$ kJ/mol at 25°C. Cell voltage?
+</ExQ>
+<ExA>
+$E^\circ = -\Delta G^\circ/(nF) = 237000/(2\cdot 96485) = 1.229$ V.
+
+Theoretical maximum cell voltage. Real cells deliver ~0.7-0.9 V at useful current due to overpotentials.
+
+Stacks of cells (300+ cells × 0.7 V) power hydrogen vehicles.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does dissolving salt in water happen even when $\Delta H_{\text{soln}} > 0$ (endothermic)?
+</ExQ>
+<ExA>
+Dissolution increases entropy substantially (ordered ionic crystal → disordered solvated ions).
+
+If $T\Delta S > \Delta H$, then $\Delta G < 0$ → spontaneous despite endothermicity.
+
+This is why ice-cold "instant cold packs" work: ammonium nitrate dissolves endothermically; entropy gain drives the process; solution cools down absorbing heat.
+
+Entropy-driven processes are everywhere — micelle formation, protein denaturation, gas dissolution.
+</ExA>
+
+<ExQ>
+**5.** Why is ammonia synthesis run at high pressure but moderate (not maximum) temperature?
+</ExQ>
+<ExA>
+$N_2 + 3H_2 \to 2NH_3$: $\Delta H < 0$ (exothermic), $\Delta S < 0$ (4 mol gas → 2 mol gas).
+
+**High P** favors products (Le Chatelier: fewer moles gas).
+
+**Low T** thermodynamically favored ($\Delta G$ more negative). But low T kinetically slow.
+
+**Compromise: ~450°C** — fast enough for reasonable rates, low enough for OK equilibrium. Iron catalyst reduces $E_a$.
+
+This is the **Haber process** — feeds half the world's protein via fertilizer. Optimal conditions are a thermodynamic-kinetic compromise.
+</ExA>

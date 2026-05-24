@@ -1,0 +1,41 @@
+{
+  "title": "Heat Transfer",
+  "description": "Conduction, convection, and radiation — governing thermal design of engines, electronics, and manufacturing processes.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Heat Transfer", "Thermal", "MIT 2.51"],
+  "chapters": [
+    {
+      "title": "Conduction",
+      "slug": "01-conduction",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-fourier-law", "title": "Fourier's Law and Thermal Resistance", "order": 1 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Convection",
+      "slug": "02-convection",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-forced-convection", "title": "Forced Convection Correlations", "order": 1 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Radiation",
+      "slug": "03-radiation",
+      "order": 3,
+      "lessons": [
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 1 }
+      ]
+    },
+    {
+      "title": "Combined and Transient",
+      "slug": "04-combined",
+      "order": 4,
+      "lessons": []
+    }
+  ]
+}

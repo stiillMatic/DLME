@@ -1,0 +1,135 @@
+---
+title: Strain and Hooke's Law
+description: How materials deform under load — and the linear elastic relationship that governs most engineering materials.
+---
+
+# Strain and Hooke's Law
+
+## The Big Picture
+
+Stress is the cause; **strain** is the effect. Strain measures the *deformation* of a material per unit length — a dimensionless quantity. **Hooke's law** is the simplest, most useful relationship: stress is proportional to strain, with the constant of proportionality being the elastic modulus. This linear relation is the cornerstone of structural design — almost every analysis assumes it as a starting point. Beyond the elastic limit, materials yield and behave nonlinearly, but Hooke's law captures the operating regime of most engineering structures.
+
+## Definitions
+
+**Normal strain (axial):**
+$$\varepsilon = \frac{\Delta L}{L_0}$$
+
+The fractional elongation. Dimensionless. Tensile: $\varepsilon > 0$. Compressive: $\varepsilon < 0$.
+
+**Shear strain:** $\gamma = $ change in angle (radians) between originally perpendicular lines.
+
+## Hooke's Law (Uniaxial)
+
+$$\sigma = E\varepsilon$$
+
+$E$ is **Young's modulus** (units: GPa) — characterizes stiffness.
+
+Typical values:
+- Steel: $E \approx 200$ GPa
+- Aluminum: $E \approx 70$ GPa
+- Concrete: $E \approx 30$ GPa
+- Rubber: $E \approx 0.01$–0.1 GPa
+
+## Poisson's Ratio
+
+When stretched in one direction, a material contracts in perpendicular directions:
+
+$$\nu = -\frac{\varepsilon_{\text{transverse}}}{\varepsilon_{\text{axial}}}$$
+
+For most metals: $\nu \approx 0.3$. Rubber: $\nu \approx 0.5$ (incompressible). Cork: $\nu \approx 0$.
+
+## Generalized Hooke's Law (3D)
+
+$$\varepsilon_x = \frac{1}{E}[\sigma_x - \nu(\sigma_y + \sigma_z)]$$
+
+(Similar for $y, z$ with cyclic permutation.) Plus shear: $\gamma_{xy} = \tau_{xy}/G$ where $G = E/[2(1+\nu)]$.
+
+## Stress-Strain Curve
+
+A typical metal:
+1. **Linear elastic:** Hooke's law applies. Removing load → no permanent deformation.
+2. **Yield point:** beyond which permanent deformation occurs.
+3. **Plastic zone:** strain hardening.
+4. **Ultimate tensile strength:** maximum stress.
+5. **Fracture:** material breaks.
+
+## Common Misconceptions
+
+**Misconception 1: "Strain has units of meters."**
+
+Strain is *dimensionless* — it's a ratio. Often expressed as % or μstrain (= $10^{-6}$).
+
+**Misconception 2: "Hooke's law works always."**
+
+Only in the **linear elastic regime** — small strains, below yield. Beyond yield, the relationship is nonlinear and irreversible.
+
+**Misconception 3: "E and yield strength are the same."**
+
+$E$ characterizes *stiffness* (slope of stress-strain). Yield strength characterizes *strength* (where plasticity begins). Independent properties — high-$E$ materials can have low or high yield strength.
+
+## Engineering Connection
+
+- **Structural design:** stress-strain relations + boundary conditions determine all member sizing.
+- **Material selection:** $E$, yield, ductility chosen for application (stiffness vs. weight vs. impact resistance).
+- **Strain gauges:** measure strain electronically to infer stress in real structures.
+- **Composite design:** stack layers with anisotropic properties for optimal stiffness/strength ratios.
+- **Plastic forming (manufacturing):** intentionally exceed yield to permanently shape parts.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A steel rod ($E = 200$ GPa) of length 2 m and cross-section 5 cm² stretches 1 mm under load. Find the stress and force.
+</ExQ>
+<ExA>
+$\varepsilon = 0.001/2 = 5\times 10^{-4}$.
+
+$\sigma = E\varepsilon = 200\times 10^9\cdot 5\times 10^{-4} = 100$ MPa.
+
+$F = \sigma A = 100\times 10^6\cdot 5\times 10^{-4} = 50$ kN.
+</ExA>
+
+<ExQ>
+A cube of rubber ($E = 0.05$ GPa, $\nu = 0.5$) under uniaxial stress 1 MPa. Find axial and lateral strains.
+</ExQ>
+<ExA>
+$\varepsilon_{\text{axial}} = \sigma/E = 1/(0.05\times 10^3) = 0.02$ (2%).
+
+$\varepsilon_{\text{lat}} = -\nu\varepsilon = -0.5\cdot 0.02 = -0.01$ (1% contraction).
+</ExA>
+
+<ExQ>
+**Conceptual.** A bar fixed at both ends is heated. Why does it experience compressive stress?
+</ExQ>
+<ExA>
+Free thermal expansion: $\varepsilon_T = \alpha\Delta T$ (positive). But the fixed ends prevent expansion: total strain = 0.
+
+So mechanical strain = $-\alpha\Delta T$ (compression), giving stress $\sigma = -E\alpha\Delta T$.
+
+Thermal stresses can be enormous: for steel, $\Delta T = 50$ K gives $\sigma \approx -120$ MPa — significant. This is why expansion joints exist in bridges and pipelines.
+</ExA>
+
+<ExQ>
+**Engineering: Composite bar.** A steel and aluminum bar are bonded in parallel. Under tension $F$, both must have same strain (compatibility). If $A_s = A_a$, find the load fraction carried by each.
+</ExQ>
+<ExA>
+Equal strain: $\varepsilon_s = \varepsilon_a \Rightarrow \sigma_s/E_s = \sigma_a/E_a \Rightarrow \sigma_s/\sigma_a = E_s/E_a = 200/70 \approx 2.86$.
+
+$F = \sigma_s A_s + \sigma_a A_a = (\sigma_s + \sigma_a)A$.
+
+Steel carries $E_s/(E_s + E_a) = 200/270 = 74\%$. Aluminum: 26%.
+
+The stiffer material carries proportionally more load — fundamental in composite design.
+</ExA>
+
+<ExQ>
+**Multi-step.** A 1 m bar is stretched 0.5 mm under 50 MPa. Find $E$. Now the same bar is heated by 30 K with $\alpha = 12\times 10^{-6}$/K, free to expand. Find total length.
+</ExQ>
+<ExA>
+$\varepsilon = 0.0005$. $E = \sigma/\varepsilon = 50/(5\times 10^{-4}) = 100$ GPa.
+
+Thermal expansion: $\Delta L = L\alpha\Delta T = 1\cdot 12\times 10^{-6}\cdot 30 = 3.6\times 10^{-4}$ m $= 0.36$ mm.
+
+If both load and heating: total elongation = $0.5 + 0.36 = 0.86$ mm. Length = 1.00086 m.
+</ExA>

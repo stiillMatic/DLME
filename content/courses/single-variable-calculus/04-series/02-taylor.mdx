@@ -1,0 +1,422 @@
+---
+title: Taylor and Maclaurin Series
+description: Approximating any smooth function by a polynomial — the most useful idea in computational mathematics.
+---
+
+# Taylor and Maclaurin Series
+
+## The Big Picture
+
+Most functions in engineering aren't polynomials. But **polynomials are easy to compute, differentiate, and integrate**, while transcendental functions (sine, exponential, logarithms) are hard. The Taylor series is the bridge: it represents virtually any smooth function as an infinite polynomial, with error that can be made as small as we want by including more terms. This idea — replacing a hard function by a polynomial near a point — is the foundation of numerical analysis, linearization, perturbation theory, and most engineering approximations. **If you understand Taylor series deeply, you understand half of computational science.**
+
+## Intuition First — Building a Function from Its Derivatives
+
+Imagine you know everything about a function at a single point: its value $f(a)$, its slope $f'(a)$, its curvature $f''(a)$, and so on. Can you reconstruct the function near $a$?
+
+Astonishingly, yes — provided $f$ is "nice enough" (analytic). The Taylor series uses each derivative to add a layer of detail to the approximation:
+
+- $f(a)$: zeroth-order — just the value at the point
+- Adding $f'(a)(x-a)$: first-order — the tangent line, using slope info
+- Adding $\tfrac{1}{2}f''(a)(x-a)^2$: second-order — the *parabola* matching slope and curvature
+- And so on, with each higher derivative pinning down a new term
+
+By including infinitely many terms, you reconstruct the original function exactly. By keeping only the first $N$ terms, you get an *approximation* whose error shrinks rapidly as $N$ grows (for analytic functions and $x$ close enough to $a$).
+
+This is the philosophical heart of approximation: **near a point, smooth things look like polynomials**.
+
+## From Linearization to the Full Series
+
+You've already met the linear approximation: near $x = a$,
+
+$$f(x) \approx f(a) + f'(a)(x - a)$$
+
+This is the *tangent line*. It's accurate for small $|x - a|$.
+
+Now we extend the idea. The next-order correction is quadratic:
+
+$$f(x) \approx f(a) + f'(a)(x - a) + \frac{f''(a)}{2}(x - a)^2$$
+
+The factor $1/2$ is the only "non-obvious" piece. Where does it come from?
+
+**Derivation.** Suppose $f(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + c_3(x-a)^3 + \cdots$ — assume $f$ has such a power series. Differentiate repeatedly and evaluate at $x = a$:
+
+- $f(a) = c_0 \Rightarrow c_0 = f(a)$
+- $f'(a) = c_1 \Rightarrow c_1 = f'(a)$
+- $f''(a) = 2c_2 \Rightarrow c_2 = f''(a)/2$
+- $f'''(a) = 6c_3 \Rightarrow c_3 = f'''(a)/6$
+- General: $f^{(n)}(a) = n!\,c_n \Rightarrow c_n = f^{(n)}(a)/n!$
+
+The factorials $n!$ come from successive differentiation of $(x-a)^n$. They give us:
+
+$$\boxed{f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n}$$
+
+This is the **Taylor series of $f$ centered at $a$**. When $a = 0$, it's called the **Maclaurin series**.
+
+<figure className="my-8 flex flex-col items-center">
+  <svg viewBox="0 0 480 280" className="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+    {/* Axes — math x ∈ [-π, π] mapped to SVG [40, 440], math y ∈ [-1.5, 1.5] mapped to SVG [260, 20] */}
+    <line x1="40" y1="140" x2="440" y2="140" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+    <line x1="240" y1="20" x2="240" y2="260" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+    <text x="446" y="145" fill="oklch(0.708 0 0)" fontSize="11" fontFamily="serif" fontStyle="italic">x</text>
+    <text x="247" y="18" fill="oklch(0.708 0 0)" fontSize="11" fontFamily="serif" fontStyle="italic">y</text>
+    {/* y = ±1 reference lines */}
+    <line x1="40" y1="60" x2="440" y2="60" stroke="oklch(0.4 0 0)" strokeWidth="0.5" strokeDasharray="2 3" />
+    <line x1="40" y1="220" x2="440" y2="220" stroke="oklch(0.4 0 0)" strokeWidth="0.5" strokeDasharray="2 3" />
+    <text x="234" y="64" fill="oklch(0.6 0 0)" fontSize="9" textAnchor="end">1</text>
+    <text x="234" y="226" fill="oklch(0.6 0 0)" fontSize="9" textAnchor="end">-1</text>
+    {/* sin(x) curve — true function (orange) */}
+    <path d="M 40 178 C 80 170, 130 60, 240 140 C 350 220, 400 110, 440 102" stroke="oklch(0.85 0.15 80)" strokeWidth="2.5" fill="none" />
+    {/* T_1(x) = x — linear approximation (purple, dashed) */}
+    <line x1="40" y1="298" x2="440" y2="-18" stroke="oklch(0.65 0.2 264)" strokeWidth="1.5" strokeDasharray="5 3" />
+    {/* T_3(x) = x - x³/6 — cubic approximation (green) */}
+    <path d="M 40 480 C 100 320, 180 220, 240 140 C 300 60, 380 -40, 440 -200" stroke="oklch(0.7 0.2 140)" strokeWidth="2" fill="none" opacity="0.7" />
+    {/* Center point */}
+    <circle cx="240" cy="140" r="3.5" fill="oklch(0.985 0 0)" />
+    {/* Legend */}
+    <g transform="translate(50, 30)">
+      <line x1="0" y1="0" x2="22" y2="0" stroke="oklch(0.85 0.15 80)" strokeWidth="2.5" />
+      <text x="28" y="4" fill="oklch(0.85 0.15 80)" fontSize="11">sin(x) — exact</text>
+      <line x1="0" y1="16" x2="22" y2="16" stroke="oklch(0.65 0.2 264)" strokeWidth="1.5" strokeDasharray="5 3" />
+      <text x="28" y="20" fill="oklch(0.65 0.2 264)" fontSize="11">T₁(x) = x</text>
+      <line x1="0" y1="32" x2="22" y2="32" stroke="oklch(0.7 0.2 140)" strokeWidth="2" />
+      <text x="28" y="36" fill="oklch(0.7 0.2 140)" fontSize="11">T₃(x) = x − x³/6</text>
+    </g>
+    <text x="240" y="275" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">approximations match sin(x) near x=0; diverge for |x| large</text>
+  </svg>
+  <figcaption className="mt-2 text-sm text-muted-foreground italic">Taylor approximations of sin(x) near x=0. Higher-order terms extend the range over which the polynomial matches the function.</figcaption>
+</figure>
+
+## Try It — Increase the Order
+
+<TaylorDemo />
+
+## Standard Maclaurin Series
+
+These should be memorized:
+
+| Function | Maclaurin series | Domain of convergence |
+|---|---|---|
+| $e^x$ | $\sum_{n=0}^\infty \dfrac{x^n}{n!}$ | all $x$ |
+| $\sin x$ | $\sum_{n=0}^\infty \dfrac{(-1)^n x^{2n+1}}{(2n+1)!}$ | all $x$ |
+| $\cos x$ | $\sum_{n=0}^\infty \dfrac{(-1)^n x^{2n}}{(2n)!}$ | all $x$ |
+| $1/(1-x)$ | $\sum_{n=0}^\infty x^n$ | $\lvert x\rvert < 1$ |
+| $\ln(1+x)$ | $\sum_{n=1}^\infty \dfrac{(-1)^{n+1} x^n}{n}$ | $-1 < x \leq 1$ |
+| $(1+x)^\alpha$ | $\sum_{n=0}^\infty \binom{\alpha}{n}x^n$ | $\lvert x\rvert < 1$ |
+
+The first three are *entire* — they converge everywhere. The others have a finite **radius of convergence**.
+
+## Why $e^x$ Is Special
+
+Notice $e^x = 1 + x + \tfrac{x^2}{2} + \tfrac{x^3}{6} + \cdots$. Differentiating term by term gives the same series back. That's why $e^x$ is its own derivative. The series structure makes this property visually obvious.
+
+## Linearization and Small-Angle Approximations
+
+In engineering, we *truncate* Taylor series for tractable formulas. The most famous:
+
+- **Small-angle approximations** (truncate after first term):
+$$\sin\theta \approx \theta, \qquad \cos\theta \approx 1, \qquad \tan\theta \approx \theta$$
+
+These are exact in the limit $\theta\to 0$ and accurate to ~1% for $|\theta| < 0.2$ rad. They're how we linearize pendulum equations, control systems, and lifting-line theory.
+
+- **Second-order approximations** (more accurate):
+$$\sin\theta \approx \theta - \theta^3/6, \qquad \cos\theta \approx 1 - \theta^2/2$$
+
+- **Approximate $(1+x)^n$** for small $x$:
+$$(1+x)^n \approx 1 + nx \qquad \text{(linear in $x$)}$$
+
+This is how we estimate tiny percentage changes (e.g., temperature effect on resistance).
+
+- **Logarithm and exponential:**
+$$\ln(1 + x) \approx x \quad \text{for small } x$$
+$$e^x \approx 1 + x \quad \text{for small } x$$
+
+## Error Bounds (Taylor's Theorem)
+
+Truncating at order $N$ leaves an **error** (remainder):
+
+$$R_N(x) = \frac{f^{(N+1)}(\xi)}{(N+1)!}(x - a)^{N+1}$$
+
+for some $\xi$ between $a$ and $x$. This is **Lagrange's form of the remainder**.
+
+The error scales as $(x-a)^{N+1}$ — get closer to $a$ or use higher order, and error shrinks rapidly. This is why Taylor approximations are so powerful: for smooth functions and small $|x-a|$, accuracy is excellent with very few terms.
+
+## Worked Examples
+
+**Example 1.** Compute $e^{0.1}$ to four decimal places using Maclaurin series.
+
+$$e^{0.1} = 1 + 0.1 + \frac{0.01}{2} + \frac{0.001}{6} + \frac{0.0001}{24} + \cdots$$
+
+$$\approx 1 + 0.1 + 0.005 + 0.000167 + 0.00000417 + \cdots \approx 1.10517$$
+
+The exact value is $1.10517...$, so 4 decimals is accurate after just 5 terms.
+
+**Example 2.** Approximate $\sin(0.2)$ to three decimal places.
+
+$$\sin(0.2) = 0.2 - \frac{0.008}{6} + \frac{(0.2)^5}{120} - \cdots = 0.2 - 0.001333 + 0.00000267 - \cdots \approx 0.1987$$
+
+Exact: $0.19867...$. The third-order truncation $\sin\theta \approx \theta - \theta^3/6$ gives 4-decimal accuracy.
+
+**Example 3.** Find the Maclaurin series of $f(x) = 1/(1+x^2)$.
+
+Use the geometric formula with $-x^2$ in place of $x$:
+
+$$\frac{1}{1+x^2} = \frac{1}{1 - (-x^2)} = \sum_{n=0}^\infty(-x^2)^n = \sum_{n=0}^\infty(-1)^n x^{2n}$$
+
+Convergent for $|x| < 1$. Integrating term by term gives the Taylor series of $\arctan x$.
+
+## Common Misconceptions
+
+**Misconception 1: "Taylor series equals the function everywhere."**
+
+Only inside the radius of convergence. Outside, the series diverges and gives nonsense. Worse, some functions (like $f(x) = e^{-1/x^2}$ at $x = 0$) have Taylor series that converge to *zero* but the function isn't zero — they aren't analytic.
+
+**Misconception 2: "More terms always give better accuracy."**
+
+Within the radius of convergence and for nice functions, yes. Outside it, more terms can make things *worse*. Always check convergence.
+
+**Misconception 3: "Linear approximation is good enough."**
+
+Depends on the application. For small parameters (small angles, weak fields), yes. For larger parameters, you need quadratic or higher-order terms — or a different expansion point closer to your $x$.
+
+**Misconception 4: "If a function has all derivatives at $a$, its Taylor series converges to it."**
+
+Almost always true in physics/engineering, but not formally. Counterexamples exist (functions whose series converge to something else). For *analytic* functions — those equal to their Taylor series — this works.
+
+**Misconception 5: "Taylor series only work near $x = 0$."**
+
+The center $a$ can be anywhere. Choose $a$ close to where you'll evaluate. For $\sin(\pi/3 + 0.01)$, expand around $\pi/3$ (where $\sin$ and $\cos$ are simple), not $0$.
+
+## Engineering Connection
+
+Taylor expansion is everywhere in engineering math:
+
+- **Linearization for control systems:** nonlinear models are linearized around an operating point using a first-order Taylor expansion. Every transfer function in classical control is a *linear* approximation of nonlinear dynamics.
+- **Finite differences:** $f'(x) \approx (f(x+h) - f(x))/h$ is a Taylor truncation. The error is $O(h)$ for forward difference, $O(h^2)$ for centered difference.
+- **Numerical ODE integration:** Runge-Kutta methods are essentially Taylor series for the unknown solution truncated at various orders.
+- **Perturbation theory in mechanics:** when a parameter $\varepsilon$ is small, expand the solution as $u = u_0 + \varepsilon u_1 + \varepsilon^2 u_2 + \cdots$ — a Taylor series in $\varepsilon$.
+- **Aircraft stability:** equations of motion are expanded around steady flight; only first-order terms are retained for linear stability analysis.
+- **Beam analysis:** the Euler-Bernoulli theory comes from a Taylor expansion of stress through the cross-section, retaining only the linear strain term.
+
+In every case, the underlying idea is: **near a point, replace the hard function with its tangent polynomial, and analyze that instead.**
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Find the first four nonzero terms of the Maclaurin series for $f(x) = \cos x$.
+</ExQ>
+<ExA>
+$f(0) = 1$, $f'(0) = 0$, $f''(0) = -1$, $f'''(0) = 0$, $f^{(4)}(0) = 1$, $f^{(5)}(0) = 0$, $f^{(6)}(0) = -1$.
+
+$$\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} + \cdots$$
+</ExA>
+
+<ExQ>
+Use the Maclaurin series of $e^x$ to estimate $e^{0.5}$ using terms up to $x^4$.
+</ExQ>
+<ExA>
+$$e^{0.5} \approx 1 + 0.5 + \frac{0.25}{2} + \frac{0.125}{6} + \frac{0.0625}{24}$$
+$$= 1 + 0.5 + 0.125 + 0.02083 + 0.00260 = 1.6485$$
+
+Exact: $e^{0.5} = 1.6487...$. Error after 5 terms: about $0.0002$.
+</ExA>
+
+### Application
+
+<ExQ>
+Use small-angle approximation to simplify $\sin(0.05) - 0.05$, and estimate the error.
+</ExQ>
+<ExA>
+$\sin\theta \approx \theta - \theta^3/6$. So $\sin(0.05) - 0.05 \approx -(0.05)^3/6 = -0.000125/6 \approx -2.08\times 10^{-5}$.
+
+Error of the linear approximation $\sin\theta \approx \theta$: about $2.08\times 10^{-5}$, or $\sim 0.04\%$. Excellent for many engineering applications.
+</ExA>
+
+<ExQ>
+Find the Maclaurin series for $f(x) = \ln(1 + 2x)$ up to the $x^4$ term.
+</ExQ>
+<ExA>
+Use $\ln(1+u) = u - u^2/2 + u^3/3 - u^4/4 + \cdots$ with $u = 2x$:
+
+$$\ln(1+2x) = 2x - \frac{(2x)^2}{2} + \frac{(2x)^3}{3} - \frac{(2x)^4}{4} + \cdots = 2x - 2x^2 + \frac{8x^3}{3} - 4x^4 + \cdots$$
+</ExA>
+
+<ExQ>
+A pendulum has period $T = 2\pi\sqrt{L/g}\bigl(1 + \tfrac{\theta_0^2}{16} + O(\theta_0^4)\bigr)$. Estimate the percent correction to small-angle period for $\theta_0 = 30° = \pi/6$ rad.
+</ExQ>
+<ExA>
+$\theta_0 = \pi/6 \approx 0.524$ rad, $\theta_0^2 \approx 0.274$.
+
+Correction factor: $1 + 0.274/16 = 1 + 0.0171$.
+
+The period is about $1.71\%$ longer than the small-angle estimate — significant for accurate timekeeping. This is why grandfather-clock pendulums use small swings (typically $< 4°$).
+</ExA>
+
+### Challenge
+
+<ExQ>
+Use the Maclaurin series of $\sin x$ and $\cos x$ to derive Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$.
+</ExQ>
+<ExA>
+Maclaurin: $e^z = 1 + z + z^2/2! + z^3/3! + z^4/4! + \cdots$
+
+Substitute $z = i\theta$:
+$$e^{i\theta} = 1 + i\theta + \frac{(i\theta)^2}{2!} + \frac{(i\theta)^3}{3!} + \frac{(i\theta)^4}{4!} + \cdots$$
+$$= 1 + i\theta - \frac{\theta^2}{2!} - i\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + i\frac{\theta^5}{5!} - \cdots$$
+
+Group real and imaginary parts:
+$$= \left(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots\right) + i\left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right)$$
+$$= \cos\theta + i\sin\theta$$
+
+The connection between exponentials and trig functions emerges naturally from the Taylor series of $e^z$.
+</ExA>
+
+<ExQ>
+Use the Taylor series of $f(x) = \sqrt{1 + x}$ around $x = 0$ to estimate $\sqrt{1.04}$ to three decimal places.
+</ExQ>
+<ExA>
+$f(x) = (1+x)^{1/2}$, $f'(x) = \tfrac{1}{2}(1+x)^{-1/2}$, $f''(x) = -\tfrac{1}{4}(1+x)^{-3/2}$.
+
+At $x = 0$: $f = 1$, $f' = 1/2$, $f'' = -1/4$.
+
+$$\sqrt{1+x} \approx 1 + \frac{x}{2} - \frac{x^2}{8}$$
+
+At $x = 0.04$: $1 + 0.02 - 0.0002 = 1.0198$.
+
+Exact: $\sqrt{1.04} = 1.01980...$ — three decimals correct.
+
+Linear approximation alone gives $1.020$, accurate to 3 decimals here. The quadratic term is the small correction.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** A Taylor series always converges to the function it represents on the entire real line. Justify.
+</ExQ>
+<ExA>
+**False.** Two things can fail:
+
+1. **Limited radius of convergence.** $1/(1-x) = \sum x^n$ only converges for $|x| < 1$, despite $1/(1-x)$ being defined for all $x \neq 1$.
+
+2. **Non-analytic functions.** $f(x) = e^{-1/x^2}$ (with $f(0) = 0$) has all derivatives equal to 0 at $x = 0$. So its Maclaurin series is identically 0, but $f$ is *not* zero anywhere except at 0. The series converges (to 0), but **not to $f$**.
+
+For most "everyday" engineering functions ($\sin$, $\cos$, $e^x$, polynomials, etc.), the Taylor series does converge to the function on its domain, but the general statement isn't universal.
+</ExA>
+
+<ExQ>
+**Why the factorial?** Where does the $n!$ in the Taylor formula come from? Derive it from the relation $f^{(n)}(a) = n! c_n$ in your own words.
+</ExQ>
+<ExA>
+Suppose $f(x) = \sum c_n(x-a)^n$. Differentiating term $c_n(x-a)^n$ once gives $n c_n(x-a)^{n-1}$. Differentiating again: $n(n-1)c_n(x-a)^{n-2}$. After $n$ differentiations: $n(n-1)(n-2)\cdots 1\cdot c_n = n!\,c_n$.
+
+When we evaluate at $x = a$, all higher-power terms vanish, leaving:
+$$f^{(n)}(a) = n!\,c_n \implies c_n = \frac{f^{(n)}(a)}{n!}$$
+
+The factorial is "what's needed to undo the repeated differentiation." Without it, coefficients would be wrong by a factor of $n!$ — the series wouldn't reproduce $f$.
+</ExA>
+
+<ExQ>
+**Use the right tool.** For each, indicate whether you'd use Taylor series at 0, Taylor series at another point, or some other method:
+(a) $\sin(0.1)$
+(b) $\sin(45°)$
+(c) $e^{10}$
+(d) $\ln(0.95)$
+(e) $\cos(\pi/3 + 0.001)$
+</ExQ>
+<ExA>
+(a) **Taylor at 0** — small input, Maclaurin works perfectly.
+
+(b) **Direct or Taylor at $\pi/4$** — $\sin(45°) = \sqrt 2/2$ is a known value. If approximating, expand around $\pi/4$.
+
+(c) **Not Taylor** — $e^{10}$ is a large value; Maclaurin series converges slowly. Use direct computation: $e^{10} = (e^5)^2$, etc.
+
+(d) **Taylor at 0** with $\ln(1+x)$, $x = -0.05$ — small perturbation from 1.
+
+(e) **Taylor at $\pi/3$** — expand around the nearby known point.
+
+The general principle: **expand around the nearest "easy" point**, not always 0.
+</ExA>
+
+<ExQ>
+**Error bound.** For the truncation $\sin x \approx x - x^3/6 + x^5/120$, what is the maximum error on $[-1, 1]$?
+</ExQ>
+<ExA>
+Lagrange remainder: $|R_5(x)| \leq \dfrac{|f^{(7)}(\xi)|}{7!}|x|^7$.
+
+For $\sin x$, all derivatives are bounded by 1: $|f^{(7)}(\xi)| \leq 1$.
+
+$|R_5(x)| \leq \dfrac{|x|^7}{7!} = \dfrac{|x|^7}{5040}$.
+
+Maximum on $[-1, 1]$: at $x = \pm 1$, error $\leq 1/5040 \approx 1.98 \times 10^{-4}$.
+
+So 5-term Taylor approximates $\sin x$ to within $0.0002$ on $[-1, 1]$. **Five terms = four decimal places of accuracy** — extremely good.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Linearization for control.** A nonlinear system has $\dot y = -\sin y + u$. Find the linearized model around the operating point $y = 0$, $u = 0$.
+</ExQ>
+<ExA>
+Around $y = 0$: $\sin y = y - y^3/6 + \cdots \approx y$ (first-order).
+
+Linearized system:
+$$\dot y \approx -y + u$$
+
+This is a stable first-order linear system with time constant $\tau = 1$. Standard control-theory techniques apply.
+
+**Validity:** the linearization is accurate for small $|y|$. Once $|y|$ approaches $\pi/2$ or so, nonlinear effects (the $-y^3/6$ correction) become important.
+
+This is **the** standard procedure in control engineering: design with a linear model around an operating point, then validate that excursions stay small.
+</ExA>
+
+<ExQ>
+**Beam deflection approximation.** For a slender beam, exact deflection involves $\sqrt{1 + (w'(x))^2}$ in the curvature formula. Show that under small-slope assumptions ($|w'| \ll 1$), the curvature simplifies to $w''(x)$ to leading order.
+</ExQ>
+<ExA>
+Exact curvature:
+$$\kappa = \frac{w''}{(1 + (w')^2)^{3/2}}$$
+
+For small $w'$: $(1 + (w')^2)^{3/2} = 1 + \tfrac{3}{2}(w')^2 + O((w')^4) \approx 1$ to leading order.
+
+So $\kappa \approx w''$ for small slopes.
+
+This is exactly the approximation that gives the linear Euler-Bernoulli equation $EI w'' = M$ — the foundation of every beam-bending calculation in undergraduate ME. Beyond small slopes, you need *large-deflection theory*.
+</ExA>
+
+<ExQ>
+**Multi-step.** Use the Maclaurin expansions of $\sin x$ and $e^x$ to estimate $\dfrac{e^x - 1}{\sin x}$ to second order in $x$ near $x = 0$.
+</ExQ>
+<ExA>
+$e^x - 1 = x + x^2/2 + x^3/6 + \cdots$
+
+$\sin x = x - x^3/6 + \cdots$
+
+$$\frac{e^x - 1}{\sin x} = \frac{x + x^2/2 + x^3/6 + \cdots}{x - x^3/6 + \cdots}$$
+
+Factor $x$ from both: $\dfrac{1 + x/2 + x^2/6 + \cdots}{1 - x^2/6 + \cdots}$.
+
+Expand $(1 + a)/(1 + b) \approx (1 + a)(1 - b) \approx 1 + a - b$ for small $a, b$:
+
+$\approx 1 + x/2 + x^2/6 - (-x^2/6) = 1 + x/2 + x^2/3 + O(x^3)$.
+
+So $\dfrac{e^x - 1}{\sin x} \approx 1 + \dfrac{x}{2} + \dfrac{x^2}{3}$ near 0.
+
+Series manipulation is faster than L'Hôpital + algebra for many engineering limits.
+</ExA>
+
+<ExQ>
+**Convergence radius via ratio test.** Find the radius of convergence of $\sum_{n=1}^\infty\dfrac{n!\,x^n}{(2n)!}$.
+</ExQ>
+<ExA>
+$\dfrac{a_{n+1}}{a_n} = \dfrac{(n+1)!\,x^{n+1}/(2n+2)!}{n!\,x^n/(2n)!} = x\cdot\dfrac{(n+1)}{(2n+1)(2n+2)} = x\cdot\dfrac{1}{2(2n+1)}$
+
+For convergence: $|x|/2(2n+1) \to 0$ as $n\to\infty$ (regardless of $x$).
+
+So the series converges for **all** real $x$. Radius of convergence: $\boxed{\infty}$.
+
+This is the kind of analysis used to design power-series solutions for ODEs (Frobenius method, Bessel functions, etc.).
+</ExA>

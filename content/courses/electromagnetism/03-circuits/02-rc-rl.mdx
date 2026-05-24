@@ -1,0 +1,139 @@
+---
+title: RC and RL Circuits
+description: Capacitors and inductors create characteristic exponential transients — the building blocks of all timing and filtering circuits.
+---
+
+# RC and RL Circuits
+
+## The Big Picture
+
+Combining resistors with capacitors (RC) or inductors (RL) gives circuits with **time-dependent response**: exponential charging, discharging, settling. The characteristic time scale (RC for capacitive, L/R for inductive) determines filter cutoffs, oscillator periods, and signal shaping. These first-order circuits are the building blocks of every electronic system.
+
+## RC Charging Circuit
+
+A resistor $R$ in series with capacitor $C$, switched onto voltage source $V_0$:
+
+$$V_C(t) = V_0(1 - e^{-t/\tau}), \quad \tau = RC$$
+
+After **one time constant** $\tau$: $V_C \approx 63\%$ of final.
+After 5τ: $V_C \approx 99.3\%$ — essentially settled.
+
+Current: $i(t) = (V_0/R)e^{-t/\tau}$, starting at $V_0/R$ and decaying.
+
+## Try It — Vary the Time Constant
+
+<RCChargingDemo />
+
+## RC Discharging
+
+Capacitor charged to $V_0$, switched onto resistor:
+
+$$V_C(t) = V_0 e^{-t/\tau}$$
+
+Energy dissipated in resistor: equals initial capacitor energy $\tfrac{1}{2}CV_0^2$.
+
+## RL Circuit Build-up
+
+Inductor $L$ in series with resistor $R$, switched onto $V_0$:
+
+$$I(t) = \frac{V_0}{R}(1 - e^{-t/\tau}), \quad \tau = L/R$$
+
+Inductor "resists" current change initially; current builds exponentially toward steady value $V_0/R$.
+
+## RL Decay
+
+Open the switch (or short the source): inductor maintains current temporarily:
+
+$$I(t) = I_0 e^{-t/\tau}$$
+
+## Frequency Response (Filters)
+
+For AC inputs at angular frequency $\omega$:
+
+**RC low-pass:**
+$$|V_{\text{out}}/V_{\text{in}}| = \frac{1}{\sqrt{1 + (\omega RC)^2}}$$
+
+Cutoff frequency: $f_c = 1/(2\pi RC)$. Below $f_c$: passes; above: attenuates.
+
+**RC high-pass:** swap output across resistor — passes high, blocks low.
+
+**Bandpass:** combine R, L, C — passes a range. Used in radio tuning.
+
+## Common Misconceptions
+
+**Misconception 1: "Capacitor 'fills up' all at once."**
+
+Voltage rises exponentially. Asymptotic — never quite reaches final value, just close enough.
+
+**Misconception 2: "Inductor opposes all current."**
+
+Inductor opposes **change** in current. Once current is steady, inductor acts as a simple wire (no voltage drop).
+
+**Misconception 3: "RC time = RC product."**
+
+Yes, but only with consistent units. With R in Ω and C in F: $\tau$ in seconds. With kΩ and μF: $\tau$ in ms.
+
+## Engineering Connection
+
+- **Camera flash:** capacitor charges slowly from battery, discharges quickly through xenon tube.
+- **Pacemakers:** RC circuit times the heartbeat pulses.
+- **Audio crossovers:** RC filters separate bass/treble for different speakers.
+- **Digital logic timing:** RC delays determine clock skew, setup/hold times.
+- **Power supplies:** RC filtering smooths rectified AC into stable DC.
+- **Spark plugs:** inductor stores energy, discharges rapidly to create spark.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $R = 1$ kΩ, $C = 10$ μF. Time constant?
+</ExQ>
+<ExA>
+$\tau = RC = 10^3\cdot 10\times 10^{-6} = 0.01$ s = 10 ms.
+</ExA>
+
+<ExQ>
+**2.** Capacitor discharges from 5 V to 1 V through 100 Ω. $C = 100$ μF. Time?
+</ExQ>
+<ExA>
+$V(t) = V_0 e^{-t/\tau}$, $\tau = RC = 10^{-2}$ s.
+
+$1 = 5e^{-t/0.01} \Rightarrow t = -0.01\ln(0.2) = 0.016$ s = 16 ms.
+</ExA>
+
+<ExQ>
+**3.** RC low-pass: $R = 10$ kΩ, $C = 0.1$ μF. Cutoff frequency?
+</ExQ>
+<ExA>
+$f_c = 1/(2\pi RC) = 1/(2\pi\cdot 10^4\cdot 10^{-7}) \approx 159$ Hz.
+
+Passes audio bass, attenuates higher frequencies.
+</ExA>
+
+<ExQ>
+**4. Engineering: Camera flash.** $C = 100$ μF charged to 300 V. Energy stored, discharge time through 0.5 Ω xenon tube?
+</ExQ>
+<ExA>
+Energy: $\tfrac{1}{2}CV^2 = 0.5\cdot 10^{-4}\cdot 9\times 10^4 = 4.5$ J.
+
+$\tau = RC = 0.5\cdot 10^{-4} = 50$ μs. Discharge in ~250 μs (5τ).
+
+Peak current: $V/R = 600$ A. Average power during flash: ~18 kW. Bright! Same energy as a $1.5$ W bulb running for 3 seconds, all packed into microseconds.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does opening a switch on a coil produce a spark?
+</ExQ>
+<ExA>
+Inductor maintains current — when switch opens, current would have to drop to 0 abruptly: $dI/dt\to\infty$, so $V_L = -L\,dI/dt\to\infty$.
+
+This high voltage breaks down the air across the switch contacts → arc/spark.
+
+Same principle:
+- Ignition coil in cars: ~30 kV from inductor discharge → spark plug.
+- Stun gun: capacitor-driven inductor produces high voltage.
+- Snubber circuits: protect switches by absorbing inductive transients.
+
+This effect (inductive kickback) is the reason "always handle inductors carefully."
+</ExA>

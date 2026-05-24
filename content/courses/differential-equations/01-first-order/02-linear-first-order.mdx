@@ -1,0 +1,118 @@
+---
+title: Linear First-Order Equations
+description: ODEs that look linear in y — solved by the integrating factor trick.
+---
+
+# Linear First-Order Equations
+
+## The Big Picture
+
+A linear first-order ODE has the form $y' + p(x)y = q(x)$. These appear constantly in engineering — RL circuits, mixing tanks with input forcing, modulated decay processes. The technique to solve them is the **integrating factor**: multiply through by a clever function so the left side becomes the derivative of a product. This trick converts the ODE into a single integration. Master it, and a huge family of ODEs become routine.
+
+## Standard Form
+
+$$y' + p(x)\,y = q(x)$$
+
+If $q(x) = 0$: **homogeneous** (separable).
+If $q(x) \neq 0$: **inhomogeneous** — needs the integrating factor.
+
+## The Integrating Factor
+
+Multiply both sides by $\mu(x) = e^{\int p(x)\,dx}$:
+
+$$\mu y' + \mu p y = \mu q$$
+
+The left side is exactly the derivative of $\mu y$ (verify with product rule!):
+
+$$(\mu y)' = \mu q$$
+
+Integrate:
+
+$$\mu y = \int\mu q\,dx + C \implies y = \frac{1}{\mu}\left[\int\mu q\,dx + C\right]$$
+
+## Worked Example
+
+Solve $y' + 2y = e^{-x}$, $y(0) = 1$.
+
+**Integrating factor:** $\mu = e^{\int 2\,dx} = e^{2x}$.
+
+Multiply: $(e^{2x}y)' = e^{2x}\cdot e^{-x} = e^x$.
+
+Integrate: $e^{2x}y = e^x + C \Rightarrow y = e^{-x} + C e^{-2x}$.
+
+IC: $y(0) = 1 + C = 1 \Rightarrow C = 0$.
+
+$$y(x) = e^{-x}$$
+
+Notice the structure: the answer is a **particular solution** ($e^{-x}$) plus a **homogeneous solution** ($Ce^{-2x}$). This decomposition is general for linear ODEs.
+
+## Common Misconceptions
+
+**Misconception 1: "Integrating factor is a magic trick."**
+
+It's purposeful: $\mu$ is chosen so that the LHS becomes a derivative. The product rule $(uv)' = u'v + uv'$ guides the choice. There's no magic — just a clever recognition of structure.
+
+**Misconception 2: "Forgot to multiply $q$ by $\mu$."**
+
+Both sides must be multiplied! Forgetting this is a common error — leads to incorrect particular solutions.
+
+**Misconception 3: "Linear means the equation has no products of $y$."**
+
+Linear means linear *in $y$ and its derivatives* — products of $x$ alone are fine. $y' + xy = x^2$ is linear; $y' + y^2 = 0$ is not.
+
+## Engineering Connection
+
+- **RL circuit:** $L\,dI/dt + RI = V(t)$. With constant $V$: $I(t) = V/R + (I_0 - V/R)e^{-Rt/L}$.
+- **Newton's cooling with varying ambient:** $dT/dt + kT = k T_\infty(t)$. Linear ODE.
+- **Mixing tank with time-varying inflow concentration:** linear ODE in salt amount.
+- **Drug pharmacokinetics:** drug elimination + dosing input is a linear first-order ODE.
+
+The structure "decay + driving force" is captured exactly by linear first-order ODEs.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Solve $y' + 3y = 6$ with $y(0) = 0$.
+</ExQ>
+<ExA>
+$\mu = e^{3x}$. $(e^{3x}y)' = 6e^{3x} \Rightarrow e^{3x}y = 2e^{3x} + C \Rightarrow y = 2 + Ce^{-3x}$.
+
+IC: $y(0) = 2 + C = 0 \Rightarrow C = -2$.
+
+$\boxed{y = 2(1 - e^{-3x})}$
+</ExA>
+
+<ExQ>
+Solve $xy' + y = x^2$ for $x > 0$.
+</ExQ>
+<ExA>
+Standard form: $y' + y/x = x$. $\mu = e^{\int dx/x} = x$.
+
+$(xy)' = x^2 \Rightarrow xy = x^3/3 + C \Rightarrow y = x^2/3 + C/x$.
+</ExA>
+
+<ExQ>
+**Engineering: RL circuit.** $L = 0.5$ H, $R = 10$ Ω, $V(t) = 12$ V (DC, applied at $t=0$). With $I(0) = 0$, find $I(t)$.
+</ExQ>
+<ExA>
+$0.5\,I' + 10I = 12 \Rightarrow I' + 20I = 24$. $\mu = e^{20t}$.
+
+$(e^{20t}I)' = 24e^{20t} \Rightarrow I = 1.2 + Ce^{-20t}$.
+
+IC: $I(0) = 1.2 + C = 0 \Rightarrow C = -1.2$.
+
+$I(t) = 1.2(1 - e^{-20t})$ A. Time constant $\tau = L/R = 0.05$ s. Settled to 99% in $\sim 5\tau = 0.25$ s.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does the homogeneous solution decay (or grow) in time, while the particular solution captures the steady-state response?
+</ExQ>
+<ExA>
+The homogeneous part $C\mu^{-1}$ contains the integrating factor $\mu^{-1} = e^{-\int p\,dx}$. If $p > 0$ (typical), this decays exponentially.
+
+The particular solution captures the *driven* response — what the system would do if it had been forced forever. After transients die out, only the driven response remains.
+
+This decomposition is the basis of **transient + steady-state analysis** in every linear control system.
+</ExA>

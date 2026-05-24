@@ -1,0 +1,39 @@
+{
+  "title": "Materials Science",
+  "description": "Atomic bonding, crystal structures, mechanical properties, and phase diagrams — the foundation of material selection and failure prevention.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Materials", "Metallurgy", "MIT 3.091"],
+  "chapters": [
+    {
+      "title": "Atomic Bonding",
+      "slug": "01-atomic-bonding",
+      "order": 1,
+      "lessons": []
+    },
+    {
+      "title": "Crystal Structure",
+      "slug": "02-crystal-structure",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-unit-cells", "title": "Unit Cells: FCC, BCC, HCP", "order": 1 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Mechanical Properties",
+      "slug": "03-mechanical-properties",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-stress-strain-curve", "title": "Stress-Strain Curve Interpretation", "order": 1 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Phase Diagrams",
+      "slug": "04-phase-diagrams",
+      "order": 4,
+      "lessons": []
+    }
+  ]
+}

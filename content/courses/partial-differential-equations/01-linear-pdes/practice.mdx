@@ -1,0 +1,55 @@
+---
+title: Chapter 1 Practice — Linear PDEs
+description: Practice on separation of variables, heat/wave/Laplace equations.
+---
+
+# Chapter 1 Practice — Linear PDEs
+
+<ExQ>
+**1.** Separate $u_t = u_{xx}$ on $[0, \pi]$ with $u(0,t) = u(\pi,t) = 0$. Write the eigenfunctions and time decay.
+</ExQ>
+<ExA>
+$X_n = \sin(nx)$, $\lambda_n = n^2$, $T_n = e^{-n^2 t}$.
+
+General: $u = \sum B_n\sin(nx)e^{-n^2 t}$.
+</ExA>
+
+<ExQ>
+**2.** Heat equation on $[0, L]$, IC $u(x, 0) = \sin(\pi x/L)$. Find $u(x, t)$.
+</ExQ>
+<ExA>
+Only $n = 1$ mode: $u(x, t) = \sin(\pi x/L)e^{-(\pi/L)^2 t}$ (with diffusivity 1).
+
+Pure mode 1 decays exponentially with time constant $L^2/\pi^2$.
+</ExA>
+
+<ExQ>
+**3. Wave equation.** $u_{tt} = c^2 u_{xx}$ on a string of length $L$. Find natural frequencies.
+</ExQ>
+<ExA>
+$\omega_n = cn\pi/L$. Fundamental ($n=1$): $\omega_1 = c\pi/L$.
+
+For $L = 1$ m, $c = 343$ m/s (sound in air): $\omega_1 \approx 1077$ rad/s, $f_1 \approx 171$ Hz.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why do higher modes decay faster in heat equation?
+</ExQ>
+<ExA>
+Decay rate $= \alpha\lambda_n = \alpha(n\pi/L)^2$, increasing with $n$.
+
+High-$n$ modes have rapid spatial oscillations → large gradients → rapid heat redistribution → fast decay.
+
+After long time, only the lowest mode survives — explains why hot spots smooth out into uniform temperature.
+</ExA>
+
+<ExQ>
+**5. Engineering: Steady state.** Heat equation with internal source $q$: $\nabla^2 T = -q/k$. Steady state in 1D wall, $T(0) = 0, T(L) = 0$, uniform $q$. Find $T(x)$.
+</ExQ>
+<ExA>
+$T'' = -q/k$. Integrate twice: $T = -qx^2/(2k) + C_1 x + C_2$.
+
+ICs: $C_2 = 0$, $-qL^2/(2k) + C_1 L = 0 \Rightarrow C_1 = qL/(2k)$.
+
+$T(x) = qx(L-x)/(2k)$. Parabolic, max at midspan: $T_{\max} = qL^2/(8k)$.
+</ExA>

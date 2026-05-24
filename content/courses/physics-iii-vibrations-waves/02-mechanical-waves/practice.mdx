@@ -1,0 +1,73 @@
+---
+title: Chapter 2 Practice — Mechanical Waves
+description: Practice on the wave equation and standing waves.
+---
+
+# Chapter 2 Practice — Mechanical Waves
+
+<ExQ>
+**1.** $y(x,t) = 0.05\sin(4x - 100t)$ m. Find wavelength, frequency, speed.
+</ExQ>
+<ExA>
+$k = 4$ rad/m → $\lambda = 2\pi/4 \approx 1.57$ m.
+$\omega = 100$ rad/s → $f = 100/(2\pi) \approx 15.9$ Hz.
+$c = \omega/k = 25$ m/s.
+</ExA>
+
+<ExQ>
+**2.** String with $\mu = 0.002$ kg/m, $T = 80$ N, $L = 0.8$ m. Find first three harmonics.
+</ExQ>
+<ExA>
+$c = \sqrt{80/0.002} = 200$ m/s.
+
+$f_n = nc/(2L) = n\cdot 125$ Hz.
+
+$f_1 = 125$, $f_2 = 250$, $f_3 = 375$ Hz.
+</ExA>
+
+<ExQ>
+**3.** Verify $y(x,t) = A e^{-(x-ct)^2}$ satisfies the wave equation.
+</ExQ>
+<ExA>
+Let $u = x - ct$. $y = A e^{-u^2}$.
+
+$\partial_t y = A e^{-u^2}\cdot(-2u)(-c) = 2cu A e^{-u^2}$.
+
+$\partial_t^2 y = 2c\partial_t(u A e^{-u^2}) = 2c\cdot(-c)A e^{-u^2}\cdot(1 - 2u^2)\cdot(-1)$ ... let me redo more carefully.
+
+$\partial_t y = -2u(-c) A e^{-u^2} = 2cu Ae^{-u^2}$.
+
+$\partial_t^2 y = \partial_t[2cu A e^{-u^2}] = 2cA[\partial_t u \cdot e^{-u^2} + u\partial_t(e^{-u^2})] = 2cA[(-c)e^{-u^2} + u\cdot 2cu\cdot e^{-u^2}] = 2c^2 A e^{-u^2}(2u^2 - 1)$.
+
+$\partial_x y = -2u A e^{-u^2}$. $\partial_x^2 y = -2A[e^{-u^2} + u\cdot(-2u)e^{-u^2}] = -2A e^{-u^2}(1 - 2u^2) = 2A e^{-u^2}(2u^2 - 1)$.
+
+Check: $\partial_t^2 = c^2\partial_x^2$ gives $2c^2 A e^{-u^2}(2u^2-1) = c^2 \cdot 2Ae^{-u^2}(2u^2-1)$ ✓.
+
+A traveling Gaussian pulse — solution to wave equation, propagates unchanged in shape.
+</ExA>
+
+<ExQ>
+**4. Engineering: Stretched membrane.** A drum (square membrane $L\times L$) has natural modes at $f_{mn} = (c/2L)\sqrt{m^2 + n^2}$ for $m, n = 1, 2, \ldots$. Find the first 4 frequencies.
+</ExQ>
+<ExA>
+$f_{11}$: $\sqrt 2 \cdot c/2L \approx 0.707\cdot 2f_0$ where $f_0 = c/(2L)$.
+
+Modes ranked by $\sqrt{m^2+n^2}$: 
+- $(1,1)$: $\sqrt 2$
+- $(1,2) = (2,1)$: $\sqrt 5 \approx 2.236$
+- $(2,2)$: $\sqrt 8 \approx 2.828$
+- $(1,3) = (3,1)$: $\sqrt{10} \approx 3.162$
+
+Non-integer ratios — that's why drums sound less "pitched" than strings.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are even harmonics absent in a closed-open pipe?
+</ExQ>
+<ExA>
+Closed end requires displacement node (or pressure antinode); open end requires displacement antinode.
+
+Mode shapes must satisfy these. The pattern $\sin((2n-1)\pi x/2L)$ does — meeting BC at $x=0$ (node) and $x=L$ (antinode at $(2n-1)\pi/2 = $ max sine).
+
+So only odd integer multiples of fundamental survive — even harmonics violate the BC and don't exist. This is a quantization rule imposed by geometry.
+</ExA>

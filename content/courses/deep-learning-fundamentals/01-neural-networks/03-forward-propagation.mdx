@@ -1,0 +1,58 @@
+---
+title: Forward Propagation
+description: How data flows through a neural network layer by layer.
+---
+
+# Forward Propagation
+
+Forward propagation is simply **evaluating the network** given an input. You push data in, it flows through each layer, and you get a prediction out.
+
+## Layer-by-Layer
+
+For a 2-layer network with input $\mathbf{x}$:
+
+**Layer 1:**
+$$
+\mathbf{z}^{(1)} = \mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}, \quad \mathbf{a}^{(1)} = \sigma(\mathbf{z}^{(1)})
+$$
+
+**Layer 2 (output):**
+$$
+\mathbf{z}^{(2)} = \mathbf{W}^{(2)} \mathbf{a}^{(1)} + \mathbf{b}^{(2)}, \quad \hat{y} = \mathbf{z}^{(2)}
+$$
+
+Each $\mathbf{W}^{(l)}$ is a weight matrix; the network learns these weights during training.
+
+## Full Example: Stress Prediction
+
+```python
+import torch
+import torch.nn as nn
+
+class StressPredictor(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(5, 64),   # 5 input features (geometry + load)
+            nn.ReLU(),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1),   # predicted von Mises stress
+        )
+
+    def forward(self, x):
+        return self.net(x)
+
+model = StressPredictor()
+
+# Batch of 8 samples, each with 5 features
+x = torch.randn(8, 5)
+predictions = model(x)
+print(predictions.shape)  # [8, 1]
+```
+
+## Computational Cost
+
+Forward pass cost scales as $O(\sum_l n_l \cdot n_{l-1})$ — linear in parameters. This is why inference is cheap even for large networks.
+
+Next up: we need to measure how wrong our predictions are — that's where **loss functions** come in.

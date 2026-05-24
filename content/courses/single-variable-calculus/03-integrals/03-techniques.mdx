@@ -1,0 +1,383 @@
+---
+title: Integration Techniques
+description: Substitution, integration by parts, and partial fractions — three tools that handle most integrals you'll meet.
+---
+
+# Integration Techniques
+
+## The Big Picture
+
+Differentiation is mechanical: apply the rules in order, and you get the answer. Integration is *not*. The "rules" of integration are mostly inverses of differentiation rules, and when an integrand doesn't fit, you need to **transform** it into something that does. The three core transformation techniques — substitution, integration by parts, and partial fractions — solve the vast majority of integrals you'll encounter in engineering. Once you can recognize *which* technique to apply, integration becomes pattern-matching rather than guesswork.
+
+## Intuition First — Why Integration Is Harder Than Differentiation
+
+The product rule says $(fg)' = f'g + fg'$. Differentiating any combination is straightforward.
+
+The "reverse" of the product rule isn't symmetric: $(\int fg) \neq (\int f)(\int g)$, and there's no clean formula. Instead we get **integration by parts**, which trades one integral for another (hopefully simpler).
+
+The chain rule says $(f(g(x)))' = f'(g)\cdot g'(x)$. Differentiating compositions is automatic.
+
+The "reverse" of the chain rule is **substitution**: spotting a piece $g(x)$ inside the integrand whose derivative $g'(x)$ also appears, and replacing the messy expression with a clean one in $u = g(x)$.
+
+So all the difficulty of integration comes from the fact that we're working with operations *backward*, and backward problems usually have many possible inverses to try.
+
+## Technique 1: Substitution (u-substitution)
+
+Substitution undoes the chain rule. If your integrand looks like $f(g(x))\cdot g'(x)$, let $u = g(x)$, $du = g'(x)\,dx$:
+
+$$\int f(g(x))g'(x)\,dx = \int f(u)\,du$$
+
+The "$g'(x)\,dx$" packages cleanly into "$du$" — that's the magic.
+
+**Step-by-step recipe:**
+1. Identify a piece $u = g(x)$ whose derivative also appears.
+2. Compute $du = g'(x)\,dx$.
+3. Rewrite the integral entirely in terms of $u$ and $du$.
+4. Integrate.
+5. Substitute $u = g(x)$ back to express the answer in $x$.
+
+**Example.** $\displaystyle\int 2x\cos(x^2)\,dx$.
+
+Let $u = x^2$, $du = 2x\,dx$. Then $2x\,dx = du$:
+
+$$\int \cos(u)\,du = \sin(u) + C = \sin(x^2) + C$$
+
+**Verify:** $\dfrac{d}{dx}\sin(x^2) = \cos(x^2)\cdot 2x$ ✓.
+
+**Definite integrals:** when you substitute, also change the limits:
+
+$$\int_0^1 2x\cos(x^2)\,dx \xrightarrow{u=x^2} \int_0^1 \cos u\,du = \sin 1 - \sin 0 = \sin 1$$
+
+(At $x = 0$, $u = 0$; at $x = 1$, $u = 1$.)
+
+## Technique 2: Integration by Parts
+
+Integration by parts undoes the product rule. From $(uv)' = u'v + uv'$, integrate both sides:
+
+$$uv = \int u'v\,dx + \int uv'\,dx$$
+
+Rearranging:
+
+$$\boxed{\int uv'\,dx = uv - \int u'v\,dx}$$
+
+Or, in differential form: $\int u\,dv = uv - \int v\,du$.
+
+The trick: pick $u$ and $dv$ so that $\int v\,du$ is *simpler* than $\int u\,dv$. There's an art to it, but a heuristic works most of the time.
+
+**LIATE rule** (priority for choosing $u$):
+- **L**ogarithms (e.g. $\ln x$)
+- **I**nverse trig (e.g. $\arctan x$)
+- **A**lgebraic (e.g. $x^n$)
+- **T**rigonometric (e.g. $\sin x$)
+- **E**xponential (e.g. $e^x$)
+
+Choose $u$ as the function highest on the list. The other becomes $dv$.
+
+**Example.** $\displaystyle\int x e^x\,dx$.
+
+LIATE: algebraic ($x$) before exponential ($e^x$). Let $u = x$, $dv = e^x\,dx$. Then $du = dx$, $v = e^x$:
+
+$$\int xe^x\,dx = xe^x - \int e^x\,dx = xe^x - e^x + C = e^x(x-1) + C$$
+
+**Example.** $\displaystyle\int \ln x\,dx$.
+
+LIATE: log first. $u = \ln x$, $dv = dx$. Then $du = dx/x$, $v = x$:
+
+$$\int\ln x\,dx = x\ln x - \int x\cdot\frac{1}{x}\,dx = x\ln x - x + C$$
+
+## Technique 3: Partial Fractions
+
+For rational functions $P(x)/Q(x)$ where $Q$ factors into linear (or quadratic) terms, **partial fractions** decomposes the rational function into simpler pieces, each of which is easy to integrate.
+
+**Example.** $\displaystyle\int\frac{1}{x^2 - 1}\,dx$.
+
+Factor: $x^2 - 1 = (x-1)(x+1)$. Decompose:
+
+$$\frac{1}{(x-1)(x+1)} = \frac{A}{x-1} + \frac{B}{x+1}$$
+
+Clear denominators: $1 = A(x+1) + B(x-1)$.
+
+Set $x = 1$: $1 = 2A \Rightarrow A = 1/2$.
+Set $x = -1$: $1 = -2B \Rightarrow B = -1/2$.
+
+$$\int\frac{1}{x^2-1}\,dx = \frac{1}{2}\int\frac{1}{x-1}dx - \frac{1}{2}\int\frac{1}{x+1}dx = \frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C$$
+
+This technique extends to repeated and complex factors with appropriate generalizations.
+
+## Common Misconceptions
+
+**Misconception 1: "Substitution requires $g'(x)$ to appear *exactly* in the integrand."**
+
+Often you can manufacture it. If $u = x^2$ gives $du = 2x\,dx$ but you only have $x\,dx$, write $x\,dx = \tfrac{1}{2}du$. Constants are forgiving.
+
+**Misconception 2: "If a substitution doesn't work, no substitution will."**
+
+Usually a different choice of $u$ works. Try $u = $ inside of a function, or $u = $ a dominant piece. Experiment.
+
+**Misconception 3: "Integration by parts requires me to apply it once."**
+
+Sometimes you apply it multiple times (e.g., $\int x^2 e^x\,dx$ needs two passes). Sometimes you get back to the original integral after one pass — solve for it algebraically (a "tabular" trick).
+
+**Misconception 4: "Partial fractions only works for proper fractions."**
+
+If the numerator's degree ≥ denominator's, **first do polynomial long division**. Then apply partial fractions to the remainder.
+
+**Misconception 5: "I can split $\int(f \cdot g)\,dx$ into $\int f\,dx \cdot \int g\,dx$."**
+
+We've said this before but it bears repeating: integration does NOT distribute over products. Use parts instead.
+
+## When to Use Which Technique
+
+| Integrand looks like... | Try... |
+|---|---|
+| $f(g(x))\cdot g'(x)$ | substitution |
+| Polynomial × ($e^x$, $\sin x$, $\ln x$) | integration by parts |
+| Rational function ($P(x)/Q(x)$, $\deg P < \deg Q$) | partial fractions |
+| $\sin^m x \cos^n x$ | trig identities + substitution |
+| $\sqrt{a^2 - x^2}$, $\sqrt{a^2 + x^2}$, $\sqrt{x^2 - a^2}$ | trig substitution |
+
+If nothing works, the integral might be non-elementary. Numerical methods are then the right tool.
+
+## Engineering Connection
+
+- **RC circuit:** capacitor charging gives $V_C(t) = \int (I/C)\,dt$ where $I = V_0/R \cdot e^{-t/RC}$. A textbook substitution problem.
+- **Flexural deflection:** $w(x) = \int\int M(x)/(EI)\,dx\,dx$. When $M$ is a polynomial, just power-rule integrate. When loads are concentrated, you split the integral.
+- **Statistical mechanics:** computing partition functions involves integrals like $\int e^{-\beta E(q)}\,dq$ — often by substitution if $E$ is quadratic.
+- **Vibration response:** convolving a forcing function with a Green's function:
+$$y(t) = \int_0^t G(t-\tau)f(\tau)\,d\tau$$
+This convolution is computed by substitution + integration by parts in many cases.
+
+In numerical practice, knowing analytical techniques helps you *test* numerical methods on cases where you know the answer — and helps you recognize when the integral has structure that can be exploited.
+
+---
+
+## Practice Problems
+
+### Warm-up (Substitution)
+
+<ExQ>
+Compute $\displaystyle\int 2x(x^2 + 1)^5\,dx$.
+</ExQ>
+<ExA>
+Let $u = x^2 + 1$, $du = 2x\,dx$:
+$$\int u^5\,du = \frac{u^6}{6} + C = \frac{(x^2+1)^6}{6} + C$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int \frac{\cos x}{\sin x}\,dx$.
+</ExQ>
+<ExA>
+Let $u = \sin x$, $du = \cos x\,dx$:
+$$\int\frac{du}{u} = \ln|u| + C = \ln|\sin x| + C$$
+</ExA>
+
+### Application (Mixed)
+
+<ExQ>
+Compute $\displaystyle\int x\ln x\,dx$.
+</ExQ>
+<ExA>
+LIATE: log first. $u = \ln x$, $dv = x\,dx$. Then $du = dx/x$, $v = x^2/2$.
+
+$$\int x\ln x\,dx = \frac{x^2\ln x}{2} - \int\frac{x^2}{2}\cdot\frac{1}{x}\,dx = \frac{x^2\ln x}{2} - \frac{x^2}{4} + C$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int_0^1 x e^{-x^2}\,dx$.
+</ExQ>
+<ExA>
+Let $u = -x^2$, $du = -2x\,dx \Rightarrow x\,dx = -du/2$.
+
+When $x=0$, $u=0$; when $x=1$, $u=-1$.
+
+$$\int_0^1 xe^{-x^2}\,dx = -\frac{1}{2}\int_0^{-1}e^u\,du = \frac{1}{2}\int_{-1}^0 e^u\,du = \frac{1}{2}(e^0 - e^{-1}) = \frac{1 - 1/e}{2} \approx 0.316$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int\frac{2x + 3}{x^2 + x - 6}\,dx$ using partial fractions.
+</ExQ>
+<ExA>
+Factor: $x^2 + x - 6 = (x+3)(x-2)$.
+
+$$\frac{2x+3}{(x+3)(x-2)} = \frac{A}{x+3} + \frac{B}{x-2}$$
+
+Clear: $2x+3 = A(x-2) + B(x+3)$.
+
+$x = 2$: $7 = 5B \Rightarrow B = 7/5$.
+$x = -3$: $-3 = -5A \Rightarrow A = 3/5$.
+
+$$\int = \frac{3}{5}\ln|x+3| + \frac{7}{5}\ln|x-2| + C$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Compute $\displaystyle\int x^2 e^x\,dx$ (integration by parts twice).
+</ExQ>
+<ExA>
+First pass: $u = x^2$, $dv = e^x\,dx \Rightarrow du = 2x\,dx$, $v = e^x$.
+
+$$\int x^2 e^x\,dx = x^2 e^x - 2\int xe^x\,dx$$
+
+Second pass on $\int xe^x$: $u = x$, $dv = e^x\,dx \Rightarrow du = dx$, $v = e^x$.
+
+$$\int xe^x\,dx = xe^x - e^x$$
+
+Combine:
+$$\int x^2 e^x\,dx = x^2 e^x - 2(xe^x - e^x) + C = e^x(x^2 - 2x + 2) + C$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int e^x \cos x\,dx$ (integration by parts twice, then solve algebraically).
+</ExQ>
+<ExA>
+Let $I = \int e^x\cos x\,dx$. Apply IBP with $u = \cos x$, $dv = e^x\,dx$:
+
+$$I = e^x\cos x + \int e^x\sin x\,dx$$
+
+Apply IBP again to $\int e^x\sin x\,dx$ with $u = \sin x$, $dv = e^x\,dx$:
+
+$$\int e^x\sin x\,dx = e^x\sin x - \int e^x\cos x\,dx = e^x\sin x - I$$
+
+So $I = e^x\cos x + e^x\sin x - I \Rightarrow 2I = e^x(\cos x + \sin x)$:
+
+$$\boxed{I = \frac{e^x(\cos x + \sin x)}{2} + C}$$
+
+This pattern occurs in damped oscillation analysis.
+</ExA>
+
+<ExQ>
+The work done compressing a gas isothermally is $W = \int_{V_1}^{V_2}P(V)\,dV$, where $P V = nRT$ (constant temperature). Compute $W$ for $V_1 = 0.1\ \text{m}^3$, $V_2 = 0.05\ \text{m}^3$, $nRT = 1000\ \text{J}$.
+</ExQ>
+<ExA>
+$P = nRT/V$, so:
+
+$$W = \int_{V_1}^{V_2}\frac{nRT}{V}\,dV = nRT\,[\ln V]_{V_1}^{V_2} = nRT\,\ln(V_2/V_1)$$
+
+$$W = 1000\,\ln(0.05/0.1) = 1000\,\ln(0.5) = -1000(0.693) = \boxed{-693\ \text{J}}$$
+
+Negative because work is *done on* the gas (we compressed it).
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**Match the technique.** For each integrand, identify the *primary* technique to try (substitution, parts, partial fractions, trig identity, or other):
+(a) $\int x^3\sqrt{x^2+1}\,dx$
+(b) $\int\dfrac{2x+1}{x^2+x-2}\,dx$
+(c) $\int\sin^4 x\,dx$
+(d) $\int e^{2x}\sin x\,dx$
+(e) $\int \arctan x\,dx$
+</ExQ>
+<ExA>
+(a) **Substitution** ($u = x^2+1$ — note $du/2 = x\,dx$, and $x^2 = u - 1$).
+(b) **Partial fractions** (denominator factors as $(x-1)(x+2)$).
+(c) **Trig identity** (use power-reducing formulas).
+(d) **Integration by parts** twice (returns to original — solve algebraically).
+(e) **Integration by parts** with $u = \arctan x$, $dv = dx$.
+
+Identifying the technique is half the battle. Practice this skill on every integral.
+</ExA>
+
+<ExQ>
+**Why does $u$-substitution work?** Explain in your own words the relationship between the chain rule and substitution.
+</ExQ>
+<ExA>
+The chain rule says $\dfrac{d}{dx}f(g(x)) = f'(g(x))g'(x)$.
+
+Reading this *backward* (in integral form): if you see an integrand of the form $f'(g(x))g'(x)$, then its antiderivative is $f(g(x))$.
+
+Substitution makes the recognition mechanical: rename $u = g(x)$, recognize $du = g'(x)\,dx$, and the integrand becomes $f'(u)\,du$ — easily integrable.
+
+Substitution is "the chain rule in reverse." That's why it shows up *everywhere* — every chain-rule pattern has a substitution counterpart.
+</ExA>
+
+<ExQ>
+**Find the LIATE choice** for $\int x^3\,e^{x}\,dx$. How many times will you apply IBP?
+</ExQ>
+<ExA>
+LIATE: **A**lgebraic ($x^3$) before **E**xponential ($e^x$). So $u = x^3$, $dv = e^x dx$.
+
+Each IBP reduces the polynomial degree by 1. Starting at degree 3, you'll need **three** IBP applications:
+- Pass 1: leaves $\int 3x^2 e^x\,dx$
+- Pass 2: leaves $\int 6x\,e^x\,dx$
+- Pass 3: leaves $\int 6\,e^x\,dx$ (trivial)
+
+Total: $\int x^3 e^x\,dx = e^x(x^3 - 3x^2 + 6x - 6) + C$.
+
+Recognizing the *number of IBPs* up front saves you from getting lost mid-derivation.
+</ExA>
+
+<ExQ>
+**Counterexample.** Show that $\int e^{x^2}\,dx$ has **no elementary closed form** — yet it is well-defined. What does this mean practically?
+</ExQ>
+<ExA>
+**Hard fact:** the antiderivative of $e^{x^2}$ exists (any continuous function has an antiderivative), but it cannot be written in terms of polynomials, exponentials, trig, log, etc. It's a non-elementary function.
+
+(Define $\text{erfi}(x) = \tfrac{2}{\sqrt\pi}\int_0^x e^{t^2}\,dt$ — that's the imaginary error function, the canonical "name" for this antiderivative.)
+
+**Practical meaning:**
+- Don't waste time looking for a closed form
+- Use **numerical integration** (Simpson's rule, Gaussian quadrature) for definite integrals
+- Use **series expansions** for analytical work near a point
+
+Many physically important integrals (Gaussian, Bessel, elliptic) fall in this category.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Variable-area channel.** Water flows through a channel whose cross-section area varies as $A(x) = A_0 e^{-x/L}$. By continuity ($\rho A V = $ const), find the velocity $V(x)$ if $V(0) = V_0$. Then find the **time** for a fluid particle starting at $x = 0$ to reach $x = L$: $t = \int_0^L dx/V(x)$.
+</ExQ>
+<ExA>
+Continuity: $V(x) = V_0 A_0/A(x) = V_0 e^{x/L}$.
+
+Time: $t = \int_0^L \dfrac{dx}{V_0 e^{x/L}} = \dfrac{1}{V_0}\int_0^L e^{-x/L}\,dx = \dfrac{1}{V_0}\cdot L(1 - e^{-1}) = \dfrac{L}{V_0}(1 - 1/e) \approx \dfrac{0.632 L}{V_0}$
+
+Compared to constant-velocity case $t = L/V_0$, the variable-area channel is faster (~37% faster) because the fluid speeds up as the area contracts.
+</ExA>
+
+<ExQ>
+**Damped oscillation work.** A spring force is $F(x) = -kx - cx'$ where $x' = dx/dt$ and $c$ is damping. For the motion $x(t) = e^{-t}\sin(2t)$, find the work done against the damping force from $t = 0$ to $t = 1$. Use $W_d = \int_0^1 c(x')^2\,dt$.
+</ExQ>
+<ExA>
+$x' = -e^{-t}\sin(2t) + 2e^{-t}\cos(2t) = e^{-t}[2\cos(2t) - \sin(2t)]$
+
+$(x')^2 = e^{-2t}[4\cos^2(2t) - 4\cos(2t)\sin(2t) + \sin^2(2t)]$
+
+Use double-angle: $4\cos^2(2t) - \sin^2(2t) = 3\cos^2(2t) + \cos(4t)$... this gets messy.
+
+For pedagogical purposes, evaluate numerically. Or note that the time-average of $(x')^2$ over a long time is well-defined.
+
+**Key engineering insight:** the work dissipated by damping over a cycle determines the **damping factor** of the system. This integral is exactly what's computed when characterizing real-world dampers.
+</ExA>
+
+<ExQ>
+**Series expansion vs. integration.** Use the Taylor series of $e^{-x^2}$ to compute $\int_0^{0.5}e^{-x^2}\,dx$ to four decimal places.
+</ExQ>
+<ExA>
+$e^{-x^2} = 1 - x^2 + x^4/2! - x^6/3! + \cdots$
+
+Integrate term by term:
+$$\int e^{-x^2}\,dx = x - \frac{x^3}{3} + \frac{x^5}{5\cdot 2!} - \frac{x^7}{7\cdot 3!} + \cdots$$
+
+Evaluate at $x = 0.5$:
+$0.5 - 0.04167 + 0.001563 - 0.0000465 + \ldots \approx 0.4612$
+
+Exact (numerical): $0.4612810...$.
+
+This is how engineering software computes $\int e^{-x^2}\,dx$ — by truncating its series. Series expansions handle integrals with no closed form.
+</ExA>
+
+<ExQ>
+**Multi-step trig.** Compute $\int\dfrac{1}{1 + \cos x}\,dx$. (Hint: multiply numerator and denominator by $1 - \cos x$.)
+</ExQ>
+<ExA>
+$\dfrac{1}{1+\cos x}\cdot\dfrac{1-\cos x}{1-\cos x} = \dfrac{1-\cos x}{1-\cos^2 x} = \dfrac{1-\cos x}{\sin^2 x} = \dfrac{1}{\sin^2 x} - \dfrac{\cos x}{\sin^2 x}$
+
+$$\int\dfrac{dx}{\sin^2 x} - \int\dfrac{\cos x\,dx}{\sin^2 x} = -\cot x + \dfrac{1}{\sin x} + C = \dfrac{1 - \cos x}{\sin x} + C$$
+
+Or equivalently: $\tan(x/2) + C$ (using half-angle identity).
+
+The conjugate trick + identity manipulation is standard for trigonometric rationals.
+</ExA>

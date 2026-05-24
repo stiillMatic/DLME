@@ -1,0 +1,129 @@
+---
+title: Local Extrema and Lagrange Multipliers
+description: Finding maxima and minima of multivariable functions, with and without constraints.
+---
+
+# Local Extrema and Lagrange Multipliers
+
+## The Big Picture
+
+Optimization is the heart of engineering design. For multivariable functions, we extend the single-variable critical-point method: find where $\nabla f = \mathbf{0}$, then classify with the **Hessian** (second derivatives). When constraints are present, **Lagrange multipliers** elegantly handle the geometry.
+
+## Critical Points
+
+Interior local extremum requires $\nabla f = \mathbf{0}$.
+
+For $f(x, y)$, this is $f_x = f_y = 0$ — a system of equations.
+
+## Hessian Test
+
+At a critical point with Hessian $H = \begin{pmatrix}f_{xx} & f_{xy}\\ f_{xy} & f_{yy}\end{pmatrix}$:
+
+Compute $D = \det H = f_{xx}f_{yy} - f_{xy}^2$.
+
+| $D$ | $f_{xx}$ | Classification |
+|---|---|---|
+| $> 0$ | $> 0$ | local **min** |
+| $> 0$ | $< 0$ | local **max** |
+| $< 0$ | (any) | **saddle** |
+| $= 0$ | (any) | inconclusive |
+
+## Lagrange Multipliers (Constrained)
+
+To extremize $f$ subject to $g = 0$:
+
+$$\nabla f = \lambda\nabla g, \quad g = 0$$
+
+Equivalently: form $\mathcal{L} = f - \lambda g$ and set $\nabla\mathcal{L} = 0$.
+
+$\lambda$ has physical meaning: rate of change of optimal $f$ as constraint level changes (shadow price).
+
+## Common Misconceptions
+
+**Misconception 1: "Multiple critical points = multiple extrema."**
+
+Could be many critical points: most are saddles, only some are extrema. Always classify each.
+
+**Misconception 2: "Lagrange multipliers always have $\lambda > 0$."**
+
+Sign of $\lambda$ depends on orientation of $\nabla g$ vs $\nabla f$. No assumption on sign.
+
+**Misconception 3: "Need explicit form of constraint."**
+
+Implicit constraint $g(\mathbf{x}) = 0$ works directly with Lagrange. No need to solve for one variable.
+
+## Engineering Connection
+
+- **Optimal beam cross-section:** maximize section modulus subject to area constraint.
+- **Heat exchanger design:** minimize cost subject to required heat transfer.
+- **Portfolio optimization (finance):** maximize return subject to risk constraint.
+- **Constrained machine learning:** SVM uses Lagrange duality.
+- **Process engineering:** minimize energy use subject to throughput constraint.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Critical points of $f(x, y) = x^3 - 3x + y^2$.
+</ExQ>
+<ExA>
+$f_x = 3x^2 - 3 = 0 \Rightarrow x = \pm 1$. $f_y = 2y = 0 \Rightarrow y = 0$.
+
+CP at $(1, 0)$ and $(-1, 0)$.
+
+Hessian: $f_{xx} = 6x, f_{yy} = 2, f_{xy} = 0$.
+
+At $(1, 0)$: $D = 12 > 0, f_{xx} > 0$ → **min**.
+At $(-1, 0)$: $D = -12 < 0$ → **saddle**.
+</ExA>
+
+<ExQ>
+**2.** Maximize $xy$ subject to $x + y = 10$.
+</ExQ>
+<ExA>
+Lagrange: $(y, x) = \lambda(1, 1)$. So $x = y$.
+
+Constraint: $2x = 10 \Rightarrow x = y = 5$.
+
+Max value: $25$.
+</ExA>
+
+<ExQ>
+**3. Engineering: Cylinder optimization.** Minimize surface area $S = 2\pi r^2 + 2\pi rh$ for fixed volume $V = \pi r^2 h$.
+</ExQ>
+<ExA>
+Substitute $h = V/(\pi r^2)$: $S(r) = 2\pi r^2 + 2V/r$.
+
+$dS/dr = 4\pi r - 2V/r^2 = 0 \Rightarrow r^3 = V/(2\pi)$.
+
+So $r = (V/(2\pi))^{1/3}$, $h = 2r$.
+
+**Optimal:** height = diameter. Minimum surface area for given volume — a "tall enough" can.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does the Lagrange condition $\nabla f = \lambda\nabla g$ make geometric sense?
+</ExQ>
+<ExA>
+On the constraint, $f$ varies. At the extremum, moving along $g = 0$ doesn't change $f$ (first order) — meaning $\nabla f \perp$ tangent to constraint.
+
+But $\nabla g$ is *also* perpendicular to the constraint (gradient is normal to level sets).
+
+Two vectors perpendicular to the same direction must be parallel: $\nabla f \parallel \nabla g$. The proportionality constant is $\lambda$.
+</ExA>
+
+<ExQ>
+**5. Multi-step.** Find the max of $f(x, y) = x^2 + y^2$ on the curve $x^4 + y^4 = 1$.
+</ExQ>
+<ExA>
+Lagrange: $(2x, 2y) = \lambda(4x^3, 4y^3)$.
+
+Cases: $x = 0, y = 0$, or $x^2 = 1/(2\lambda)$ and $y^2 = 1/(2\lambda)$, so $x^2 = y^2$.
+
+If $x^2 = y^2$: constraint $2x^4 = 1 \Rightarrow x^2 = 1/\sqrt 2$. So $f = 2/\sqrt 2 = \sqrt 2$.
+
+If $y = 0$: $x^4 = 1$, $x = \pm 1$. $f = 1$.
+
+Max on this curve: $\sqrt 2 \approx 1.414$ at $(\pm 2^{-1/4}, \pm 2^{-1/4})$.
+</ExA>

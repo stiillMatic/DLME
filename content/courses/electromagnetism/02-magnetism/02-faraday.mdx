@@ -1,0 +1,145 @@
+---
+title: Faraday's Law and Induction
+description: A changing magnetic flux induces an EMF — the principle behind every generator, transformer, and electromagnetic motor.
+---
+
+# Faraday's Law and Induction
+
+## The Big Picture
+
+Michael Faraday discovered in 1831 that **changing magnetic fields create electric fields** — the bridge that completes the unification of electricity and magnetism. This **electromagnetic induction** is what every generator on Earth uses to convert mechanical energy to electricity, every transformer uses to change voltage, and every inductor uses to store energy. Without Faraday's law, modern civilization wouldn't exist.
+
+## Faraday's Law
+
+The **EMF** (induced voltage) around a closed loop equals the negative rate of change of magnetic flux through the loop:
+
+$$\varepsilon = -\frac{d\Phi_B}{dt}$$
+
+Magnetic flux: $\Phi_B = \mathbf{B}\cdot\mathbf{A} = BA\cos\theta$ for uniform B through area A.
+
+## Lenz's Law
+
+The minus sign: induced current opposes the change in flux.
+
+Push a magnet into a coil → coil generates current that pushes back.
+Pull it out → current reverses to attract the leaving magnet.
+
+This is energy conservation in disguise — the induced current resists the motion that creates it. You have to do work, which becomes electrical energy.
+
+## How to Change Flux
+
+Several ways:
+1. **Change B:** turn the magnet on or off, change current in a source coil.
+2. **Change area:** loop expanding or contracting in B.
+3. **Change angle:** rotate the coil in a steady field (= AC generator!).
+
+## The AC Generator
+
+Coil with $N$ turns rotates at angular velocity $\omega$ in uniform B:
+
+$\Phi_B = NBA\cos(\omega t)$.
+
+$\varepsilon = -d\Phi/dt = NBA\omega\sin(\omega t)$.
+
+A sinusoidal voltage at frequency $\omega/(2\pi)$. This is exactly how power plants work — turbines spin coils in magnetic fields.
+
+## Transformers
+
+Two coils linked by iron core. AC current in **primary** ($N_1$ turns) creates AC flux. Secondary ($N_2$ turns) sees same flux through it, so:
+
+$$\frac{V_2}{V_1} = \frac{N_2}{N_1}$$
+
+By choosing turns ratio: step up or down voltage. Power conserved (ideal): $V_1 I_1 = V_2 I_2$, so currents inverse to voltages.
+
+This is the entire reason **AC** beats **DC** for long-distance transmission — transformers let you push at high voltage (low loss), use at low voltage.
+
+## Self-Inductance
+
+A coil generates flux through itself. Changing current induces opposing EMF:
+
+$$V_L = -L\frac{dI}{dt}$$
+
+$L$ is **inductance** (henries, H). Energy stored: $U = \tfrac{1}{2}LI^2$.
+
+## Common Misconceptions
+
+**Misconception 1: "EMF = voltage."**
+
+Related but not identical. EMF is the "source" voltage (battery, generator, induced). In a circuit, voltage drops across components equal source EMF.
+
+**Misconception 2: "Induced current always in same direction as B."**
+
+Direction determined by Lenz's law — opposes the change in $\Phi$.
+
+**Misconception 3: "Faraday and Maxwell are different things."**
+
+Faraday's law IS one of Maxwell's four equations. Maxwell formalized it (added displacement current for completeness).
+
+## Engineering Connection
+
+- **Power generation:** every conventional power plant (coal, nuclear, hydro, wind) uses Faraday — spin a turbine.
+- **Transformers:** every wall outlet's voltage came from a transformer somewhere upstream.
+- **Inductors in circuits:** filter, store energy, time constants.
+- **Wireless charging:** primary coil in charger, secondary in phone.
+- **Eddy currents in brakes:** induced currents create magnetic drag — used in roller coasters, trains, separators.
+- **Metal detectors:** transmit pulse; detect altered EMF from induced eddy currents in metal.
+- **Microphones and pickups:** sound-driven coil moving in field generates voltage.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Coil 50 turns, area 0.01 m². B changes from 0 to 0.5 T in 0.1 s. EMF?
+</ExQ>
+<ExA>
+$\Phi$ changes from 0 to $0.01\cdot 0.5 = 0.005$ Wb per turn.
+
+Total: $50\cdot 0.005 = 0.25$ Wb.
+
+$\varepsilon = -d\Phi/dt = -0.25/0.1 = -2.5$ V (negative sign indicates direction).
+
+Magnitude: 2.5 V.
+</ExA>
+
+<ExQ>
+**2.** Transformer: primary 100 turns, secondary 1000. Primary 12 V AC. Secondary?
+</ExQ>
+<ExA>
+$V_2/V_1 = N_2/N_1 = 10$. $V_2 = 120$ V.
+
+This is a "step-up" transformer.
+
+Current ratio inverse: $I_2 = I_1/10$.
+</ExA>
+
+<ExQ>
+**3.** Inductor 100 mH, current changes at 50 A/s. Voltage across inductor?
+</ExQ>
+<ExA>
+$V_L = L\,dI/dt = 0.1\cdot 50 = 5$ V.
+</ExA>
+
+<ExQ>
+**4. Engineering: Wind turbine.** Coil 200 turns, area 4 m², spins at 30 rad/s in $B = 0.5$ T. Peak EMF?
+</ExQ>
+<ExA>
+$\varepsilon_{\text{peak}} = NBA\omega = 200\cdot 0.5\cdot 4\cdot 30 = 12000$ V = 12 kV.
+
+This is peak generator voltage. Real wind turbines often use permanent magnet alternators with more sophisticated geometry, producing power for the grid via inverters.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why do power lines use ~kV rather than ~V for long-distance transmission?
+</ExQ>
+<ExA>
+Power loss in wires: $P_{\text{loss}} = I^2 R$.
+
+For given power transmitted $P = VI$: at higher V, lower I needed → far less loss.
+
+$10\times$ higher V → $10\times$ lower I → $100\times$ less loss.
+
+Transformers (Faraday's law!) make this possible: step up at generator to ~500 kV for transmission, step down repeatedly toward home (240/120 V).
+
+Without transformers (and Faraday), long-distance electric grid wouldn't be economical.
+</ExA>

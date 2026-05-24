@@ -1,0 +1,30 @@
+{
+  "title": "Deep Learning Fundamentals for ME",
+  "description": "Build a solid foundation in deep learning — from neurons to backpropagation — with mechanical engineering intuition throughout.",
+  "level": "beginner",
+  "area": "Deep Learning",
+  "tags": ["PyTorch", "Neural Networks", "Python"],
+  "chapters": [
+    {
+      "title": "Neural Networks",
+      "slug": "01-neural-networks",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-what-is-a-neuron", "title": "What Is a Neuron?", "order": 1 },
+        { "slug": "02-activation-functions", "title": "Activation Functions", "order": 2 },
+        { "slug": "03-forward-propagation", "title": "Forward Propagation", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Training Networks",
+      "slug": "02-training",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-loss-functions", "title": "Loss Functions", "order": 1 },
+        { "slug": "02-backpropagation", "title": "Backpropagation", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

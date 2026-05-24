@@ -1,0 +1,174 @@
+---
+title: Gaussian Elimination
+description: The systematic algorithm for solving linear systems — and the structural backbone of all numerical linear algebra.
+---
+
+# Gaussian Elimination
+
+## The Big Picture
+
+Solving $A\mathbf{x} = \mathbf{b}$ — a system of linear equations — is the central computational task of engineering. Gaussian elimination is the workhorse algorithm: a systematic procedure to reduce a system to a triangular form that's trivially solvable. Every numerical linear algebra package implements this (with optimizations); every FEA solver uses it as a subroutine. Understanding it gives you the foundation for everything that follows.
+
+## Intuition First — Triangularize, Then Back-Substitute
+
+Imagine three equations in three unknowns. If only the first equation involved all three unknowns, the second involved two, the third one — you could solve them trivially from bottom to top. That triangle shape is the **goal** of elimination.
+
+Gaussian elimination uses three operations that don't change the solution:
+1. **Swap** two rows
+2. **Scale** a row by a nonzero constant
+3. **Add** a multiple of one row to another
+
+By applying these systematically, we zero out entries below the diagonal — creating the triangle.
+
+## The Algorithm
+
+For an augmented matrix $[A | \mathbf{b}]$:
+
+1. Use row 1 to eliminate the first column below row 1
+2. Use row 2 to eliminate the second column below row 2
+3. Continue until upper triangular
+4. **Back-substitute** to solve for each variable from bottom to top
+
+The result is **row echelon form** (REF).
+
+Continuing further (zeroing above the pivots, normalizing pivots to 1) gives **reduced row echelon form** (RREF) — unique.
+
+## Worked Example
+
+Solve:
+$$\begin{cases}2x + y + z = 8\\ -3x - y + 2z = -11\\ -2x + y + 2z = -3\end{cases}$$
+
+Augmented matrix:
+$$\left[\begin{array}{ccc|c} 2 & 1 & 1 & 8 \\ -3 & -1 & 2 & -11 \\ -2 & 1 & 2 & -3\end{array}\right]$$
+
+Row 2 ← R2 + (3/2)R1; Row 3 ← R3 + R1:
+$$\left[\begin{array}{ccc|c} 2 & 1 & 1 & 8 \\ 0 & 1/2 & 7/2 & 1 \\ 0 & 2 & 3 & 5\end{array}\right]$$
+
+Row 3 ← R3 − 4 R2:
+$$\left[\begin{array}{ccc|c} 2 & 1 & 1 & 8 \\ 0 & 1/2 & 7/2 & 1 \\ 0 & 0 & -11 & 1\end{array}\right]$$
+
+Back-substitute:
+- $-11 z = 1 \Rightarrow z = -1/11$
+- $\tfrac{1}{2}y + \tfrac{7}{2}(-1/11) = 1 \Rightarrow y = 2 + 7/11 = 29/11$
+- $2x + 29/11 - 1/11 = 8 \Rightarrow x = (88 - 28)/22 = 30/11$
+
+(Solution: $(30/11, 29/11, -1/11)$.)
+
+## Three Possible Outcomes
+
+After elimination:
+
+1. **Unique solution:** every column has a pivot → exactly one $\mathbf{x}$.
+2. **Infinite solutions:** some columns have no pivot (free variables) → entire solution family.
+3. **No solution:** a row $[0\;0\;\cdots\;0\;|\;c]$ with $c \neq 0$ → contradiction ($0 = c$).
+
+Reading the structure of the row-echelon form tells you which case you're in.
+
+## Common Misconceptions
+
+**Misconception 1: "Pivot must be nonzero."**
+
+If a pivot position is zero, **swap rows** to get a nonzero entry there. If no row has a nonzero entry in that column, that variable becomes free.
+
+**Misconception 2: "Row reduction changes the solution."**
+
+The three elementary operations preserve the solution set. The system *looks* different, but it has identical solutions.
+
+**Misconception 3: "Always reduce to RREF."**
+
+For solving systems, REF + back-substitution is enough. RREF is useful for understanding structure (rank, null space basis) but is more work to compute.
+
+**Misconception 4: "If $A$ has more columns than rows, no solution."**
+
+Wrong — usually means *infinite* solutions (more unknowns than equations). "Tall" systems (more rows) often have no solution; "wide" systems have many.
+
+## Engineering Connection
+
+- **Circuit analysis (Kirchhoff's laws):** systems of linear equations for currents and voltages.
+- **Truss analysis:** force balance at each joint → linear system in member forces.
+- **Finite element analysis:** stiffness equations $K\mathbf{u} = \mathbf{f}$ solved via LU decomposition (a refined Gaussian elimination).
+- **Linear regression:** normal equations $A^TA\,\mathbf{x} = A^T\mathbf{b}$ solved via elimination.
+- **Heat conduction with finite differences:** the discretized PDE is a linear system.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Solve via elimination: $x + y = 5$, $2x - y = 1$.
+</ExQ>
+<ExA>
+$\left[\begin{array}{cc|c}1 & 1 & 5\\ 2 & -1 & 1\end{array}\right] \to \left[\begin{array}{cc|c}1 & 1 & 5\\ 0 & -3 & -9\end{array}\right]$.
+
+$-3y = -9 \Rightarrow y = 3$. $x = 5 - 3 = 2$.
+
+Solution: $(2, 3)$.
+</ExA>
+
+<ExQ>
+**2.** Solve: $x + 2y + z = 4$, $2x + y - z = 3$, $x + y + 2z = 5$.
+</ExQ>
+<ExA>
+$R_2 \to R_2 - 2R_1$: $0, -3, -3, -5$.
+$R_3 \to R_3 - R_1$: $0, -1, 1, 1$.
+
+$R_3 \to R_3 - R_2/3$: $0, 0, 2, 1 + 5/3 = 8/3$.
+
+So $z = 4/3$. From $R_2$: $-3y - 3(4/3) = -5 \Rightarrow y = 1/3$. From $R_1$: $x = 4 - 2/3 - 4/3 = 2$.
+
+Solution: $(2, 1/3, 4/3)$.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** Solve $\begin{cases}x + y = 3\\ 2x + 2y = 7\end{cases}$. What does the result mean?
+</ExQ>
+<ExA>
+$R_2 \to R_2 - 2R_1$: $0\,x + 0\,y = 1$.
+
+Contradiction: $0 = 1$. **No solution**.
+
+Geometrically: the two equations describe **parallel lines** (same slope, different intercepts) — never intersect.
+</ExA>
+
+<ExQ>
+**4.** Solve $\begin{cases}x + y + z = 6\\ 2x + 2y + 2z = 12\\ x - y + z = 2\end{cases}$.
+</ExQ>
+<ExA>
+$R_2 \to R_2 - 2R_1$: all zeros (the second equation was redundant).
+
+$R_3 \to R_3 - R_1$: $0, -2, 0, -4$ ⟹ $y = 2$.
+
+Now: $x + z = 4$ — one equation, two unknowns. $z$ is **free**.
+
+General solution: $\mathbf{x} = (4 - t,\ 2,\ t)$ for any $t$.
+
+**Infinite solutions** — the system has fewer independent equations than unknowns.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** Adding rows of a matrix to each other can produce a matrix with the same row space. Justify.
+</ExQ>
+<ExA>
+**True.** The row space is the span of the rows. Adding row $i$ to row $j$ replaces row $j$ with a linear combination of the existing rows — this doesn't add any new "direction" to the span, and the original row $i$ is still there, so the span is unchanged.
+
+This is exactly why elementary row operations don't change the *row space* — which is why elimination preserves solutions to $A\mathbf{x} = \mathbf{b}$.
+</ExA>
+
+<ExQ>
+**6.** A system has reduced augmented matrix $\left[\begin{array}{ccc|c}1 & 0 & 2 & 3\\ 0 & 1 & -1 & 4\\ 0 & 0 & 0 & 0\end{array}\right]$. Describe all solutions.
+</ExQ>
+<ExA>
+Pivots in columns 1, 2. Column 3 has no pivot → $z$ is free.
+
+$x = 3 - 2z$, $y = 4 + z$.
+
+Parametric: $\mathbf{x} = (3, 4, 0) + t(-2, 1, 1)$ for any $t \in \mathbb{R}$.
+
+A line in $\mathbb{R}^3$.
+</ExA>

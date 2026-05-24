@@ -1,0 +1,161 @@
+---
+title: Chapter 3 Practice — Multiple Integrals
+description: Mixed practice on double and triple integrals, with engineering applications.
+---
+
+# Chapter 3 Practice — Multiple Integrals
+
+## Mechanical Drills
+
+<ExQ>
+**1.** Evaluate $\displaystyle\iint_R xy\,dA$ over $R = [0, 2]\times[0, 3]$.
+</ExQ>
+<ExA>
+$\int_0^2 x\,dx\cdot\int_0^3 y\,dy = 2\cdot 4.5 = 9$.
+</ExA>
+
+<ExQ>
+**2.** Find the area of the region bounded by $y = x^2$ and $y = 2x$.
+</ExQ>
+<ExA>
+Intersect at $x = 0, 2$. On $[0, 2]$, $2x \geq x^2$.
+
+$A = \int_0^2(2x - x^2)\,dx = 4 - 8/3 = 4/3$.
+</ExA>
+
+<ExQ>
+**3.** Use polar coordinates to compute $\displaystyle\iint_D(x^2 + y^2)\,dA$ where $D$ is the disk $x^2 + y^2 \leq 4$.
+</ExQ>
+<ExA>
+$\int_0^{2\pi}\int_0^2 r^2\cdot r\,dr\,d\theta = 2\pi\cdot 4 = 8\pi$.
+</ExA>
+
+<ExQ>
+**4.** Find the volume of the solid bounded by $z = 0$, $z = 1 - x - y$ in the first octant.
+</ExQ>
+<ExA>
+Region in $xy$-plane: $x + y \leq 1$, $x, y \geq 0$.
+
+$V = \int_0^1\int_0^{1-x}(1 - x - y)\,dy\,dx = \int_0^1\frac{(1-x)^2}{2}\,dx = 1/6$.
+</ExA>
+
+<ExQ>
+**5.** Evaluate $\displaystyle\iiint_E z\,dV$ where $E = \{(x, y, z) : 0 \leq z \leq 4 - x^2 - y^2\}$ over the region $x^2 + y^2 \leq 4$.
+</ExQ>
+<ExA>
+Cylindrical: $E = \{(r, \theta, z) : r \in [0, 2], \theta \in [0, 2\pi], z \in [0, 4 - r^2]\}$.
+
+$\int_0^{2\pi}\int_0^2\int_0^{4-r^2}z\,r\,dz\,dr\,d\theta = 2\pi\int_0^2\frac{(4-r^2)^2}{2}r\,dr$
+
+Substitute $u = 4 - r^2$: $du = -2r\,dr$. Limits: $r=0 \to u=4$, $r=2 \to u=0$.
+
+$= -\pi\int_4^0 u^2/2\,du = (\pi/2)\int_0^4 u^2\,du = (\pi/2)(64/3) = 32\pi/3$.
+</ExA>
+
+## Conceptual
+
+<ExQ>
+**P1. True or False.** $\iint_R\,dA = $ area of $R$.
+</ExQ>
+<ExA>
+**True.** Integrating the constant function 1 over a region gives its area.
+
+Equivalently: $\iiint_V dV =$ volume.
+</ExA>
+
+<ExQ>
+**P2. Reasoning.** Why do we use $r\,dr\,d\theta$ in polar, not just $dr\,d\theta$?
+</ExQ>
+<ExA>
+The $r$ factor accounts for the area scaling: a "wedge" $dr$ wide and $d\theta$ in angle has area $\approx r\,dr\,d\theta$ — proportional to the radius from the origin.
+
+Without $r$, the integral would weight inner points more than outer ones — incorrect.
+
+Same logic for cylindrical and spherical: the Jacobian factor encodes how volumes transform.
+</ExA>
+
+<ExQ>
+**P3. Order swap.** Why is $\int_0^1\int_x^1 e^{y^2}\,dy\,dx$ impossible in this order but easy after swapping?
+</ExQ>
+<ExA>
+$\int e^{y^2}\,dy$ has no elementary closed form (related to the imaginary error function).
+
+After swapping: region is $\{0 \leq y \leq 1, 0 \leq x \leq y\}$. Inner integral: $\int_0^y e^{y^2}\,dx = ye^{y^2}$ (treating $y$ as constant).
+
+Then $\int_0^1 ye^{y^2}\,dy = (e - 1)/2$ (substitution $u = y^2$).
+
+**Lesson:** when integration looks impossible, try swapping the order — sometimes the geometry is symmetric in a way that makes one variable easy.
+</ExA>
+
+<ExQ>
+**P4. Symmetry.** Why is $\iint_D x\,dA = 0$ when $D$ is the unit disk centered at origin?
+</ExQ>
+<ExA>
+$D$ is symmetric about the $y$-axis. The integrand $x$ is **odd** in $x$. Pairing each point $(x, y)$ with its mirror $(-x, y)$ gives canceling contributions.
+
+So $\iint_D x\,dA = 0$ by symmetry — without computation. This kind of reasoning saves enormous effort.
+</ExA>
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1. Center of mass.** A semicircular plate of radius $R$ with uniform density has its diameter on the $x$-axis. Find $\bar y$ (center of mass $y$-coordinate).
+</ExQ>
+<ExA>
+Region: $r \in [0, R]$, $\theta \in [0, \pi]$. Density $\rho_0$.
+
+$M = \rho_0\cdot\pi R^2/2$.
+
+$\bar y = \dfrac{1}{M}\iint y\rho_0\,dA = \dfrac{\rho_0}{M}\int_0^\pi\int_0^R r\sin\theta\cdot r\,dr\,d\theta$
+
+$= \dfrac{\rho_0}{M}\cdot\dfrac{R^3}{3}\cdot 2 = \dfrac{2\rho_0 R^3}{3M} = \dfrac{2\rho_0 R^3}{3\cdot\rho_0\pi R^2/2} = \dfrac{4R}{3\pi}$
+
+The CM of a semicircle is at $4R/(3\pi)$ from the diameter — a classic result.
+</ExA>
+
+<ExQ>
+**S2. Engineering: Hydrostatic force.** A vertical wall is submerged so it spans depth 0 to $h$. Pressure at depth $z$ is $p(z) = \rho g z$. Find total force on the wall (width $w$).
+</ExQ>
+<ExA>
+$F = \int_0^h\int_0^w \rho g z\,dx\,dz = \rho g w\int_0^h z\,dz = \rho g w h^2/2$
+
+For water ($\rho = 1000$ kg/m³), $w = 5$ m, $h = 4$ m: $F = 1000\cdot 9.81\cdot 5\cdot 8 = 392{,}400$ N ≈ 392 kN.
+
+This is the basis of dam and tank design.
+</ExA>
+
+<ExQ>
+**S3. Triple integral.** Find the moment of inertia about the $z$-axis for a uniform solid cylinder of radius 2 m, height 5 m, total mass $M$.
+</ExQ>
+<ExA>
+$\rho_0 = M/(\pi\cdot 4\cdot 5) = M/(20\pi)$.
+
+$I_z = \int_0^5\int_0^{2\pi}\int_0^2\rho_0\cdot r^2\cdot r\,dr\,d\theta\,dz$
+$= \rho_0\cdot 5\cdot 2\pi\cdot 4 = 40\pi\rho_0 = 2M$.
+
+$I_z = 2M$ kg·m². Standard formula for cylinder: $I_z = \tfrac{1}{2}MR^2 = \tfrac{1}{2}M\cdot 4 = 2M$ ✓.
+</ExA>
+
+<ExQ>
+**S4. Spherical integral.** A spherical region $\rho \leq R$ has charge density $\rho_q(\rho) = \rho_0(1 - \rho/R)$. Find total charge.
+</ExQ>
+<ExA>
+$Q = \int_0^{2\pi}\int_0^\pi\int_0^R\rho_0(1 - \rho/R)\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$
+
+$= 4\pi\rho_0\int_0^R(\rho^2 - \rho^3/R)\,d\rho = 4\pi\rho_0(R^3/3 - R^3/4)$
+
+$= 4\pi\rho_0\cdot R^3/12 = \pi\rho_0 R^3/3$.
+</ExA>
+
+<ExQ>
+**S5. Conceptual + technique.** Compute $\iint_R e^{-(x^2 + y^2)}\,dA$ where $R$ is the entire $xy$-plane. Use this to derive $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt\pi$.
+</ExQ>
+<ExA>
+**Polar:** $\iint = \int_0^{2\pi}\int_0^\infty e^{-r^2}r\,dr\,d\theta = 2\pi\cdot 1/2 = \pi$.
+
+**Cartesian:** $\iint = \int_{-\infty}^\infty\int_{-\infty}^\infty e^{-x^2}e^{-y^2}\,dx\,dy = \left(\int_{-\infty}^\infty e^{-x^2}\,dx\right)^2$.
+
+Equating: $I^2 = \pi \Rightarrow I = \sqrt\pi$.
+
+This is the famous **Gaussian integral** — central in probability, statistics, and quantum mechanics. Note: cannot be computed in 1D directly, only via 2D polar trick.
+</ExA>

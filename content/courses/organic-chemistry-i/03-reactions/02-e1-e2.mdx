@@ -1,0 +1,143 @@
+---
+title: E1 and E2 Eliminations
+description: When a leaving group departs along with a β-hydrogen — generating alkenes instead of substituted products.
+---
+
+# E1 and E2 Eliminations
+
+## The Big Picture
+
+**Elimination** reactions are the alternative to substitution: instead of the nucleophile attaching to carbon, a **base** removes an H from a β-carbon while the leaving group departs, forming a double bond (alkene). Like substitution, there are two mechanisms (E1 and E2) competing based on conditions. SN and E reactions often compete — and the conditions you choose determine which dominates.
+
+## E2: Bimolecular, Concerted
+
+**One step:**
+- Base removes β-H (the one adjacent to the C bearing the leaving group)
+- Leaving group departs
+- Both happen in one concerted step → π bond forms
+
+**Stereochemistry:** anti-periplanar — H and LG must be on opposite sides with their bonds parallel.
+
+Kinetics: $\text{rate} = k[\text{substrate}][\text{base}]$ — **second order**.
+
+**Favored:** strong base, hot, secondary or tertiary substrate.
+
+## E1: Unimolecular, Stepwise
+
+**Two steps:**
+1. Substrate ionizes (same as SN1): leaving group departs, carbocation forms.
+2. Base removes β-H from carbocation → alkene.
+
+Kinetics: $\text{rate} = k[\text{substrate}]$ — **first order**.
+
+**Favored:** weak base, polar protic solvent, tertiary substrate.
+
+## Zaitsev's Rule
+
+When multiple β-hydrogens are available, elimination usually gives the **more substituted** alkene (thermodynamically more stable, more hyperconjugation).
+
+Exception (Hofmann's rule): bulky bases (e.g., t-butoxide) sterically hindered → remove less hindered H → less substituted alkene.
+
+## Competition: SN1/E1 and SN2/E2
+
+| Substrate | Strong base | Weak base/nucleophile |
+|---|---|---|
+| Primary | SN2 | (slow SN2) |
+| Secondary | E2 | SN1/E1 mixture |
+| Tertiary | E2 | E1/SN1 |
+
+Heat favors elimination (entropy + breaking C-H + C-LG bonds).
+
+Cold favors substitution.
+
+## Common Misconceptions
+
+**Misconception 1: "Same substrate gives same product."**
+
+Conditions matter enormously. (CH₃)₃CBr with cold NaOH gives mostly substitution (t-BuOH); same substrate with hot NaOEt gives mostly elimination (isobutylene).
+
+**Misconception 2: "E2 requires base."**
+
+E2 needs a base (to remove the β-H). But sometimes the same species (e.g., OH⁻) can act as nucleophile (SN2) or base (E2) — substrate determines which wins.
+
+**Misconception 3: "Zaitsev always wins."**
+
+Bulky bases follow Hofmann's rule (less substituted alkene). Steric effects flip the selectivity.
+
+## Engineering Connection
+
+- **Petroleum cracking:** elimination reactions break alkanes into alkenes (feedstocks for polymers).
+- **Drug synthesis:** elimination steps introduce double bonds critical for biological activity.
+- **Industrial dehydration of alcohols:** acid-catalyzed E1 produces alkenes (ethanol → ethylene).
+- **Polymer functionalization:** controlled elimination creates functional groups for further chemistry.
+- **Biofuel from cellulosic ethanol:** dehydration step converts ethanol to ethylene for petrochemicals.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** 2-bromobutane + KOH (in ethanol, heat). Major mechanism and product?
+</ExQ>
+<ExA>
+Secondary substrate, strong base, heat → **E2**.
+
+Possible alkenes:
+- 1-butene (CH₂=CH-CH₂-CH₃) — terminal, less substituted.
+- 2-butene (CH₃-CH=CH-CH₃) — internal, more substituted.
+
+By Zaitsev: **2-butene** is the major product (more substituted).
+</ExA>
+
+<ExQ>
+**2.** Tert-butyl chloride in ethanol (mild conditions). Mechanism?
+</ExQ>
+<ExA>
+Tertiary substrate, weak base, polar protic → mixture of **SN1** and **E1**.
+
+SN1: tert-butyl ethyl ether.
+E1: isobutylene (2-methylpropene).
+
+Ratio depends on temperature. Higher T → more elimination.
+</ExA>
+
+<ExQ>
+**3.** 2-bromopentane + bulky base (t-BuO⁻). Predict major product.
+</ExQ>
+<ExA>
+Hofmann elimination — bulky base favors less substituted alkene.
+
+Possible products: 1-pentene (terminal) or 2-pentene (internal).
+
+Bulky base prefers to remove the more accessible terminal H → **1-pentene major**.
+
+Standard "Hofmann switch" with t-BuOK or LDA bases.
+</ExA>
+
+<ExQ>
+**4. Engineering: Industrial ethylene from ethanol.** Dehydration of ethanol at 200°C with H₂SO₄. Mechanism, product?
+</ExQ>
+<ExA>
+Acid catalysis: protonate OH (good leaving group H₂O), then E1.
+
+Step 1: CH₃CH₂OH + H⁺ → CH₃CH₂-OH₂⁺.
+Step 2: ionize → CH₃CH₂⁺ (primary cation, somewhat unstable but possible at high T).
+Step 3: lose β-H → CH₂=CH₂ (ethylene).
+
+This is essentially how ethylene is made from biomass-derived ethanol — a major industrial process for "green plastics."
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does E2 require anti-periplanar arrangement of H and leaving group?
+</ExQ>
+<ExA>
+For concerted elimination, the σ C-H bond and σ* C-LG orbital must align for π bond formation.
+
+Anti-periplanar (180°) gives optimal alignment: parallel orbitals overlap into the forming π bond.
+
+Other arrangements (gauche, eclipsed) don't permit smooth orbital overlap → much higher barrier.
+
+This is why cyclohexane elimination requires axial H and axial LG (both diaxial) — locked anti-periplanar geometry. Equatorial substituents must ring-flip to react.
+
+This stereoelectronic requirement is a powerful predictor of organic reactivity.
+</ExA>

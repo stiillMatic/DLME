@@ -1,0 +1,116 @@
+---
+title: Vector-Valued Functions and Curves in Space
+description: Functions whose output is a 3D vector — parameterizing curves and tracing motion.
+---
+
+# Vector-Valued Functions and Curves in Space
+
+## The Big Picture
+
+A **vector-valued function** $\mathbf{r}(t)$ takes a scalar input and returns a 3D vector. Geometrically, as $t$ varies, $\mathbf{r}(t)$ traces a curve in space. This is the natural language for trajectories — projectiles, satellite orbits, robot paths. Calculus on these functions (derivatives, integrals) gives velocity, acceleration, and arc length.
+
+## Definition
+
+$$\mathbf{r}(t) = \langle x(t), y(t), z(t)\rangle$$
+
+Calculus operates component-wise:
+
+$$\mathbf{r}'(t) = \langle x'(t), y'(t), z'(t)\rangle$$
+
+## Geometric Meaning
+
+- $\mathbf{r}(t)$: position at parameter $t$
+- $\mathbf{r}'(t)$: velocity (tangent to curve)
+- $\mathbf{r}''(t)$: acceleration
+- $\|\mathbf{r}'(t)\|$: speed
+
+**Unit tangent:** $\hat{\mathbf{T}}(t) = \mathbf{r}'(t)/\|\mathbf{r}'(t)\|$.
+
+## Common Curves
+
+| Curve | Parameterization |
+|---|---|
+| Line through $\mathbf{p}_0$ in direction $\mathbf{v}$ | $\mathbf{r}(t) = \mathbf{p}_0 + t\mathbf{v}$ |
+| Circle in $xy$-plane | $\mathbf{r}(t) = (R\cos t, R\sin t, 0)$ |
+| Helix | $\mathbf{r}(t) = (R\cos t, R\sin t, ct)$ |
+
+## Arc Length
+
+$$L = \int_a^b\|\mathbf{r}'(t)\|\,dt = \int_a^b\sqrt{x'^2 + y'^2 + z'^2}\,dt$$
+
+3D version of the parametric arc length formula.
+
+## Common Misconceptions
+
+**Misconception 1: "Speed = velocity."**
+
+Speed is the magnitude of velocity (a scalar). Velocity is a vector with direction.
+
+**Misconception 2: "$\mathbf{r}'(t)$ always points 'forward'."**
+
+Always tangent to the curve, in direction of increasing $t$. If you reverse parameterization, the tangent direction flips.
+
+**Misconception 3: "Constant-speed motion has zero acceleration."**
+
+Only along straight lines. On curved paths, even at constant speed, direction changes — $\mathbf{r}''$ is nonzero (centripetal).
+
+## Engineering Connection
+
+- **Trajectory planning (robotics):** specify $\mathbf{r}(t)$ for desired path; differentiate for required joint velocities.
+- **Spacecraft orbit:** $\mathbf{r}(t)$ from Kepler's equations or numerical integration.
+- **CFD streamlines:** $\mathbf{r}(t)$ is the path of a fluid particle.
+- **CAD/CAM:** tool paths in machining are parametric curves.
+- **Computer graphics:** Bezier curves and splines for smooth curve generation.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Helix $\mathbf{r}(t) = (\cos t, \sin t, t)$. Find $\mathbf{r}'(t)$, speed.
+</ExQ>
+<ExA>
+$\mathbf{r}'(t) = (-\sin t, \cos t, 1)$. Speed $= \sqrt{1 + 1} = \sqrt 2$ (constant).
+</ExA>
+
+<ExQ>
+**2.** Find the tangent line to $\mathbf{r}(t) = (t, t^2, t^3)$ at $t = 1$.
+</ExQ>
+<ExA>
+$\mathbf{r}(1) = (1, 1, 1)$, $\mathbf{r}'(1) = (1, 2, 3)$.
+
+Line: $(1+s, 1+2s, 1+3s)$.
+</ExA>
+
+<ExQ>
+**3.** Arc length of helix on $[0, 2\pi]$.
+</ExQ>
+<ExA>
+From above, speed $= \sqrt 2$. $L = 2\pi\sqrt 2 \approx 8.89$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Drone flight.** Drone follows $\mathbf{r}(t) = (10t, 5t^2, 20)$ m for $t \in [0, 5]$ s. Find total distance traveled.
+</ExQ>
+<ExA>
+$\mathbf{r}'(t) = (10, 10t, 0)$. Speed $= \sqrt{100 + 100t^2} = 10\sqrt{1 + t^2}$.
+
+$L = 10\int_0^5\sqrt{1+t^2}\,dt$.
+
+This integral: $\sqrt{1+t^2}/2 + \sinh^{-1}(t)/2$ at $t = 5$. Value $\approx 13.18 + 1.27 \cdot 5 = $ ... easier numerically:
+
+$L = 10\cdot 13.18 \approx 131.8$ m. (Approximate.)
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is $\mathbf{r}\cdot\mathbf{r}'$ zero for a curve on a sphere?
+</ExQ>
+<ExA>
+On a sphere: $\|\mathbf{r}\|^2 = R^2$ constant.
+
+Differentiate: $d/dt(\|\mathbf{r}\|^2) = 2\mathbf{r}\cdot\mathbf{r}' = 0$.
+
+So $\mathbf{r}\perp\mathbf{r}'$ always — tangent to a sphere is perpendicular to the radius vector. Geometrically obvious; calculus confirms.
+
+This is exactly why orbits are perpendicular to the gravitational radius (idealized).
+</ExA>

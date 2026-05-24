@@ -1,0 +1,49 @@
+---
+title: Chapter 2 Practice — Beams
+description: Practice on shear/moment diagrams, bending stress, and beam deflection.
+---
+
+# Chapter 2 Practice — Beams
+
+<ExQ>
+**1.** Cantilever beam, length 3 m, point load 4 kN at tip. Find max moment and where.
+</ExQ>
+<ExA>
+Max moment at fixed end: $M = 4\cdot 3 = 12$ kN·m.
+</ExA>
+
+<ExQ>
+**2.** Simply supported beam, $L = 10$ m, UDL $w = 3$ kN/m. Find $M_{\max}$.
+</ExQ>
+<ExA>
+$M_{\max} = wL^2/8 = 3\cdot 100/8 = 37.5$ kN·m at midspan.
+</ExA>
+
+<ExQ>
+**3. Engineering.** Rectangular beam $0.05\times 0.15$ m, $\sigma_{\text{allow}} = 180$ MPa. Find max moment it can carry.
+</ExQ>
+<ExA>
+$S = bh^2/6 = 0.05\cdot 0.0225/6 = 1.875\times 10^{-4}$ m³.
+
+$M = \sigma S = 180\times 10^6\cdot 1.875\times 10^{-4} = 33.75$ kN·m.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is a beam stronger when oriented with $h > b$ (tall) than $h < b$ (wide)?
+</ExQ>
+<ExA>
+Section modulus $S = bh^2/6$. For fixed area $A = bh$, $S \propto h$. So bigger $h$ (with smaller $b$) gives bigger $S$ for the same material.
+
+This is why floor joists are oriented vertically — the bending stiffness goes as $h^3$ (for $I$).
+</ExA>
+
+<ExQ>
+**5. Multi-step.** Simply supported beam, $L = 8$ m, central point load 25 kN. Beam: rectangular, $0.1\times h$, $\sigma_{\text{allow}} = 200$ MPa. Find required $h$.
+</ExQ>
+<ExA>
+$M_{\max} = PL/4 = 50$ kN·m.
+
+Required $S = M/\sigma = 50000/(200\times 10^6) = 2.5\times 10^{-4}$ m³.
+
+$bh^2/6 \geq 2.5\times 10^{-4} \Rightarrow h^2 \geq 1.5\times 10^{-2} \Rightarrow h \geq 0.122$ m. So $h \approx 125$ mm minimum.
+</ExA>

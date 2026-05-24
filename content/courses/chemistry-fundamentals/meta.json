@@ -1,0 +1,49 @@
+{
+  "title": "Chemistry Fundamentals",
+  "description": "Atomic structure, chemical bonding, thermochemistry, and kinetics — the molecular foundation of materials science and manufacturing.",
+  "level": "beginner",
+  "area": "Chemistry",
+  "tags": ["Chemistry", "Materials", "MIT 5.111"],
+  "chapters": [
+    {
+      "title": "Atomic Structure",
+      "slug": "01-atomic-structure",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-atomic-model", "title": "The Atomic Model and Periodic Table", "order": 1 },
+        { "slug": "02-quantum-numbers", "title": "Quantum Numbers and Electron Configuration", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Chemical Bonding",
+      "slug": "02-bonding",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-ionic-covalent", "title": "Ionic and Covalent Bonds", "order": 1 },
+        { "slug": "02-metallic-bonding", "title": "Metallic Bonding and Properties", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Thermochemistry",
+      "slug": "03-thermochemistry",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-enthalpy", "title": "Enthalpy and Hess's Law", "order": 1 },
+        { "slug": "02-entropy-gibbs", "title": "Entropy and Gibbs Free Energy", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Reaction Kinetics",
+      "slug": "04-kinetics",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-reaction-rates", "title": "Reaction Rates and Rate Laws", "order": 1 },
+        { "slug": "02-activation-energy", "title": "Activation Energy and Arrhenius Equation", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

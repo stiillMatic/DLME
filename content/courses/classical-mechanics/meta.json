@@ -1,0 +1,52 @@
+{
+  "title": "Classical Mechanics",
+  "description": "Newton's laws, energy, momentum, and rotational dynamics — the physical foundation of all mechanical engineering.",
+  "level": "beginner",
+  "area": "Physics",
+  "tags": ["Physics", "Mechanics", "MIT 8.01"],
+  "chapters": [
+    {
+      "title": "Kinematics",
+      "slug": "01-kinematics",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-position-velocity-acceleration", "title": "Position, Velocity, and Acceleration", "order": 1 },
+        { "slug": "02-projectile-motion", "title": "Projectile Motion", "order": 2 },
+        { "slug": "03-circular-motion", "title": "Uniform Circular Motion", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Newton's Laws",
+      "slug": "02-newtons-laws",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-newtons-laws", "title": "Newton's Three Laws", "order": 1 },
+        { "slug": "02-friction", "title": "Friction and Normal Forces", "order": 2 },
+        { "slug": "03-free-body-diagrams", "title": "Free Body Diagrams", "order": 3 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Energy and Momentum",
+      "slug": "03-energy-momentum",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-work-energy", "title": "Work and Kinetic Energy", "order": 1 },
+        { "slug": "02-potential-energy", "title": "Potential Energy and Conservation", "order": 2 },
+        { "slug": "03-momentum", "title": "Linear Momentum and Collisions", "order": 3 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Rotational Dynamics",
+      "slug": "04-rotation",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-torque", "title": "Torque and Rotational Inertia", "order": 1 },
+        { "slug": "02-angular-momentum", "title": "Angular Momentum", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

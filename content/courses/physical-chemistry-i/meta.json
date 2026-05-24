@@ -1,0 +1,49 @@
+{
+  "title": "Physical Chemistry I: Thermodynamics & Kinetics",
+  "description": "The laws of thermodynamics applied to chemical systems, equilibrium, and reaction kinetics — based on MIT 5.60.",
+  "level": "intermediate",
+  "area": "Chemistry",
+  "tags": ["Chemistry", "Thermodynamics", "Kinetics", "MIT 5.60"],
+  "chapters": [
+    {
+      "title": "Laws of Thermodynamics",
+      "slug": "01-laws-thermo",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-first-law", "title": "Energy, Heat, and the First Law", "order": 1 },
+        { "slug": "02-entropy-second-law", "title": "Entropy and the Second Law", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Spontaneity and Free Energy",
+      "slug": "02-spontaneity",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-gibbs-energy", "title": "Gibbs Free Energy and Spontaneity", "order": 1 },
+        { "slug": "02-phase-equilibria", "title": "Phase Equilibria and the Clausius-Clapeyron Equation", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Chemical Equilibrium",
+      "slug": "03-equilibrium",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-equilibrium-constants", "title": "Equilibrium Constants and Le Chatelier's Principle", "order": 1 },
+        { "slug": "02-acid-base", "title": "Acid-Base Equilibria and pH", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Chemical Kinetics",
+      "slug": "04-kinetics",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-rate-laws", "title": "Rate Laws and Order of Reactions", "order": 1 },
+        { "slug": "02-arrhenius", "title": "Arrhenius Equation and Catalysis", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+---
+title: Activation Functions
+description: Why nonlinearities matter and which ones to use.
+---
+
+# Activation Functions
+
+Without an activation function, no matter how many layers you stack, the entire network reduces to a single linear transformation — useless for anything complex.
+
+## ReLU
+
+The most widely used activation today:
+
+$$
+\text{ReLU}(z) = \max(0, z)
+$$
+
+- Gradient is either 0 or 1 — no vanishing gradient for positive inputs
+- Fast to compute
+
+## Sigmoid
+
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}} \in (0, 1)
+$$
+
+Good for **binary classification outputs** (predicting probability). Avoid in hidden layers — gradients vanish for large $|z|$.
+
+## Tanh
+
+$$
+\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} \in (-1, 1)
+$$
+
+Zero-centered, slightly better than sigmoid for hidden layers but still suffers from saturation.
+
+## ME Analogy
+
+A stress-strain curve is a natural activation function. In the elastic regime the response is linear. Past yield, behaviour becomes nonlinear — that's your hidden-layer nonlinearity kicking in.
+
+## Practical Guide
+
+| Layer type | Recommended activation |
+|---|---|
+| Hidden layers (general) | ReLU or GELU |
+| Output — regression | None (linear) |
+| Output — binary classification | Sigmoid |
+| Output — multi-class | Softmax |
+
+```python
+import torch.nn as nn
+
+model = nn.Sequential(
+    nn.Linear(10, 64),
+    nn.ReLU(),
+    nn.Linear(64, 32),
+    nn.ReLU(),
+    nn.Linear(32, 1),  # regression output, no activation
+)
+```

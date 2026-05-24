@@ -1,0 +1,49 @@
+{
+  "title": "Physics III: Vibrations and Waves",
+  "description": "Oscillations, mechanical and electromagnetic waves, interference, and basic optics — the third semester of MIT's physics core (8.03).",
+  "level": "intermediate",
+  "area": "Physics",
+  "tags": ["Physics", "Waves", "Optics", "MIT 8.03"],
+  "chapters": [
+    {
+      "title": "Oscillations",
+      "slug": "01-oscillations",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-simple-harmonic-motion", "title": "Simple Harmonic Motion", "order": 1 },
+        { "slug": "02-damped-driven", "title": "Damped and Driven Oscillators", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Mechanical Waves",
+      "slug": "02-mechanical-waves",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-wave-equation", "title": "The Wave Equation", "order": 1 },
+        { "slug": "02-standing-waves", "title": "Standing Waves and Boundary Conditions", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Electromagnetic Waves",
+      "slug": "03-em-waves",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-maxwell-em-waves", "title": "Maxwell's Equations and EM Waves", "order": 1 },
+        { "slug": "02-polarization", "title": "Polarization and Energy Transport", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Interference, Diffraction, and Optics",
+      "slug": "04-optics",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-interference", "title": "Interference: Two-Slit and Thin Films", "order": 1 },
+        { "slug": "02-diffraction", "title": "Diffraction and Resolution", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

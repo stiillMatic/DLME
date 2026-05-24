@@ -1,0 +1,186 @@
+---
+title: Rank, Nullspace, and Column Space
+description: The four fundamental subspaces — what they are, how to find them, and why they characterize a matrix completely.
+---
+
+# Rank, Nullspace, and Column Space
+
+## The Big Picture
+
+Every matrix $A$ defines four fundamental subspaces: the **column space** (image), **null space** (kernel), **row space**, and **left null space**. These tell you what the matrix can do and what it cannot. The **rank** is a single number capturing how "much" the matrix actually transforms. Understanding rank and these subspaces lets you immediately read off whether a system has solutions, how many, and what the structure looks like.
+
+## Intuition First — A Matrix as a Funnel
+
+A matrix $A$ takes vectors from the *input* space $\mathbb{R}^n$ to the *output* space $\mathbb{R}^m$. Two questions:
+- **Which outputs are reachable?** That's the column space (image).
+- **Which inputs map to zero?** That's the null space (kernel).
+
+Some matrices "flatten" their inputs — multiple inputs collapse to one output, losing information. Rank measures how much information survives.
+
+## Column Space (Image)
+
+$$\text{Col}(A) = \{A\mathbf{x} : \mathbf{x} \in \mathbb{R}^n\} = \text{span of the columns of } A$$
+
+It's a subspace of $\mathbb{R}^m$. The **dimension of Col($A$)** is the rank.
+
+## Null Space (Kernel)
+
+$$\text{Null}(A) = \{\mathbf{x} : A\mathbf{x} = \mathbf{0}\}$$
+
+A subspace of $\mathbb{R}^n$. Vectors that the matrix "kills." Its dimension is called the **nullity**.
+
+## The Rank-Nullity Theorem
+
+For an $m\times n$ matrix:
+
+$$\text{rank}(A) + \text{nullity}(A) = n$$
+
+In words: the number of input dimensions = "dimensions that survive" + "dimensions that get killed."
+
+This conservation principle is the most important equation in linear algebra after the matrix product.
+
+## How to Find Them
+
+**Row reduce** $A$ to RREF. Then:
+- **Rank** = number of pivots.
+- **Column space basis** = original columns corresponding to pivot positions.
+- **Null space basis** = solve $A\mathbf{x} = \mathbf{0}$ via free variables, write parametric form.
+- **Row space** = nonzero rows of the RREF.
+
+## Worked Example
+
+$$A = \begin{pmatrix}1 & 2 & 3\\ 2 & 4 & 6\\ 1 & 1 & 2\end{pmatrix}$$
+
+Row reduce: $R_2 \to R_2 - 2R_1$ gives all zeros. $R_3 \to R_3 - R_1$ gives $(0, -1, -1)$.
+
+RREF: $\begin{pmatrix}1 & 0 & 1\\ 0 & 1 & 1\\ 0 & 0 & 0\end{pmatrix}$ (after further reduction).
+
+**Rank = 2** (two pivots), **Nullity = 1** (third column has no pivot — free variable).
+
+**Column space basis:** columns 1 and 2 of original $A$: $(1, 2, 1)^T$ and $(2, 4, 1)^T$.
+
+**Null space:** solve $\begin{pmatrix}1 & 0 & 1\\ 0 & 1 & 1\\ 0 & 0 & 0\end{pmatrix}\mathbf{x} = \mathbf{0}$. With $z = t$ free: $x = -t, y = -t$. Basis: $(-1, -1, 1)^T$.
+
+## What Rank Tells You
+
+| Rank $r$ for $m\times n$ matrix | Meaning |
+|---|---|
+| $r = n$ | columns linearly independent |
+| $r = m$ | rows linearly independent |
+| $r = m = n$ | invertible |
+| $r < \min(m, n)$ | rank-deficient |
+
+For $A\mathbf{x} = \mathbf{b}$:
+- Solution exists iff $\mathbf{b} \in $ Col$(A)$ iff rank$([A | \mathbf{b}])$ = rank$(A)$.
+- Solution unique iff rank = $n$ (no free variables) iff Null$(A) = \{0\}$.
+
+## Common Misconceptions
+
+**Misconception 1: "rank = number of nonzero rows."**
+
+Only after row reduction. The *original* matrix might have all-nonzero rows but be rank 1 (all rows are multiples of one).
+
+**Misconception 2: "Null space contains the zero vector, so it's always 1-dimensional."**
+
+Null space *always contains* $\mathbf{0}$ (that's what makes it a subspace). But if the only solution to $A\mathbf{x} = \mathbf{0}$ is $\mathbf{x} = \mathbf{0}$, the null space is $\{\mathbf{0}\}$ — a **zero-dimensional** subspace (just the origin). If there are nontrivial solutions, dimension ≥ 1.
+
+**Misconception 3: "Column space basis = columns of RREF."**
+
+No! Use **original** columns at pivot positions. The RREF columns are different vectors (in a different basis).
+
+**Misconception 4: "Full rank means invertible."**
+
+Full rank just means rank = min(m, n). For invertibility, need square AND full rank.
+
+## Engineering Connection
+
+- **Truss / structural rigidity:** kinematic indeterminacy = nullity of the equilibrium matrix. Zero nullity = stable structure.
+- **Static indeterminacy:** when the equilibrium matrix has rank < number of unknowns → can't solve uniquely from statics alone.
+- **System identifiability:** in dynamical systems, the rank of the observability matrix tells you whether the state can be inferred from outputs.
+- **Compressed sensing:** signals that are sparse have effective rank lower than ambient dimension.
+- **PCA / dimensionality reduction:** "effective rank" of a data matrix tells you how many features really matter.
+- **Neural network expressiveness:** layers with low-rank weight matrices effectively reduce information bandwidth.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Find the rank of $A = \begin{pmatrix}1 & 2\\ 3 & 6\end{pmatrix}$.
+</ExQ>
+<ExA>
+$R_2 - 3R_1$ gives row of zeros. **Rank = 1.** Second row is a multiple of the first.
+</ExA>
+
+<ExQ>
+**2.** Find a basis for the null space of $A = \begin{pmatrix}1 & 2 & 1\\ 2 & 4 & 2\end{pmatrix}$.
+</ExQ>
+<ExA>
+$R_2 - 2R_1$ gives zero row. RREF: $\begin{pmatrix}1 & 2 & 1\\ 0 & 0 & 0\end{pmatrix}$.
+
+One pivot in column 1; columns 2 and 3 free: $y = s$, $z = t$ free. $x = -2s - t$.
+
+Null space basis: $\{(-2, 1, 0), (-1, 0, 1)\}$. Dimension 2.
+
+Verify rank-nullity: $\text{rank} = 1$, $n = 3$, $1 + 2 = 3$ ✓.
+</ExA>
+
+### Application
+
+<ExQ>
+**3. Engineering: Truss.** A 2D truss has 8 unknowns (member forces) and 10 equilibrium equations from 5 joints. If the equilibrium matrix has rank 8, what does this tell you?
+</ExQ>
+<ExA>
+Rank = number of unknowns = 8 → unique solution exists for member forces if the loading is statically admissible.
+
+The 10 equations have rank 8, meaning 2 equations are redundant (or contradictory if loading is inadmissible). Equilibrium imposes only 8 independent constraints.
+
+This is the standard **statically determinate** truss analysis. Rank-deficient cases (rank < 8) correspond to mechanisms — the truss can deform without applying force.
+</ExA>
+
+<ExQ>
+**4.** For $A = \begin{pmatrix}1 & 1 & 0\\ 0 & 1 & 1\\ 1 & 0 & -1\end{pmatrix}$, find rank and determine if $\mathbf{b} = (2, 1, 1)^T$ is in Col$(A)$.
+</ExQ>
+<ExA>
+$R_3 \to R_3 - R_1$: $(0, -1, -1)$. $R_3 \to R_3 + R_2$: $(0, 0, 0)$.
+
+RREF: $\begin{pmatrix}1 & 0 & -1\\ 0 & 1 & 1\\ 0 & 0 & 0\end{pmatrix}$.
+
+**Rank = 2.**
+
+Augment with $\mathbf{b}$ and reduce: $\left[\begin{array}{ccc|c}1 & 1 & 0 & 2\\ 0 & 1 & 1 & 1\\ 1 & 0 & -1 & 1\end{array}\right]$.
+
+Apply same operations: third row becomes $(0, 0, 0, 0)$. Rank of augmented matrix = 2 = rank of $A$.
+
+So **yes**, $\mathbf{b} \in $ Col$(A)$, system is consistent (infinite solutions due to nullity 1).
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** If $A$ is invertible, then $A^TA$ is also invertible. Justify.
+</ExQ>
+<ExA>
+**True.** $A^TA$ is invertible iff $A^TA$ has trivial null space.
+
+Suppose $A^TA\mathbf{x} = 0$. Multiply on left by $\mathbf{x}^T$: $\mathbf{x}^T A^T A\mathbf{x} = \|A\mathbf{x}\|^2 = 0$, so $A\mathbf{x} = \mathbf{0}$.
+
+If $A$ is invertible, $A\mathbf{x} = 0$ implies $\mathbf{x} = 0$. So Null$(A^TA) = \{0\}$, meaning $A^TA$ is invertible. ✓
+
+**General fact:** $A^TA$ is invertible iff $A$ has full column rank. Doesn't require $A$ square.
+</ExA>
+
+<ExQ>
+**6.** Explain why the **rows** of $A$ and the **columns** of $A$ always have the same dimension of span.
+</ExQ>
+<ExA>
+This is the *row rank = column rank* theorem.
+
+After row-reducing $A$ to RREF, the number of nonzero rows (= row rank) equals the number of pivot columns (= column rank). Row operations don't change the **row space** dimension, and pivot columns correspond to a maximal linearly independent set of original columns.
+
+So both row rank and column rank equal the rank of the matrix.
+
+**Practical:** you can find rank by looking at rows OR columns — whichever is convenient.
+</ExA>

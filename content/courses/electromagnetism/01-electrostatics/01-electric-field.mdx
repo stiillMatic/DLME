@@ -1,0 +1,112 @@
+---
+title: Electric Charge and Coulomb's Law
+description: The fundamental force between charged particles — and how it gives rise to electric fields.
+---
+
+# Electric Charge and Coulomb's Law
+
+## The Big Picture
+
+Electromagnetism is the second of the four fundamental forces, governing all electrical and magnetic phenomena. It begins with **electric charge** and **Coulomb's law** — the inverse-square force between charges, mathematically identical to gravity but enormously stronger. Understanding this allows us to construct the **electric field** $\mathbf{E}$, which becomes the central object of electrostatic analysis.
+
+## Coulomb's Law
+
+The force on charge $q_1$ due to $q_2$ separated by $\mathbf{r}_{12}$:
+
+$$\mathbf{F}_{12} = \frac{q_1 q_2}{4\pi\varepsilon_0 r_{12}^2}\hat{\mathbf{r}}_{12}$$
+
+where $\varepsilon_0 = 8.854\times 10^{-12}$ F/m is the **permittivity of free space**.
+
+Like charges repel; opposite charges attract.
+
+## Electric Field
+
+A point charge $q$ creates field at position $\mathbf{r}$:
+
+$$\mathbf{E}(\mathbf{r}) = \frac{q}{4\pi\varepsilon_0 r^2}\hat{\mathbf{r}}$$
+
+Force on test charge: $\mathbf{F} = q_t\mathbf{E}$.
+
+The field is a **vector field** existing throughout space, even where no test charge is.
+
+## Superposition
+
+Total field from multiple charges = vector sum of individual fields:
+
+$$\mathbf{E}_{\text{total}} = \sum_i\frac{q_i}{4\pi\varepsilon_0 r_i^2}\hat{\mathbf{r}}_i$$
+
+For continuous charge distributions: integrate $d\mathbf{E} = (dq/4\pi\varepsilon_0 r^2)\hat{\mathbf{r}}$ over the source.
+
+## Common Misconceptions
+
+**Misconception 1: "Electric field requires test charges to exist."**
+
+No — the field exists due to source charges, regardless of whether a test charge is there. The test charge merely *probes* the field.
+
+**Misconception 2: "$1/r^2$ means field is weak far away."**
+
+Yes for point charges. But fields from sheets of charge fall off as $1/r$ or even constant — depends on geometry. Always check the source distribution.
+
+**Misconception 3: "Coulomb force and gravity are similar in strength."**
+
+Coulomb force between two electrons exceeds gravity by ~$10^{42}$ times. Electrostatic forces dominate at atomic and molecular scales.
+
+## Engineering Connection
+
+- **Capacitors:** electric field stored between plates → energy storage.
+- **Insulator design:** dielectric breakdown when field exceeds material's strength.
+- **Particle accelerators:** electric fields accelerate charged particles to high energies.
+- **Inkjet printers:** charged droplets deflected by electric fields onto paper.
+- **Electrostatic precipitators:** charged dust particles collected on grounded plates.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Two charges, $+1$ μC and $+2$ μC, separated by 0.1 m. Force?
+</ExQ>
+<ExA>
+$F = (1\times 10^{-6})(2\times 10^{-6})/(4\pi\cdot 8.85\times 10^{-12}\cdot 0.01)$
+$= 2\times 10^{-12}/(1.11\times 10^{-12}) = 1.8$ N (repulsive).
+</ExA>
+
+<ExQ>
+**2.** Field at 2 m from a $+5$ μC point charge?
+</ExQ>
+<ExA>
+$E = 5\times 10^{-6}/(4\pi\cdot 8.85\times 10^{-12}\cdot 4) = 1.12\times 10^4$ V/m, radially outward.
+</ExA>
+
+<ExQ>
+**3. Engineering: Capacitor.** Two parallel plates, area 0.01 m², separation 1 mm, charged to 100 V. Field between plates?
+</ExQ>
+<ExA>
+$E = V/d = 100/0.001 = 10^5$ V/m = 100 kV/m.
+
+(Below typical air breakdown of 3 MV/m.)
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is Coulomb's law analogous to Newton's gravity but charges can be negative?
+</ExQ>
+<ExA>
+Both inverse-square. But mass is always positive (no anti-gravity); charge has sign.
+
+Consequence: gravity is always attractive (huge masses still pull). Charges can attract OR repel — and net charge of macroscopic objects is usually near zero (matter is mostly neutral).
+
+This is why gravity dominates at large scales (planets) despite being so much weaker — because charges cancel.
+</ExA>
+
+<ExQ>
+**5.** Three charges: $+q$ at $(0,0)$, $-q$ at $(d,0)$, $+q$ at $(0,d)$. Find force on charge at origin.
+</ExQ>
+<ExA>
+From $-q$ at $(d,0)$: attractive, magnitude $kq^2/d^2$, in $+x$ direction.
+
+From $+q$ at $(0,d)$: repulsive, magnitude $kq^2/d^2$, in $-y$ direction.
+
+Total: $(kq^2/d^2, -kq^2/d^2)$, magnitude $\sqrt 2 kq^2/d^2$, at 45° below $+x$ axis.
+
+(Where $k = 1/(4\pi\varepsilon_0)$.)
+</ExA>

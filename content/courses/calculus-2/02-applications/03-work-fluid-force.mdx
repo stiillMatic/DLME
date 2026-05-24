@@ -1,0 +1,117 @@
+---
+title: Work and Fluid Pressure
+description: Computing work done by variable forces and total force from hydrostatic pressure — physics in integral form.
+---
+
+# Work and Fluid Pressure
+
+## The Big Picture
+
+Two engineering applications of definite integration: **work** done by a variable force and **fluid force** on a submerged surface. Both involve integrating a quantity that varies with position. Master these patterns and you can solve a huge range of mechanical problems — pump sizing, dam design, lifting calculations.
+
+## Work by a Variable Force
+
+For a force $F(x)$ moving an object from $x = a$ to $x = b$:
+
+$$W = \int_a^b F(x)\,dx$$
+
+Units: J (or ft·lb in US).
+
+**Spring force:** $F = -kx$. Work to stretch from $x_1$ to $x_2$: $W = \int_{x_1}^{x_2}kx\,dx = k(x_2^2 - x_1^2)/2$.
+
+**Gravity over varying mass:** lifting a chain or rope where weight per length varies with position.
+
+## Pumping Liquid
+
+To pump liquid out of a tank: each layer of thickness $dy$ at depth $h$ has volume $A(y)\,dy$, mass $\rho A(y)\,dy$, weight $\rho g A(y)\,dy$. Lifting it height $h$ requires work $\rho g A(y) h\,dy$.
+
+Total work:
+
+$$W = \int \rho g\,A(y)\,h(y)\,dy$$
+
+(Limits: bottom to top of fluid; $h(y)$: distance to lift each layer.)
+
+## Fluid Pressure on Vertical Wall
+
+Pressure at depth $h$: $p = \rho g h$. Force on horizontal strip at depth $h$ with width $w(h)$ and thickness $dh$:
+
+$$dF = p\cdot dA = \rho g h\cdot w(h)\,dh$$
+
+Total force: $F = \int_0^H\rho g h\,w(h)\,dh$.
+
+## Common Misconceptions
+
+**Misconception 1: "Work = force × distance always."**
+
+Only when force is *constant*. For variable force, you need the integral. Confusing $F\cdot d$ with $\int F\,dx$ leads to wrong answers.
+
+**Misconception 2: "Forgot the orientation."**
+
+For pumping, distinguish: lifting *to* the top vs *out* of the top. The lifting distance for each layer differs.
+
+**Misconception 3: "Pressure on horizontal vs vertical surface."**
+
+On horizontal surface: pressure constant, $F = pA$. On vertical surface: pressure varies linearly with depth, must integrate.
+
+## Engineering Connection
+
+- **Pump sizing:** work to drain or fill tank determines pump power × time.
+- **Dam force calculation:** total horizontal force from water determines structural requirements.
+- **Lifting heavy chain/cable:** total work depends on chain weight distribution.
+- **Water tower pressure:** elevation determines available head pressure.
+- **Compressing gas:** $W = \int P\,dV$ — fundamental thermodynamics.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** A spring with $k = 100$ N/m stretched from 0 to 0.2 m. Work?
+</ExQ>
+<ExA>
+$W = \int_0^{0.2}100x\,dx = 50\cdot 0.04 = 2$ J.
+</ExA>
+
+<ExQ>
+**2. Pumping.** Cylindrical tank, radius 2 m, height 5 m, full of water. Work to empty (over the top)?
+</ExQ>
+<ExA>
+At depth $y$ below top, layer volume = $\pi(4)\,dy$, mass = $4000\pi\,dy$ kg, weight = $4000\pi g\,dy$ N.
+
+Lifting height = $y$ (to reach top).
+
+$W = \int_0^5 4000\pi g\cdot y\,dy = 4000\pi g\cdot 12.5 = 50000\pi\cdot 9.81 \approx 1.54\times 10^6$ J ≈ 1.54 MJ.
+</ExA>
+
+<ExQ>
+**3. Engineering: Dam.** Triangular dam, top width 10 m, depth 6 m. Width at depth $h$ is $w(h) = 10 - h\cdot 10/6$. Total force?
+</ExQ>
+<ExA>
+$F = \int_0^6 \rho g h\cdot(10 - 5h/3)\,dh = 1000\cdot 9.81\int_0^6(10h - 5h^2/3)\,dh$
+
+$= 9810\cdot[5h^2 - 5h^3/9]_0^6 = 9810\cdot(180 - 120) = 9810\cdot 60 = 5.89\times 10^5$ N ≈ 589 kN.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does the work to pump water depend on tank shape, even at fixed total volume?
+</ExQ>
+<ExA>
+Different shapes have water at different *depths*. A tall narrow tank has water that needs to be lifted further than a wide shallow tank with the same volume.
+
+$W = \int \rho g A(y)y\,dy$. Same total volume but different $A(y)$ profiles give different integrals.
+
+This is why water towers are tall: the height determines pressure available downstream — gives "head" without active pumping.
+</ExA>
+
+<ExQ>
+**5. Engineering: Hanging chain.** A 10 m chain weighs 5 N/m. Work to lift entire chain to a roof at height 10 m?
+</ExQ>
+<ExA>
+At height $y$, the bottom $(10-y)$ m of chain still hangs. To lift the chain by $dy$: weight currently being lifted is $5\cdot(10-y)$ N (the part still suspended) at distance ... actually, this is more subtle.
+
+Let me parameterize differently: bring chain layer at original position $y$ (measured from top) up to roof. It needs to travel $y$ meters. Weight per layer = $5\,dy$. Work for that layer: $5y\,dy$.
+
+$W = \int_0^{10}5y\,dy = 250$ J.
+
+Equivalent: total weight × distance for center of mass = $50\cdot 5 = 250$ J ✓.
+</ExA>

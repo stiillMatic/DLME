@@ -1,0 +1,106 @@
+---
+title: Triple Integrals and Cylindrical/Spherical
+description: Integrating over 3D regions — volumes, masses, and field totals.
+---
+
+# Triple Integrals and Cylindrical/Spherical
+
+## The Big Picture
+
+Triple integrals extend the idea to 3D: integrate over solid regions to get volumes, masses, moments, total fields. Cylindrical and spherical coordinates are essential when the region or integrand has corresponding symmetry — they convert intractable Cartesian integrals into routine ones.
+
+## Triple Integral
+
+$$\iiint_E f(x,y,z)\,dV$$
+
+In Cartesian: $dV = dx\,dy\,dz$. Six orderings possible — pick the easiest.
+
+**Volume:** $V = \iiint_E\,dV$.
+**Mass:** $M = \iiint_E\rho\,dV$.
+
+## Cylindrical Coordinates
+
+$x = r\cos\theta$, $y = r\sin\theta$, $z = z$.
+
+$dV = r\,dr\,d\theta\,dz$.
+
+Use for cylinders, paraboloids, cones — anything with axis symmetry.
+
+## Spherical Coordinates
+
+$x = \rho\sin\phi\cos\theta$, $y = \rho\sin\phi\sin\theta$, $z = \rho\cos\phi$.
+
+$dV = \rho^2\sin\phi\,d\rho\,d\phi\,d\theta$.
+
+Use for spheres, cones from origin, "ice cream cones."
+
+## Common Misconceptions
+
+**Misconception 1: "The Jacobian factor is just bookkeeping."**
+
+It's the volume element of the new coordinates. Forgetting it gives totally wrong volumes/masses.
+
+**Misconception 2: "Spherical is always best for 3D."**
+
+Spherical is for **point** symmetry (origin-centered). Cylindrical is for **axial** symmetry. Different problems.
+
+**Misconception 3: "Inverse Jacobian also works."**
+
+Use $|J|$, not $1/|J|$. The Jacobian is volume scaling factor for *new variables in terms of old*.
+
+## Engineering Connection
+
+- **Mass of irregular bodies:** $M = \iiint\rho\,dV$ for 3D density distributions.
+- **Center of mass:** $\bar{\mathbf{r}} = (1/M)\iiint\rho\mathbf{r}\,dV$.
+- **Moment of inertia:** $I = \iiint\rho r^2\,dV$ — for rigid-body rotation.
+- **Total field flux** through a volume.
+- **Heat content of an irregular object.**
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Volume of cube $[0, 1]^3$ via triple integral.
+</ExQ>
+<ExA>
+$\iiint_{[0,1]^3}\,dV = 1\cdot 1\cdot 1 = 1$.
+</ExA>
+
+<ExQ>
+**2.** Volume of sphere of radius $R$.
+</ExQ>
+<ExA>
+$\int_0^{2\pi}\int_0^\pi\int_0^R\rho^2\sin\phi\,d\rho\,d\phi\,d\theta = 2\pi\cdot 2\cdot R^3/3 = 4\pi R^3/3$ ✓.
+</ExA>
+
+<ExQ>
+**3.** Volume of cylinder radius 2, height 5.
+</ExQ>
+<ExA>
+$\int_0^{2\pi}\int_0^2\int_0^5 r\,dz\,dr\,d\theta = 2\pi\cdot 2\cdot 5 = 20\pi \approx 62.83$ ✓.
+</ExA>
+
+<ExQ>
+**4. Engineering: Moment of inertia.** Solid cylinder, mass $M$, radius $R$, height $h$. Find $I_z$ about the axis.
+</ExQ>
+<ExA>
+Density: $\rho_0 = M/(\pi R^2 h)$.
+
+$I_z = \iiint\rho_0(x^2+y^2)\,dV = \rho_0\int_0^h\int_0^{2\pi}\int_0^R r^2\cdot r\,dr\,d\theta\,dz$
+
+$= \rho_0\cdot h\cdot 2\pi\cdot R^4/4 = \rho_0\cdot\pi R^2 h\cdot R^2/2 = MR^2/2$.
+
+Standard cylinder formula.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does $\rho^2\sin\phi$ vanish at the poles in spherical coordinates?
+</ExQ>
+<ExA>
+At $\phi = 0$ or $\pi$, all azimuthal angles $\theta$ collapse to a single point on the $z$-axis. No azimuthal extent → zero volume element.
+
+This is why spherical coordinates are *singular* at the poles — a small numerical issue but a real geometric fact.
+
+Engineers solving PDEs in spherical coords often use modified schemes near the poles to avoid this singularity.
+</ExA>

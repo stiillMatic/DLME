@@ -1,0 +1,77 @@
+{
+  "title": "Linear Algebra",
+  "description": "Vectors, linear transformations, eigenvalues, SVD, and the Fredholm Alternative — the complete applied linear algebra curriculum for engineers.",
+  "level": "intermediate",
+  "area": "Mathematics",
+  "tags": ["Linear Algebra", "Mathematics", "MIT 18.06"],
+  "chapters": [
+    {
+      "title": "Vectors and Matrices",
+      "slug": "01-vectors-matrices",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-vectors", "title": "Vectors and Vector Spaces", "order": 1 },
+        { "slug": "02-matrices", "title": "Matrix Operations", "order": 2 },
+        { "slug": "03-matrix-multiplication", "title": "Matrix Multiplication and Inverse", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Solving Linear Systems",
+      "slug": "02-systems",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-gaussian-elimination", "title": "Gaussian Elimination", "order": 1 },
+        { "slug": "02-rank-null", "title": "Rank, Nullspace, and Column Space", "order": 2 }
+      ]
+    },
+    {
+      "title": "Eigenvalues and Eigenvectors",
+      "slug": "03-eigenvalues",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-eigenvalues", "title": "Eigenvalues and Eigenvectors", "order": 1 },
+        { "slug": "02-diagonalization", "title": "Diagonalization and Matrix Powers", "order": 2 },
+        { "slug": "03-svd", "title": "Singular Value Decomposition (SVD)", "order": 3 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Applications",
+      "slug": "04-applications",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-least-squares", "title": "Least Squares and Regression", "order": 1 },
+        { "slug": "02-pca", "title": "Principal Component Analysis (PCA)", "order": 2 }
+      ]
+    },
+    {
+      "title": "Linear Transformations",
+      "slug": "05-linear-transformations",
+      "order": 5,
+      "lessons": [
+        { "slug": "01-linear-maps", "title": "Linear Maps and Their Properties", "order": 1 },
+        { "slug": "02-change-of-basis", "title": "Change of Basis for Linear Transformations", "order": 2 },
+        { "slug": "03-projection-tensors", "title": "Projection Tensors and Orthogonal Projection", "order": 3 }
+      ]
+    },
+    {
+      "title": "Systems of Equations and the Fredholm Alternative",
+      "slug": "06-systems-fredholm",
+      "order": 6,
+      "lessons": [
+        { "slug": "02-fredholm-alternative", "title": "The Fredholm Alternative Theorem", "order": 1 },
+        { "slug": "03-pseudo-inverse", "title": "Least-Squares and the Pseudo-Inverse", "order": 2 }
+      ]
+    },
+    {
+      "title": "The Eigenvalue Spectrum and SVD",
+      "slug": "07-eigenvalue-spectrum",
+      "order": 7,
+      "lessons": [
+        { "slug": "02-singular-values", "title": "Singular Values and Rectangular Matrices", "order": 1 },
+        { "slug": "03-svd-applications", "title": "SVD Applications: Noise Filtering and Data Compression", "order": 2 }
+      ]
+    }
+  ]
+}

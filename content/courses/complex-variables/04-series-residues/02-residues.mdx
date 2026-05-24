@@ -1,0 +1,83 @@
+---
+title: Residues and the Residue Theorem
+description: Computing residues at poles and using them to evaluate contour integrals efficiently.
+---
+
+# Residues and the Residue Theorem
+
+When $f(z)$ has an isolated singularity at $z_0$, its Laurent series has the form:
+
+$$f(z) = \sum_{n=-\infty}^{\infty} a_n (z-z_0)^n$$
+
+The coefficient $a_{-1}$ is the **residue** of $f$ at $z_0$:
+
+$$\text{Res}(f, z_0) = a_{-1}$$
+
+## Types of Singularities
+
+| Type | Laurent series | Example |
+|---|---|---|
+| Removable | No negative powers | $\sin z / z$ at $z=0$ |
+| Simple pole (order 1) | $a_{-1}/(z-z_0) + \ldots$ | $1/(z-1)$ at $z=1$ |
+| Pole of order $m$ | $a_{-m}/(z-z_0)^m + \ldots$ | $1/(z-1)^3$ at $z=1$ |
+| Essential | Infinitely many negative powers | $e^{1/z}$ at $z=0$ |
+
+## Computing Residues
+
+**Simple pole at $z_0$:**
+$$\text{Res}(f, z_0) = \lim_{z\to z_0}(z-z_0)f(z)$$
+
+**Pole of order $m$:**
+$$\text{Res}(f, z_0) = \frac{1}{(m-1)!}\lim_{z\to z_0}\frac{d^{m-1}}{dz^{m-1}}\left[(z-z_0)^m f(z)\right]$$
+
+**Ratio $p/q$ with simple zero of $q$ at $z_0$:**
+$$\text{Res}\!\left(\frac{p}{q}, z_0\right) = \frac{p(z_0)}{q'(z_0)}$$
+
+## Residue Theorem
+
+If $f$ is analytic inside and on $C$ except at isolated singularities $z_1, \ldots, z_k$ inside $C$:
+
+$$\oint_C f(z)\,dz = 2\pi i \sum_{j=1}^k \text{Res}(f, z_j)$$
+
+This reduces any contour integral to computing a few residues — enormously powerful.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the residue of $f(z) = \dfrac{e^z}{(z-1)^2}$ at $z = 1$.
+</ExQ>
+<ExA>
+Pole of order 2 at $z = 1$:
+
+$$\text{Res}(f, 1) = \lim_{z\to 1}\frac{d}{dz}\left[(z-1)^2 \cdot \frac{e^z}{(z-1)^2}\right] = \lim_{z\to 1}\frac{d}{dz}e^z = e^1 = \boxed{e}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\oint_C \frac{z^2}{(z-1)(z+2)}\,dz$ where $C$ is $|z| = 3$.
+</ExQ>
+<ExA>
+Both poles $z = 1$ and $z = -2$ are inside $|z| = 3$.
+
+**Res at $z=1$:**
+$$\lim_{z\to 1}(z-1)\cdot\frac{z^2}{(z-1)(z+2)} = \frac{1}{3}$$
+
+**Res at $z=-2$:**
+$$\lim_{z\to -2}(z+2)\cdot\frac{z^2}{(z-1)(z+2)} = \frac{4}{-3} = -\frac{4}{3}$$
+
+$$\oint_C = 2\pi i\left(\frac{1}{3} - \frac{4}{3}\right) = 2\pi i(-1) = \boxed{-2\pi i}$$
+</ExA>
+
+<ExQ>
+Find the residue of $\dfrac{\cos z}{z^2}$ at $z = 0$ using the Laurent series.
+</ExQ>
+<ExA>
+Laurent series of $\cos z / z^2$ around $z = 0$:
+
+$$\frac{\cos z}{z^2} = \frac{1}{z^2}\left(1 - \frac{z^2}{2!} + \frac{z^4}{4!} - \cdots\right) = \frac{1}{z^2} - \frac{1}{2} + \frac{z^2}{24} - \cdots$$
+
+The coefficient of $1/z$ is **0**. Therefore $\text{Res}(\cos z/z^2, 0) = \boxed{0}$.
+
+(There is a pole of order 2, but the residue — the $a_{-1}$ coefficient — happens to be zero.)
+</ExA>

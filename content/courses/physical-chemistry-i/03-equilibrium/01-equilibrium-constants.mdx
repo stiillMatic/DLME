@@ -1,0 +1,140 @@
+---
+title: Equilibrium Constants and Le Chatelier's Principle
+description: How to predict reaction extent at equilibrium and how it shifts when conditions change.
+---
+
+# Equilibrium Constants and Le Chatelier's Principle
+
+## The Big Picture
+
+Most chemical reactions don't go to completion — they reach **equilibrium**, where forward and reverse rates balance. The **equilibrium constant** $K$ quantifies the position of this balance — large $K$ means products dominate, small $K$ means reactants. **Le Chatelier's principle** predicts how the equilibrium shifts when you perturb the system. Together, these tools let you predict yield, design reactors, and tune chemical processes.
+
+## Equilibrium Constant
+
+For $aA + bB \rightleftharpoons cC + dD$:
+
+$$K = \frac{[C]^c[D]^d}{[A]^a[B]^b}$$
+
+Concentrations or pressures, depending on phase. Pure solids and liquids omitted.
+
+At equilibrium, $Q = K$. If $Q < K$: forward reaction dominates (driving toward equilibrium). $Q > K$: reverse.
+
+## Relation to Gibbs Energy
+
+$$\Delta G^\circ = -RT\ln K$$
+
+So:
+- $\Delta G^\circ < 0 \Leftrightarrow K > 1$: products favored
+- $\Delta G^\circ > 0 \Leftrightarrow K < 1$: reactants favored
+
+Magnitude of $K$: order-of-magnitude estimate of yield.
+
+## Temperature Dependence: Van't Hoff
+
+$$\ln\frac{K_2}{K_1} = -\frac{\Delta H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)$$
+
+- Exothermic ($\Delta H < 0$): $K$ decreases with temperature.
+- Endothermic ($\Delta H > 0$): $K$ increases with temperature.
+
+This is one form of Le Chatelier — heating an endothermic equilibrium shifts forward.
+
+## Le Chatelier's Principle
+
+"A system at equilibrium, when disturbed, shifts to relieve the disturbance."
+
+| Disturbance | Shift |
+|---|---|
+| Add reactant | Forward |
+| Add product | Reverse |
+| Increase P (gas; more mol on one side) | Toward fewer mol |
+| Increase T (endothermic) | Forward |
+| Increase T (exothermic) | Reverse |
+| Add catalyst | No shift (just faster equilibration) |
+| Add inert gas at constant V | No shift |
+
+## Common Misconceptions
+
+**Misconception 1: "At equilibrium, all concentrations are equal."**
+
+At equilibrium, **rates** are equal — not concentrations. The ratio of concentrations equals $K$, which can be any value.
+
+**Misconception 2: "Catalysts shift equilibrium."**
+
+No! Catalysts accelerate forward and reverse equally — only the *rate* of approach changes, not the equilibrium position.
+
+**Misconception 3: "Pressure changes shift all equilibria equally."**
+
+Only equilibria with different total moles of gas are affected by pressure. Solid/liquid equilibria essentially independent of P.
+
+## Engineering Connection
+
+- **Ammonia synthesis (Haber):** N₂ + 3H₂ ⇌ 2NH₃. High P favors forward (4 → 2 mol gas).
+- **Steam reforming:** CH₄ + H₂O ⇌ CO + 3H₂. Endothermic — high T favors H₂ production.
+- **Water-gas shift:** CO + H₂O ⇌ CO₂ + H₂. Slightly exothermic; T tuned for kinetics vs equilibrium.
+- **Industrial methanol synthesis:** CO + 2H₂ ⇌ CH₃OH. High P, modest T.
+- **Buffer design in biology and chemistry** uses acid-base equilibria.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $K = 4$ for $A + B \rightleftharpoons C$. Initially [A]=[B]=1 M, [C]=0. Equilibrium concentrations?
+</ExQ>
+<ExA>
+Let $x$ = amount reacted. At equilibrium: [A] = 1-x, [B] = 1-x, [C] = x.
+
+$K = x/(1-x)^2 = 4 \Rightarrow x = 4(1-x)^2 = 4 - 8x + 4x^2$.
+
+$4x^2 - 9x + 4 = 0$. Quadratic: $x = (9 \pm \sqrt{81-64})/8 = (9 \pm 4.12)/8$.
+
+Physical solution (x < 1): $x = (9-4.12)/8 = 0.61$.
+
+[A] = [B] = 0.39 M, [C] = 0.61 M.
+
+61% yield.
+</ExA>
+
+<ExQ>
+**2.** $K = 10^{-5}$. Reaction goes forward or stays?
+</ExQ>
+<ExA>
+Very small $K$ — reactants strongly favored. Reaction barely proceeds.
+
+Equivalent: $\Delta G^\circ = -RT\ln K = +28.6$ kJ/mol at 298 K. Strongly non-spontaneous.
+
+To get product, need to remove product as it forms (Le Chatelier) or couple with another reaction with $\Delta G^\circ \ll 0$.
+</ExA>
+
+<ExQ>
+**3.** Exothermic reaction at equilibrium. Heat the system. What happens?
+</ExQ>
+<ExA>
+Le Chatelier: equilibrium shifts to **absorb the added heat** = endothermic direction = reverse direction.
+
+K decreases. Less product at higher T.
+
+Mathematically: Van't Hoff with $\Delta H^\circ < 0$ gives $dK/dT < 0$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Methanol synthesis.** CO + 2H₂ ⇌ CH₃OH, $\Delta H = -91$ kJ/mol. Exothermic, but industrial process at ~250°C, 100 atm. Why these conditions?
+</ExQ>
+<ExA>
+**Pressure:** 3 mol gas → 1 mol gas. High P → forward shift (more methanol). 100 atm is economical and increases yield.
+
+**Temperature:** Trade-off. Cooler → more thermodynamic favor (since exothermic). Hotter → faster (kinetics). 250°C is a compromise where catalyst is active and equilibrium still favors product.
+
+Plus: heat removal is critical (exothermic + high P = explosion risk if uncooled). Reactor design includes heat exchangers.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does adding an inert gas at constant V not shift gaseous equilibrium?
+</ExQ>
+<ExA>
+At constant V, adding inert gas doesn't change partial pressures of reactants/products. Their concentrations unchanged. $Q$ unchanged → equilibrium unchanged.
+
+At constant P (e.g., adding gas to an unconfined balloon system), V increases — partial pressures of all species decrease equally. $Q$ changes if forward/reverse have different $\Delta n_{\text{gas}}$.
+
+This subtle distinction matters for industrial reactors: constant V (most common) vs constant P designs respond differently.
+</ExA>

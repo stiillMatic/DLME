@@ -1,0 +1,159 @@
+---
+title: Double Integrals
+description: Integrating over 2D regions — areas, volumes, masses, and the foundation of all surface and field calculations in engineering.
+---
+
+# Double Integrals
+
+## The Big Picture
+
+A single integral sums a 1D quantity over an interval. A **double integral** generalizes this to 2D regions: it sums a function $f(x, y)$ over an area, weighting each piece by infinitesimal area $dA$. This is how engineers compute the volume under a surface, the mass of a 2D plate, the total force on an area, the moment of inertia, and the average value of a field. Once you can integrate over arbitrary 2D regions, you can quantify any field-based quantity.
+
+## Intuition First — Stacking Slices
+
+Think of the volume under a surface $z = f(x, y)$ over a region $R$ as a 3D pile. To compute it: slice it into thin strips of width $dy$, integrate the cross-sectional area along each strip, then sum the strips. That's an iterated integral:
+
+$$V = \iint_R f(x, y)\,dA = \int_a^b\int_{g_1(y)}^{g_2(y)}f(x, y)\,dx\,dy$$
+
+The inner integral builds 1D cross-sections; the outer sums them.
+
+## Formal Definition
+
+For a function $f$ on a region $R$, partition $R$ into small rectangles of area $\Delta A_{ij}$, sample at $(x_{ij}^*, y_{ij}^*)$, form Riemann sum:
+
+$$\iint_R f(x, y)\,dA = \lim_{n\to\infty}\sum_{i,j} f(x_{ij}^*, y_{ij}^*)\Delta A_{ij}$$
+
+For continuous $f$, the limit exists and is independent of partition.
+
+## Iterated Integrals (Fubini's Theorem)
+
+If $R$ is described as $\{(x, y) : a \leq x \leq b,\ g_1(x) \leq y \leq g_2(x)\}$:
+
+$$\iint_R f\,dA = \int_a^b\int_{g_1(x)}^{g_2(x)}f(x, y)\,dy\,dx$$
+
+Or, equivalently, with the order swapped (integrate over $x$ first, then $y$).
+
+**Fubini's theorem:** for continuous $f$ on a "nice" region, the order of integration doesn't matter — both iterated integrals give the same answer.
+
+**But:** the *limits* and *integrand expression* may look different in each order, and one order is often easier than the other. Choose wisely.
+
+## Polar Coordinates
+
+For circular regions, use polar coordinates: $x = r\cos\theta$, $y = r\sin\theta$, $dA = r\,dr\,d\theta$.
+
+$$\iint_R f(x, y)\,dA = \iint_R f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$
+
+The factor $r$ accounts for the way "wedges" expand outward.
+
+**Example:** integral of $e^{-(x^2 + y^2)}$ over the entire plane — only solvable in polar:
+
+$$\int_0^{2\pi}\int_0^\infty e^{-r^2}r\,dr\,d\theta = 2\pi\cdot\frac{1}{2} = \pi$$
+
+This famous result (Gaussian integral squared) is fundamental in probability and statistical physics.
+
+## Common Misconceptions
+
+**Misconception 1: "$\iint = \int\int$ — they're the same calculation."**
+
+The notation $\iint$ suggests *2D integration over a region*; the iterated form $\int\int$ is the *computation*. Fubini links them.
+
+**Misconception 2: "Order of integration doesn't matter."**
+
+For convergence, yes (Fubini). For *ease* of computation, often dramatically yes — choose the order that makes integration tractable. Some integrals are impossible in one order but easy in the other.
+
+**Misconception 3: "I can ignore $r$ when switching to polar."**
+
+Don't forget the Jacobian! In polar, $dA = r\,dr\,d\theta$. The $r$ factor is essential — it's why polar integrals over the entire plane often work out to clean answers.
+
+**Misconception 4: "Sign of the integrand doesn't affect interpretation."**
+
+A double integral represents *signed volume*. If $f$ takes negative values, the integral may be smaller than naive geometric volume. For unsigned area or volume, integrate $|f|$.
+
+## Engineering Connection
+
+- **Mass of a plate:** for surface density $\sigma(x, y)$, total mass = $\iint_R\sigma\,dA$.
+- **Center of mass:** $\bar x = \dfrac{1}{M}\iint_R x\sigma\,dA$.
+- **Moment of inertia:** $I_z = \iint_R(x^2 + y^2)\sigma\,dA$ — controls rotational dynamics.
+- **Heat flux through area:** $Q = \iint_S\mathbf{q}\cdot d\mathbf{A}$ — total heat crossing a surface.
+- **Pressure force:** force on a submerged plate = $\iint_R p(x, y)\,dA$.
+- **Volume between surfaces:** $V = \iint_R[f(x, y) - g(x, y)]\,dA$.
+
+In each case, the double integral aggregates an infinitesimal local quantity to a global total.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Evaluate $\displaystyle\iint_R xy\,dA$ where $R = [0, 2]\times[0, 3]$.
+</ExQ>
+<ExA>
+$$\int_0^2\int_0^3 xy\,dy\,dx = \int_0^2 x\cdot\frac{9}{2}\,dx = \frac{9}{2}\cdot 2 = \boxed{9}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\iint_R (x + y)\,dA$ where $R$ is bounded by $y = x^2$ and $y = x$.
+</ExQ>
+<ExA>
+Curves intersect at $x = 0$ and $x = 1$. On $[0, 1]$, $x \geq x^2$.
+
+$$\int_0^1\int_{x^2}^x (x + y)\,dy\,dx = \int_0^1\left[xy + \frac{y^2}{2}\right]_{x^2}^x\,dx$$
+
+$= \int_0^1\left[(x^2 + x^2/2) - (x^3 + x^4/2)\right]dx = \int_0^1\left[\frac{3x^2}{2} - x^3 - \frac{x^4}{2}\right]dx$
+
+$= \dfrac{1}{2} - \dfrac{1}{4} - \dfrac{1}{10} = \dfrac{10 - 5 - 2}{20} = \dfrac{3}{20}$
+</ExA>
+
+<ExQ>
+Convert $\displaystyle\int_0^1\int_0^{\sqrt{1-x^2}}\sqrt{x^2 + y^2}\,dy\,dx$ to polar coordinates and evaluate.
+</ExQ>
+<ExA>
+Region: quarter unit disk in 1st quadrant. Polar: $r \in [0, 1]$, $\theta \in [0, \pi/2]$.
+
+$\sqrt{x^2 + y^2} = r$, $dA = r\,dr\,d\theta$.
+
+$$\int_0^{\pi/2}\int_0^1 r\cdot r\,dr\,d\theta = \int_0^{\pi/2}\frac{1}{3}d\theta = \frac{\pi}{6}$$
+
+Polar conversion makes this trivial; in Cartesian it would be very tedious.
+</ExA>
+
+<ExQ>
+**Engineering: Mass.** A semicircular plate of radius 2 m has surface density $\sigma(x, y) = 1 + x$ kg/m². Find the total mass.
+</ExQ>
+<ExA>
+Region: $x^2 + y^2 \leq 4$, $y \geq 0$.
+
+Polar: $\theta \in [0, \pi]$, $r \in [0, 2]$. $\sigma = 1 + r\cos\theta$.
+
+$$M = \int_0^\pi\int_0^2(1 + r\cos\theta)r\,dr\,d\theta = \int_0^\pi\left[\frac{r^2}{2} + \frac{r^3\cos\theta}{3}\right]_0^2 d\theta$$
+
+$= \int_0^\pi\left[2 + \frac{8\cos\theta}{3}\right]d\theta = 2\pi + \frac{8}{3}[\sin\theta]_0^\pi = 2\pi + 0 = 2\pi$ kg ≈ 6.28 kg.
+
+The $\cos\theta$ term integrates to zero over $[0, \pi]$ — symmetry kills the $x$-dependence's contribution.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does swapping the order of integration sometimes turn an impossible integral into a solvable one?
+</ExQ>
+<ExA>
+The integrand is the same, but in different orders, the *inner* variable's antiderivative may or may not be elementary.
+
+Classic example: $\int_0^1\int_x^1\dfrac{\sin y}{y}\,dy\,dx$. The inner integral $\int\sin y/y\,dy$ has no elementary form. But swapping order: $\int_0^1\int_0^y\dfrac{\sin y}{y}\,dx\,dy = \int_0^1\sin y\,dy = 1 - \cos 1$.
+
+The key: in the second order, $\sin y/y$ is treated as a constant in the inner $x$-integral, which is trivial. Reordering lets us avoid the difficult antiderivative.
+
+This trick appears constantly in probability and applied mathematics.
+</ExA>
+
+<ExQ>
+**Sketch and reasoning.** Sketch the region of integration for $\displaystyle\int_0^1\int_y^1 e^{x^2}\,dx\,dy$. Then evaluate by swapping the order.
+</ExQ>
+<ExA>
+Region: $0 \leq y \leq 1$, $y \leq x \leq 1$. This is the triangle with vertices $(0,0), (1,0), (1,1)$.
+
+Swap: for each $x \in [0, 1]$, $y$ runs from $0$ to $x$.
+
+$$\int_0^1\int_0^x e^{x^2}\,dy\,dx = \int_0^1 x e^{x^2}\,dx = \frac{1}{2}[e^{x^2}]_0^1 = \frac{e - 1}{2}$$
+
+The original integral was unsolvable (no elementary antiderivative for $e^{x^2}$ in $x$). After swap: trivial substitution $u = x^2$.
+</ExA>

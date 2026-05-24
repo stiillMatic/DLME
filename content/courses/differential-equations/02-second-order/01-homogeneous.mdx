@@ -1,0 +1,137 @@
+---
+title: Homogeneous Second-Order Equations
+description: Solving constant-coefficient linear ODEs via the characteristic equation — the workhorse of mechanical and electrical analysis.
+---
+
+# Homogeneous Second-Order Equations
+
+## The Big Picture
+
+The constant-coefficient linear ODE $ay'' + by' + cy = 0$ describes every basic oscillator: spring-mass-damper, RLC circuit, simple pendulum (linearized). Its solution is found by guessing $y = e^{rt}$, plugging in, and solving the resulting algebraic **characteristic equation** for $r$. The roots tell you whether the system oscillates, decays, or both — and at what rate. This single technique unlocks the entire theory of linear free vibration.
+
+## The Method
+
+For $ay'' + by' + cy = 0$, try $y = e^{rt}$:
+
+$$a r^2 e^{rt} + b r e^{rt} + c e^{rt} = 0 \implies ar^2 + br + c = 0$$
+
+This is the **characteristic equation**. Its roots $r_1, r_2$ depend on the discriminant $\Delta = b^2 - 4ac$.
+
+## Three Cases
+
+**Case 1: $\Delta > 0$** (distinct real roots $r_1, r_2$)
+
+$$y(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t}$$
+
+Pure exponential behavior — overdamped if both negative.
+
+**Case 2: $\Delta = 0$** (repeated root $r$)
+
+$$y(t) = (C_1 + C_2 t)e^{rt}$$
+
+The "$t$" factor accounts for the second linearly independent solution.
+
+**Case 3: $\Delta < 0$** (complex conjugate roots $\alpha\pm i\beta$)
+
+$$y(t) = e^{\alpha t}[C_1\cos(\beta t) + C_2\sin(\beta t)]$$
+
+Oscillation with amplitude $e^{\alpha t}$ — damped if $\alpha < 0$.
+
+## Connection to Mass-Spring-Damper
+
+$m\ddot{x} + c\dot{x} + kx = 0$. Characteristic: $mr^2 + cr + k = 0$. Define:
+- $\omega_n = \sqrt{k/m}$ (natural frequency)
+- $\zeta = c/(2\sqrt{mk})$ (damping ratio)
+
+| $\zeta$ | Behavior |
+|---|---|
+| $> 1$ | Overdamped (Case 1, two real negatives) |
+| $= 1$ | Critically damped (Case 2) |
+| $< 1$ | Underdamped (Case 3, oscillation) |
+| $= 0$ | Undamped (pure oscillation at $\omega_n$) |
+
+## Common Misconceptions
+
+**Misconception 1: "All second-order linear ODEs have oscillating solutions."**
+
+Only when $\Delta < 0$. Overdamped systems don't oscillate — they decay monotonically. In engineering terms: "too much friction → no overshoot."
+
+**Misconception 2: "The constant in $(C_1 + C_2 t)e^{rt}$ is just for completeness."**
+
+Without the $C_2 t$ term, you'd have only one degree of freedom — but second-order ODEs need *two* (initial position AND velocity). The "$t$" carries the second IC.
+
+**Misconception 3: "Complex roots give complex solutions."**
+
+The complex $e^{(\alpha+i\beta)t}$ combines via Euler's formula into real $\cos$/$\sin$ functions. The physics is real; the complex form is just algebraic.
+
+## Engineering Connection
+
+- **Spring-mass-damper:** every shock absorber, vehicle suspension, vibrating beam.
+- **RLC circuit:** $L\ddot{q} + R\dot{q} + q/C = 0$. Natural frequency $\omega_0 = 1/\sqrt{LC}$, damping = $R/(2L)$.
+- **Simple pendulum (small angle):** $\ddot{\theta} + (g/L)\theta = 0$ — undamped oscillator, $\omega = \sqrt{g/L}$.
+- **Earthquake response of buildings:** modeled as mass-spring-damper with seismic forcing.
+
+Knowing $\zeta$ and $\omega_n$ tells you the entire transient behavior of the system.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Solve $y'' - 5y' + 6y = 0$ with $y(0) = 1$, $y'(0) = 0$.
+</ExQ>
+<ExA>
+Characteristic: $r^2 - 5r + 6 = 0 \Rightarrow (r-2)(r-3) = 0$, roots 2 and 3.
+
+$y = C_1 e^{2t} + C_2 e^{3t}$. ICs: $C_1 + C_2 = 1$, $2C_1 + 3C_2 = 0$.
+
+Solve: $C_1 = 3$, $C_2 = -2$. So $y = 3e^{2t} - 2e^{3t}$.
+</ExA>
+
+<ExQ>
+Solve $y'' + 4y = 0$ with $y(0) = 2$, $y'(0) = 0$.
+</ExQ>
+<ExA>
+Characteristic: $r^2 + 4 = 0 \Rightarrow r = \pm 2i$.
+
+$y = C_1\cos(2t) + C_2\sin(2t)$. ICs: $C_1 = 2$, $2 C_2 = 0$.
+
+$y = 2\cos(2t)$. Pure undamped oscillation.
+</ExA>
+
+<ExQ>
+**Engineering: Damped oscillator.** $m = 1$ kg, $c = 4$ N·s/m, $k = 4$ N/m. Find the response from rest at $x_0 = 1$ m.
+</ExQ>
+<ExA>
+$\omega_n = \sqrt{4} = 2$, $\zeta = 4/(2\sqrt{4}) = 1$ — **critically damped**.
+
+Characteristic: $r^2 + 4r + 4 = 0 \Rightarrow r = -2$ (repeated).
+
+$x(t) = (C_1 + C_2 t)e^{-2t}$. ICs: $x(0) = C_1 = 1$, $\dot x(0) = -2 C_1 + C_2 = 0 \Rightarrow C_2 = 2$.
+
+$x(t) = (1 + 2t)e^{-2t}$.
+
+Maximum overshoot: zero. System returns to zero monotonically — by definition of critical damping.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does critical damping give the *fastest* return to zero with no overshoot?
+</ExQ>
+<ExA>
+Underdamped systems oscillate around zero; overdamped systems return slowly (one root has slow decay).
+
+Critical damping has a repeated root — the slowest decay rate is maximized by being equal in both modes. Slightly less damping → oscillation; slightly more → slower return.
+
+For control systems: critical damping is the "sweet spot" for transient response when overshoot must be avoided.
+</ExA>
+
+<ExQ>
+**Reasoning.** Why do we need *two* linearly independent solutions for a second-order ODE?
+</ExQ>
+<ExA>
+The general solution must accommodate two ICs (e.g., $y(0)$ and $y'(0)$). Two arbitrary constants in the general solution = two ICs to satisfy.
+
+If the two solutions were linearly dependent (proportional), they'd give only one effective constant, and most ICs couldn't be satisfied.
+
+Linear independence is what makes the **two-parameter family** of solutions. In the repeated-root case, $e^{rt}$ and $te^{rt}$ are linearly independent — that's why the $t$ is needed.
+</ExA>

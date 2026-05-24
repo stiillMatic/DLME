@@ -1,0 +1,133 @@
+---
+title: Zeroth and First Laws
+description: The foundations of thermodynamics — temperature, energy conservation, and the relationship between heat and work.
+---
+
+# Zeroth and First Laws of Thermodynamics
+
+## The Big Picture
+
+Thermodynamics begins with two foundational principles. The **zeroth law** establishes the concept of temperature — that bodies in mutual thermal equilibrium share a common attribute. The **first law** is conservation of energy: heat and work are forms of energy transfer, and the total energy of an isolated system is conserved. These two laws underlie every analysis of engines, refrigerators, heat exchangers, and power systems.
+
+## The Zeroth Law
+
+**Statement:** If body A is in thermal equilibrium with body C, and B is also in thermal equilibrium with C, then A is in thermal equilibrium with B.
+
+This sounds trivial but is profound: it means we can define a *temperature scale* — bodies in mutual equilibrium share a common temperature.
+
+## The First Law
+
+For a closed system:
+$$\Delta U = Q - W$$
+
+where:
+- $\Delta U$ = change in internal energy
+- $Q$ = heat added to system
+- $W$ = work done *by* the system
+
+**Differential form:** $dU = \delta Q - \delta W$.
+
+(The $\delta$ rather than $d$ indicates path-dependent quantities — heat and work are not state functions.)
+
+## Sign Conventions
+
+- $Q > 0$: heat added (system gains energy from surroundings)
+- $W > 0$: system does work on surroundings (loses energy)
+
+(Some thermodynamics texts use opposite sign for $W$. Stay consistent.)
+
+## Internal Energy
+
+$U$ depends only on the **state** of the system (temperature, pressure, etc.), not on how it got there. This is what makes $U$ a *state function*.
+
+For an ideal gas, $U = U(T)$ only — independent of pressure or volume.
+
+## Work in Thermodynamic Processes
+
+For a quasi-static process: $\delta W = P\,dV$.
+
+So $W = \int_{V_1}^{V_2} P\,dV$ — the area under the $P$-$V$ curve.
+
+Different processes give different work:
+- **Isobaric** ($P$ const): $W = P\Delta V$
+- **Isothermal** (ideal gas, $T$ const): $W = nRT\ln(V_2/V_1)$
+- **Adiabatic** ($Q = 0$): $W = -\Delta U$
+- **Isochoric** ($V$ const): $W = 0$
+
+## Common Misconceptions
+
+**Misconception 1: "Heat and temperature are the same."**
+
+Temperature is a *state property*. Heat is *transfer of energy* due to temperature difference. Two bodies of different masses at the same temperature contain different amounts of internal energy.
+
+**Misconception 2: "$U$ depends on path."**
+
+$U$ is a state function — depends only on current state. $Q$ and $W$ depend on path, but their difference $\Delta U = Q - W$ is path-independent.
+
+**Misconception 3: "First law allows perpetual motion."**
+
+The first law forbids creating energy from nothing — but allows perfect conversion (100% heat to work). The *second law* forbids that. Real engines must obey both.
+
+## Engineering Connection
+
+- **Engine analysis:** balance fuel energy = work + waste heat. First law gives efficiency $\eta = W_{\text{net}}/Q_{\text{in}}$.
+- **HVAC systems:** energy balance on a building accounts for heat in/out, work by fans, etc.
+- **Steam turbines:** $h_{\text{in}} = h_{\text{out}} + W_{\text{shaft}}$ (steady-flow energy equation, derived from first law).
+- **Process engineering:** mass + energy balances on every unit operation.
+
+The first law is *the* accounting tool of thermal engineering.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A gas in a cylinder absorbs 500 J of heat and does 200 J of work. Find $\Delta U$.
+</ExQ>
+<ExA>
+$\Delta U = Q - W = 500 - 200 = 300$ J.
+</ExA>
+
+<ExQ>
+1 mol of ideal gas (monatomic) heated from 300 K to 400 K at constant volume. Find $\Delta U$ and $Q$. ($C_v = 3R/2 = 12.47$ J/(mol·K)).
+</ExQ>
+<ExA>
+$\Delta U = n C_v \Delta T = 1\cdot 12.47\cdot 100 = 1247$ J.
+
+At constant V, $W = 0$, so $Q = \Delta U = 1247$ J.
+</ExA>
+
+<ExQ>
+Isothermal expansion of 0.5 mol ideal gas at 300 K from 0.01 m³ to 0.02 m³. Find $W$, $Q$, and $\Delta U$.
+</ExQ>
+<ExA>
+Isothermal: $\Delta U = 0$ (for ideal gas), so $Q = W$.
+
+$W = nRT\ln(V_2/V_1) = 0.5\cdot 8.314\cdot 300\cdot\ln 2 = 864$ J.
+
+$Q = 864$ J.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is $\delta W$ written with a $\delta$ instead of $d$?
+</ExQ>
+<ExA>
+$\delta W$ indicates an "inexact differential" — work depends on the *path*, not just the endpoints. There's no function $W$ such that $\delta W$ is its differential.
+
+Compare $dU$ where $U$ is a state function: $\int dU = U_2 - U_1$ depends only on endpoints.
+
+Heat $Q$ and work $W$ are process-dependent — different paths give different values.
+</ExA>
+
+<ExQ>
+**Engineering.** A steam turbine takes in steam at $h_1 = 3000$ kJ/kg and outputs at $h_2 = 2400$ kJ/kg. With negligible heat loss and KE/PE changes, find specific work output.
+</ExQ>
+<ExA>
+Steady-flow energy: $h_1 = h_2 + w$.
+
+$w = h_1 - h_2 = 600$ kJ/kg.
+
+For 100 kg/s flow: power = $100\cdot 600 = 60$ MW.
+
+This is exactly how power plants are sized.
+</ExA>

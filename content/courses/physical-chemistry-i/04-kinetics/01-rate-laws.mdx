@@ -1,0 +1,132 @@
+---
+title: Rate Laws and Order of Reactions
+description: How concentration controls reaction rate — and how to extract kinetic mechanisms from rate data.
+---
+
+# Rate Laws and Order of Reactions
+
+## The Big Picture
+
+Thermodynamics tells us whether a reaction can happen. **Kinetics** tells us how fast. The rate law expresses how reaction rate depends on concentrations — and gives us a window into the molecular **mechanism**. Different rate laws (zeroth, first, second order) imply different elementary steps. Understanding rate laws is fundamental to process design, pharmacokinetics, and atmospheric chemistry.
+
+## Reaction Rate
+
+For $aA + bB \to cC + dD$:
+
+$$\text{rate} = -\frac{1}{a}\frac{d[A]}{dt} = -\frac{1}{b}\frac{d[B]}{dt} = \frac{1}{c}\frac{d[C]}{dt}$$
+
+Units: M/s.
+
+## Rate Law
+
+Often takes the form:
+
+$$\text{rate} = k[A]^m[B]^n$$
+
+- $k$: rate constant (depends on T but not concentrations).
+- $m, n$: **orders** with respect to A, B. Determined experimentally.
+- $m + n$: overall order.
+
+**Important:** orders are NOT generally equal to stoichiometric coefficients. They're determined by the mechanism.
+
+## Common Orders
+
+| Order | Rate law | Integrated | Half-life |
+|---|---|---|---|
+| Zeroth | $\text{rate} = k$ | $[A] = [A]_0 - kt$ | $[A]_0/(2k)$ |
+| First | $\text{rate} = k[A]$ | $[A] = [A]_0 e^{-kt}$ | $\ln 2/k$ (constant!) |
+| Second | $\text{rate} = k[A]^2$ | $1/[A] = 1/[A]_0 + kt$ | $1/(k[A]_0)$ |
+
+**First-order has constant half-life** — diagnostic feature. Radioactive decay, many drug eliminations follow this.
+
+## Determining Order from Data
+
+**Method 1:** plot integrated form. Linear plot → that order.
+- 0th: $[A]$ vs $t$ linear.
+- 1st: $\ln[A]$ vs $t$ linear.
+- 2nd: $1/[A]$ vs $t$ linear.
+
+**Method 2:** initial rates. Run reaction at different starting concentrations, measure initial rates, fit power law.
+
+## Multistep Reactions
+
+Most reactions involve multiple **elementary steps**. The overall rate law depends on the rate-determining (slowest) step.
+
+For mechanism $A + B \to I$ (slow), $I + C \to P$ (fast):
+- rate = $k[A][B]$ — slow step kinetics.
+
+For pre-equilibrium $A \rightleftharpoons I$ (fast), $I + B \to P$ (slow):
+- rate = $k_2 K_{\text{eq}}[A][B]/[A^*]$ — combined.
+
+## Common Misconceptions
+
+**Misconception 1: "Order = coefficient."**
+
+Only for elementary reactions. Multistep mechanisms have orders ≠ stoichiometry.
+
+**Misconception 2: "Higher concentration always = faster."**
+
+For zeroth order, rate is independent of concentration. Many surface-catalyzed reactions or enzyme reactions at saturating substrate are zeroth order in substrate.
+
+**Misconception 3: "First-order means one molecule reacts."**
+
+Refers to rate law form (rate ∝ first power of [A]). Could be unimolecular elementary or complex mechanism with first-order rate law.
+
+## Engineering Connection
+
+- **Pharmacokinetics:** drug elimination is often first-order. Half-life determines dosing frequency.
+- **Atmospheric chemistry:** ozone destruction rates determine policy on CFCs.
+- **Reactor design:** plug-flow vs CSTR (continuous stirred tank) chosen based on reaction order.
+- **Polymerization:** different mechanisms (chain-growth vs step-growth) have different rate laws → different molecular weight distributions.
+- **Combustion modeling:** detailed kinetics with hundreds of elementary steps.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** First-order, $k = 0.05$ s⁻¹. Time to drop from 1 M to 0.1 M?
+</ExQ>
+<ExA>
+$\ln(0.1/1) = -kt \Rightarrow t = \ln 10/0.05 \approx 46.1$ s.
+</ExA>
+
+<ExQ>
+**2.** Doubling [A] doubles the rate. Order in A?
+</ExQ>
+<ExA>
+$\text{rate} \propto [A]^m$. Doubling [A]: rate $\times 2^m = 2 \Rightarrow m = 1$. **First order**.
+</ExA>
+
+<ExQ>
+**3.** Half-life of $^{14}C$ = 5730 years (first order). Decay constant?
+</ExQ>
+<ExA>
+$k = \ln 2/t_{1/2} = 0.693/5730 \approx 1.21\times 10^{-4}$ /year.
+
+Used in carbon dating: measure ratio of ¹⁴C in sample, calculate age.
+</ExA>
+
+<ExQ>
+**4. Engineering: Drug dosing.** Drug eliminated first-order with half-life 6 hours. To maintain therapeutic levels, dosing interval?
+</ExQ>
+<ExA>
+After one half-life (6 hr), 50% remains. After 2 (12 hr), 25%.
+
+For roughly constant levels: dose every half-life replaces what's been eliminated. **Every 6-12 hours** typically.
+
+Loading dose strategy: start with extra to reach steady state quickly, then maintenance every $t_{1/2}$. This is the pharmacokinetic basis of dosing schedules.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the half-life of a first-order reaction independent of concentration but second-order depends on it?
+</ExQ>
+<ExA>
+First order: $[A] = [A]_0 e^{-kt}$. Half-life $\ln 2/k$ — independent of $[A]_0$.
+
+Second order: $1/[A] = 1/[A]_0 + kt$. At half-life, $1/(0.5[A]_0) = 1/[A]_0 + kt_{1/2} \Rightarrow t_{1/2} = 1/(k[A]_0)$.
+
+Second-order needs two molecules to meet. As concentration drops, collisions become rarer, slowing the rate disproportionately. Higher initial concentration = faster initial rate, but also faster slow-down.
+
+This is why constant-$t_{1/2}$ is a fingerprint of first-order kinetics.
+</ExA>

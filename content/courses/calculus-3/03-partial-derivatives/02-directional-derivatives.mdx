@@ -1,0 +1,101 @@
+---
+title: Directional Derivatives
+description: Rate of change of a multivariable function in any direction — and how the gradient encodes them all.
+---
+
+# Directional Derivatives
+
+## The Big Picture
+
+The partial derivatives $f_x$, $f_y$ tell you the rate of change along the coordinate axes. But what about other directions? The **directional derivative** generalizes this: rate of change along any unit vector $\hat{\mathbf{u}}$. The remarkable fact: all directional derivatives are determined by the gradient via a single dot product. The gradient is a *complete* description of first-order behavior.
+
+## Definition
+
+For unit vector $\hat{\mathbf{u}}$:
+
+$$D_{\hat{\mathbf{u}}}f(\mathbf{x}_0) = \lim_{h\to 0}\frac{f(\mathbf{x}_0 + h\hat{\mathbf{u}}) - f(\mathbf{x}_0)}{h}$$
+
+## Formula via Gradient
+
+$$D_{\hat{\mathbf{u}}}f = \nabla f \cdot \hat{\mathbf{u}} = \|\nabla f\|\cos\theta$$
+
+where $\theta$ is the angle between $\hat{\mathbf{u}}$ and $\nabla f$.
+
+**Maximum:** $\theta = 0$ (along $\nabla f$): $D_{\hat{\mathbf{u}}}f = \|\nabla f\|$.
+**Minimum:** $\theta = \pi$ (against $\nabla f$): $-\|\nabla f\|$.
+**Zero:** $\theta = \pi/2$ (perpendicular to $\nabla f$).
+
+This shows why gradient = direction of fastest increase.
+
+## Common Mistakes
+
+**Misconception 1: "$\hat{\mathbf{u}}$ doesn't need to be unit."**
+
+If you use a non-unit vector, you get $\nabla f\cdot\mathbf{u}$ — but this scales with $\|\mathbf{u}\|$. To get a *rate* per unit distance, $\hat{\mathbf{u}}$ must be unit.
+
+**Misconception 2: "Directional derivative is along a curve."**
+
+It's along a *direction* (straight line). For along-curve rates, use the chain rule.
+
+## Engineering Connection
+
+- **Heat flow:** rate of temperature change in direction of measurement.
+- **Pressure changes:** $\nabla P$ direction is steepest pressure ascent; aircraft fly perpendicular for minimum drag.
+- **Sensitivity:** $D_{\hat{\mathbf{u}}}f$ at design point tells you how a parameter combo affects output.
+- **Steepest descent algorithms:** ML, optimization use $-\nabla f$ as the direction of decrease.
+- **Wave propagation:** wavefront moves in direction of $\nabla\phi$ for phase $\phi$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $f(x, y) = x^2 + y^2$ at $(1, 1)$. Directional derivative in direction $(3, 4)$?
+</ExQ>
+<ExA>
+$\nabla f = (2x, 2y) = (2, 2)$ at $(1, 1)$.
+
+$\hat{\mathbf{u}} = (3, 4)/5$.
+
+$D_{\hat{\mathbf{u}}}f = (2)(3/5) + (2)(4/5) = 14/5 = 2.8$.
+</ExA>
+
+<ExQ>
+**2.** Direction of fastest decrease for $f = xy$ at $(1, 2)$?
+</ExQ>
+<ExA>
+$\nabla f = (y, x) = (2, 1)$ at $(1, 2)$.
+
+Fastest decrease: $-\nabla f = (-2, -1)$, normalized: $(-2, -1)/\sqrt 5$.
+</ExA>
+
+<ExQ>
+**3.** Maximum rate of change of $f = e^{xy}$ at $(1, 1)$?
+</ExQ>
+<ExA>
+$\nabla f = (ye^{xy}, xe^{xy}) = (e, e)$.
+
+Max rate = $\|\nabla f\| = e\sqrt 2 \approx 3.84$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Topographic.** Hill height $h(x, y) = 1000 - x^2/100 - y^2/200$. You're at $(20, 10)$. In which direction is the slope steepest?
+</ExQ>
+<ExA>
+$\nabla h = (-x/50, -y/100) = (-0.4, -0.1)$ at $(20, 10)$.
+
+Steepest descent direction: $(0.4, 0.1)/\sqrt{0.17} \approx (0.97, 0.24)$.
+
+Walking in direction roughly East-northeast gives fastest descent (water also flows this way).
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the maximum rate of change equal to $\|\nabla f\|$?
+</ExQ>
+<ExA>
+$D_{\hat{\mathbf{u}}}f = \|\nabla f\|\cos\theta \leq \|\nabla f\|$, equality when $\theta = 0$.
+
+So $\|\nabla f\|$ is the upper bound, achieved only in the gradient direction.
+
+This bound is sharp — the gradient is *the* fastest direction. Choosing any other direction gives slower rates.
+</ExA>

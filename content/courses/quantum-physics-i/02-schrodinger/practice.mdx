@@ -1,0 +1,67 @@
+---
+title: Chapter 2 Practice — The Schrödinger Equation
+description: Practice on wavefunctions and Schrödinger equation.
+---
+
+# Chapter 2 Practice — The Schrödinger Equation
+
+<ExQ>
+**1.** Normalize $\psi(x) = A x e^{-x}$ on $[0, \infty)$.
+</ExQ>
+<ExA>
+$\int_0^\infty A^2 x^2 e^{-2x}\,dx$. Use $\int_0^\infty x^n e^{-\alpha x}\,dx = n!/\alpha^{n+1}$:
+
+$= A^2\cdot 2!/2^3 = A^2/4$.
+
+Normalize: $A = 2$.
+</ExA>
+
+<ExQ>
+**2.** Verify $\psi(x, t) = e^{i(kx - \omega t)}$ is a stationary state for a free particle.
+</ExQ>
+<ExA>
+TISE for free particle: $\hat H\phi = E\phi$ with $\phi = e^{ikx}$. $\hat H\phi = (\hbar^2 k^2/2m)\phi$ ✓ (E = $\hbar^2 k^2/2m$).
+
+Time evolution: $\phi e^{-iEt/\hbar} = e^{i(kx - Et/\hbar)} = e^{i(kx - \omega t)}$ with $\omega = E/\hbar$ ✓.
+
+Free particle plane wave is a stationary state.
+</ExA>
+
+<ExQ>
+**3.** $\hat p$ operator on $\psi = e^{ikx}$. Eigenvalue?
+</ExQ>
+<ExA>
+$\hat p\psi = -i\hbar\partial_x e^{ikx} = -i\hbar(ik)e^{ikx} = \hbar k\psi$.
+
+Eigenvalue: $\hbar k$ — the momentum.
+
+Plane waves are momentum eigenstates.
+</ExA>
+
+<ExQ>
+**4. Engineering: Quantum well width.** GaAs/AlGaAs quantum well with infinite walls, want $E_1 = 100$ meV for electron ($m_e^* = 0.067 m_e$). Find well width.
+</ExQ>
+<ExA>
+$E_1 = \hbar^2\pi^2/(2m^* L^2)$.
+
+$L^2 = \hbar^2\pi^2/(2m^* E_1)$.
+
+$m^* = 0.067\cdot 9.11\times 10^{-31} = 6.10\times 10^{-32}$ kg.
+$E_1 = 0.1\cdot 1.6\times 10^{-19} = 1.6\times 10^{-20}$ J.
+
+$L^2 = (1.055\times 10^{-34})^2\pi^2/(2\cdot 6.10\times 10^{-32}\cdot 1.6\times 10^{-20})$
+$\approx 1.097\times 10^{-67}\cdot 9.87/(1.95\times 10^{-51})\approx 5.55\times 10^{-16}$ m².
+
+$L \approx 23.6$ nm. Realistic for MBE-grown quantum well lasers.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are stationary states called "stationary" even though their phase oscillates?
+</ExQ>
+<ExA>
+The *observable* (probability density $|\psi|^2$) is time-independent. All expectation values of physical observables are constant in stationary states.
+
+The phase oscillation is "unobservable" by single measurement — only interference between different stationary states reveals it.
+
+So "stationary" refers to physical observables, not to the wavefunction itself. The wavefunction's phase oscillates at rate $E/\hbar$, but this doesn't affect any single measurement.
+</ExA>

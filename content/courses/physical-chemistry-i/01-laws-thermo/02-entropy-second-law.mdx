@@ -1,0 +1,148 @@
+---
+title: Entropy and the Second Law
+description: The arrow of time in chemistry — disorder always increases, setting fundamental limits on what reactions are possible.
+---
+
+# Entropy and the Second Law
+
+## The Big Picture
+
+The first law allows any energy-conserving process. The **second law** picks out which actually happen: only those increasing the **entropy** of the universe. Entropy quantifies "disorder" or "number of microstates"; for chemistry, it dictates which reactions go forward, which equilibria are favored, and how much useful work you can extract. Without entropy, there's no chemistry — only equilibrium and reversal.
+
+## Entropy
+
+Statistical definition (Boltzmann):
+
+$$S = k_B\ln\Omega$$
+
+where $\Omega$ is the number of microstates consistent with the macroscopic state, $k_B = 1.38\times 10^{-23}$ J/K.
+
+Thermodynamic definition (Clausius):
+
+$$dS = \delta q_{\text{rev}}/T$$
+
+Both equivalent.
+
+## The Second Law
+
+$$\Delta S_{\text{universe}} \geq 0$$
+
+For any spontaneous process. Equality only for reversible processes.
+
+Subdivide: $\Delta S_{\text{univ}} = \Delta S_{\text{sys}} + \Delta S_{\text{surr}} \geq 0$.
+
+The system's entropy can decrease — but only if surroundings' entropy increases more.
+
+## Entropy Trends
+
+| Process | $\Delta S_{\text{sys}}$ |
+|---|---|
+| Gas → liquid | Negative (more order) |
+| Solid → gas (sublimation) | Positive (more disorder) |
+| Compression of gas | Negative |
+| Heating | Positive |
+| Mixing | Positive |
+| Reactions producing more gas molecules | Positive |
+
+## Calculating Entropy Change
+
+**Phase changes (reversible at $T$ of transition):**
+$\Delta S = \Delta H/T$.
+
+E.g., water → vapor at 373 K: $\Delta H_{\text{vap}} = 40.7$ kJ/mol → $\Delta S_{\text{vap}} = 109$ J/(mol·K).
+
+**Heating at constant P:**
+$\Delta S = nC_P\ln(T_2/T_1)$.
+
+**Mixing of ideal gases:**
+$\Delta S_{\text{mix}} = -nR\sum x_i\ln x_i > 0$.
+
+## Third Law: Reference State
+
+The entropy of a perfect crystal at $T = 0$ K is zero.
+
+This sets an absolute scale. Tabulated "standard molar entropies" $S^\circ$ are absolute, unlike enthalpy (which is relative to elements at standard state).
+
+## Common Misconceptions
+
+**Misconception 1: "Entropy = disorder."**
+
+Loose analogy. Real definition: number of accessible microstates. Some "ordered-looking" states have high entropy (e.g., uniform mixture); some "disordered-looking" have lower.
+
+**Misconception 2: "Spontaneous = exothermic."**
+
+False. Endothermic processes can be spontaneous if entropy gain compensates ($\Delta G < 0$). E.g., NH₄NO₃ dissolving in water absorbs heat but happens spontaneously (large entropy gain from mixing).
+
+**Misconception 3: "Second law forbids local order."**
+
+You can decrease entropy *locally* by exporting more entropy elsewhere. Life, refrigeration, computers all do this. The universe-level entropy still increases.
+
+## Engineering Connection
+
+- **Heat engines:** Carnot efficiency $\eta = 1 - T_C/T_H$ — entropy sets the ceiling for engine efficiency.
+- **Refrigeration:** must input work to "pump heat uphill" — Coefficient of Performance derives from entropy.
+- **Chemical reactors:** equilibrium depends on $\Delta G = \Delta H - T\Delta S$ — entropy matters.
+- **Materials engineering:** disorder controls glass formation, alloying.
+- **Information theory:** Shannon entropy parallels thermodynamic entropy — basis for compression, communication.
+- **Cosmology and arrow of time:** the second law gives a preferred direction to time itself.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\Delta H_{\text{fus}}$ of ice = 6.01 kJ/mol at 273 K. $\Delta S$ of melting?
+</ExQ>
+<ExA>
+$\Delta S = \Delta H/T = 6010/273 = 22.0$ J/(mol·K).
+
+Positive: melting increases disorder.
+</ExA>
+
+<ExQ>
+**2.** Sign of $\Delta S_{\text{sys}}$ for $2H_2(g) + O_2(g) \to 2H_2O(l)$?
+</ExQ>
+<ExA>
+3 mol gas → 0 mol gas (liquid). Big decrease in entropy.
+
+$\Delta S_{\text{sys}} < 0$.
+
+(Despite this, the reaction is spontaneous because $\Delta H \ll 0$ — exothermic enough to drive the surroundings' entropy up.)
+</ExA>
+
+<ExQ>
+**3.** Why does $\Delta S_{\text{mix}} = -nR\sum x_i\ln x_i$ always positive (for ideal solutions)?
+</ExQ>
+<ExA>
+For each mole fraction $0 < x_i < 1$: $\ln x_i < 0$, so $x_i\ln x_i < 0$, so $-x_i\ln x_i > 0$.
+
+Sum of positive numbers > 0.
+
+Mixing always increases entropy (more accessible configurations). Need work to *demix*.
+
+This is why osmosis, diffusion, gas mixing all spontaneous.
+</ExA>
+
+<ExQ>
+**4. Engineering: Carnot limit.** A power plant operates between 600 K and 300 K. Maximum efficiency?
+</ExQ>
+<ExA>
+$\eta_{\text{max}} = 1 - 300/600 = 0.5 = 50\%$.
+
+Real plants achieve 30-40% (irreversibilities). Combined-cycle plants approach 60% by using waste heat in secondary cycles.
+
+This is an entropy-based ceiling — no engine can exceed it. Even infinite engineering improvement can only approach (not exceed) Carnot.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does life exist if it locally decreases entropy?
+</ExQ>
+<ExA>
+Living organisms maintain internal order (low entropy) by exporting more entropy to surroundings.
+
+Metabolism: take in low-entropy food (concentrated chemical energy), excrete high-entropy waste (CO₂, H₂O, heat).
+
+Net effect on universe: entropy increases.
+
+So life doesn't violate the second law — it locally circumvents it by being open to exchange. **Steady-state far-from-equilibrium systems** are the modern thermodynamic framework for biology.
+</ExA>

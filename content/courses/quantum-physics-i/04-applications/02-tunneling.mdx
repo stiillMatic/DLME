@@ -1,0 +1,129 @@
+---
+title: Quantum Tunneling
+description: A particle can pass through a barrier even when it doesn't have enough energy — exponentially suppressed, but never zero.
+---
+
+# Quantum Tunneling
+
+## The Big Picture
+
+A classical particle with energy $E$ less than the barrier height $V_0$ cannot pass — period. But a quantum particle has a finite probability to **tunnel** through the barrier, even if classically forbidden. This exponentially small but nonzero effect drives radioactive decay, stars (nuclear fusion), chemistry (proton tunneling), and devices (scanning tunneling microscope, tunnel diodes). Tunneling is one of the most distinctly quantum phenomena.
+
+## Setup: Rectangular Barrier
+
+Region I ($x < 0$): $V = 0$, particle incoming with energy $E$.
+Region II ($0 < x < L$): $V = V_0 > E$ (barrier).
+Region III ($x > L$): $V = 0$, transmitted wave.
+
+Inside the barrier, the wavefunction is **exponentially decaying**:
+
+$$\phi_{II}(x) = A e^{-\kappa x} + B e^{\kappa x}, \quad \kappa = \sqrt{2m(V_0 - E)}/\hbar$$
+
+The wavefunction "leaks" through the barrier.
+
+## Transmission Coefficient
+
+For thin/low barriers ($\kappa L \gtrsim 1$):
+
+$$T \approx e^{-2\kappa L}$$
+
+For exact calculation: solve continuity of $\phi$ and $\phi'$ at boundaries, gives:
+
+$$T = \frac{1}{1 + V_0^2\sinh^2(\kappa L)/(4E(V_0 - E))}$$
+
+## Tunneling Rate
+
+$T$ depends **exponentially** on barrier width and height. Doubling the barrier width reduces $T$ by factor $e^{-2\kappa L}$ — could be many orders of magnitude.
+
+This is why tunneling is sensitive: STM relies on this exponential sensitivity to map atomic surfaces.
+
+## Examples
+
+**Alpha decay:** $\alpha$ particle (helium nucleus) tunnels through Coulomb barrier inside heavy nuclei. Predicts half-lives spanning $\sim 30$ orders of magnitude — Gamow's 1928 theory.
+
+**Stellar fusion:** protons in the Sun's core must overcome Coulomb repulsion. Tunneling makes fusion happen at temperatures where classical mechanics says it's impossible.
+
+**Tunnel diodes:** electrons tunnel through thin junction — negative differential resistance, high-speed oscillators.
+
+## Common Misconceptions
+
+**Misconception 1: "Tunneling requires extra energy from somewhere."**
+
+Energy is conserved — the particle ends up on the other side with the *same* energy. No "borrowing" needed. The wavefunction permeates the barrier but most of it reflects.
+
+**Misconception 2: "Probability inside barrier is zero."**
+
+Probability is nonzero (decays exponentially), but you "shouldn't find" the particle there in a stationary sense — measurement at that location would impart energy.
+
+**Misconception 3: "Wider barriers slow tunneling linearly."**
+
+Exponentially. A 10× wider barrier reduces $T$ by $e^{-18\kappa}$ or similar — extreme sensitivity.
+
+## Engineering Connection
+
+- **Scanning Tunneling Microscope (STM):** tunneling current between tip and surface gives atomic-resolution imaging.
+- **Flash memory:** charges tunnel through oxide layer to write/erase.
+- **Tunnel diodes (Esaki):** high-speed electronics.
+- **Josephson junctions:** superconducting tunneling — basis of qubits and ultra-sensitive magnetometers.
+- **Nuclear fusion:** confined plasma at 10⁸ K still relies on tunneling for fusion rate.
+- **Enzyme reactions:** proton tunneling speeds up many biochemical reactions.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Electron, $V_0 - E = 1$ eV. $\kappa$?
+</ExQ>
+<ExA>
+$\kappa = \sqrt{2m_e\cdot 1.6\times 10^{-19}}/(1.055\times 10^{-34}) = \sqrt{2\cdot 9.11\times 10^{-31}\cdot 1.6\times 10^{-19}}/1.055\times 10^{-34}$
+$\approx 5.12\times 10^9$ m⁻¹.
+
+So $1/\kappa \approx 0.2$ nm — tunneling decay length on the angstrom scale.
+</ExA>
+
+<ExQ>
+**2.** Same $\kappa = 5\times 10^9$ m⁻¹. Barrier 1 nm wide. Transmission?
+</ExQ>
+<ExA>
+$T \approx e^{-2\kappa L} = e^{-10} \approx 4.5\times 10^{-5}$.
+
+Very small but nonzero — measurable.
+</ExA>
+
+<ExQ>
+**3. Engineering: STM gap.** Tip-sample gap 0.5 nm gives tunneling current. What if gap is 0.6 nm?
+</ExQ>
+<ExA>
+$T \propto e^{-2\kappa L}$. With electron tunneling, $\kappa \approx 10\,\text{nm}^{-1}$.
+
+Ratio: $e^{-2\cdot 10\cdot 0.1} = e^{-2} \approx 0.135$.
+
+Current drops by factor ~7 for 0.1 nm = 1 Å increase in gap. This is why STM can distinguish atomic-scale features.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does tunneling become negligible for macroscopic objects?
+</ExQ>
+<ExA>
+$\kappa = \sqrt{2m(V_0-E)}/\hbar$. Larger $m$ → larger $\kappa$ → faster exponential decay of wavefunction in barrier.
+
+For a 1 kg object trying to tunnel through a tiny barrier: $\kappa$ is enormous, $T \to 0$ extremely fast.
+
+Tunneling is significant only for light particles (electrons, protons) and thin barriers (nanometer-scale). For macroscopic objects, it's so suppressed that the Sun would burn out before observing it.
+</ExA>
+
+<ExQ>
+**5.** Show that for very thick barrier $\kappa L \gg 1$, $T \approx 16\,(E/V_0)(1 - E/V_0)e^{-2\kappa L}$.
+</ExQ>
+<ExA>
+For thick barrier, $\sinh^2(\kappa L) \approx e^{2\kappa L}/4$.
+
+$T = 1/[1 + V_0^2 e^{2\kappa L}/(16 E(V_0 - E))]$.
+
+In thick limit, the second term dominates:
+
+$T \approx 16 E(V_0 - E) e^{-2\kappa L}/V_0^2 = 16(E/V_0)(1 - E/V_0)e^{-2\kappa L}$.
+
+The exponential dominates — barrier width is the leading-order parameter. The pre-factor varies between 0 and 4 depending on $E/V_0$ ratio (max at $E = V_0/2$).
+</ExA>

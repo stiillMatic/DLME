@@ -1,0 +1,185 @@
+---
+title: Singular Value Decomposition (SVD)
+description: The most important matrix factorization — what every matrix "really does," for rectangular matrices too.
+---
+
+# Singular Value Decomposition (SVD)
+
+## The Big Picture
+
+Eigenvalues work only for square matrices and only when diagonalizable. The **SVD** generalizes diagonalization to **every matrix** — rectangular, singular, anything. It expresses any matrix as a rotation, then a scaling, then another rotation. The result is the single most powerful tool in numerical linear algebra: it underlies least squares, PCA, data compression, recommendation systems, and modern deep learning analysis. If you only learn one decomposition, learn SVD.
+
+## Intuition First — Every Matrix is "Stretch Between Two Rotations"
+
+Geometrically, **every** linear transformation can be decomposed as:
+1. Rotate the input space to align with "right singular vectors"
+2. Stretch each axis by a (nonnegative) "singular value"
+3. Rotate the output to land in the column space
+
+A unit circle gets mapped to an ellipse. The semi-axes lengths are the singular values; the directions are the singular vectors.
+
+## The Decomposition
+
+For any $m\times n$ matrix $A$:
+
+$$A = U\Sigma V^T$$
+
+where:
+- $U$ is $m\times m$ **orthogonal** (left singular vectors as columns)
+- $V$ is $n\times n$ **orthogonal** (right singular vectors as columns)
+- $\Sigma$ is $m\times n$ "diagonal" with **singular values** $\sigma_1 \geq \sigma_2 \geq \cdots \geq 0$ on the diagonal
+
+The number of nonzero singular values is the **rank** of $A$.
+
+## Connection to Eigenvalues
+
+$$A^T A = V\Sigma^T\Sigma V^T \quad \Rightarrow \quad \text{eigenvalues of } A^TA = \sigma_i^2$$
+$$AA^T = U\Sigma\Sigma^T U^T \quad \Rightarrow \quad \text{eigenvalues of } AA^T = \sigma_i^2$$
+
+So singular values come from eigenvalues of $A^TA$ (or $AA^T$).
+
+## Reduced (Thin) SVD
+
+For $m > n$, often we only need the **reduced** form:
+
+$$A = U_r\Sigma_r V_r^T$$
+
+where $U_r$ is $m\times r$, $\Sigma_r$ is $r\times r$, $V_r$ is $n\times r$, and $r = \text{rank}(A)$. Much smaller — useful for compression.
+
+## What SVD Tells You
+
+| Quantity | Meaning |
+|---|---|
+| $\sigma_1$ | maximum stretch factor ($\|A\|_2$, spectral norm) |
+| $\sigma_n$ | minimum stretch factor (or 0 if rank-deficient) |
+| $\sigma_1/\sigma_n$ | condition number — how stable the matrix is |
+| First $k$ columns of $V$ | best $k$-dim subspace to project rows onto |
+| First $k$ columns of $U$ | best $k$-dim subspace for columns |
+| Rank | number of nonzero $\sigma_i$ |
+| $A^{-1}$ (if it exists) | $V\Sigma^{-1}U^T$ |
+| Pseudo-inverse | $V\Sigma^+U^T$ where $\Sigma^+$ inverts nonzero $\sigma_i$ |
+
+## Worked Example: $A = \begin{pmatrix}3 & 0\\ 4 & 5\end{pmatrix}$
+
+$A^TA = \begin{pmatrix}25 & 20\\ 20 & 25\end{pmatrix}$. Eigenvalues: $\lambda = 45, 5$ → $\sigma_1 = \sqrt{45}, \sigma_2 = \sqrt 5$.
+
+(Constructing $V$ from eigenvectors of $A^TA$, then $U = AV\Sigma^{-1}$, would complete the decomposition.)
+
+## Low-Rank Approximation
+
+The **Eckart-Young theorem** says: the best rank-$k$ approximation of $A$ (in Frobenius or spectral norm) is obtained by keeping the top $k$ singular values:
+
+$$A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i\mathbf{v}_i^T$$
+
+This is the foundation of:
+- **JPEG/PNG image compression** (keep largest $\sigma_i$'s)
+- **Recommender systems** (Netflix Prize: matrix completion via low-rank)
+- **PCA** (best low-dim representation of data)
+
+## Common Misconceptions
+
+**Misconception 1: "SVD is the same as eigendecomposition."**
+
+For symmetric positive matrices, they coincide (up to signs). Generally they're different: SVD has *two* sets of singular vectors (left and right), eigendecomposition has one set.
+
+**Misconception 2: "$\Sigma$ contains negative entries."**
+
+Singular values are always **nonnegative** by definition. Sign information lives in $U$ and $V$.
+
+**Misconception 3: "SVD exists only for square matrices."**
+
+SVD exists for **every** matrix. This is a major advantage over eigendecomposition.
+
+**Misconception 4: "Singular values = absolute values of eigenvalues."**
+
+Only true for normal matrices ($A^*A = AA^*$). For general matrices, singular values can differ significantly from $|\lambda_i|$.
+
+## Engineering Connection
+
+- **Image compression:** treat image as matrix; keep top $k$ singular values to compress.
+- **PCA / dimensionality reduction:** apply SVD to mean-centered data matrix → principal components.
+- **Least squares with rank-deficient $A$:** use pseudo-inverse $A^+ = V\Sigma^+U^T$ for minimum-norm solution.
+- **Condition number** $\sigma_1/\sigma_n$ tells you numerical stability — high CN means numerical methods may fail.
+- **Modal analysis** of dynamic systems uses SVD-like decompositions for unsteady data (DMD, POD).
+- **Latent semantic analysis** in NLP: SVD on term-document matrix reveals "topics."
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Find singular values of $A = \begin{pmatrix}2 & 0\\ 0 & 3\end{pmatrix}$.
+</ExQ>
+<ExA>
+Already diagonal with nonnegative entries — singular values are 3, 2 (in decreasing order).
+
+For a diagonal positive matrix, singular values = diagonal entries (just sort).
+</ExA>
+
+<ExQ>
+**2.** Find singular values of $A = \begin{pmatrix}1 & 1\\ 1 & 1\end{pmatrix}$.
+</ExQ>
+<ExA>
+$A^TA = \begin{pmatrix}2 & 2\\ 2 & 2\end{pmatrix}$. Eigenvalues: $\det(A^TA - \lambda I) = (2-\lambda)^2 - 4 = \lambda^2 - 4\lambda = 0$, so $\lambda = 4, 0$.
+
+Singular values: $\sigma_1 = 2$, $\sigma_2 = 0$.
+
+Rank = 1.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** A matrix has $\sigma_1 = 10, \sigma_2 = 0.01$. What is its condition number? Is solving $A\mathbf{x} = \mathbf{b}$ numerically reliable?
+</ExQ>
+<ExA>
+$\kappa = \sigma_1/\sigma_2 = 1000$.
+
+**Poorly conditioned.** Small errors in $\mathbf{b}$ can amplify by up to 1000× in $\mathbf{x}$. Computations should use careful numerical methods (e.g., QR or SVD-based solvers, not direct inversion).
+
+Rule of thumb: $\kappa > 10^{12}$ indicates effective rank deficiency — treat as singular.
+</ExA>
+
+<ExQ>
+**4. Engineering: Image compression.** A 1000×1000 grayscale image has rank ~1000. Compute storage savings if you compress to rank 50.
+</ExQ>
+<ExA>
+Original: $1000\times 1000 = 10^6$ entries.
+
+Rank-50 approximation $A_{50} = U_{50}\Sigma_{50}V_{50}^T$:
+- $U_{50}$: $1000\times 50 = 50{,}000$
+- $\Sigma_{50}$: $50$ values
+- $V_{50}$: $1000\times 50 = 50{,}000$
+
+Total: $\sim 100{,}050$ entries.
+
+**Savings: 90%** with often imperceptible image-quality loss. This is essentially how JPEG-2000 wavelet compression works (using SVD-like decompositions).
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** Singular values are the same as absolute values of eigenvalues. Justify.
+</ExQ>
+<ExA>
+**False in general.** For **normal** matrices (like symmetric, skew-symmetric, orthogonal, or unitary), yes. For general matrices, no.
+
+Counterexample: $A = \begin{pmatrix}0 & 1\\ 0 & 0\end{pmatrix}$ has eigenvalue 0 (double), so $|\lambda_i| = 0$. But $A^TA = \begin{pmatrix}0&0\\0&1\end{pmatrix}$ has eigenvalue 1, giving $\sigma_1 = 1$.
+
+So singular values measure something different from eigenvalues for non-normal matrices.
+</ExA>
+
+<ExQ>
+**6.** Why is the rank of a matrix equal to the number of nonzero singular values?
+</ExQ>
+<ExA>
+In SVD $A = U\Sigma V^T$, $U$ and $V$ are invertible (orthogonal). Multiplying by invertible matrices doesn't change rank.
+
+So $\text{rank}(A) = \text{rank}(\Sigma) =$ number of nonzero diagonal entries.
+
+**Stable rank computation:** unlike Gaussian elimination, SVD-based rank is **numerically robust** — small noise in $A$ produces small changes in singular values. The "rank" is essentially "number of $\sigma_i$ above some threshold."
+
+This is why SVD is the gold standard for computing rank in floating-point arithmetic.
+</ExA>

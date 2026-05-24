@@ -1,0 +1,129 @@
+---
+title: Simple Harmonic Motion
+description: The universal mathematical structure governing oscillations — from atoms to bridges to circuits.
+---
+
+# Simple Harmonic Motion
+
+## The Big Picture
+
+Simple harmonic motion (SHM) is the prototype oscillation. Whenever a system has a stable equilibrium and you perturb it slightly, it oscillates in approximately this way. Mass-spring, pendulum (small angle), atoms in a crystal lattice, LC circuits — they all reduce to the same equation. Mastering SHM gives you instant intuition for *every* oscillatory phenomenon in engineering.
+
+## Intuition First — Restoring Force Proportional to Displacement
+
+Push a mass on a spring. The spring pulls back proportionally to how far you've stretched it. Push twice as hard? It pulls back twice as hard. This is **Hooke's law**: $F = -kx$.
+
+What does this give you? An object that swings around equilibrium, with the same period regardless of amplitude (linear system). The motion is a perfect sinusoid in time.
+
+This pattern — restoring force proportional to displacement — is **universal**. Whenever the potential energy has a smooth minimum, expanding to leading order gives $U \approx \tfrac{1}{2}kx^2$. The dynamics near *any* stable equilibrium look like SHM. That's why SHM is everywhere.
+
+## From Hooke to the Equation of Motion
+
+Newton's second law on a mass-spring system:
+
+$$m\ddot{x} = -kx \quad \Longrightarrow \quad \ddot{x} + \omega_0^2 x = 0, \quad \omega_0 \equiv \sqrt{k/m}$$
+
+**Solution:**
+$$x(t) = A\cos(\omega_0 t + \phi)$$
+
+where $A$ is amplitude and $\phi$ is the phase. Both determined from initial conditions.
+
+**Period:** $T = 2\pi/\omega_0 = 2\pi\sqrt{m/k}$. Independent of amplitude — the key signature of linear systems.
+
+## Energy in SHM
+
+$$E = \tfrac{1}{2}m\dot{x}^2 + \tfrac{1}{2}kx^2 = \tfrac{1}{2}kA^2 = \text{const}$$
+
+Energy oscillates between kinetic and potential, but the total is conserved (in the absence of damping).
+
+## Try It — Tune the Parameters
+
+<SHMDemo />
+
+## Other Examples of SHM
+
+| System | Restoring "force" | Frequency |
+|---|---|---|
+| Mass-spring | $-kx$ | $\sqrt{k/m}$ |
+| Pendulum (small angle) | $-mg\theta/L$ | $\sqrt{g/L}$ |
+| LC circuit | $-q/C$ on charge | $1/\sqrt{LC}$ |
+| Beam in bending (lowest mode) | $-K_{\text{eff}}w$ | $\sqrt{K_{\text{eff}}/m_{\text{eff}}}$ |
+
+All share the equation $\ddot{x} + \omega_0^2 x = 0$ — the language of "small oscillation about equilibrium."
+
+## Common Misconceptions
+
+**Misconception 1: "Period depends on amplitude."**
+
+For SHM (linear restoring force), period is amplitude-independent. This is special — the **isochronism** discovered by Galileo (allegedly observing a swinging cathedral lamp). For real pendulums at large angles, the assumption breaks down and period grows with amplitude.
+
+**Misconception 2: "$\omega_0$ is the angular frequency you spin at."**
+
+$\omega_0$ is the **angular frequency** of oscillation: $\omega_0 = 2\pi/T$ in rad/s. It is *not* an actual angular velocity in space. The "angular" terminology comes from the analogy to circular motion projected onto an axis.
+
+**Misconception 3: "SHM applies to large oscillations."**
+
+Only for *small* perturbations around equilibrium. Past some amplitude, nonlinear terms (like $-kx^3$ correction) matter. Period drifts, harmonics appear.
+
+## Engineering Connection
+
+- **Vibration absorbers** in buildings and machinery designed via mass-spring models.
+- **Quartz crystal oscillators** in electronics use mechanical SHM at MHz frequencies.
+- **Atomic force microscopy** measures atomic forces via tip oscillation amplitude/frequency shifts.
+- **Pendulum clocks** (Huygens, 1656) exploit isochronism for timekeeping.
+- **MEMS gyroscopes / accelerometers** use SHM as the reference oscillation.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Mass 0.5 kg on spring with $k = 200$ N/m. Find period.
+</ExQ>
+<ExA>
+$\omega_0 = \sqrt{200/0.5} = 20$ rad/s. $T = 2\pi/20 \approx 0.314$ s.
+</ExA>
+
+<ExQ>
+**2.** Pendulum length 1 m. Find period (small-angle).
+</ExQ>
+<ExA>
+$T = 2\pi\sqrt{1/9.81} \approx 2.006$ s.
+
+(Famous result: a pendulum with $L \approx 0.994$ m has period 2 s — basis of grandfather clock design.)
+</ExA>
+
+<ExQ>
+**3. Engineering: Building sway.** A 60 m tall building has effective mass 10⁶ kg and equivalent stiffness 4·10⁶ N/m. Natural period?
+</ExQ>
+<ExA>
+$\omega_0 = \sqrt{4\cdot 10^6/10^6} = 2$ rad/s. $T = \pi$ s ≈ 3.14 s.
+
+Real buildings of this height have periods around 3-5 seconds. Wind gusts and earthquakes near these frequencies are dangerous — leading to designs that shift the natural frequency away from common excitation.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** A car on a bumpy road bounces with period 1 s. Why does adding 4 passengers (extra 300 kg) change the period?
+</ExQ>
+<ExA>
+$T \propto \sqrt{m}$. Adding mass increases period.
+
+Suspension natural period typically 1 s with car alone; +300 kg might extend to ~1.05-1.1 s. Period change is small because car mass is ~1500 kg.
+
+Engineers tune suspension stiffness $k$ so that loaded and unloaded periods both remain in a comfortable range (~1 s) — too fast feels harsh, too slow feels seasick.
+</ExA>
+
+<ExQ>
+**5.** Show that SHM total energy $E = \tfrac{1}{2}kA^2$ is independent of time.
+</ExQ>
+<ExA>
+$x = A\cos(\omega_0 t)$, $\dot x = -A\omega_0\sin(\omega_0 t)$.
+
+$E = \tfrac{1}{2}m A^2\omega_0^2\sin^2(\omega_0 t) + \tfrac{1}{2}k A^2\cos^2(\omega_0 t)$.
+
+Use $m\omega_0^2 = k$:
+
+$E = \tfrac{1}{2}k A^2[\sin^2 + \cos^2] = \tfrac{1}{2}k A^2$ ✓.
+
+Energy conservation: kinetic ↔ potential, total constant. Pythagorean identity is the math, energy conservation is the physics.
+</ExA>

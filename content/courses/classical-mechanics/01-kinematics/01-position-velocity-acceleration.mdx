@@ -1,0 +1,130 @@
+---
+title: Position, Velocity, and Acceleration
+description: The fundamental kinematic relationships — derivatives and integrals connect them.
+---
+
+# Position, Velocity, and Acceleration
+
+## The Big Picture
+
+Kinematics describes motion **without asking why** — pure geometry of how things move. Three quantities form its foundation: **position** (where), **velocity** (how fast and which way), **acceleration** (how velocity changes). Each is the time derivative of the previous, linked by calculus. Understanding their interplay is the prerequisite for all of dynamics, control, and trajectory analysis.
+
+## The Definitions
+
+In 1D:
+- Position: $x(t)$
+- Velocity: $v(t) = dx/dt$
+- Acceleration: $a(t) = dv/dt = d^2x/dt^2$
+
+In 3D, each is a vector: $\mathbf{r}(t)$, $\mathbf{v}(t) = d\mathbf{r}/dt$, $\mathbf{a}(t) = d\mathbf{v}/dt$.
+
+## Inverse Relationships (Integration)
+
+Going from acceleration back to position requires integration with initial conditions:
+
+$$v(t) = v_0 + \int_0^t a(\tau)\,d\tau$$
+
+$$x(t) = x_0 + \int_0^t v(\tau)\,d\tau$$
+
+The constants $v_0$, $x_0$ are the initial velocity and position — the "starting state" of the motion.
+
+## Constant Acceleration
+
+The classic case ($a$ = const):
+
+$$v(t) = v_0 + at$$
+$$x(t) = x_0 + v_0 t + \tfrac{1}{2}at^2$$
+
+Eliminating $t$: $v^2 = v_0^2 + 2a(x - x_0)$ — the energy-like kinematic relation.
+
+These three formulas cover all uniform-gravity problems (free fall, projectiles), uniformly accelerated cars, and so on.
+
+## Average vs. Instantaneous
+
+**Average velocity:** $\bar v = \Delta x/\Delta t$.
+**Instantaneous velocity:** $v(t) = dx/dt = \lim_{\Delta t\to 0}\Delta x/\Delta t$.
+
+If $v$ is constant, the two agree. If $v$ varies, they're different — and the instantaneous version (the derivative) is what we usually mean by "velocity at time $t$."
+
+## Common Misconceptions
+
+**Misconception 1: "Acceleration means speeding up."**
+
+Acceleration is *change of velocity*. Slowing down (deceleration) is also acceleration — just opposite to velocity. In circular motion, you can have acceleration with constant speed (centripetal).
+
+**Misconception 2: "$v$ and $a$ point in the same direction."**
+
+Not necessarily. A car braking has $\mathbf{v} > 0$ but $\mathbf{a} < 0$. In circular motion, $\mathbf{v}$ is tangent and $\mathbf{a}$ is radial — perpendicular.
+
+**Misconception 3: "If $v = 0$, then $a = 0$."**
+
+A ball at the top of its trajectory has $v = 0$ momentarily, but $a = -g \neq 0$. Velocity zero doesn't mean acceleration zero.
+
+## Engineering Connection
+
+- **Trajectory planning (robotics, aerospace):** specify desired $a(t)$, integrate twice to get $x(t)$.
+- **Vehicle dynamics:** braking distance = $v_0^2/(2a)$ — direct kinematic relation.
+- **Sensor design:** accelerometers measure $a(t)$; integrating recovers velocity and position (with drift).
+- **Inertial navigation:** integrating accelerometer + gyro signals to track position over time.
+- **Control systems:** state-space includes position and velocity; feedback achieves desired motion.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A car accelerates from rest at 3 m/s² for 5 s. Find the velocity and distance traveled.
+</ExQ>
+<ExA>
+$v = 0 + 3\cdot 5 = 15$ m/s.
+
+$x = \tfrac{1}{2}\cdot 3\cdot 25 = 37.5$ m.
+</ExA>
+
+<ExQ>
+A ball is thrown straight up at 20 m/s. How high does it go? When does it return?
+</ExQ>
+<ExA>
+At top: $v = 0$. $0 = 20 - 9.81 t \Rightarrow t = 2.04$ s.
+
+Max height: $x = 20(2.04) - \tfrac{1}{2}(9.81)(2.04)^2 = 40.8 - 20.4 = 20.4$ m.
+
+Returns when $x = 0$: by symmetry, $t = 4.08$ s.
+</ExA>
+
+<ExQ>
+Position: $x(t) = 5\sin(2t)$ m. Find $v(t)$ and $a(t)$.
+</ExQ>
+<ExA>
+$v = 10\cos(2t)$ m/s.
+$a = -20\sin(2t)$ m/s² $= -4 x$.
+
+Note $a = -\omega^2 x$ — simple harmonic motion ($\omega = 2$).
+</ExA>
+
+<ExQ>
+**Engineering: Stopping distance.** A car at 30 m/s brakes with $a = -7$ m/s². Find stopping distance.
+</ExQ>
+<ExA>
+$0 = 30^2 + 2(-7)d \Rightarrow d = 900/14 \approx 64.3$ m.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is $v(t)$ at the top of a projectile's trajectory zero, but $a(t) \neq 0$?
+</ExQ>
+<ExA>
+Velocity is *changing* due to gravity throughout the motion — never zero acceleration.
+
+At the apex, the upward velocity has been decelerated to zero, but the next instant, gravity continues to act → velocity becomes negative.
+
+So $v = 0$ momentarily ≠ "stopped." It's the *transition* from upward to downward motion. Acceleration is unchanged: $-g$ throughout.
+</ExA>
+
+<ExQ>
+**Multi-step.** A train decelerates from 30 m/s to 10 m/s over 200 m. Find the (constant) acceleration and the time taken.
+</ExQ>
+<ExA>
+$v^2 = v_0^2 + 2ad$: $100 = 900 + 400 a \Rightarrow a = -2$ m/s² (deceleration of 2 m/s²).
+
+Time: $v = v_0 + at$: $10 = 30 - 2t \Rightarrow t = 10$ s.
+</ExA>

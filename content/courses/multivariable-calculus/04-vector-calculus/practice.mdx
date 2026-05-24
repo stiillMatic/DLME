@@ -1,0 +1,187 @@
+---
+title: Chapter 4 Practice — Vector Calculus
+description: Mixed practice on line integrals, surface integrals, Green's, Stokes', and Divergence theorems.
+---
+
+# Chapter 4 Practice — Vector Calculus
+
+## Mechanical Drills
+
+<ExQ>
+**1.** Compute $\int_C\mathbf{F}\cdot d\mathbf{r}$ for $\mathbf{F} = \langle x, y\rangle$ along the curve $\mathbf{r}(t) = \langle\cos t, \sin t\rangle$ from $t = 0$ to $t = \pi$.
+</ExQ>
+<ExA>
+$\mathbf{r}'(t) = \langle-\sin t, \cos t\rangle$. $\mathbf{F}(\mathbf{r}(t)) = \langle\cos t, \sin t\rangle$.
+
+$\mathbf{F}\cdot\mathbf{r}' = -\sin t\cos t + \sin t\cos t = 0$.
+
+$\int = 0$. (The field is radial; the curve is angular — perpendicular.)
+</ExA>
+
+<ExQ>
+**2.** Compute $\nabla\cdot\mathbf{F}$ and $\nabla\times\mathbf{F}$ for $\mathbf{F} = \langle x^2, y^2, z^2\rangle$.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{F} = 2x + 2y + 2z$.
+
+$\nabla\times\mathbf{F} = \langle 0, 0, 0\rangle$ (each cross-component cancels).
+
+The field is irrotational (curl = 0) but has nonzero divergence — a "pure source" field.
+</ExA>
+
+<ExQ>
+**3.** Use Green's theorem to compute $\oint_C(y^2\,dx + 2xy\,dy)$ where $C$ is the unit square $[0,1]^2$ counterclockwise.
+</ExQ>
+<ExA>
+$\partial Q/\partial x - \partial P/\partial y = 2y - 2y = 0$.
+
+$\oint = \iint_D 0\,dA = 0$.
+
+(Field is conservative: $P = y^2$, $Q = 2xy = \partial(xy^2)/\partial x$, potential $\phi = xy^2$.)
+</ExA>
+
+<ExQ>
+**4.** Use Stokes' theorem to compute $\oint_C\mathbf{F}\cdot d\mathbf{r}$ for $\mathbf{F} = \langle 0, 0, x^2\rangle$ where $C$ is the boundary of the upper unit hemisphere with positive orientation.
+</ExQ>
+<ExA>
+$\nabla\times\mathbf{F} = \langle 0, 2x, 0\rangle$.
+
+By Stokes: $\oint = \iint_S\nabla\times\mathbf{F}\cdot d\mathbf{S}$. The simplest surface is the disk $x^2 + y^2 \leq 1$ in $xy$-plane, with $d\mathbf{S} = \hat{\mathbf{k}}\,dA$.
+
+$\nabla\times\mathbf{F}\cdot\hat{\mathbf{k}} = 0$. So $\oint = 0$.
+</ExA>
+
+<ExQ>
+**5.** Use the divergence theorem to compute $\oiint_S\mathbf{F}\cdot d\mathbf{S}$ for $\mathbf{F} = \langle x, 2y, 3z\rangle$ over the unit sphere.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{F} = 1 + 2 + 3 = 6$.
+
+$\iiint_V 6\,dV = 6\cdot 4\pi/3 = 8\pi$.
+</ExA>
+
+## Conceptual
+
+<ExQ>
+**P1. True or False.** A conservative vector field has zero curl everywhere.
+</ExQ>
+<ExA>
+**True** in simply connected domains. (More precisely: a field with a potential $\nabla\phi$ has $\nabla\times(\nabla\phi) = \mathbf{0}$ identically.)
+
+In multiply connected domains (e.g., with a hole), zero curl doesn't guarantee a global potential — you can have nontrivial loop integrals.
+</ExA>
+
+<ExQ>
+**P2. Identify the connection.** What does each theorem connect — boundary, surface, volume?
+</ExQ>
+<ExA>
+- **FTC for line integrals:** endpoints (0D) $\leftrightarrow$ curve (1D)
+- **Green's theorem:** curve (1D) $\leftrightarrow$ region (2D)
+- **Stokes' theorem:** curve (1D) $\leftrightarrow$ surface (2D)
+- **Divergence theorem:** surface (2D) $\leftrightarrow$ volume (3D)
+
+Each lifts dimensionality by one — they're all special cases of the **generalized Stokes' theorem**.
+</ExA>
+
+<ExQ>
+**P3. Curl interpretation.** A paddle wheel is placed in a vector field. Where would it spin fastest?
+</ExQ>
+<ExA>
+Where $\|\nabla\times\mathbf{F}\|$ is largest, AND its axis aligned with $\nabla\times\mathbf{F}$.
+
+Curl direction = axis of rotation; magnitude = angular velocity.
+
+This is why curl is sometimes called the "rotational" of a field — it's a vorticity measurement.
+</ExA>
+
+<ExQ>
+**P4. Why Maxwell.** Why does $\nabla\cdot\mathbf{B} = 0$ tell us magnetic monopoles don't exist?
+</ExQ>
+<ExA>
+By divergence theorem: $\oiint_S\mathbf{B}\cdot d\mathbf{S} = \iiint_V\nabla\cdot\mathbf{B}\,dV = 0$ for any closed surface.
+
+If a magnetic monopole existed, its field would have flux equal to its "magnetic charge" — by analogy with electric charge. But the integral is always zero. Therefore: no isolated magnetic poles.
+
+Magnetic field lines must form closed loops, never starting or ending. This is one of Maxwell's four equations.
+</ExA>
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1.** Compute $\oint_C(2xy - y^2)\,dx + (x^2 + 4xy)\,dy$ where $C$ is the boundary of the triangle with vertices $(0,0), (2, 0), (0, 1)$.
+</ExQ>
+<ExA>
+By Green's theorem: $\partial Q/\partial x - \partial P/\partial y = (2x + 4y) - (2x - 2y) = 6y$.
+
+$\iint_D 6y\,dA$ over the triangle.
+
+Triangle: $0 \leq x \leq 2$, $0 \leq y \leq 1 - x/2$.
+
+$\int_0^2\int_0^{1-x/2}6y\,dy\,dx = \int_0^2 3(1 - x/2)^2\,dx = 3\cdot\dfrac{2(1-x/2)^3}{-3}\bigg|_0^2 \cdot (-1)$
+
+Let me redo: $\int_0^2 3(1-x/2)^2\,dx$. Substitute $u = 1 - x/2$, $du = -dx/2$, $dx = -2du$. Limits: $x=0\to u=1$, $x=2\to u=0$.
+
+$= 3\int_1^0 u^2(-2)\,du = 6\int_0^1 u^2\,du = 6/3 = 2$.
+</ExA>
+
+<ExQ>
+**S2. Engineering: Circulation in airfoil.** A 2D flow has $\mathbf{v} = \langle -y, x\rangle/(\,x^2 + y^2)$. Compute the circulation around any loop containing the origin.
+</ExQ>
+<ExA>
+This is the field of an irrotational vortex (zero curl, except at origin where it's singular).
+
+For a circle of radius $R$ centered at origin: $\mathbf{v} = (1/R)\langle -\sin t, \cos t\rangle$ (parameterize), $d\mathbf{r} = R\langle -\sin t, \cos t\rangle\,dt$.
+
+$\mathbf{v}\cdot d\mathbf{r} = (1/R)\cdot R(\sin^2 + \cos^2)\,dt = dt$.
+
+$\oint = \int_0^{2\pi}dt = 2\pi$.
+
+By deforming any loop containing the origin to a circle, circulation = $2\pi$ for any such loop. This is the **Kutta-Joukowski circulation** — directly tied to lift on an airfoil.
+</ExA>
+
+<ExQ>
+**S3. Engineering: Heat conservation.** Apply divergence theorem to the heat flux $\mathbf{q} = -k\nabla T$ through a closed surface. What does the result represent for steady-state heat flow?
+</ExQ>
+<ExA>
+$\oiint_S\mathbf{q}\cdot d\mathbf{S} = -k\iiint_V\nabla\cdot(\nabla T)\,dV = -k\iiint_V\nabla^2 T\,dV$
+
+For steady-state with no internal heat sources: $\nabla^2 T = 0$ (Laplace equation), so total flux is zero.
+
+**Physical meaning:** in steady state, heat in = heat out for any closed region. With sources (e.g., resistive heating $\dot q$): $\nabla^2 T = -\dot q/k$ (Poisson), and net outward flux equals total source rate.
+
+This **is** the conservation of energy in differential form.
+</ExA>
+
+<ExQ>
+**S4.** Verify Stokes' theorem for $\mathbf{F} = \langle y, -x, z\rangle$ over the upper hemisphere of radius 1, with positively oriented boundary (the unit circle in $xy$-plane).
+</ExQ>
+<ExA>
+**Line side:** parameterize unit circle CCW: $\mathbf{r}(t) = (\cos t, \sin t, 0)$. $\mathbf{F}(\mathbf{r}(t)) = \langle\sin t, -\cos t, 0\rangle$. $\mathbf{r}'(t) = \langle-\sin t, \cos t, 0\rangle$.
+
+$\mathbf{F}\cdot\mathbf{r}' = -\sin^2 t - \cos^2 t = -1$.
+
+$\oint = \int_0^{2\pi}(-1)\,dt = -2\pi$.
+
+**Surface side:** $\nabla\times\mathbf{F} = \langle 0, 0, -2\rangle$. On hemisphere, outward normal points away from origin.
+
+Easier: use the disk in $xy$-plane (same boundary). $d\mathbf{S} = \hat{\mathbf{k}}\,dA$.
+
+$\iint_D\langle 0, 0, -2\rangle\cdot\hat{\mathbf{k}}\,dA = -2\pi$.
+
+Both sides $= -2\pi$ ✓.
+</ExA>
+
+<ExQ>
+**S5.** Show that the divergence theorem reduces the surface integral $\oiint_S\mathbf{r}\cdot d\mathbf{S}$ over any closed surface to $3V$, where $V$ is the enclosed volume.
+</ExQ>
+<ExA>
+$\nabla\cdot\mathbf{r} = \nabla\cdot\langle x, y, z\rangle = 3$.
+
+By divergence theorem: $\oiint_S\mathbf{r}\cdot d\mathbf{S} = \iiint_V 3\,dV = 3V$.
+
+**Application:** this gives a slick formula for the **volume of any region** via a surface integral:
+
+$$V = \frac{1}{3}\oiint_S\mathbf{r}\cdot d\mathbf{S}$$
+
+Used in computer graphics (mesh volume calculations) and computational geometry.
+</ExA>

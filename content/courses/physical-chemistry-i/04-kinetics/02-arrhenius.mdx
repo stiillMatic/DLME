@@ -1,0 +1,154 @@
+---
+title: Arrhenius Equation and Catalysis
+description: Why temperature matters exponentially — and how catalysts work without changing thermodynamics.
+---
+
+# Arrhenius Equation and Catalysis
+
+## The Big Picture
+
+The **Arrhenius equation** quantifies how rate constants depend on temperature. The exponential form means small changes in T have outsized effects on rate. **Catalysts** accelerate reactions by lowering the activation energy without being consumed — fundamental to industrial chemistry, biology (enzymes), and environmental processes. Understanding both is essential for any chemical engineer.
+
+## Arrhenius Equation
+
+$$k = A e^{-E_a/RT}$$
+
+- $A$: pre-exponential factor (frequency of "attempts").
+- $E_a$: activation energy (barrier to reaction).
+- $R$: gas constant.
+- $T$: temperature (K).
+
+**Logarithmic form:**
+
+$$\ln k = \ln A - E_a/(RT)$$
+
+Plot $\ln k$ vs $1/T$ → slope $= -E_a/R$.
+
+## Temperature Sensitivity
+
+For typical $E_a \sim 50$ kJ/mol, rate **roughly doubles per 10 K** near room temperature.
+
+Rigorously:
+$$\frac{k_2}{k_1} = \exp\left[\frac{E_a}{R}\left(\frac{1}{T_1} - \frac{1}{T_2}\right)\right]$$
+
+Same equation as van't Hoff for $K$ — both have Boltzmann factor $e^{-E/kT}$ origin.
+
+## Activation Energy Interpretation
+
+$E_a$ is the energy threshold molecules must possess (via thermal fluctuation) to undergo reaction.
+
+Boltzmann fraction with sufficient energy: $\exp(-E_a/RT)$.
+
+So rate $\propto$ this fraction $\times$ collision frequency $A$.
+
+## Catalysts
+
+A **catalyst** provides an alternative reaction pathway with lower $E_a$. It is not consumed and doesn't change equilibrium.
+
+| Aspect | Without catalyst | With catalyst |
+|---|---|---|
+| $E_a$ | High | Lower |
+| $\Delta G$ | Same | **Same** (unchanged) |
+| Rate | Slower | Faster |
+| Equilibrium | Same position | Same position (just reached faster) |
+
+**Homogeneous catalysts:** same phase as reactants (acid catalysis in solution).
+**Heterogeneous catalysts:** different phase (solid catalysts in gas reactions — automotive catalytic converters).
+**Enzymes:** biological catalysts. Often factor of $10^6-10^{17}$ rate enhancement.
+
+## Enzyme Kinetics (Michaelis-Menten)
+
+For enzyme + substrate: $E + S \rightleftharpoons ES \to E + P$.
+
+Rate: $v = \dfrac{V_{\max}[S]}{K_M + [S]}$.
+
+- $V_{\max}$: maximum rate (saturated enzyme).
+- $K_M$: substrate concentration at half $V_{\max}$.
+
+Low [S]: first-order in S. High [S]: zeroth order (saturated). The Michaelis-Menten curve is hyperbolic.
+
+## Common Misconceptions
+
+**Misconception 1: "Catalysts speed forward and slow reverse."**
+
+Catalysts speed **both** equally — equilibrium unchanged.
+
+**Misconception 2: "Higher T always = better."**
+
+Higher T speeds forward and reverse equally, but for endothermic reactions shifts equilibrium forward; for exothermic, away from products. Beyond some T, may hurt yield.
+
+**Misconception 3: "$A$ doesn't matter."**
+
+$A$ varies by orders of magnitude (collision frequency, geometric requirements). Two reactions with same $E_a$ but $A$ differing by $10^6$ have rates differing by $10^6$.
+
+## Engineering Connection
+
+- **Catalytic converters:** Pt/Pd/Rh catalysts convert CO, NOx, hydrocarbons in car exhaust.
+- **Haber process:** Fe catalyst for NH₃ synthesis enables industrial production.
+- **Polymerization:** Ziegler-Natta and metallocene catalysts control polymer structure.
+- **Enzymes in industry:** detergent proteases, glucose isomerase, lipases.
+- **Drug metabolism:** CYP450 enzymes process drugs, affecting half-life.
+- **Atmospheric chemistry:** OH radical catalytic cycles destroy methane and other pollutants.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $k = 10^{-3}$ at 300 K, $10^{-2}$ at 350 K. $E_a$?
+</ExQ>
+<ExA>
+$\ln(10) = (E_a/R)(1/300 - 1/350) = (E_a/8.314)\cdot 4.76\times 10^{-4}$.
+
+$E_a = 2.303\cdot 8.314/4.76\times 10^{-4} = 40240$ J/mol = 40.2 kJ/mol.
+
+Reasonable for many organic reactions.
+</ExA>
+
+<ExQ>
+**2.** Catalyst lowers $E_a$ by 30 kJ/mol at 300 K. Rate enhancement?
+</ExQ>
+<ExA>
+$k_{\text{cat}}/k_{\text{uncat}} = \exp(30000/8.314\cdot 300) = \exp(12.03) \approx 168000$.
+
+**~170,000 ×** faster. Typical catalyst effect.
+
+Industrial catalysts often achieve much more — factor of $10^9-10^{15}$.
+</ExA>
+
+<ExQ>
+**3.** Reaction rate doubles for every 10 K. $E_a$ at 300 K?
+</ExQ>
+<ExA>
+$2 = \exp(E_a/R\cdot(1/300 - 1/310)) = \exp(E_a/R \cdot 0.0001075)$.
+
+$\ln 2 = E_a\cdot 1.293\times 10^{-5}$.
+
+$E_a \approx 0.693/1.293\times 10^{-5} \approx 53600$ J/mol = 53.6 kJ/mol.
+
+"Doubling per 10 K" is a useful rule of thumb for moderate activation energies.
+</ExA>
+
+<ExQ>
+**4. Engineering: Enzyme rate.** Enzyme has $V_{\max} = 10$ μM/s, $K_M = 50$ μM. Rate at [S] = 100 μM?
+</ExQ>
+<ExA>
+$v = V_{\max}[S]/(K_M + [S]) = 10\cdot 100/(50+100) = 1000/150 = 6.67$ μM/s.
+
+At $[S] = K_M$: rate = $V_{\max}/2 = 5$ μM/s. At $[S] \gg K_M$: rate $\to V_{\max}$.
+
+This hyperbolic kinetics is the fingerprint of catalysis with substrate binding.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why doesn't a catalyst violate the second law of thermodynamics?
+</ExQ>
+<ExA>
+Catalysts don't change $\Delta G$ or equilibrium — only the rate of approach. Equilibrium position is the same with or without catalyst.
+
+If catalysts could shift equilibrium, you could violate second law: catalyze A→B forward without enough free energy to drive it.
+
+The energy balance is preserved: catalyst is regenerated unchanged at end of cycle. No net work input or output. Just faster equilibration.
+
+This is why catalysts are so valuable — they reduce kinetic barriers without "creating" thermodynamic favorability.
+</ExA>

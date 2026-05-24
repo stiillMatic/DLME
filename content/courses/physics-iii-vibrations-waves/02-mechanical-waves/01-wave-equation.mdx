@@ -1,0 +1,136 @@
+---
+title: The Wave Equation
+description: The fundamental PDE governing waves on strings, sound in air, light in vacuum — same equation, many manifestations.
+---
+
+# The Wave Equation
+
+## The Big Picture
+
+A **wave** is a disturbance that travels through space, carrying energy and information but not matter. The mathematical statement of "wave propagation" is the **wave equation** — a single second-order PDE that governs strings, fluids, electromagnetic fields, and even gravitational waves. Solving and understanding this one equation unlocks the entire study of wave phenomena.
+
+## Intuition First — Restoring Force + Inertia + Spatial Coupling
+
+A wave needs three things:
+1. **Inertia** (mass): so motion can persist.
+2. **Restoring force**: pulls particles back toward equilibrium.
+3. **Coupling between neighbors**: so disturbance at one place pushes neighbors.
+
+Combine: at point $x$, the net restoring force depends on neighbors' positions — i.e., on the **second spatial derivative** $\partial^2 y/\partial x^2$. Inertia means acceleration $\partial^2 y/\partial t^2$ equals this force per mass.
+
+## Derivation: Wave on a String
+
+A taut string with tension $T$, linear mass density $\mu$, small displacement $y(x, t)$.
+
+Consider a small segment between $x$ and $x + dx$. The tension at each end pulls along the string direction. The vertical component of net force:
+
+$$F_y \approx T\frac{\partial y}{\partial x}\bigg|_{x+dx} - T\frac{\partial y}{\partial x}\bigg|_x = T\frac{\partial^2 y}{\partial x^2}dx$$
+
+Mass: $\mu\,dx$. Acceleration: $\partial^2 y/\partial t^2$.
+
+Newton's law:
+$$\mu\,dx\,\frac{\partial^2 y}{\partial t^2} = T\frac{\partial^2 y}{\partial x^2}dx$$
+
+$$\boxed{\frac{\partial^2 y}{\partial t^2} = c^2\frac{\partial^2 y}{\partial x^2}, \quad c = \sqrt{T/\mu}}$$
+
+The **wave equation**. $c$ is the **wave speed** — set by tension and density.
+
+## General Solution: d'Alembert
+
+The wave equation has solutions of the form:
+
+$$y(x, t) = f(x - ct) + g(x + ct)$$
+
+- $f(x - ct)$: any shape, moving right at speed $c$ (without distortion).
+- $g(x + ct)$: any shape, moving left at speed $c$.
+
+So *any* wave is a sum of left-mover plus right-mover. This is **dispersionless** propagation — the shape doesn't change in time.
+
+## Harmonic Waves
+
+A particularly useful basis: sinusoidal waves.
+
+$$y(x, t) = A\cos(kx - \omega t)$$
+
+where:
+- $k$ = **wave number** (rad/m), $\omega$ = **angular frequency** (rad/s)
+- **Wavelength** $\lambda = 2\pi/k$
+- **Period** $T = 2\pi/\omega$
+- **Speed** $c = \omega/k = \lambda f$ — the **dispersion relation**
+
+For ideal strings (and many media), $c$ is constant: nondispersive.
+
+## Common Misconceptions
+
+**Misconception 1: "Particles travel with the wave."**
+
+For mechanical waves, particles oscillate in place (transverse or longitudinal). The wave pattern moves; the medium doesn't.
+
+**Misconception 2: "Wave speed = particle speed."**
+
+Distinct! Wave speed $c$ depends on medium properties. Particle speed depends on amplitude and frequency. For small waves on string, particle speed $\ll c$.
+
+**Misconception 3: "Wave equation is 1D only."**
+
+Generalizes to 3D: $\partial^2 y/\partial t^2 = c^2\nabla^2 y$. Same structure, $\nabla^2$ replaces $\partial^2/\partial x^2$.
+
+## Engineering Connection
+
+- **Acoustic waves in pipes:** wave equation for pressure $p(x, t)$ with $c = \sqrt{\gamma RT/M}$ (sound speed in gases).
+- **Vibrations in beams** (slender): the Euler-Bernoulli equation is 4th-order, not 2nd — distinct from string but still wave-like.
+- **EM waves in vacuum:** $\partial^2 \mathbf E/\partial t^2 = c^2\nabla^2\mathbf E$ from Maxwell's equations, $c = 1/\sqrt{\mu_0\varepsilon_0}$.
+- **Seismic waves:** P-waves and S-waves in earth obey wave equations; wave speeds reveal subsurface properties.
+- **Ultrasound imaging:** wave equation with variable $c$ for tissue properties enables image reconstruction.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** String tension 50 N, mass density 0.01 kg/m. Wave speed?
+</ExQ>
+<ExA>
+$c = \sqrt{50/0.01} = \sqrt{5000} \approx 70.7$ m/s.
+</ExA>
+
+<ExQ>
+**2.** Sound wave with $f = 1000$ Hz in air ($c = 343$ m/s). Wavelength?
+</ExQ>
+<ExA>
+$\lambda = c/f = 343/1000 = 0.343$ m.
+</ExA>
+
+<ExQ>
+**3. Engineering: Guitar string.** $L = 0.65$ m, $\mu = 5\times 10^{-4}$ kg/m. Want fundamental at 110 Hz. Find tension.
+</ExQ>
+<ExA>
+Fundamental wavelength: $\lambda = 2L = 1.3$ m. Speed: $c = f\lambda = 143$ m/s.
+
+$T = \mu c^2 = 5\times 10^{-4}\cdot 143^2 \approx 10.22$ N.
+
+Guitar strings are typically tensioned to 70-120 N for various pitches — this string is light/loose.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** A wave $y(x, t) = A\sin(kx - \omega t)$ moves which direction?
+</ExQ>
+<ExA>
+At time $t$, the wave looks like $\sin(kx - \omega t)$. To follow a specific feature (e.g., a crest), set $kx - \omega t = $ const, so $x$ increases with $t$.
+
+**Moves to the right** (+x direction) at speed $\omega/k$.
+
+If instead the form were $\sin(kx + \omega t)$, it would move left.
+</ExA>
+
+<ExQ>
+**5.** Verify that $y(x, t) = (x - ct)^2$ satisfies the wave equation.
+</ExQ>
+<ExA>
+$\partial_t y = -2c(x - ct)$. $\partial_t^2 y = 2c^2$.
+
+$\partial_x y = 2(x - ct)$. $\partial_x^2 y = 2$.
+
+Check: $\partial_t^2 y = c^2\partial_x^2 y$ gives $2c^2 = c^2(2)$ ✓.
+
+So *any* function of $(x - ct)$ satisfies the wave equation — this is d'Alembert's theorem in action.
+</ExA>

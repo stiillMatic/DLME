@@ -1,0 +1,184 @@
+---
+title: Diagonalization and Matrix Powers
+description: Decomposing a matrix into eigenvector basis — and why this makes computing powers, exponentials, and dynamics easy.
+---
+
+# Diagonalization and Matrix Powers
+
+## The Big Picture
+
+A matrix is hard to work with when its action mixes the coordinates. But if you change to the **eigenvector basis**, the same transformation becomes **diagonal** — every component just scales independently. This is **diagonalization**: rewriting $A$ as $PDP^{-1}$ where $D$ is diagonal. Once you have this form, matrix powers, exponentials, and dynamical systems become trivial. Diagonalization is the single most useful structural decomposition in applied math.
+
+## Intuition First — Coordinate Choice Matters
+
+Imagine you're stretching a piece of rubber. In some coordinate system, the stretch mixes $x$ and $y$ — confusing. But if you align coordinates with the principal stretch directions, the same operation looks like:
+- stretch $\hat{e}_1$ direction by factor $\lambda_1$
+- stretch $\hat{e}_2$ direction by factor $\lambda_2$
+
+These principal directions ARE the eigenvectors. The factors ARE the eigenvalues.
+
+Diagonalization is just **putting the matrix in its natural coordinates**.
+
+## The Diagonalization
+
+If $A$ is $n\times n$ with $n$ linearly independent eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_n$ and eigenvalues $\lambda_1, \ldots, \lambda_n$, then:
+
+$$A = PDP^{-1}$$
+
+where:
+- $P$ has the eigenvectors as columns
+- $D$ is diagonal with eigenvalues on the diagonal
+
+**Equivalent:** $AP = PD$, i.e., $A\mathbf{v}_i = \lambda_i\mathbf{v}_i$ for each column.
+
+## When Is a Matrix Diagonalizable?
+
+$A$ is diagonalizable **iff** it has $n$ linearly independent eigenvectors. This happens when:
+- All eigenvalues are **distinct**, OR
+- For each repeated eigenvalue, its geometric multiplicity equals its algebraic multiplicity.
+
+**Always diagonalizable:**
+- Real symmetric matrices (with orthogonal eigenvectors!) — Spectral theorem.
+
+**Not always diagonalizable:**
+- Matrices with repeated eigenvalues and "defective" eigenvectors (Jordan blocks).
+
+## Power of Diagonalization — Computing $A^k$
+
+If $A = PDP^{-1}$:
+
+$$A^k = (PDP^{-1})(PDP^{-1})\cdots(PDP^{-1}) = PD^kP^{-1}$$
+
+Powers of $A$ require $n^3$ operations each. Powers of $D$ are trivial: $D^k = \text{diag}(\lambda_1^k, \ldots, \lambda_n^k)$.
+
+This transforms $A^{1000}$ from "expensive" to "trivial."
+
+## Matrix Exponential
+
+For dynamics $\dot{\mathbf{x}} = A\mathbf{x}$, the solution is $\mathbf{x}(t) = e^{At}\mathbf{x}_0$.
+
+Using diagonalization:
+$$e^{At} = Pe^{Dt}P^{-1}, \quad e^{Dt} = \text{diag}(e^{\lambda_1 t}, \ldots, e^{\lambda_n t})$$
+
+So the dynamics decouple: each eigenmode evolves independently as $e^{\lambda_i t}$.
+
+## Worked Example
+
+$$A = \begin{pmatrix}4 & 1\\ 2 & 3\end{pmatrix}$$
+
+Eigenvalues: $\lambda^2 - 7\lambda + 10 = 0 \Rightarrow \lambda = 2, 5$.
+
+Eigenvectors:
+- $\lambda = 5$: $(A - 5I)\mathbf{v} = 0 \Rightarrow \mathbf{v}_1 = (1, 1)$.
+- $\lambda = 2$: $(A - 2I)\mathbf{v} = 0 \Rightarrow \mathbf{v}_2 = (1, -2)$.
+
+$P = \begin{pmatrix}1 & 1\\ 1 & -2\end{pmatrix}$, $D = \begin{pmatrix}5 & 0\\ 0 & 2\end{pmatrix}$.
+
+$P^{-1} = \frac{1}{-3}\begin{pmatrix}-2 & -1\\ -1 & 1\end{pmatrix} = \frac{1}{3}\begin{pmatrix}2 & 1\\ 1 & -1\end{pmatrix}$.
+
+Verify: $A = PDP^{-1}$ — check by direct computation if desired.
+
+## Common Misconceptions
+
+**Misconception 1: "All matrices can be diagonalized."**
+
+False. Defective matrices like $\begin{pmatrix}1 & 1\\ 0 & 1\end{pmatrix}$ have one eigenvalue ($\lambda = 1$) with algebraic multiplicity 2 but only one eigenvector — not diagonalizable. They need Jordan canonical form instead.
+
+**Misconception 2: "Eigenvectors are unique."**
+
+Eigenvectors are unique up to scaling. Any nonzero multiple of an eigenvector is also an eigenvector. By convention, we often normalize them.
+
+**Misconception 3: "Order of eigenvalues doesn't matter."**
+
+Order matters: column $i$ of $P$ must match $D_{ii}$. Permuting eigenvalues requires permuting eigenvectors correspondingly.
+
+**Misconception 4: "Diagonalization makes everything diagonal."**
+
+It makes $A$ diagonal **in the eigenvector basis**, not in the standard basis. The transformation $P$ converts between bases.
+
+## Engineering Connection
+
+- **Vibration analysis:** the modal decomposition of mass-stiffness system $M\ddot{\mathbf{x}} + K\mathbf{x} = 0$ is essentially diagonalization. Each "mode" is an eigenvector; "natural frequency" is $\sqrt{\lambda}$.
+- **Control theory:** state-space system $\dot{\mathbf{x}} = A\mathbf{x}$ is stable iff eigenvalues of $A$ have negative real parts.
+- **PageRank / Markov chains:** long-run behavior dominated by largest-eigenvalue eigenvector.
+- **Principal stresses:** diagonalizing the stress tensor gives principal stresses (eigenvalues) along principal directions (eigenvectors).
+- **Quantum mechanics:** eigenvalues = energy levels; eigenvectors = stationary states.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Diagonalize $A = \begin{pmatrix}3 & 0\\ 0 & 5\end{pmatrix}$. Find $A^{10}$.
+</ExQ>
+<ExA>
+Already diagonal! $A^{10} = \begin{pmatrix}3^{10} & 0\\ 0 & 5^{10}\end{pmatrix}$.
+
+(Eigenvalues 3, 5; eigenvectors $(1, 0), (0, 1)$.)
+</ExA>
+
+<ExQ>
+**2.** Find eigenvalues and eigenvectors of $A = \begin{pmatrix}2 & 1\\ 0 & 3\end{pmatrix}$.
+</ExQ>
+<ExA>
+Eigenvalues from $(2-\lambda)(3-\lambda) = 0$: $\lambda = 2, 3$.
+
+$\lambda = 2$: $(A - 2I)\mathbf{v} = 0$ gives $\mathbf{v}_1 = (1, 0)$.
+$\lambda = 3$: $(A - 3I)\mathbf{v} = 0$ gives $\mathbf{v}_2 = (1, 1)$.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** Compute $A^{100}$ symbolically for $A = \begin{pmatrix}0 & 1\\ 1 & 1\end{pmatrix}$ (Fibonacci matrix).
+</ExQ>
+<ExA>
+Characteristic: $\lambda^2 - \lambda - 1 = 0 \Rightarrow \lambda = (1\pm\sqrt 5)/2 = \phi, -1/\phi$ where $\phi$ is the golden ratio.
+
+After diagonalization, $A^{100}$ has entries $\sim \phi^{100}$. The $(1,2)$ entry of $A^n$ is exactly the $n$-th Fibonacci number $F_n$.
+
+So $F_{100} = $ entry $(1,2)$ of $A^{100}$. Compute via $A^{100} = PD^{100}P^{-1}$ in closed form.
+
+This is **Binet's formula**: $F_n = (\phi^n - (-1/\phi)^n)/\sqrt 5$.
+</ExA>
+
+<ExQ>
+**4. Engineering: 2-DOF vibration.** A mass-spring system has $M\ddot{\mathbf{x}} = -K\mathbf{x}$ with $M = I$, $K = \begin{pmatrix}3 & -1\\ -1 & 3\end{pmatrix}$. Find natural frequencies and mode shapes.
+</ExQ>
+<ExA>
+Need $\det(K - \omega^2 I) = 0$: $(3-\omega^2)^2 - 1 = 0 \Rightarrow (3-\omega^2) = \pm 1$, so $\omega^2 = 2, 4$.
+
+Frequencies: $\omega_1 = \sqrt 2 \approx 1.41$ rad/s, $\omega_2 = 2$ rad/s.
+
+Mode shapes:
+- $\omega^2 = 2$: $(K - 2I)\mathbf{v} = 0$ gives $\mathbf{v}_1 = (1, 1)$ — **in-phase** mode.
+- $\omega^2 = 4$: $(K - 4I)\mathbf{v} = 0$ gives $\mathbf{v}_2 = (1, -1)$ — **out-of-phase** mode.
+
+Diagonalization gives the modal coordinates that decouple the system.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** If $A$ and $B$ have the same eigenvalues, then $A = B$. Justify.
+</ExQ>
+<ExA>
+**False.** Eigenvalues alone don't determine a matrix — eigenvectors also matter.
+
+Counterexample: $A = \begin{pmatrix}1 & 0\\ 0 & 2\end{pmatrix}$ and $B = \begin{pmatrix}1 & 5\\ 0 & 2\end{pmatrix}$ both have eigenvalues 1, 2 but $A \neq B$.
+
+Eigenvalues capture *how much* but eigenvectors capture *in which directions*. Both are needed.
+</ExA>
+
+<ExQ>
+**6.** Why is a symmetric matrix always diagonalizable?
+</ExQ>
+<ExA>
+**Spectral Theorem:** every real symmetric matrix has real eigenvalues and a complete set of orthogonal eigenvectors.
+
+This is a deep result with several proofs. The key consequence: $A = PDP^T$ where $P$ is **orthogonal** ($P^T = P^{-1}$). The change of basis is a rotation (or reflection) — particularly easy to invert.
+
+This is why so many engineering problems with symmetric matrices (stress, stiffness, covariance) have clean diagonalization-based analyses.
+</ExA>

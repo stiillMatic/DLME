@@ -1,0 +1,116 @@
+---
+title: Uniform Circular Motion
+description: An object moving at constant speed in a circle is constantly accelerating — toward the center.
+---
+
+# Uniform Circular Motion
+
+## The Big Picture
+
+Circular motion appears everywhere: planets, wheels, centrifuges, particle accelerators. Even at *constant speed*, the direction of velocity changes — so there's acceleration. This **centripetal acceleration** always points toward the center, and provides the bridge from kinematics to dynamics: it tells you what force the system must supply.
+
+## Intuition First — Direction Change Is Acceleration
+
+Velocity is a vector. Changing **either** magnitude or direction changes velocity, which is acceleration.
+
+Tie a ball to a string and swing it in a circle at constant speed. The ball's speed is constant, but the string tugs it inward — that's the centripetal force. Without it, the ball flies off tangentially (Newton's first law).
+
+## Quantitative Formulas
+
+For an object moving at constant speed $v$ in a circle of radius $r$:
+
+$$a_c = \frac{v^2}{r}$$
+
+This is the **centripetal acceleration**. Direction: toward the center.
+
+If $T$ is the period and $\omega = 2\pi/T$ is angular velocity:
+$$v = \omega r, \quad a_c = \omega^2 r$$
+
+## Worked Example
+
+A car rounds a circular curve of radius 50 m at 20 m/s. Centripetal acceleration?
+
+$$a_c = (20)^2/50 = 8\,\text{m/s}^2$$
+
+For a 1000 kg car: required centripetal **force** $F = ma_c = 8000$ N — supplied by friction between tires and road.
+
+If friction can't supply 8000 N (icy road, sharp turn), the car skids outward.
+
+## Common Misconceptions
+
+**Misconception 1: "Centrifugal force pulls outward."**
+
+In an inertial frame, there's **no outward force**. The centripetal force pulls inward; the object's *inertia* makes it "want" to go straight (tangentially), which feels like an outward push in the rotating frame.
+
+**Misconception 2: "Constant speed = no acceleration."**
+
+Acceleration is rate of change of *velocity* (a vector). Constant speed with changing direction is still acceleration.
+
+**Misconception 3: "Centripetal force is a separate type of force."**
+
+It's a role, not a type. The centripetal force is whatever real force (gravity, tension, friction, normal) provides the inward pull. For orbiting planets, gravity is the centripetal force; for cars, friction is; for a swung ball, tension is.
+
+## Engineering Connection
+
+- **Vehicle dynamics:** maximum safe cornering speed depends on tire friction and curve radius.
+- **Centrifuges:** separate components by density using strong centripetal accelerations (thousands of g's).
+- **Banked curves:** racetracks and highways angled inward so component of normal force provides centripetal — allows higher speeds without relying on friction.
+- **Satellite orbits:** gravity provides exactly the centripetal force needed for orbital motion at a given altitude.
+- **Rotating machinery:** stress on turbine blades, propellers, flywheels driven by $a_c = \omega^2 r$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Object on 2 m string, speed 4 m/s. Centripetal acceleration?
+</ExQ>
+<ExA>
+$a_c = 16/2 = 8$ m/s².
+</ExA>
+
+<ExQ>
+**2.** Car cornering on 100 m radius curve, $\mu_s = 0.7$. Max safe speed?
+</ExQ>
+<ExA>
+Friction provides centripetal: $\mu_s mg \geq mv^2/r$.
+
+$v_{\max} = \sqrt{\mu_s g r} = \sqrt{0.7\cdot 9.81\cdot 100} \approx 26.2$ m/s ≈ 94 km/h.
+
+Wet/icy road ($\mu_s$ down to 0.2-0.3) drops this to ~50 km/h — why slow down in bad weather.
+</ExA>
+
+<ExQ>
+**3. Engineering: Centrifuge.** Lab centrifuge, radius 10 cm, 10,000 rpm. Acceleration in g's?
+</ExQ>
+<ExA>
+$\omega = 10000\cdot 2\pi/60 \approx 1047$ rad/s.
+
+$a_c = \omega^2 r = 1047^2\cdot 0.1 \approx 1.1\times 10^5$ m/s².
+
+In g: $\approx 11{,}200$ g. Strong enough to separate proteins, particles, cells by density.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why don't satellites need fuel to stay in orbit?
+</ExQ>
+<ExA>
+Gravity provides exactly the centripetal force needed at orbital speed. No additional force required — orbits are self-sustaining.
+
+Slight atmospheric drag (LEO satellites) eventually decays orbits, requiring boost. Geostationary satellites at 36,000 km have negligible drag and stay for centuries.
+
+Insight: orbit = "perpetual free-fall around Earth." Newton's thought experiment, now realized.
+</ExA>
+
+<ExQ>
+**5.** A 70 kg passenger experiences 3 g at the bottom of a roller coaster loop. Normal force from seat?
+</ExQ>
+<ExA>
+At bottom: $N - mg = ma_c$ (net upward = centripetal toward center which is up here).
+
+$N = m(g + a_c) = 70\cdot(9.81 + 3\cdot 9.81) = 70\cdot 39.24 \approx 2747$ N.
+
+This is the "weight" the passenger feels — 4× normal weight. Quad-extension strain on the body.
+
+(Roller coaster designers limit to ~5 g.)
+</ExA>

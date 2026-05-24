@@ -1,0 +1,81 @@
+---
+title: Poisson's Equation and Laplace's Equation
+description: The governing PDEs for steady-state heat conduction, electrostatics, and incompressible potential flow.
+---
+
+# Poisson's Equation and Laplace's Equation
+
+**Poisson's equation:**
+
+$$\nabla^2 u = f(\mathbf{x})$$
+
+**Laplace's equation** (when $f = 0$):
+
+$$\nabla^2 u = 0$$
+
+In 2D Cartesian: $\nabla^2 u = \dfrac{\partial^2 u}{\partial x^2} + \dfrac{\partial^2 u}{\partial y^2}$
+
+In cylindrical: $\nabla^2 u = \dfrac{1}{r}\dfrac{\partial}{\partial r}\!\left(r\dfrac{\partial u}{\partial r}\right) + \dfrac{1}{r^2}\dfrac{\partial^2 u}{\partial\theta^2}$
+
+## Physical Problems Governed by These Equations
+
+| Problem | $u$ | $f$ |
+|---|---|---|
+| Steady heat conduction | Temperature $T$ | $-Q/k$ (heat source) |
+| Electrostatics | Electric potential $\phi$ | $-\rho/\varepsilon_0$ (charge density) |
+| Groundwater flow | Hydraulic head $h$ | Source/sink rate |
+| Membrane deflection | Deflection $w$ | $-p/T$ (pressure / tension) |
+| 2D potential flow | Velocity potential $\phi$ | 0 (Laplace) |
+
+## Boundary Conditions
+
+Three types:
+- **Dirichlet:** $u = g$ on boundary (prescribed value — e.g., fixed temperature)
+- **Neumann:** $\partial u/\partial n = h$ on boundary (prescribed flux — e.g., insulated wall: $\partial T/\partial n = 0$)
+- **Robin:** $\partial u/\partial n + \alpha u = h$ (convection BC in heat transfer)
+
+## Properties of Harmonic Functions
+
+Solutions to $\nabla^2 u = 0$ are **harmonic** and satisfy:
+- **Mean value property:** $u$ at any point equals the average over any sphere centered there
+- **Maximum principle:** $u$ attains its max and min on the boundary (never in the interior)
+- **Uniqueness:** Dirichlet and Neumann problems have unique solutions (up to a constant for pure Neumann)
+
+## Steady-State Heat Equation Example
+
+A 2D plate with $\nabla^2 T = 0$, $T = 0$ on three sides, $T = T_0\sin(\pi x/L)$ on the top edge $y=H$:
+
+$$T(x,y) = T_0\sin\!\left(\frac{\pi x}{L}\right)\frac{\sinh(\pi y/L)}{\sinh(\pi H/L)}$$
+
+---
+
+## Practice Problems
+
+<ExQ>
+Verify that $u(x,y) = e^x\cos y$ is harmonic, and find a physical context for this solution.
+</ExQ>
+<ExA>
+$$\frac{\partial^2 u}{\partial x^2} = e^x\cos y, \quad \frac{\partial^2 u}{\partial y^2} = -e^x\cos y$$
+
+$$\nabla^2 u = e^x\cos y - e^x\cos y = 0 \checkmark$$
+
+**Physical context:** In 2D potential flow, $\phi = e^x\cos y$ is a velocity potential. The complex potential is $w(z) = e^z = e^x(\cos y + i\sin y)$, representing an exponential flow. In heat transfer, $u = e^x\cos y$ could be the temperature in a plate with specific boundary conditions.
+</ExA>
+
+<ExQ>
+A long square rod (cross-section $[0,1]\times[0,1]$) has $T=0$ on three sides and $T=100$ on the top. Write the formal series solution.
+</ExQ>
+<ExA>
+Separate variables: $T = X(x)Y(y)$, with $X(0)=X(1)=0$ and $Y(0)=0$.
+
+$$X_n = \sin(n\pi x), \quad Y_n = \sinh(n\pi y)$$
+
+General solution: $T = \sum_{n=1}^\infty A_n\sin(n\pi x)\sinh(n\pi y)$
+
+Top BC $T(x,1)=100$: $\sum A_n\sin(n\pi x)\sinh(n\pi) = 100$
+
+Fourier sine coefficients:
+$$A_n = \frac{2}{\sinh(n\pi)}\int_0^1 100\sin(n\pi x)\,dx = \frac{200(1-\cos n\pi)}{n\pi\sinh(n\pi)}$$
+
+Non-zero for odd $n$ only: $A_n = \dfrac{400}{n\pi\sinh(n\pi)}$ for $n = 1, 3, 5, \ldots$
+</ExA>

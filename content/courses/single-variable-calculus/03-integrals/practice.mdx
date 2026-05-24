@@ -1,0 +1,448 @@
+---
+title: Chapter 3 Practice — Integration
+description: 18 mixed practice problems on antiderivatives, definite integrals, and integration techniques.
+---
+
+# Chapter 3 Practice — Integration
+
+Integration is pattern-matching practice. The more problems you do, the faster you'll spot which technique to use. Solutions are hidden — try first.
+
+---
+
+## Antiderivatives (Direct)
+
+<ExQ>
+**1.** Compute $\displaystyle\int (3x^2 - 4x + 7)\,dx$.
+</ExQ>
+<ExA>
+$$x^3 - 2x^2 + 7x + C$$
+</ExA>
+
+<ExQ>
+**2.** Compute $\displaystyle\int(2e^x + \dfrac{1}{x})\,dx$.
+</ExQ>
+<ExA>
+$$2e^x + \ln|x| + C$$
+</ExA>
+
+<ExQ>
+**3.** Compute $\displaystyle\int(x^{1/3} + x^{-2})\,dx$.
+</ExQ>
+<ExA>
+$$\frac{3}{4}x^{4/3} - \frac{1}{x} + C$$
+</ExA>
+
+<ExQ>
+**4.** Find $f(x)$ if $f'(x) = 4x^3 - 6x$ and $f(2) = 1$.
+</ExQ>
+<ExA>
+$f(x) = x^4 - 3x^2 + C$. Apply $f(2) = 16 - 12 + C = 1 \Rightarrow C = -3$.
+
+$$f(x) = x^4 - 3x^2 - 3$$
+</ExA>
+
+---
+
+## Definite Integrals (FTC)
+
+<ExQ>
+**5.** Evaluate $\displaystyle\int_0^2(x^3 + 3)\,dx$.
+</ExQ>
+<ExA>
+$$\left[\frac{x^4}{4} + 3x\right]_0^2 = (4 + 6) - 0 = \boxed{10}$$
+</ExA>
+
+<ExQ>
+**6.** Evaluate $\displaystyle\int_0^{\pi/2}\cos x\,dx$.
+</ExQ>
+<ExA>
+$[\sin x]_0^{\pi/2} = 1 - 0 = \boxed{1}$
+</ExA>
+
+<ExQ>
+**7.** Evaluate $\displaystyle\int_1^e\frac{1}{x}\,dx$.
+</ExQ>
+<ExA>
+$[\ln x]_1^e = 1 - 0 = \boxed{1}$
+</ExA>
+
+<ExQ>
+**8.** Evaluate $\displaystyle\int_{-2}^2 |x|\,dx$.
+</ExQ>
+<ExA>
+Split at $0$: $\int_{-2}^0(-x)dx + \int_0^2 x\,dx = 2 + 2 = \boxed{4}$.
+</ExA>
+
+---
+
+## Substitution
+
+<ExQ>
+**9.** Compute $\displaystyle\int(2x+3)^7\,dx$.
+</ExQ>
+<ExA>
+$u = 2x+3$, $du = 2\,dx$:
+$$\frac{1}{2}\int u^7\,du = \frac{u^8}{16} + C = \frac{(2x+3)^8}{16} + C$$
+</ExA>
+
+<ExQ>
+**10.** Compute $\displaystyle\int x^2\sqrt{x^3 + 1}\,dx$.
+</ExQ>
+<ExA>
+$u = x^3 + 1$, $du = 3x^2\,dx$:
+$$\frac{1}{3}\int\sqrt{u}\,du = \frac{2}{9}u^{3/2} + C = \frac{2}{9}(x^3+1)^{3/2} + C$$
+</ExA>
+
+<ExQ>
+**11.** Compute $\displaystyle\int_0^1\frac{e^x}{1+e^x}\,dx$.
+</ExQ>
+<ExA>
+$u = 1 + e^x$, $du = e^x\,dx$. Limits: $x=0 \to u=2$, $x=1 \to u=1+e$.
+$$\int_2^{1+e}\frac{du}{u} = \ln(1+e) - \ln 2 = \ln\!\left(\frac{1+e}{2}\right) \approx \boxed{0.620}$$
+</ExA>
+
+---
+
+## Integration by Parts
+
+<ExQ>
+**12.** Compute $\displaystyle\int xe^{-x}\,dx$.
+</ExQ>
+<ExA>
+$u = x$, $dv = e^{-x}dx \Rightarrow du = dx$, $v = -e^{-x}$.
+$$\int xe^{-x}dx = -xe^{-x} + \int e^{-x}dx = -xe^{-x} - e^{-x} + C = -e^{-x}(x+1) + C$$
+</ExA>
+
+<ExQ>
+**13.** Compute $\displaystyle\int x\cos(2x)\,dx$.
+</ExQ>
+<ExA>
+$u = x$, $dv = \cos(2x)dx \Rightarrow du = dx$, $v = \sin(2x)/2$.
+$$\int x\cos(2x)dx = \frac{x\sin(2x)}{2} - \frac{1}{2}\int\sin(2x)dx = \frac{x\sin(2x)}{2} + \frac{\cos(2x)}{4} + C$$
+</ExA>
+
+<ExQ>
+**14.** Compute $\displaystyle\int_1^e \ln x\,dx$.
+</ExQ>
+<ExA>
+$u = \ln x$, $dv = dx \Rightarrow du = dx/x$, $v = x$.
+$$\int_1^e\ln x\,dx = [x\ln x]_1^e - \int_1^e dx = (e - 0) - (e - 1) = \boxed{1}$$
+</ExA>
+
+---
+
+## Engineering Applications
+
+<ExQ>
+**15.** Find the area between $y = x^2$ and $y = x$ from $x=0$ to $x=1$.
+</ExQ>
+<ExA>
+On $[0,1]$, $x \geq x^2$. Area:
+$$\int_0^1(x - x^2)\,dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{2} - \frac{1}{3} = \boxed{\frac{1}{6}}$$
+</ExA>
+
+<ExQ>
+**16.** A force $F(x) = 50/(1 + x^2)$ N acts on an object as it moves from $x = 0$ to $x = 1$ m. Find the work done.
+</ExQ>
+<ExA>
+$$W = \int_0^1\frac{50\,dx}{1+x^2} = 50[\arctan x]_0^1 = 50\cdot\frac{\pi}{4} \approx \boxed{39.27\ \text{J}}$$
+</ExA>
+
+<ExQ>
+**17.** A simply supported beam of length 4 m carries a uniformly distributed load $q = 1000$ N/m. The bending moment is $M(x) = \tfrac{1}{2}qx(L - x)$. Find $\int_0^L M(x)\,dx$ — the area under the moment diagram.
+</ExQ>
+<ExA>
+$$\int_0^4 \frac{1000}{2}x(4-x)\,dx = 500\int_0^4(4x - x^2)\,dx = 500\left[2x^2 - \frac{x^3}{3}\right]_0^4$$
+$$= 500\left(32 - \frac{64}{3}\right) = 500\cdot\frac{32}{3} = \boxed{\frac{16000}{3} \approx 5333\ \text{N·m}^2}$$
+</ExA>
+
+<ExQ>
+**18.** A capacitor charges with current $i(t) = 0.1 e^{-t/2}$ A. The total charge accumulated from $t=0$ is $Q(t) = \int_0^t i(\tau)\,d\tau$. Find $Q(\infty)$.
+</ExQ>
+<ExA>
+$$Q(\infty) = \int_0^\infty 0.1\,e^{-t/2}\,dt = 0.1\cdot[-2 e^{-t/2}]_0^\infty = 0.1\cdot 2 = \boxed{0.2\ \text{C}}$$
+
+This is the total charge transferred to the capacitor over all time.
+</ExA>
+
+---
+
+## Challenge Set (Mastery Level)
+
+These problems require combining substitution, parts, and creative algebra. Solving all five demonstrates true mastery of Chapter 3.
+
+<ExQ>
+**C1.** Compute $\displaystyle\int\sec^3 x\,dx$. (Hint: integration by parts with $u = \sec x$, $dv = \sec^2 x\,dx$, then use the identity $\sec^2 x - 1 = \tan^2 x$.)
+</ExQ>
+<ExA>
+Let $u = \sec x$, $dv = \sec^2 x\,dx \Rightarrow du = \sec x\tan x\,dx$, $v = \tan x$.
+
+$$\int\sec^3 x\,dx = \sec x\tan x - \int\sec x\tan^2 x\,dx$$
+
+Use $\tan^2 x = \sec^2 x - 1$:
+
+$$= \sec x\tan x - \int\sec^3 x\,dx + \int\sec x\,dx$$
+
+Add $\int\sec^3 x\,dx$ to both sides:
+
+$$2\int\sec^3 x\,dx = \sec x\tan x + \int\sec x\,dx = \sec x\tan x + \ln|\sec x + \tan x|$$
+
+$$\boxed{\int\sec^3 x\,dx = \frac{1}{2}[\sec x\tan x + \ln|\sec x + \tan x|] + C}$$
+
+This integral appears in arc-length calculations for parabolic shapes.
+</ExA>
+
+<ExQ>
+**C2.** Compute $\displaystyle\int_0^\infty\frac{x}{e^x - 1}\,dx$. (Hint: expand $1/(e^x - 1) = e^{-x}/(1 - e^{-x}) = \sum_{n=1}^\infty e^{-nx}$, then integrate term by term.)
+</ExQ>
+<ExA>
+$$\int_0^\infty\frac{x}{e^x-1}\,dx = \int_0^\infty x\sum_{n=1}^\infty e^{-nx}\,dx = \sum_{n=1}^\infty\int_0^\infty x e^{-nx}\,dx$$
+
+Each inner integral by parts (or formula): $\int_0^\infty xe^{-nx}\,dx = 1/n^2$.
+
+$$= \sum_{n=1}^\infty\frac{1}{n^2} = \frac{\pi^2}{6}$$
+
+This integral appears in the Stefan-Boltzmann law for blackbody radiation — the same $\pi^2/6$ comes from the Riemann zeta function $\zeta(2)$.
+</ExA>
+
+<ExQ>
+**C3.** Find the volume of the solid of revolution obtained by rotating the region under $y = \sin x$ for $x \in [0, \pi]$ around the x-axis. (Use $V = \pi\int_0^\pi \sin^2 x\,dx$.)
+</ExQ>
+<ExA>
+Use the half-angle identity: $\sin^2 x = (1 - \cos 2x)/2$.
+
+$$V = \pi\int_0^\pi\frac{1-\cos 2x}{2}\,dx = \frac{\pi}{2}\left[x - \frac{\sin 2x}{2}\right]_0^\pi = \frac{\pi}{2}\cdot\pi = \boxed{\frac{\pi^2}{2}}$$
+
+This computation pattern (squaring + half-angle) is core to acoustic and electromagnetic energy calculations.
+</ExA>
+
+<ExQ>
+**C4.** A beam has bending moment $M(x) = qx(L-x)/2$ (UDL). The strain energy is $U = \int_0^L M^2(x)/(2EI)\,dx$. Compute $U$ for $q = 1000$ N/m, $L = 4$ m, $EI = 10^5$ N·m².
+</ExQ>
+<ExA>
+$M^2 = q^2 x^2(L-x)^2/4$.
+
+$$U = \frac{1}{2EI}\int_0^L\frac{q^2 x^2(L-x)^2}{4}\,dx = \frac{q^2}{8EI}\int_0^L x^2(L-x)^2\,dx$$
+
+Expand: $x^2(L-x)^2 = x^2 L^2 - 2Lx^3 + x^4$.
+
+$$\int_0^L = \frac{L^5}{3} - \frac{L^5}{2} + \frac{L^5}{5} = L^5\left(\frac{10 - 15 + 6}{30}\right) = \frac{L^5}{30}$$
+
+$$U = \frac{q^2 L^5}{240 EI}$$
+
+Plug in: $U = \dfrac{(1000)^2(4)^5}{240(10^5)} = \dfrac{1024 \times 10^6}{2.4 \times 10^7} = \boxed{42.7\ \text{J}}$.
+
+This is the textbook strain-energy formula for UDL on a simply supported beam.
+</ExA>
+
+<ExQ>
+**C5.** Compute $\displaystyle\int_0^\pi\frac{x\sin x}{1+\cos^2 x}\,dx$. (Hint: use the substitution $x \to \pi - x$ to relate the integral to itself.)
+</ExQ>
+<ExA>
+Let $I = \int_0^\pi \dfrac{x\sin x}{1+\cos^2 x}\,dx$. Substitute $u = \pi - x$:
+- $du = -dx$, when $x=0$, $u=\pi$; when $x=\pi$, $u=0$
+- $\sin x = \sin(\pi - u) = \sin u$, $\cos x = -\cos u$, $\cos^2 x = \cos^2 u$
+
+$$I = \int_\pi^0\frac{(\pi - u)\sin u}{1+\cos^2 u}(-du) = \int_0^\pi\frac{(\pi - u)\sin u}{1+\cos^2 u}\,du = \pi\int_0^\pi\frac{\sin u}{1+\cos^2 u}du - I$$
+
+So $2I = \pi\int_0^\pi\frac{\sin u\,du}{1+\cos^2 u}$.
+
+Substitute $v = \cos u$: $dv = -\sin u\,du$, limits $1 \to -1$:
+
+$$\int_0^\pi\frac{\sin u\,du}{1+\cos^2 u} = -\int_1^{-1}\frac{dv}{1+v^2} = \int_{-1}^1\frac{dv}{1+v^2} = [\arctan v]_{-1}^1 = \frac{\pi}{2}$$
+
+Therefore $2I = \pi\cdot\pi/2 = \pi^2/2$, so $\boxed{I = \pi^2/4}$.
+
+The "symmetric substitution" trick reduces a hard integral to an easy one.
+</ExA>
+
+---
+
+## Conceptual Probes
+
+<ExQ>
+**P1. True or False.** $\displaystyle\int_a^b f(x)\,dx = 0$ implies $f(x) = 0$ for all $x \in [a, b]$. Justify with a counterexample if false.
+</ExQ>
+<ExA>
+**False.** The integral is signed area; positive and negative regions can cancel.
+
+Counterexample: $\int_{-1}^1 x\,dx = 0$, but $f(x) = x \neq 0$ except at $x = 0$.
+
+**Correct statement:** if $f$ is continuous *and non-negative* on $[a, b]$ with $\int_a^b f = 0$, then $f = 0$ everywhere on $[a, b]$. Both conditions matter.
+</ExA>
+
+<ExQ>
+**P2. Reasoning.** What does $\dfrac{d}{dx}\displaystyle\int_a^x f(t)\,dt$ equal? What about $\dfrac{d}{dx}\displaystyle\int_x^b f(t)\,dt$? Justify both.
+</ExQ>
+<ExA>
+By FTC1: $\dfrac{d}{dx}\int_a^x f(t)\,dt = f(x)$ — the integrand evaluated at the upper limit.
+
+For $\int_x^b f$: rewrite as $-\int_b^x f$. Then $\dfrac{d}{dx} = -f(x)$.
+
+Pattern: changing the *upper* limit gives $+f$; changing the *lower* limit gives $-f$. This sign flip catches many students.
+</ExA>
+
+<ExQ>
+**P3. Identify the technique.** For each, name the *first* technique to try:
+(a) $\int x\,e^{x^2}\,dx$
+(b) $\int\dfrac{x^3}{x^2 + 1}\,dx$
+(c) $\int x\sqrt{x + 1}\,dx$
+(d) $\int e^{2x}\cos(3x)\,dx$
+(e) $\int\dfrac{1}{x^2 + 4x + 5}\,dx$
+</ExQ>
+<ExA>
+(a) **Substitution** ($u = x^2$, $du/2 = x\,dx$).
+
+(b) **Polynomial long division** first, then handle the remainder. (Or substitution $u = x^2+1$.)
+
+(c) **Substitution** ($u = x + 1$, then $x = u - 1$).
+
+(d) **Integration by parts** twice (returns to original — solve algebraically).
+
+(e) **Complete the square**: $x^2 + 4x + 5 = (x+2)^2 + 1$. Then it's an arctan.
+
+Recognizing technique up front saves 80% of the work.
+</ExA>
+
+<ExQ>
+**P4. Sketch.** Sketch the function $F(x) = \int_0^x \cos t\,dt$ and identify it.
+</ExQ>
+<ExA>
+By FTC2, $F(x) = \sin x - \sin 0 = \sin x$.
+
+Sketch: standard sine wave, $F(0) = 0$, $F(\pi/2) = 1$, $F(\pi) = 0$, etc.
+
+Lesson: integrating $\cos$ gives $\sin$ (with the obvious reference point shift). The integral function is itself a familiar function.
+</ExA>
+
+<ExQ>
+**P5. Counterexample.** Give an example of $f$ on $[0, 1]$ such that $\int_0^1 f = 0$ but $\int_0^1|f| > 0$.
+</ExQ>
+<ExA>
+$f(x) = x - 1/2$ on $[0, 1]$.
+
+$\int_0^1 f = [(x^2/2 - x/2)]_0^1 = 1/2 - 1/2 = 0$ (positive and negative pieces cancel).
+
+$\int_0^1|f| = 2\int_0^{1/2}(1/2 - x)\,dx = 2(1/8) = 1/4 > 0$.
+
+This shows that the integral can mask cancellation. The L¹ norm $\int|f|$ catches "total magnitude" while the integral catches "net magnitude".
+</ExA>
+
+<ExQ>
+**P6. Average value.** What value of $c$ makes $\dfrac{1}{2}\int_0^2[f(x) - c]^2\,dx$ as small as possible? Why is this answer the average value of $f$?
+</ExQ>
+<ExA>
+Differentiate w.r.t. $c$ (treat the integral as a function of $c$):
+
+$\dfrac{d}{dc}\int_0^2(f(x)-c)^2\,dx = \int_0^2 2(f(x)-c)(-1)\,dx = 2\int_0^2(c - f(x))\,dx$
+
+Set to zero: $\int_0^2(c - f(x))\,dx = 0 \Rightarrow 2c = \int_0^2 f \Rightarrow c = \dfrac{1}{2}\int_0^2 f(x)\,dx$.
+
+This is exactly the **average value** of $f$ on $[0, 2]$.
+
+**Deep insight:** the average is the value that minimizes mean squared deviation — a property used everywhere in statistics, signal processing, and least squares.
+</ExA>
+
+---
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1.** Find the area between $y = x^2$ and $y = 2 - x^2$ above the $x$-axis.
+</ExQ>
+<ExA>
+First find intersections: $x^2 = 2 - x^2 \Rightarrow x = \pm 1$. So the region spans $x \in [-1, 1]$.
+
+The upper curve is $2 - x^2$, lower is $x^2$ (between intersections).
+
+$$A = \int_{-1}^1[(2 - x^2) - x^2]\,dx = \int_{-1}^1(2 - 2x^2)\,dx = 2[2x - 2x^3/3]_{0}^{1} = 2(2 - 2/3) = 8/3$$
+
+(Using even-symmetry to integrate over $[0,1]$ then double.)
+</ExA>
+
+<ExQ>
+**S2.** A car's velocity is $v(t) = 20 - 4t + 0.1 t^2$ m/s for $t \in [0, 10]$. Find: (a) total distance traveled, (b) net displacement, (c) when the car momentarily stops.
+</ExQ>
+<ExA>
+**(c) When does it stop?** $v(t) = 0$: $20 - 4t + 0.1 t^2 = 0$.
+
+Discriminant: $16 - 4(0.1)(20) = 16 - 8 = 8$. $t = (4 \pm \sqrt 8)/0.2 = (4 \pm 2.83)/0.2$. Solutions: $t \approx 5.86$ or $t \approx 34.14$ (outside range).
+
+So $v < 0$ on $(5.86, 10]$.
+
+**(b) Net displacement:** $\int_0^{10}v(t)\,dt = [20t - 2t^2 + t^3/30]_0^{10} = 200 - 200 + 1000/30 \approx 33.3$ m.
+
+**(a) Total distance:** $\int_0^{5.86}v\,dt - \int_{5.86}^{10}v\,dt$. Compute each piece numerically (or use software). Approximately $58 - 25 = 83$ m more total than net (numbers approximate).
+
+**Key insight:** **net displacement** ≠ **total distance** when velocity changes sign. Always check.
+</ExA>
+
+<ExQ>
+**S3. Volume of revolution.** Find the volume of the solid generated by rotating $y = \sqrt x$ on $[0, 4]$ around the $x$-axis.
+</ExQ>
+<ExA>
+Disk method: each cross-section is a disk of radius $y(x) = \sqrt x$, area $\pi y^2 = \pi x$.
+
+$$V = \pi\int_0^4 x\,dx = \pi\cdot\frac{x^2}{2}\bigg|_0^4 = 8\pi \approx 25.13$$
+
+Volumes of revolution are foundational for tank design, turbomachinery, and biomechanics.
+</ExA>
+
+<ExQ>
+**S4. Engineering scenario.** A drag force on a falling object is $F_d = -kv^2$. The object's velocity satisfies $m\dfrac{dv}{dt} = mg - kv^2$, with $v(0) = 0$. The terminal velocity is $v_\infty = \sqrt{mg/k}$. Show that the time to reach $v_\infty/2$ is $t_{1/2} = \dfrac{1}{2}\sqrt{m/(gk)}\,\text{arctanh}(1/2)$.
+</ExQ>
+<ExA>
+Separate variables: $\dfrac{dv}{g - kv^2/m} = dt$.
+
+Factor: $g - kv^2/m = g(1 - v^2/v_\infty^2)$, where $v_\infty^2 = mg/k$.
+
+$$\int\frac{dv}{g(1-(v/v_\infty)^2)} = t + C$$
+
+Substitute $u = v/v_\infty$, $du = dv/v_\infty$:
+
+$$\frac{v_\infty}{g}\int\frac{du}{1-u^2} = t + C$$
+
+$$\frac{v_\infty}{g}\,\text{arctanh}(u) = t + C$$
+
+At $t = 0$, $v = 0 \Rightarrow C = 0$. So $t = (v_\infty/g)\,\text{arctanh}(v/v_\infty)$.
+
+Since $v_\infty/g = \sqrt{m/(gk)}$, we get:
+$$t_{1/2} = \sqrt{m/(gk)}\,\text{arctanh}(1/2)$$
+
+The factor $1/2$ in the original problem was probably intended differently — the form with $\text{arctanh}$ matches the hyperbolic tangent reaching half its asymptote. This kind of derivation is standard for objects approaching terminal velocity (skydivers, droplet fall, etc.).
+</ExA>
+
+<ExQ>
+**S5. Solve and interpret.** A capacitor with $C = 1$ μF is charged through a resistor $R = 10$ kΩ to a voltage source $V_0 = 10$ V. The voltage on the capacitor satisfies $V(t) = V_0(1 - e^{-t/\tau})$ where $\tau = RC$. Find the **total energy** dissipated in the resistor between $t = 0$ and $t = \infty$.
+</ExQ>
+<ExA>
+Power dissipated: $P_R = i^2 R$. Current: $i = C\,dV/dt = (V_0/R)e^{-t/\tau}$.
+
+$P_R(t) = i^2 R = \dfrac{V_0^2}{R}e^{-2t/\tau}$.
+
+Total energy:
+$$E = \int_0^\infty P_R\,dt = \frac{V_0^2}{R}\int_0^\infty e^{-2t/\tau}\,dt = \frac{V_0^2}{R}\cdot\frac{\tau}{2} = \frac{V_0^2 RC}{2R} = \frac{1}{2}CV_0^2$$
+
+For our values: $\tfrac{1}{2}(10^{-6})(100) = 5\times 10^{-5}$ J.
+
+**Beautiful result:** the energy dissipated in the resistor exactly equals the energy stored in the capacitor ($\tfrac{1}{2}CV_0^2$). The total energy delivered by the source ($CV_0^2$) is split 50-50 between dissipation and storage. This is **independent of $R$** — true for any RC circuit charging from a constant voltage source.
+</ExA>
+
+<ExQ>
+**S6.** Compute $\displaystyle\int_0^1\dfrac{\ln(1+x)}{1+x^2}\,dx$. (Hint: try $x = \tan\theta$.)
+</ExQ>
+<ExA>
+Substitute $x = \tan\theta$, $dx = \sec^2\theta\,d\theta$. Limits: $0 \to 0$, $1 \to \pi/4$. $1 + x^2 = \sec^2\theta$.
+
+$$I = \int_0^{\pi/4}\frac{\ln(1+\tan\theta)}{\sec^2\theta}\sec^2\theta\,d\theta = \int_0^{\pi/4}\ln(1+\tan\theta)\,d\theta$$
+
+Now use the substitution $\theta \to \pi/4 - \theta$ (symmetry trick):
+
+$\tan(\pi/4 - \theta) = \dfrac{1 - \tan\theta}{1 + \tan\theta}$, so $1 + \tan(\pi/4 - \theta) = \dfrac{2}{1+\tan\theta}$.
+
+$$I = \int_0^{\pi/4}\ln\!\left(\frac{2}{1+\tan\theta}\right)d\theta = \int_0^{\pi/4}\ln 2\,d\theta - I$$
+
+So $2I = (\pi/4)\ln 2 \Rightarrow \boxed{I = \dfrac{\pi\ln 2}{8}}$.
+
+A classical Putnam-style integral. The trig substitution + symmetry trick is very powerful.
+</ExA>

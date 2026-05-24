@@ -1,0 +1,161 @@
+---
+title: Lines, Planes, and Quadric Surfaces
+description: How to describe basic geometric objects in 3D using vector equations.
+---
+
+# Lines, Planes, and Quadric Surfaces
+
+## The Big Picture
+
+To do calculus in 3D, we first need to *describe* basic geometric objects: lines, planes, spheres, paraboloids. Each can be encoded as a single vector equation. Mastering these descriptions is the foundation for talking about tangent planes, normal directions, surface integrals, and constrained optimization. Without them, multivariable calculus has nothing to compute on.
+
+## Intuition First — Parametric vs Implicit
+
+Two ways to describe a curve or surface:
+
+- **Parametric:** specify each point as a function of parameters. "Walk along this path" — gives you the *trajectory*.
+- **Implicit:** state an equation that points must satisfy. "Be on this curve" — gives you a *constraint*.
+
+Both have their uses. Parametric is great for integration along curves; implicit is great for finding intersections and computing normals via gradients. Each lesson in 3D geometry boils down to choosing the right form.
+
+## Lines in 3D
+
+A line through point $\mathbf{r}_0 = \langle x_0, y_0, z_0\rangle$ with direction $\mathbf{v} = \langle a, b, c\rangle$:
+
+**Vector form:** $\mathbf{r}(t) = \mathbf{r}_0 + t\mathbf{v}$
+
+**Parametric form:**
+$$x = x_0 + at, \quad y = y_0 + bt, \quad z = z_0 + ct$$
+
+**Symmetric form:** (when $a, b, c \neq 0$)
+$$\frac{x - x_0}{a} = \frac{y - y_0}{b} = \frac{z - z_0}{c}$$
+
+## Planes in 3D
+
+A plane is determined by a point $\mathbf{r}_0$ and a normal vector $\mathbf{n}$:
+
+**Vector equation:** $\mathbf{n}\cdot(\mathbf{r} - \mathbf{r}_0) = 0$
+
+**Scalar form:** $a(x - x_0) + b(y - y_0) + c(z - z_0) = 0$, or $ax + by + cz = d$ where $d = ax_0 + by_0 + cz_0$.
+
+**Why the normal?** The plane consists of all vectors perpendicular to $\mathbf{n}$ from $\mathbf{r}_0$. If you know $\mathbf{n}$, you know the orientation of the plane completely.
+
+## Distance Formulas
+
+**Point to plane:** distance from $\mathbf{p}$ to the plane $\mathbf{n}\cdot(\mathbf{r} - \mathbf{r}_0) = 0$:
+
+$$d = \frac{|\mathbf{n}\cdot(\mathbf{p} - \mathbf{r}_0)|}{\|\mathbf{n}\|}$$
+
+**Point to line:** distance from $\mathbf{p}$ to line $\mathbf{r}_0 + t\mathbf{v}$:
+
+$$d = \frac{\|(\mathbf{p}-\mathbf{r}_0)\times\mathbf{v}\|}{\|\mathbf{v}\|}$$
+
+(Cross product gives "perpendicular component" magnitude.)
+
+## Quadric Surfaces
+
+Quadrics are surfaces defined by quadratic equations. The main types:
+
+| Surface | Equation | Shape |
+|---|---|---|
+| Sphere | $x^2 + y^2 + z^2 = R^2$ | Round ball |
+| Ellipsoid | $x^2/a^2 + y^2/b^2 + z^2/c^2 = 1$ | Stretched sphere |
+| Cylinder | $x^2 + y^2 = R^2$ | Tube along $z$-axis |
+| Paraboloid | $z = x^2 + y^2$ | Bowl |
+| Cone | $z^2 = x^2 + y^2$ | Double cone |
+| Hyperboloid (1 sheet) | $x^2 + y^2 - z^2 = 1$ | Cooling tower |
+| Hyperboloid (2 sheets) | $-x^2 - y^2 + z^2 = 1$ | Two bowls |
+
+## Common Misconceptions
+
+**Misconception 1: "A line in 3D needs $y = mx + b$ form."**
+
+That's 2D thinking. In 3D, a line generally needs *parametric* form (3 equations) or *symmetric* form. A single equation defines a *plane*, not a line.
+
+**Misconception 2: "The normal is unique."**
+
+The normal direction is unique, but its sign isn't. Both $\mathbf{n}$ and $-\mathbf{n}$ are valid normals. By convention, we often pick the "outward" normal for closed surfaces.
+
+**Misconception 3: "Two planes always intersect in a line."**
+
+Only if they're not parallel. Parallel planes either don't intersect (different) or are the same plane. Check by comparing normal vectors.
+
+## Engineering Connection
+
+- **Stress tensor on a face:** the traction $\mathbf{t}$ on a surface element is found via $\mathbf{t} = \boldsymbol{\sigma}\hat{\mathbf{n}}$ — needs the plane's normal.
+- **CAD geometry:** every CAD model is built from primitives — planes, cylinders, spheres, etc. Boolean operations between these create complex shapes.
+- **Robotics:** a robot's end-effector position lies on a workspace surface, often parameterized as a quadric.
+- **Wing aerodynamics:** the upper and lower wing surfaces are commonly modeled as parametric quadric patches for CFD meshing.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find a parametric equation for the line through $(1, 2, 3)$ and $(4, 0, -1)$.
+</ExQ>
+<ExA>
+Direction: $\langle 4 - 1, 0 - 2, -1 - 3\rangle = \langle 3, -2, -4\rangle$.
+
+$\mathbf{r}(t) = \langle 1 + 3t, 2 - 2t, 3 - 4t\rangle$.
+</ExA>
+
+<ExQ>
+Find an equation for the plane through $(1, 0, 2)$ with normal $\mathbf{n} = \langle 2, -1, 3\rangle$.
+</ExQ>
+<ExA>
+$2(x - 1) - 1(y - 0) + 3(z - 2) = 0 \Rightarrow 2x - y + 3z = 8$.
+</ExA>
+
+<ExQ>
+Find the distance from the point $(2, 3, 1)$ to the plane $x - 2y + 2z = 5$.
+</ExQ>
+<ExA>
+$\mathbf{n} = \langle 1, -2, 2\rangle$, $\|\mathbf{n}\| = 3$.
+
+Pick a point on plane: $(5, 0, 0)$ works.
+
+$d = \dfrac{|1(2-5) - 2(3-0) + 2(1-0)|}{3} = \dfrac{|-3 - 6 + 2|}{3} = \dfrac{7}{3}$
+</ExA>
+
+<ExQ>
+Show that the lines $\mathbf{r}_1 = \langle 1+t, 2t, 3-t\rangle$ and $\mathbf{r}_2 = \langle 2-s, 1+s, s\rangle$ do not intersect.
+</ExQ>
+<ExA>
+For intersection, we need:
+$1 + t = 2 - s$ → $t + s = 1$
+$2t = 1 + s$
+$3 - t = s$ → $t + s = 3$
+
+The first and third equations are inconsistent ($t + s$ can't be both 1 and 3). So **no intersection** — these are skew lines.
+</ExA>
+
+<ExQ>
+**Conceptual.** Two planes have normals $\mathbf{n}_1 = \langle 1, 0, 1\rangle$ and $\mathbf{n}_2 = \langle 1, 1, 0\rangle$. What is the angle between the planes? What is the direction of their line of intersection?
+</ExQ>
+<ExA>
+**Angle:** $\cos\theta = \dfrac{\mathbf{n}_1\cdot\mathbf{n}_2}{\|\mathbf{n}_1\|\|\mathbf{n}_2\|} = \dfrac{1}{2}$, so $\theta = 60°$.
+
+**Intersection direction:** $\mathbf{n}_1\times\mathbf{n}_2 = \langle 0\cdot 0 - 1\cdot 1, 1\cdot 1 - 1\cdot 0, 1\cdot 1 - 0\cdot 1\rangle = \langle -1, 1, 1\rangle$.
+
+The intersection line points along $\langle -1, 1, 1\rangle$ — perpendicular to both normals, as expected.
+</ExA>
+
+<ExQ>
+**Engineering.** A wing surface is parameterized as $\mathbf{r}(u, v) = \langle u, v, 0.1u^2 + 0.05v^2\rangle$ for $u, v \in [0, 1]$. Find the unit normal at $(0.5, 0.5, ?)$.
+</ExQ>
+<ExA>
+Tangent vectors: $\mathbf{r}_u = \langle 1, 0, 0.2u\rangle$, $\mathbf{r}_v = \langle 0, 1, 0.1v\rangle$.
+
+Normal: $\mathbf{r}_u\times\mathbf{r}_v$. At $(u,v) = (0.5, 0.5)$:
+
+$\mathbf{r}_u = \langle 1, 0, 0.1\rangle$, $\mathbf{r}_v = \langle 0, 1, 0.05\rangle$.
+
+$\mathbf{n} = \langle 0\cdot 0.05 - 0.1\cdot 1, 0.1\cdot 0 - 1\cdot 0.05, 1\cdot 1 - 0\rangle = \langle -0.1, -0.05, 1\rangle$.
+
+$\|\mathbf{n}\| = \sqrt{0.01 + 0.0025 + 1} \approx 1.0062$
+
+$\hat{\mathbf{n}} \approx \langle -0.0994, -0.0497, 0.9938\rangle$ — predominantly in $\hat{\mathbf{k}}$ direction (nearly flat surface).
+
+This is the basis of computing pressure forces on a wing in CFD.
+</ExA>

@@ -1,0 +1,146 @@
+---
+title: SN1 and SN2 Mechanisms
+description: Two ways a nucleophile can replace a leaving group — single-step concerted attack vs two-step ionization.
+---
+
+# SN1 and SN2 Mechanisms
+
+## The Big Picture
+
+**Nucleophilic substitution** (SN) is one of the most fundamental reactions in organic chemistry — a nucleophile (electron-rich) attacks a carbon, kicking out a leaving group (electron-poor). The two mechanisms (SN1 and SN2) compete based on substrate structure, nucleophile, solvent, and leaving group. Understanding when each happens lets you predict rates, products, and stereochemistry.
+
+## SN2: Bimolecular, Concerted
+
+**One step:**
+- Nucleophile attacks carbon from back side (opposite to leaving group)
+- Bond forms while bond breaks
+- Stereochemistry: **inversion** (Walden inversion)
+
+Kinetics: $\text{rate} = k[\text{substrate}][\text{Nu}^-]$ — **second order**.
+
+**Favored when:**
+- **Methyl, primary substrates** (steric access)
+- Strong nucleophile
+- Polar aprotic solvent (DMSO, DMF, acetone)
+- Good leaving group (I⁻ > Br⁻ > Cl⁻ > F⁻)
+
+## SN1: Unimolecular, Stepwise
+
+**Two steps:**
+1. Substrate ionizes: leaving group departs, forming a **carbocation**.
+2. Nucleophile attacks carbocation (from either face → racemic product).
+
+Stereochemistry: **racemization** (loss of chirality), since carbocation is planar (sp²).
+
+Kinetics: $\text{rate} = k[\text{substrate}]$ — **first order**.
+
+**Favored when:**
+- **Tertiary substrates** (stable carbocation)
+- Weak nucleophile
+- Polar protic solvent (water, alcohol)
+- Good leaving group
+
+## Substrate Reactivity
+
+| Substrate | SN1 rate | SN2 rate |
+|---|---|---|
+| Methyl | Very slow | Very fast |
+| Primary | Slow | Fast |
+| Secondary | Moderate | Moderate |
+| Tertiary | Fast | Very slow (steric block) |
+
+Methyl: SN2 only. Tertiary: SN1 only. Secondary: depends on conditions.
+
+## Carbocation Stability
+
+Tertiary > Secondary > Primary > Methyl
+
+Hyperconjugation (overlap with C–H σ bonds on adjacent carbons) and inductive effects stabilize carbocations with more alkyl groups.
+
+This is why SN1 needs ≥ secondary substrate to proceed.
+
+## Common Misconceptions
+
+**Misconception 1: "SN1 always gives racemic products."**
+
+Most cases yes, but **ion pairs** can persist briefly, leading to partial inversion (more inversion than retention). Pure racemic outcome only for truly free carbocations.
+
+**Misconception 2: "Stronger nucleophile = faster reaction always."**
+
+For SN2, yes. For SN1, **nucleophile doesn't appear in the rate law** — strength doesn't affect rate. (It does affect product, especially in mixtures.)
+
+**Misconception 3: "All SN reactions are nucleophilic."**
+
+Some "substitution" reactions are electrophilic (e.g., aromatic substitution). SN refers specifically to nucleophilic attack on sp³ carbon with departing leaving group.
+
+## Engineering Connection
+
+- **Drug synthesis:** controlled stereochemistry via SN2 (specific stereochemistry needed for activity).
+- **Polymer modification:** functional group installation via SN reactions on polymer backbones.
+- **Solvent selection in chemical processes:** SN1 vs SN2 favored by different solvent types.
+- **Green chemistry:** designing solvents to direct desired mechanism.
+- **Biochemistry:** enzymatic SN2 reactions (e.g., methylation of DNA) are stereospecific.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** CH₃Br + OH⁻. Mechanism?
+</ExQ>
+<ExA>
+Methyl substrate, strong nucleophile → **SN2**.
+
+Product: CH₃OH + Br⁻. Single transition state.
+</ExA>
+
+<ExQ>
+**2.** (CH₃)₃C-Br + H₂O. Mechanism?
+</ExQ>
+<ExA>
+Tertiary, weak nucleophile, protic solvent → **SN1**.
+
+Step 1: (CH₃)₃C⁺ + Br⁻.
+Step 2: (CH₃)₃C⁺ + H₂O → (CH₃)₃C-OH₂⁺ → (CH₃)₃C-OH + H⁺.
+
+Product: (CH₃)₃C-OH (tert-butanol). Racemic if substrate was chiral.
+</ExA>
+
+<ExQ>
+**3. Stereochemistry.** (R)-2-bromobutane + I⁻ → ? (with strong nucleophile, polar aprotic solvent)
+</ExQ>
+<ExA>
+Conditions favor SN2 (secondary, strong nucleophile).
+
+SN2 inverts: (R)-substrate → (S)-product.
+
+Product: (S)-2-iodobutane. Note the inversion of priority due to halogen change can complicate R/S assignment — check carefully.
+
+(Actually, with priorities I > Br: if substrate was R, the product configuration is inverted but the descriptor might still be S or R depending on priority change.)
+</ExA>
+
+<ExQ>
+**4. Engineering: Pharma scale-up.** A drug synthesis step is SN1 on a chiral substrate, but the desired product is one specific enantiomer. What does this imply for the process?
+</ExQ>
+<ExA>
+SN1 produces racemic mixture. To get single enantiomer:
+
+1. **Use enantioselective conditions** (chiral catalyst): forces preferential attack from one face.
+2. **Separate enantiomers** afterward via chiral chromatography or crystallization with chiral resolving agent.
+3. **Switch to SN2** (if substrate allows): preserves stereochemistry with inversion.
+
+Industrial practice often involves option 3 — redesigning the substrate to enable SN2 chemistry. Stereochemistry control is a top consideration in drug manufacturing.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does SN2 require back-side attack?
+</ExQ>
+<ExA>
+The nucleophile's lone pair attacks the σ* (antibonding) orbital of the C–LG bond. This orbital is concentrated on the back side of the C, opposite to the leaving group.
+
+Front-side attack would mean overlap with the bonding orbital (electron density) — repulsive.
+
+Geometric constraint: 180° angle between Nu and LG → Walden inversion (like an umbrella flipping inside out).
+
+This rigid geometry is why SN2 stereochemistry is so predictable, and why SN2 fails on tertiary substrates (back side blocked by alkyl groups).
+</ExA>

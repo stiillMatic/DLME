@@ -1,0 +1,136 @@
+---
+title: Friction and Normal Forces
+description: The contact forces that grip surfaces together — friction enables walking, driving, and braking, and resists every motion.
+---
+
+# Friction and Normal Forces
+
+## The Big Picture
+
+When two surfaces touch, two contact forces arise: **normal force** (perpendicular to surface) and **friction** (parallel). Friction is what makes walking, gripping, braking possible — and what makes things slow down. Despite being ubiquitous, friction is a complex microscopic phenomenon idealized as a simple coefficient. Understanding the standard model is essential for every mechanical design.
+
+## Normal Force
+
+When an object presses on a surface, the surface pushes back **perpendicular** to itself. This balances gravity (or other components) and prevents penetration.
+
+For object on horizontal surface: $N = mg$.
+
+For object on incline of angle $\theta$: $N = mg\cos\theta$.
+
+For object with applied force component perpendicular: adjust accordingly.
+
+## Friction
+
+Friction opposes relative motion (or tendency thereof) and is proportional to normal force.
+
+**Kinetic friction** (sliding):
+$$f_k = \mu_k N$$
+
+**Static friction** (not yet sliding):
+$$f_s \leq \mu_s N$$
+
+Static is *up to* $\mu_s N$ — adjusts to balance applied force until exceeded, then sliding begins.
+
+Generally $\mu_s > \mu_k$. (Why "static gives way" feels like a sudden release.)
+
+## Coefficients of Friction
+
+| Surfaces | $\mu_s$ | $\mu_k$ |
+|---|---|---|
+| Steel on steel (dry) | 0.6 | 0.5 |
+| Rubber on dry pavement | 0.9 | 0.7 |
+| Rubber on wet pavement | 0.6 | 0.5 |
+| Ice on ice | 0.1 | 0.03 |
+| Teflon on teflon | 0.04 | 0.04 |
+
+Note: ranges widely with surface conditions, temperature, lubrication.
+
+## Worked Example: Block on Incline
+
+Mass $m$ on incline angle $\theta$. Will it slide?
+
+Forces along incline: gravity component $mg\sin\theta$ (down) vs friction $f_s$ (up).
+
+Threshold: $mg\sin\theta = \mu_s mg\cos\theta \Rightarrow \tan\theta = \mu_s$.
+
+So **critical angle** $\theta_c = \arctan(\mu_s)$. Above this, block slides.
+
+## Common Misconceptions
+
+**Misconception 1: "Friction depends on area of contact."**
+
+In the standard model, friction depends only on $N$, not area. Microscopically, surfaces touch only at "asperities" — true contact area is much smaller than apparent area and scales with $N$.
+
+**Misconception 2: "Friction goes to zero at zero velocity."**
+
+Kinetic friction continues until motion stops. Then static friction takes over.
+
+**Misconception 3: "Heavier objects need more force to move."**
+
+In one sense yes: $f_s = \mu_s mg$ scales with $m$. But also $F = ma$ — so acceleration $a = F/m$. If you maintain the same applied force, heavier objects accelerate slower; if you maintain the same acceleration, you need more force.
+
+## Engineering Connection
+
+- **Vehicle braking:** kinetic friction sets stopping distance. Anti-lock brakes (ABS) maintain wheels on the verge of slipping → max friction.
+- **Tire design:** rubber compound, tread pattern optimize $\mu$ for various conditions.
+- **Bearings and lubrication:** reduce friction in machinery → less wear, energy loss.
+- **Grip and assembly:** bolts, nails rely on friction.
+- **Friction welding:** intentional high-friction heating to fuse metals.
+- **Rocket launches:** static friction limits how heavy a rocket can sit on its pad.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Block of mass 10 kg on horizontal surface, $\mu_s = 0.4$. Minimum force to start it moving?
+</ExQ>
+<ExA>
+$F_{\min} = \mu_s mg = 0.4\cdot 10\cdot 9.81 = 39.2$ N.
+
+Less than this, static friction adjusts to match. Above, block accelerates.
+</ExA>
+
+<ExQ>
+**2.** Same block, sliding. Applied force 50 N, $\mu_k = 0.3$. Acceleration?
+</ExQ>
+<ExA>
+$f_k = \mu_k mg = 0.3\cdot 98.1 = 29.4$ N.
+
+Net force: $50 - 29.4 = 20.6$ N. $a = 20.6/10 = 2.06$ m/s².
+</ExA>
+
+<ExQ>
+**3.** Incline with $\mu_s = 0.5$. Critical angle?
+</ExQ>
+<ExA>
+$\theta_c = \arctan(0.5) \approx 26.6°$. Steeper inclines: block slides.
+
+This is the "angle of repose" — characteristic for granular materials (sand, grain).
+</ExA>
+
+<ExQ>
+**4. Engineering: Car braking.** Car at 30 m/s, $\mu_k = 0.8$ (dry pavement). Stopping distance with locked wheels?
+</ExQ>
+<ExA>
+Deceleration: $a = \mu_k g = 7.85$ m/s².
+
+Using $v^2 = u^2 - 2as$: $0 = 900 - 2(7.85)s$, $s = 57.3$ m.
+
+With ABS keeping near static friction (higher $\mu$): shorter distance ~50 m.
+
+Wet pavement (µ = 0.4): doubles to ~115 m. Why braking distance changes so much with conditions.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** A rope wrapped around a pole creates capstan friction. Why can wrapping 3 times let one person hold a much heavier load?
+</ExQ>
+<ExA>
+Capstan equation: $T_1/T_2 = e^{\mu\theta}$ where $\theta$ is wrap angle in radians.
+
+For 3 wraps: $\theta = 6\pi \approx 18.8$. With $\mu = 0.3$: $e^{5.65} \approx 285$.
+
+So 1 N of holding force can resist 285 N pulling force. Doubles per ~2 radians of wrap.
+
+Boats are moored with just a few wraps around a cleat. Capstan winches use this principle to manage huge loads safely.
+</ExA>

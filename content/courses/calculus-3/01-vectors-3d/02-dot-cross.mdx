@@ -1,0 +1,115 @@
+---
+title: Dot Product and Cross Product
+description: The two fundamental products of 3D vectors — measuring alignment and perpendicularity.
+---
+
+# Dot Product and Cross Product
+
+## The Big Picture
+
+Vectors in 3D have **two** fundamental products that capture different geometric relationships. The **dot product** measures how aligned two vectors are. The **cross product** measures their perpendicular interaction (and produces a vector perpendicular to both). Master both, and you have the toolbox for every 3D geometric calculation: angles, projections, areas, volumes, torques, and rotation directions.
+
+## Dot Product (Scalar)
+
+For $\mathbf{u}, \mathbf{v}$ in $\mathbb{R}^n$:
+
+$$\mathbf{u}\cdot\mathbf{v} = u_1v_1 + u_2v_2 + u_3v_3 = \|\mathbf{u}\|\|\mathbf{v}\|\cos\theta$$
+
+**Properties:**
+- Commutative
+- Sign indicates angle: positive (acute), zero (right), negative (obtuse)
+- Self-product: $\mathbf{u}\cdot\mathbf{u} = \|\mathbf{u}\|^2$
+
+**Projection of $\mathbf{u}$ onto $\mathbf{v}$:**
+$$\text{proj}_\mathbf{v}\mathbf{u} = \frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{v}\|^2}\mathbf{v}$$
+
+## Cross Product (Vector, 3D only)
+
+$$\mathbf{u}\times\mathbf{v} = \det\begin{pmatrix}\hat{\mathbf{i}}&\hat{\mathbf{j}}&\hat{\mathbf{k}}\\ u_1&u_2&u_3\\ v_1&v_2&v_3\end{pmatrix}$$
+
+**Properties:**
+- Anticommutative: $\mathbf{u}\times\mathbf{v} = -\mathbf{v}\times\mathbf{u}$
+- Magnitude: $\|\mathbf{u}\times\mathbf{v}\| = \|\mathbf{u}\|\|\mathbf{v}\|\sin\theta$ = area of parallelogram
+- Direction: perpendicular to both, by right-hand rule
+
+## Triple Products
+
+**Scalar triple product:** $\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})$ = signed volume of parallelepiped.
+
+**Vector triple product:** $\mathbf{u}\times(\mathbf{v}\times\mathbf{w}) = (\mathbf{u}\cdot\mathbf{w})\mathbf{v} - (\mathbf{u}\cdot\mathbf{v})\mathbf{w}$ — "BAC-CAB" rule.
+
+## Common Misconceptions
+
+**Misconception 1: "Cross product works in any dimension."**
+
+True cross product is special to 3D (and 7D). In 2D, only the $z$-component is meaningful — sometimes called "scalar cross product."
+
+**Misconception 2: "$\mathbf{a}\cdot\mathbf{b} = 0$ implies $\mathbf{a} = 0$ or $\mathbf{b} = 0$."**
+
+Could also be perpendicular vectors. The dot product zero is *less* informative than scalar zero.
+
+**Misconception 3: "Cross product order doesn't matter."**
+
+It does — sign flips. $\mathbf{a}\times\mathbf{b} = -\mathbf{b}\times\mathbf{a}$. Crucial in physics where torque direction depends on order.
+
+## Engineering Connection
+
+- **Work done by force:** $W = \mathbf{F}\cdot\mathbf{d}$.
+- **Torque:** $\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}$.
+- **Magnetic force:** $\mathbf{F} = q\mathbf{v}\times\mathbf{B}$.
+- **Surface element vector:** $d\mathbf{S} = \mathbf{r}_u\times\mathbf{r}_v\,du\,dv$ for parametric surfaces.
+- **Plane normal from three points:** $\mathbf{n} = (\mathbf{p}_2 - \mathbf{p}_1)\times(\mathbf{p}_3 - \mathbf{p}_1)$.
+- **Determining handedness/chirality** of molecular structures via triple products.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\mathbf{a} = (3, -1, 2)$, $\mathbf{b} = (1, 4, 0)$. Find $\mathbf{a}\cdot\mathbf{b}$ and angle between them.
+</ExQ>
+<ExA>
+$\mathbf{a}\cdot\mathbf{b} = 3 - 4 + 0 = -1$.
+
+$\|\mathbf{a}\| = \sqrt{14}$, $\|\mathbf{b}\| = \sqrt{17}$.
+
+$\cos\theta = -1/\sqrt{238} \approx -0.065$. $\theta \approx 93.7°$.
+</ExA>
+
+<ExQ>
+**2.** $\mathbf{u} = (1, 2, 3), \mathbf{v} = (4, 5, 6)$. Find $\mathbf{u}\times\mathbf{v}$.
+</ExQ>
+<ExA>
+$\mathbf{u}\times\mathbf{v} = (2\cdot 6 - 3\cdot 5, 3\cdot 4 - 1\cdot 6, 1\cdot 5 - 2\cdot 4) = (-3, 6, -3)$.
+</ExA>
+
+<ExQ>
+**3.** Volume of parallelepiped with edges $(1, 0, 0), (1, 1, 0), (1, 1, 1)$.
+</ExQ>
+<ExA>
+$V = |\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})|$.
+
+$\mathbf{b}\times\mathbf{c} = (1, -1, 0)$.
+
+$\mathbf{a}\cdot(1, -1, 0) = 1$. So $V = 1$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Bolt torque.** Wrench from $(0, 0, 0)$ to $(0.3, 0, 0)$ m, force $(0, 50, 30)$ N. Torque?
+</ExQ>
+<ExA>
+$\boldsymbol{\tau} = (0.3, 0, 0)\times(0, 50, 30) = (0\cdot 30 - 0\cdot 50, 0\cdot 0 - 0.3\cdot 30, 0.3\cdot 50 - 0)$ = $(0, -9, 15)$ N·m.
+
+$|\tau| = \sqrt{306} \approx 17.5$ N·m.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** A force is parallel to a wrench. What's the torque?
+</ExQ>
+<ExA>
+Cross product of parallel vectors = $\mathbf{0}$. So no torque.
+
+This makes physical sense: pushing along the wrench (instead of perpendicular) doesn't twist the bolt.
+
+You're "wasting" the force — it adds compression but no rotation.
+</ExA>

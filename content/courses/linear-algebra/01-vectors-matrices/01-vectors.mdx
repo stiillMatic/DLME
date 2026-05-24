@@ -1,0 +1,78 @@
+---
+title: Vectors and Vector Spaces
+description: Vectors, linear combinations, and the geometric meaning behind them.
+---
+
+# Vectors and Vector Spaces
+
+A **vector** is an ordered list of numbers. In $\mathbb{R}^n$, a vector $\mathbf{v}$ has $n$ components:
+
+$$\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}$$
+
+## Vector Operations
+
+**Addition:** $\mathbf{u} + \mathbf{v} = \begin{pmatrix} u_1 + v_1 \\ u_2 + v_2 \end{pmatrix}$
+
+**Scalar multiplication:** $c\mathbf{v} = \begin{pmatrix} cv_1 \\ cv_2 \end{pmatrix}$
+
+## Dot Product
+
+$$\mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n = \|\mathbf{u}\| \|\mathbf{v}\| \cos\theta$$
+
+- Dot product = 0 means the vectors are **orthogonal** (perpendicular)
+- Used constantly in projections, FEA stiffness matrices, and neural network layers
+
+## Linear Combinations and Span
+
+A **linear combination** of vectors $\mathbf{v}_1, \ldots, \mathbf{v}_k$ is:
+
+$$c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_k \mathbf{v}_k$$
+
+The **span** is the set of all such combinations — all vectors reachable.
+
+## Linear Independence
+
+Vectors are **linearly independent** if no one of them can be written as a combination of the others. Formally: $c_1\mathbf{v}_1 + \cdots + c_k\mathbf{v}_k = \mathbf{0}$ only when all $c_i = 0$.
+
+**ME Application:** In FEA, if your stiffness matrix rows are linearly dependent, the system is singular — the structure has a rigid-body mode and cannot be solved without additional constraints.
+
+## Norm (Magnitude)
+
+$$\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2}$$
+
+A **unit vector** has $\|\hat{\mathbf{v}}\| = 1$: $\hat{\mathbf{v}} = \mathbf{v}/\|\mathbf{v}\|$
+
+---
+
+## Practice Problems
+
+<ExQ>
+Given $\mathbf{u} = (3, -1, 2)$ and $\mathbf{v} = (1, 4, -2)$, compute $\mathbf{u} \cdot \mathbf{v}$ and determine if they are orthogonal.
+</ExQ>
+<ExA>
+$$\mathbf{u} \cdot \mathbf{v} = (3)(1) + (-1)(4) + (2)(-2) = 3 - 4 - 4 = -5$$
+
+Since $\mathbf{u} \cdot \mathbf{v} = -5 \neq 0$, the vectors are **not orthogonal**.
+</ExA>
+
+<ExQ>
+Are the vectors $\mathbf{v}_1 = (1, 2)$ and $\mathbf{v}_2 = (2, 4)$ linearly independent?
+</ExQ>
+<ExA>
+Check if $c_1(1,2) + c_2(2,4) = (0,0)$:
+
+$$c_1 + 2c_2 = 0, \quad 2c_1 + 4c_2 = 0$$
+
+The second equation is just 2× the first. So $c_1 = -2c_2$ for any $c_2$. Non-trivial solutions exist.
+
+Therefore $\mathbf{v}_1$ and $\mathbf{v}_2$ are **linearly dependent** ($\mathbf{v}_2 = 2\mathbf{v}_1$).
+</ExA>
+
+<ExQ>
+Find a unit vector in the direction of $\mathbf{a} = (6, -2, 3)$.
+</ExQ>
+<ExA>
+$$\|\mathbf{a}\| = \sqrt{36 + 4 + 9} = \sqrt{49} = 7$$
+
+$$\hat{\mathbf{a}} = \frac{1}{7}(6, -2, 3) = \left(\frac{6}{7},\ -\frac{2}{7},\ \frac{3}{7}\right)$$
+</ExA>

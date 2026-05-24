@@ -1,0 +1,400 @@
+---
+title: Chapter 1 Practice — Limits and Continuity
+description: 18 mixed practice problems covering limits, limit techniques, and continuity.
+---
+
+# Chapter 1 Practice — Limits and Continuity
+
+Work through these in order. The problems progress from warm-ups to challenges. Time yourself: aim for 60–90 minutes total. Solutions are hidden — try first, then check.
+
+---
+
+## Warm-up (Direct Computation)
+
+<ExQ>
+**1.** Evaluate $\displaystyle\lim_{x\to 4}(x^2 - 3x + 7)$.
+</ExQ>
+<ExA>
+Polynomial → direct substitution: $16 - 12 + 7 = \boxed{11}$.
+</ExA>
+
+<ExQ>
+**2.** Evaluate $\displaystyle\lim_{x\to 0}\frac{\sin(5x)}{x}$.
+</ExQ>
+<ExA>
+$\dfrac{\sin(5x)}{x} = 5\cdot\dfrac{\sin(5x)}{5x} \to 5\cdot 1 = \boxed{5}$
+</ExA>
+
+<ExQ>
+**3.** Evaluate $\displaystyle\lim_{x\to 2}\frac{x^2 - 4}{x - 2}$.
+</ExQ>
+<ExA>
+Factor: $\dfrac{(x-2)(x+2)}{x-2} = x+2 \to \boxed{4}$.
+</ExA>
+
+<ExQ>
+**4.** Evaluate $\displaystyle\lim_{x\to\infty}\frac{3x^2 - x + 1}{x^2 + 4}$.
+</ExQ>
+<ExA>
+Divide numerator and denominator by $x^2$: $\dfrac{3 - 1/x + 1/x^2}{1 + 4/x^2} \to \boxed{3}$.
+</ExA>
+
+---
+
+## Algebraic Manipulation
+
+<ExQ>
+**5.** Evaluate $\displaystyle\lim_{x\to 0}\frac{\sqrt{x+9} - 3}{x}$.
+</ExQ>
+<ExA>
+Multiply by conjugate $(\sqrt{x+9}+3)$:
+$$\frac{(x+9) - 9}{x(\sqrt{x+9}+3)} = \frac{1}{\sqrt{x+9}+3} \to \boxed{\frac{1}{6}}$$
+</ExA>
+
+<ExQ>
+**6.** Evaluate $\displaystyle\lim_{x\to 1}\frac{x^3 - 1}{x - 1}$.
+</ExQ>
+<ExA>
+Factor: $x^3 - 1 = (x-1)(x^2+x+1)$:
+$$\lim_{x\to 1}(x^2+x+1) = \boxed{3}$$
+</ExA>
+
+<ExQ>
+**7.** Evaluate $\displaystyle\lim_{h\to 0}\frac{(2+h)^3 - 8}{h}$.
+</ExQ>
+<ExA>
+Expand: $(2+h)^3 - 8 = 12h + 6h^2 + h^3$.
+$$\frac{12h + 6h^2 + h^3}{h} = 12 + 6h + h^2 \to \boxed{12}$$
+(This is $f'(2)$ for $f(x) = x^3$.)
+</ExA>
+
+<ExQ>
+**8.** Evaluate $\displaystyle\lim_{x\to\infty}(\sqrt{x^2 + 4x} - x)$.
+</ExQ>
+<ExA>
+Multiply by conjugate:
+$$\frac{4x}{\sqrt{x^2+4x}+x} = \frac{4}{\sqrt{1 + 4/x}+1} \to \frac{4}{2} = \boxed{2}$$
+</ExA>
+
+---
+
+## One-Sided Limits and Squeeze
+
+<ExQ>
+**9.** Evaluate $\displaystyle\lim_{x\to 0^+}\frac{|x|}{x}$ and $\displaystyle\lim_{x\to 0^-}\frac{|x|}{x}$. Does the two-sided limit exist?
+</ExQ>
+<ExA>
+Right: $|x|/x = 1 \to 1$. Left: $|x|/x = -1 \to -1$.
+
+Two-sided limit **does not exist**.
+</ExA>
+
+<ExQ>
+**10.** Use the squeeze theorem to evaluate $\displaystyle\lim_{x\to 0}x^4\sin(1/x)$.
+</ExQ>
+<ExA>
+$-x^4 \leq x^4\sin(1/x) \leq x^4$, both bounds $\to 0$, so by squeeze theorem the limit is $\boxed{0}$.
+</ExA>
+
+<ExQ>
+**11.** Evaluate $\displaystyle\lim_{x\to 0}\frac{1-\cos x}{x}$.
+</ExQ>
+<ExA>
+Multiply by conjugate $(1+\cos x)$:
+$$\frac{1-\cos^2 x}{x(1+\cos x)} = \frac{\sin^2 x}{x(1+\cos x)} = \sin x\cdot\frac{\sin x}{x}\cdot\frac{1}{1+\cos x}$$
+
+As $x\to 0$: $\sin x\to 0$, $\sin x/x \to 1$, $1/(1+\cos x) \to 1/2$. Product $\to 0\cdot 1\cdot \tfrac{1}{2} = \boxed{0}$.
+</ExA>
+
+---
+
+## Continuity
+
+<ExQ>
+**12.** Find the value of $a$ that makes $f(x) = \begin{cases}x^2 - 1 & x < 2 \\ ax + 1 & x \geq 2\end{cases}$ continuous at $x = 2$.
+</ExQ>
+<ExA>
+Left limit: $4 - 1 = 3$. Right limit: $2a + 1$.
+
+Set equal: $2a + 1 = 3 \Rightarrow \boxed{a = 1}$.
+</ExA>
+
+<ExQ>
+**13.** Where is $f(x) = \dfrac{x^2 - 9}{x^2 - x - 6}$ discontinuous? Classify each discontinuity.
+</ExQ>
+<ExA>
+Factor denominator: $x^2 - x - 6 = (x-3)(x+2)$. Discontinuous at $x = 3$ and $x = -2$.
+
+At $x = 3$: numerator also zero, $\dfrac{(x-3)(x+3)}{(x-3)(x+2)} = \dfrac{x+3}{x+2} \to 6/5$. **Removable**.
+
+At $x = -2$: denominator $\to 0$, numerator $\to -5$. **Infinite (essential)** discontinuity.
+</ExA>
+
+<ExQ>
+**14.** Use the Intermediate Value Theorem to show $\cos x = x$ has a solution in $[0, 1]$.
+</ExQ>
+<ExA>
+Let $g(x) = \cos x - x$. Continuous. $g(0) = 1 > 0$, $g(1) = \cos 1 - 1 \approx -0.46 < 0$.
+
+By IVT, there exists $c \in (0, 1)$ with $g(c) = 0 \Leftrightarrow \cos c = c$. ✓
+</ExA>
+
+---
+
+## Challenge
+
+<ExQ>
+**15.** Evaluate $\displaystyle\lim_{x\to 0}\frac{\tan x - x}{x^3}$ (use Taylor expansion or L'Hôpital).
+</ExQ>
+<ExA>
+Maclaurin: $\tan x = x + x^3/3 + 2x^5/15 + \cdots$.
+
+$$\frac{\tan x - x}{x^3} = \frac{x^3/3 + O(x^5)}{x^3} = \frac{1}{3} + O(x^2) \to \boxed{\frac{1}{3}}$$
+</ExA>
+
+<ExQ>
+**16.** Find values of $a$ and $b$ making $f$ continuous everywhere:
+$$f(x) = \begin{cases}\frac{\sin(ax)}{x} & x < 0 \\ b & x = 0 \\ x^2 + 5 & x > 0\end{cases}$$
+</ExQ>
+<ExA>
+Left limit at 0: $\dfrac{\sin(ax)}{x} = a\cdot\dfrac{\sin(ax)}{ax} \to a$.
+
+Right limit at 0: $0 + 5 = 5$.
+
+For continuity: $a = 5$, $b = 5$.
+</ExA>
+
+<ExQ>
+**17.** A particle has position $s(t) = t^2 + \sin(\pi t)$ m. Use limits to find the instantaneous velocity at $t = 1$ s.
+</ExQ>
+<ExA>
+$v(1) = \displaystyle\lim_{h\to 0}\dfrac{s(1+h) - s(1)}{h}$.
+
+$s(1) = 1 + \sin\pi = 1$.
+$s(1+h) = (1+h)^2 + \sin(\pi(1+h)) = 1 + 2h + h^2 + \sin(\pi + \pi h) = 1 + 2h + h^2 - \sin(\pi h)$.
+
+$\dfrac{s(1+h)-s(1)}{h} = \dfrac{2h + h^2 - \sin(\pi h)}{h} = 2 + h - \dfrac{\sin(\pi h)}{h}$
+
+As $h\to 0$: $\sin(\pi h)/h \to \pi$. So $v(1) = 2 + 0 - \pi = \boxed{2 - \pi}$ m/s.
+</ExA>
+
+<ExQ>
+**18.** A heat exchanger is modeled by $T(x) = T_\infty + (T_0 - T_\infty)e^{-x/L}$ where $L > 0$. As $x \to \infty$, what is $T$? What is the physical meaning of this limit?
+</ExQ>
+<ExA>
+$$\lim_{x\to\infty}T(x) = T_\infty + 0 = T_\infty$$
+
+Physical meaning: far from the entrance ($x = 0$), the fluid temperature has decayed exponentially to the ambient/freestream temperature $T_\infty$. The parameter $L$ is the *thermal length scale* — the distance over which the temperature difference drops by a factor of $e$.
+
+This is one of the most useful limit calculations in heat transfer engineering.
+</ExA>
+
+---
+
+## Conceptual Probes
+
+These problems test understanding, not computation. If you can answer them, you genuinely understand limits.
+
+<ExQ>
+**P1. True or False.** If $\lim_{x\to a}f(x) = L$ and $\lim_{x\to a}g(x)$ does not exist, then $\lim_{x\to a}[f(x) + g(x)]$ does not exist. Justify.
+</ExQ>
+<ExA>
+**True.** Suppose for contradiction $\lim(f+g) = M$ exists. Then $\lim g = \lim[(f+g) - f] = M - L$ would exist by the limit subtraction law. This contradicts the hypothesis.
+
+**Pattern:** A "well-behaved" function plus a "misbehaving" function always misbehaves. The good part can never patch up the bad part.
+</ExA>
+
+<ExQ>
+**P2. True or False.** If $\lim_{x\to a}|f(x)| = L$, then $\lim_{x\to a}f(x) = L$ or $-L$. Justify.
+</ExQ>
+<ExA>
+**False.** Counterexample: $f(x) = 1$ if $x$ is rational, $f(x) = -1$ if $x$ is irrational. Then $|f| = 1$ everywhere, so $\lim|f| = 1$. But $f$ itself oscillates wildly, so $\lim f$ does not exist.
+
+Less pathological: at $x = 0$, $f(x) = x/|x|$ has $|f| \to 1$ but $f$ has different left/right limits.
+
+**Lesson:** taking absolute values can hide sign-related discontinuities. The limit of $|f|$ tells you less than the limit of $f$.
+</ExA>
+
+<ExQ>
+**P3. Sketch.** Sketch a function defined on $[0, 4]$ with $\lim_{x\to 1}f = 2$, $\lim_{x\to 2^-}f = 5$, $\lim_{x\to 2^+}f = 3$, $f$ continuous at $x=3$, and $\lim_{x\to 4^-}f = \infty$.
+</ExQ>
+<ExA>
+Build piecewise: from $(0, ?)$ approaching $(1, 2)$ smoothly. At $x = 1$, the limit is 2 — could be a hole or actual value.
+
+At $x = 2$, jump discontinuity: left side approaches 5, right side approaches 3.
+
+At $x = 3$, smooth (continuous).
+
+At $x = 4^-$, vertical asymptote (function blows up).
+
+Many specific examples work; the key is having three different qualitative behaviors at three points: limit existing, jump, and infinite blow-up.
+</ExA>
+
+<ExQ>
+**P4. Identify the form.** Without solving, identify which of these are indeterminate:
+(a) $\lim_{x\to 0}\dfrac{x^2 + 1}{x}$
+(b) $\lim_{x\to\infty}\dfrac{x}{e^x}$
+(c) $\lim_{x\to 1}\dfrac{\ln x}{x - 1}$
+(d) $\lim_{x\to 0^+}x\ln x$
+(e) $\lim_{x\to 0^+}(\sin x)^x$
+</ExQ>
+<ExA>
+(a) Form $1/0^+$ at $x \to 0^+$: $\to +\infty$. **Not indeterminate.**
+
+(b) $\infty/\infty$. **Indeterminate.** (Limit is 0.)
+
+(c) $0/0$. **Indeterminate.** (Limit is 1, by L'Hôpital or definition of derivative.)
+
+(d) $0\cdot(-\infty)$. **Indeterminate.** (Limit is 0.)
+
+(e) $0^0$. **Indeterminate.** (Limit is 1, via $\ln$.)
+
+Recognizing the form before computing tells you whether work is needed.
+</ExA>
+
+<ExQ>
+**P5. Counterexample.** Give an example of two functions with $\lim f = \lim g = \infty$ but $\lim(f - g)$ is some specific positive number, say 5.
+</ExQ>
+<ExA>
+Take $f(x) = x + 5$, $g(x) = x$.
+
+$\lim_{x\to\infty}f = \infty$, $\lim_{x\to\infty}g = \infty$, $\lim(f-g) = 5$.
+
+This shows $\infty - \infty$ is genuinely indeterminate — the answer depends on the difference rate, not on either piece alone.
+</ExA>
+
+<ExQ>
+**P6. Reasoning.** A continuous function $f$ on $[0, 1]$ has $f(0) = -3$ and $f(1) = 5$. Does $f$ necessarily attain the value 0? The value 100? Justify each.
+</ExQ>
+<ExA>
+**Value 0:** Yes, by IVT — 0 is between $f(0) = -3$ and $f(1) = 5$, so a continuous function takes every value in between.
+
+**Value 100:** Not necessarily. IVT only guarantees values in $[-3, 5]$ are attained. Whether $f$ exceeds 5 depends on what happens in between (which IVT doesn't constrain).
+
+Counterexample: $f$ could be linear from $(0, -3)$ to $(1, 5)$ — never reaching 100.
+</ExA>
+
+---
+
+## Multi-Step Synthesis
+
+These combine techniques and require reasoning across multiple ideas.
+
+<ExQ>
+**S1.** A continuous function $f$ on $[-2, 2]$ satisfies $f(-2) = 1$ and $f(2) = 5$. Show that there is some $c$ with $f(c) = c^2$.
+</ExQ>
+<ExA>
+Define $g(x) = f(x) - x^2$. This is continuous (sum of continuous functions).
+
+$g(-2) = 1 - 4 = -3 < 0$.
+$g(2) = 5 - 4 = 1 > 0$.
+
+By IVT, $\exists c \in (-2, 2)$ with $g(c) = 0$, i.e., $f(c) = c^2$. ✓
+
+**Method:** transform an "intersection" question into a "root" question by subtracting. Then IVT tells you the root exists.
+</ExA>
+
+<ExQ>
+**S2.** Find values of $a$ and $b$ such that $\displaystyle\lim_{x\to 0}\dfrac{\sqrt{ax + b} - 2}{x} = 1$.
+</ExQ>
+<ExA>
+For the limit to be finite (not $\infty$), need numerator $\to 0$: $\sqrt{b} = 2 \Rightarrow b = 4$.
+
+Now multiply by conjugate:
+$$\frac{\sqrt{ax + 4} - 2}{x}\cdot\frac{\sqrt{ax+4}+2}{\sqrt{ax+4}+2} = \frac{ax}{x(\sqrt{ax+4}+2)} = \frac{a}{\sqrt{ax+4}+2}$$
+
+Limit as $x\to 0$: $\dfrac{a}{2 + 2} = a/4$. Set $= 1 \Rightarrow a = 4$.
+
+$$\boxed{a = 4, \quad b = 4}$$
+</ExA>
+
+<ExQ>
+**S3.** A diving board oscillates with damped amplitude $A(t) = A_0 e^{-\zeta t}\cos(\omega t)$. Find $\lim_{t\to\infty}A(t)$. Now find $\lim_{t\to\infty}|A(t)|$. Why is the second limit easier to interpret physically?
+</ExQ>
+<ExA>
+$|\cos(\omega t)| \leq 1$, so $|A(t)| \leq A_0 e^{-\zeta t} \to 0$. By squeeze, $A(t) \to 0$ and $|A(t)| \to 0$.
+
+**Why $|A|$ is easier:** $|A|$ tells you the **envelope** — the maximum oscillation amplitude. It's monotonically decreasing (modulo the $|\cos|$ wiggles). Engineers care more about "how much is it swinging" than the exact instantaneous value.
+
+In control engineering, the **decay envelope** $A_0 e^{-\zeta t}$ defines the settling time — the practical "limit behavior" of an underdamped system.
+</ExA>
+
+<ExQ>
+**S4.** Show that the equation $x = \cos x$ has a unique solution in $[0, 1]$. (Hint: use IVT for existence and monotonicity for uniqueness.)
+</ExQ>
+<ExA>
+**Existence (IVT):** Let $g(x) = x - \cos x$. Continuous. $g(0) = -1 < 0$, $g(1) = 1 - \cos 1 \approx 0.46 > 0$. By IVT, $\exists c \in (0, 1)$ with $g(c) = 0$.
+
+**Uniqueness (monotonicity):** $g'(x) = 1 + \sin x > 0$ for $x \in (0, 1)$ (since $\sin x > 0$ there). So $g$ is strictly increasing, hence has at most one root.
+
+Therefore $x = \cos x$ has **exactly one** solution in $[0, 1]$. (Numerically, $c \approx 0.7391$, the famous Dottie number.)
+
+**Pattern:** "exactly one solution" usually requires existence (IVT) + uniqueness (monotonicity from sign of derivative).
+</ExA>
+
+<ExQ>
+**S5. Engineering scenario.** A capacitor charges with voltage $V(t) = V_0(1 - e^{-t/\tau})$. The settling time $t_s$ is defined as when $V$ first reaches $0.99 V_0$. Find $t_s$ in terms of $\tau$, then evaluate the *limit* of $V'(t)/V$ as $t\to\infty$.
+</ExQ>
+<ExA>
+**Settling time:** $V_0(1 - e^{-t_s/\tau}) = 0.99 V_0 \Rightarrow e^{-t_s/\tau} = 0.01 \Rightarrow t_s = \tau\ln 100 \approx 4.6\tau$.
+
+**Ratio limit:** $V'(t) = (V_0/\tau)e^{-t/\tau}$, $V(t) = V_0(1 - e^{-t/\tau})$.
+
+$$\frac{V'(t)}{V(t)} = \frac{(1/\tau)e^{-t/\tau}}{1 - e^{-t/\tau}}$$
+
+As $t\to\infty$: numerator $\to 0$, denominator $\to 1$. Ratio $\to 0$.
+
+**Interpretation:** the *fractional rate of change* shrinks to zero — the system is settling. This ratio defines a *time scale* in adaptive control.
+</ExA>
+
+<ExQ>
+**S6. Real-world.** A pollutant disperses with concentration $c(x, t) = \dfrac{M}{\sqrt{4\pi D t}}e^{-x^2/(4Dt)}$. Find:
+(a) $\lim_{t\to\infty}c(x, t)$ for fixed $x$.
+(b) $\lim_{x\to\infty}c(x, t)$ for fixed $t$.
+(c) $\lim_{t\to 0^+}c(0, t)$ — what does this represent physically?
+</ExQ>
+<ExA>
+(a) $\lim_{t\to\infty}c(x, t) = 0$ — pollutant disperses to infinitely large region, concentration → 0 anywhere. Diffusion eventually dilutes.
+
+(b) $\lim_{x\to\infty}c(x, t) = 0$ — far enough away, no pollution has reached.
+
+(c) $\lim_{t\to 0^+}c(0, t) = \lim_{t\to 0^+}\dfrac{M}{\sqrt{4\pi D t}} = +\infty$ — at $t = 0$, all mass $M$ is at point $x = 0$, so concentration is *infinite* there. Physically: this is a **point source** — the entire mass is concentrated at one point initially.
+
+This Gaussian solution is the **Green's function** for the diffusion equation — fundamental in heat transfer, fluid mechanics, and stochastic processes.
+</ExA>
+
+---
+
+## Challenge Set (Mastery Level)
+
+<ExQ>
+**C1.** Prove using the precise $\varepsilon$-$\delta$ definition that $\lim_{x\to 2}(3x + 1) = 7$.
+</ExQ>
+<ExA>
+Given $\varepsilon > 0$, we want $\delta$ such that $0 < |x - 2| < \delta \Rightarrow |3x + 1 - 7| < \varepsilon$.
+
+$|3x + 1 - 7| = |3x - 6| = 3|x - 2|$.
+
+So $3|x - 2| < \varepsilon$ requires $|x - 2| < \varepsilon/3$.
+
+Choose $\delta = \varepsilon/3$. Then $0 < |x - 2| < \delta \Rightarrow |3x - 6| < 3\delta = \varepsilon$. ✓
+
+This is the **rigorous foundation** of "the limit equals 7" — for every error tolerance on the output, we can find a tolerance on the input.
+</ExA>
+
+<ExQ>
+**C2.** A function $f$ is continuous on $[0, 1]$ with $f(0) = f(1)$. Prove there exists $c \in [0, 1/2]$ with $f(c) = f(c + 1/2)$.
+</ExQ>
+<ExA>
+Define $g(x) = f(x + 1/2) - f(x)$ on $[0, 1/2]$. Continuous.
+
+$g(0) = f(1/2) - f(0)$.
+$g(1/2) = f(1) - f(1/2) = f(0) - f(1/2)$ (using $f(0) = f(1)$).
+
+So $g(0) + g(1/2) = 0$. Either both are zero (then any $c$ works), or they have opposite signs.
+
+If opposite signs: by IVT, $\exists c \in [0, 1/2]$ with $g(c) = 0$, i.e., $f(c) = f(c + 1/2)$.
+
+**This is a "horizontal chord" theorem** — common in physics for finding symmetric configurations.
+</ExA>
+

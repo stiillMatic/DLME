@@ -1,0 +1,60 @@
+{
+  "title": "Calculus III",
+  "description": "Multivariable calculus — vectors in 3D, partial derivatives, multiple integrals, and vector calculus. The third semester of calculus.",
+  "level": "intermediate",
+  "area": "Mathematics",
+  "tags": ["Calculus", "Mathematics", "Multivariable"],
+  "chapters": [
+    {
+      "title": "Vectors and the Geometry of Space",
+      "slug": "01-vectors-3d",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-3d-coordinates", "title": "3D Coordinates and Distance", "order": 1 },
+        { "slug": "02-dot-cross", "title": "Dot Product and Cross Product", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Vector-Valued Functions",
+      "slug": "02-vector-functions",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-vector-functions", "title": "Vector-Valued Functions and Curves in Space", "order": 1 },
+        { "slug": "02-tangent-curvature", "title": "Tangent, Normal, and Curvature", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Functions of Several Variables",
+      "slug": "03-partial-derivatives",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-partials-gradient", "title": "Partial Derivatives and the Gradient", "order": 1 },
+        { "slug": "02-directional-derivatives", "title": "Directional Derivatives", "order": 2 },
+        { "slug": "03-optimization", "title": "Local Extrema and Lagrange Multipliers", "order": 3 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Multiple Integrals",
+      "slug": "04-multiple-integrals",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-double-integrals", "title": "Double Integrals", "order": 1 },
+        { "slug": "02-triple-integrals", "title": "Triple Integrals and Cylindrical/Spherical", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Vector Calculus",
+      "slug": "05-vector-calculus",
+      "order": 5,
+      "lessons": [
+        { "slug": "01-vector-fields", "title": "Vector Fields, Divergence, and Curl", "order": 1 },
+        { "slug": "02-fundamental-theorems", "title": "Fundamental Theorems: Green, Stokes, Divergence", "order": 2 },
+        { "slug": "practice", "title": "Chapter 5 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

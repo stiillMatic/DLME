@@ -1,0 +1,49 @@
+---
+title: Chapter 2 Practice — Vector Functions
+description: Practice on vector-valued functions, curves, and curvature.
+---
+
+# Chapter 2 Practice — Vector Functions
+
+<ExQ>
+**1.** $\mathbf{r}(t) = (t, t^2, t^3)$. Find $\mathbf{r}'(1)$ and unit tangent.
+</ExQ>
+<ExA>
+$\mathbf{r}'(1) = (1, 2, 3)$. $\|\cdot\| = \sqrt{14}$.
+
+$\hat{\mathbf{T}} = (1, 2, 3)/\sqrt{14}$.
+</ExA>
+
+<ExQ>
+**2.** Arc length of $\mathbf{r}(t) = (\cos t, \sin t, t^2)$ from 0 to 1.
+</ExQ>
+<ExA>
+$\mathbf{r}' = (-\sin t, \cos t, 2t)$. $\|\cdot\| = \sqrt{1 + 4t^2}$.
+
+$L = \int_0^1\sqrt{1+4t^2}\,dt$. Numerically: $L \approx 1.479$.
+</ExA>
+
+<ExQ>
+**3.** Curvature of $y = e^x$ at $x = 0$.
+</ExQ>
+<ExA>
+$y' = 1, y'' = 1$. $\kappa = 1/(1+1)^{3/2} = 1/(2\sqrt 2) \approx 0.354$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Roller coaster.** Track: $\mathbf{r}(t) = (10t, 5\sin t, 3\cos(2t))$. Find speed at $t = 0$.
+</ExQ>
+<ExA>
+$\mathbf{r}'(t) = (10, 5\cos t, -6\sin(2t))$.
+
+At $t = 0$: $(10, 5, 0)$. Speed = $\sqrt{125} \approx 11.18$ m/s.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does a circle have constant curvature?
+</ExQ>
+<ExA>
+By symmetry, every point on a circle of radius $R$ is geometrically identical. The "tightness" of bending is the same everywhere → constant $\kappa = 1/R$.
+
+Conversely, any 2D curve with constant nonzero curvature *is* a circle (or arc of one). This characterization makes circles unique.
+</ExA>

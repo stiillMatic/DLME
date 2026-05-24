@@ -1,0 +1,143 @@
+---
+title: Power Series and Radius of Convergence
+description: Series of the form Σ aₙ(x-c)ⁿ — generalizing Taylor series and providing the foundation for analytic functions.
+---
+
+# Power Series and Radius of Convergence
+
+## The Big Picture
+
+A **power series** is a function defined by an infinite series in powers of $(x - c)$:
+
+$$f(x) = \sum_{n=0}^\infty a_n(x - c)^n$$
+
+The set of $x$ where it converges is an **interval of convergence**, with **radius of convergence** $R$. Power series are the natural way to define special functions ($e^x$, $\sin x$, Bessel functions) and the foundation of analytic methods in PDEs and complex analysis.
+
+## Radius of Convergence
+
+Apply ratio test to $|a_{n+1}(x-c)/a_n|$:
+
+$$|x - c|\lim|a_{n+1}/a_n| < 1$$
+
+So $R = \lim|a_n/a_{n+1}|$ (if the limit exists).
+
+The series converges absolutely for $|x - c| < R$ and diverges for $|x - c| > R$. Endpoints $|x-c| = R$ require separate analysis.
+
+## Examples
+
+| Series | $a_n$ | $R$ |
+|---|---|---|
+| $\sum x^n$ | 1 | 1 |
+| $\sum x^n/n!$ | $1/n!$ | $\infty$ |
+| $\sum x^n/n$ | $1/n$ | 1 |
+| $\sum n!\,x^n$ | $n!$ | 0 |
+
+The last has radius zero — converges only at $x = 0$.
+
+## Taylor and Maclaurin Series
+
+If $f$ is infinitely differentiable at $c$:
+
+$$f(x) = \sum_{n=0}^\infty\frac{f^{(n)}(c)}{n!}(x - c)^n$$
+
+(Maclaurin: $c = 0$.)
+
+When this converges to $f$ inside its radius of convergence, $f$ is **analytic** at $c$.
+
+## Try It — Fourier Series Convergence
+
+Closely related: a **Fourier series** decomposes a periodic function into sines and cosines. Drag the slider to see partial sums of the square-wave Fourier series, and notice the persistent overshoot near jumps (Gibbs phenomenon).
+
+<FourierSquareWaveDemo />
+
+## Operations on Power Series
+
+Within their radius of convergence, power series can be:
+- **Differentiated term-by-term**
+- **Integrated term-by-term**
+- **Multiplied** (Cauchy product)
+- **Substituted** (e.g., replace $x$ with $x^2$)
+
+These operations preserve the radius of convergence.
+
+## Common Misconceptions
+
+**Misconception 1: "Power series equals function for all $x$ where defined."**
+
+Only inside the radius of convergence. Outside, the series diverges and gives nonsense.
+
+**Misconception 2: "Radius of convergence is symmetric — converges in $|x| \leq R$."**
+
+The *radius* $R$ is symmetric, but **endpoints** $\pm R$ may behave differently. Always check endpoints separately.
+
+**Misconception 3: "All smooth functions equal their Taylor series."**
+
+Some smooth functions ($e^{-1/x^2}$ at 0) have all derivatives zero but aren't zero — Taylor series doesn't represent them. Such functions are **not analytic**.
+
+## Engineering Connection
+
+- **Special functions:** Bessel, Legendre, Hermite — all defined via power series solutions to ODEs (Frobenius method).
+- **Numerical computation:** $\sin x$, $\cos x$, $\ln$, $\arctan$ — implemented by truncated Taylor series in math libraries.
+- **Perturbation methods:** small-parameter expansions $u = u_0 + \varepsilon u_1 + \varepsilon^2 u_2 + \cdots$ are power series.
+- **Control systems:** Padé approximants and series expansions of transfer functions.
+- **Quantum mechanics:** wavefunctions often expressed as power series with specific recurrences.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Find $R$ for $\sum x^n/(n+1)$.
+</ExQ>
+<ExA>
+$|a_n/a_{n+1}| = (n+2)/(n+1) \to 1$. So $R = 1$.
+
+Endpoints: $x = 1$: $\sum 1/(n+1)$ diverges (harmonic-like). $x = -1$: alternating, converges.
+
+Interval of convergence: $[-1, 1)$.
+</ExA>
+
+<ExQ>
+**2.** Find $R$ for $\sum (n!)^2 x^n / (2n)!$.
+</ExQ>
+<ExA>
+$|a_n/a_{n+1}| = (2n+2)(2n+1)/((n+1)^2) \to 4$.
+
+So $R = 4$.
+</ExA>
+
+<ExQ>
+**3.** Find Maclaurin series of $f(x) = 1/(1-x^2)$ and its radius.
+</ExQ>
+<ExA>
+$1/(1-u) = \sum u^n$ for $|u| < 1$. Substitute $u = x^2$:
+
+$f(x) = \sum x^{2n}$ for $|x^2| < 1$, i.e., $|x| < 1$.
+
+Radius: $R = 1$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Solving ODEs.** Find power series solution of $y' - y = 0$, $y(0) = 1$, in form $y = \sum a_n x^n$.
+</ExQ>
+<ExA>
+$y' = \sum n a_n x^{n-1} = y$ requires $a_n = a_{n-1}/n$.
+
+With $a_0 = 1$: $a_n = 1/n!$.
+
+$y = \sum x^n/n! = e^x$ ✓.
+
+Power series methods solve ODEs algebraically — basis of Frobenius method for variable-coefficient cases.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are power series so important compared to other infinite series?
+</ExQ>
+<ExA>
+- **Closed under calculus:** differentiation/integration term-by-term within $R$.
+- **Define functions:** $e^x$, $\sin x$ etc are *defined* by power series.
+- **Analytic continuation:** uniquely extend functions known on small regions.
+- **Computation:** truncated power series give approximations with controlled error.
+
+In physics/engineering, when an exact closed form is unavailable, power series often *is* the answer — we just keep enough terms for required accuracy.
+</ExA>

@@ -1,0 +1,93 @@
+---
+title: Separation of Variables and Eigenvalue Problems
+description: The fundamental technique for solving linear PDEs — reducing them to ODEs via separation of variables.
+---
+
+# Separation of Variables
+
+Separation of variables converts a PDE into a system of ODEs by assuming the solution is a product of functions of individual variables.
+
+## The Method
+
+For a PDE in two variables $x$ and $t$, assume $u(x,t) = X(x)T(t)$.
+
+**Example: 1D Heat Equation**
+
+$$\frac{\partial u}{\partial t} = \alpha\frac{\partial^2 u}{\partial x^2}$$
+
+Substitute $u = X(x)T(t)$:
+
+$$X\dot{T} = \alpha X''T \implies \frac{\dot{T}}{\alpha T} = \frac{X''}{X} = -\lambda$$
+
+Since the left side depends only on $t$ and the right only on $x$, both must equal the same constant $-\lambda$.
+
+This gives two ODEs:
+$$X'' + \lambda X = 0 \qquad (\text{spatial eigenvalue problem})$$
+$$\dot{T} + \alpha\lambda T = 0 \qquad (\text{temporal equation})$$
+
+## The Eigenvalue Problem
+
+The spatial ODE with boundary conditions (BCs) is an **eigenvalue problem**. For a rod of length $L$ with $X(0) = X(L) = 0$:
+
+$$X'' + \lambda X = 0, \quad X(0) = 0, \quad X(L) = 0$$
+
+Non-trivial solutions exist only for discrete values (eigenvalues):
+
+$$\lambda_n = \left(\frac{n\pi}{L}\right)^2, \quad n = 1, 2, 3, \ldots$$
+
+with corresponding eigenfunctions:
+
+$$X_n(x) = \sin\!\left(\frac{n\pi x}{L}\right)$$
+
+## Complete Solution
+
+The general solution is a **superposition** of all modes:
+
+$$u(x,t) = \sum_{n=1}^{\infty} B_n \sin\!\left(\frac{n\pi x}{L}\right) e^{-\alpha(n\pi/L)^2 t}$$
+
+Coefficients $B_n$ are determined from the initial condition $u(x,0) = f(x)$ via Fourier sine series.
+
+## Engineering Interpretation
+
+- Each mode $n$ decays at rate $\alpha(n\pi/L)^2$ — higher modes decay faster
+- After a long time, only the $n=1$ (fundamental) mode survives
+- The eigenvalues $\lambda_n$ determine the natural "time constants" of heat diffusion
+
+---
+
+## Practice Problems
+
+<ExQ>
+Separate the 1D wave equation $u_{tt} = c^2 u_{xx}$. What ODEs do you get, and what are the general solutions assuming $X(0)=X(L)=0$?
+</ExQ>
+<ExA>
+Let $u = X(x)T(t)$:
+
+$$X T'' = c^2 X'' T \implies \frac{T''}{c^2 T} = \frac{X''}{X} = -\lambda$$
+
+Two ODEs:
+$$X'' + \lambda X = 0 \quad \Rightarrow \quad X_n = \sin(n\pi x/L), \quad \lambda_n = (n\pi/L)^2$$
+
+$$T'' + c^2\lambda_n T = 0 \quad \Rightarrow \quad T_n = A_n\cos(\omega_n t) + B_n\sin(\omega_n t)$$
+
+where $\omega_n = c n\pi/L$ is the $n$-th natural frequency of the string.
+
+General solution: $u = \sum_{n=1}^\infty \sin(n\pi x/L)[A_n\cos(\omega_n t)+B_n\sin(\omega_n t)]$
+</ExA>
+
+<ExQ>
+For the heat equation on $[0, L]$ with $\alpha = 1$, $L = \pi$, and initial condition $u(x,0) = \sin(x)$, find $u(x,t)$.
+</ExQ>
+<ExA>
+Eigenvalues: $\lambda_n = n^2$. Eigenfunctions: $X_n = \sin(nx)$.
+
+General solution: $u = \sum_{n=1}^\infty B_n \sin(nx) e^{-n^2 t}$
+
+Initial condition: $u(x,0) = \sin(x) = \sum B_n \sin(nx)$.
+
+By orthogonality: $B_1 = 1$, $B_n = 0$ for $n \geq 2$.
+
+$$\boxed{u(x,t) = \sin(x)\,e^{-t}}$$
+
+The initial temperature profile decays exponentially at rate 1.
+</ExA>

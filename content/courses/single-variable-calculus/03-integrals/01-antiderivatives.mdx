@@ -1,0 +1,337 @@
+---
+title: Antiderivatives and the Indefinite Integral
+description: Reversing differentiation — finding a function from its derivative, and why "+C" is essential.
+---
+
+# Antiderivatives and the Indefinite Integral
+
+## The Big Picture
+
+Differentiation answers the question: "given a function, what is its rate of change?" Antidifferentiation answers the **reverse**: "given a rate, what is the function?" This is at least as important as differentiation itself, because nature usually gives us *rates* (velocity, force, heat flow) and we want *quantities* (position, work, temperature). The antiderivative bridges that gap. It's the gateway to integration and the second half of calculus.
+
+## Intuition First — Running the Movie Backward
+
+Differentiation is like watching a movie of a quantity changing and asking, "what's the speed?" Antidifferentiation is like having only the speedometer reading and asking, "what was the position over time?"
+
+Crucially, knowing only the rate **doesn't pin down the position uniquely**. If two cars travel at exactly the same speed, they may be 10 km apart — they have the same derivative but different functions. The difference is a *constant*: an unknown starting position.
+
+This is why every antiderivative includes "$+\,C$" — the unknown constant of integration. It's not a fussy detail; it's the mathematical reflection of an undetermined starting condition.
+
+## From Differentiation to Antidifferentiation
+
+A function $F$ is an **antiderivative** of $f$ if $F'(x) = f(x)$.
+
+**Example.** $F(x) = x^2$ is an antiderivative of $f(x) = 2x$ since $F'(x) = 2x$. But so is $G(x) = x^2 + 7$, and $H(x) = x^2 - \pi$. They all share the same derivative.
+
+**Theorem.** If $F$ and $G$ are both antiderivatives of $f$ on an interval, then $G(x) = F(x) + C$ for some constant $C$.
+
+The proof is short: $(G - F)' = G' - F' = f - f = 0$, so $G - F$ has zero derivative, hence is constant.
+
+## Indefinite Integral Notation
+
+We write the family of all antiderivatives as the **indefinite integral**:
+
+$$\int f(x)\,dx = F(x) + C$$
+
+where $F$ is any specific antiderivative. The "$dx$" indicates the variable of integration. The "$+ C$" reminds us that any constant is a valid choice.
+
+## Power Rule (Reversed)
+
+Differentiation: $\dfrac{d}{dx}x^n = nx^{n-1}$.
+
+Reversing this idea: to integrate $x^n$, increase the exponent by 1 and divide by the new exponent:
+
+$$\int x^n\,dx = \frac{x^{n+1}}{n+1} + C \qquad (n \neq -1)$$
+
+The exception $n = -1$ would give division by zero. That case has its own answer:
+
+$$\int \frac{1}{x}\,dx = \ln|x| + C$$
+
+## Common Antiderivatives
+
+Read these as "differentiation rules running backward":
+
+| Function $f(x)$ | Antiderivative $F(x)$ |
+|---|---|
+| $x^n$ ($n \neq -1$) | $\dfrac{x^{n+1}}{n+1}$ |
+| $1/x$ | $\ln \lvert x\rvert$ |
+| $e^x$ | $e^x$ |
+| $\cos x$ | $\sin x$ |
+| $\sin x$ | $-\cos x$ |
+| $\sec^2 x$ | $\tan x$ |
+| $\dfrac{1}{1+x^2}$ | $\arctan x$ |
+| $\dfrac{1}{\sqrt{1-x^2}}$ | $\arcsin x$ |
+
+(Each gets a "$+C$" when written as an indefinite integral.)
+
+## Linearity
+
+Antidifferentiation, like differentiation, is linear:
+
+$$\int [af(x) + bg(x)]\,dx = a\int f(x)\,dx + b\int g(x)\,dx$$
+
+You can pull out constants and split sums. **You cannot split products** — there is no "product rule" for integrals (we'll see *integration by parts* later, the closest analogue).
+
+## Worked Examples
+
+**Example 1.** $\displaystyle\int (3x^2 - 4x + 5)\,dx$
+
+Apply linearity and the power rule:
+
+$$= 3\cdot\frac{x^3}{3} - 4\cdot\frac{x^2}{2} + 5x + C = x^3 - 2x^2 + 5x + C$$
+
+**Verify** by differentiating: $3x^2 - 4x + 5$ ✓.
+
+**Example 2.** $\displaystyle\int \frac{1}{x^2}\,dx = \int x^{-2}\,dx$
+
+$$= \frac{x^{-1}}{-1} + C = -\frac{1}{x} + C$$
+
+**Verify:** $d/dx(-1/x) = 1/x^2$ ✓.
+
+**Example 3.** $\displaystyle\int (e^x + \cos x)\,dx = e^x + \sin x + C$
+
+## Initial Value Problems
+
+When we add information that fixes the constant, we get a unique solution. This is called an **initial value problem (IVP)**.
+
+**Problem:** Find $f(x)$ if $f'(x) = 3x^2$ and $f(0) = 7$.
+
+**Solve:**
+1. Antidifferentiate: $f(x) = x^3 + C$.
+2. Use the condition: $f(0) = 0 + C = 7 \Rightarrow C = 7$.
+3. Answer: $f(x) = x^3 + 7$.
+
+This is exactly what physics asks of you: given $a(t) = -g$ and initial position/velocity, find the trajectory. Antidifferentiate twice and use ICs to determine the two constants.
+
+## Common Misconceptions
+
+**Misconception 1: "I forgot the $+C$, but it's a small mistake."**
+
+In an *indefinite* integral, it's not small — the family of solutions IS what defines an antiderivative. Forgetting $+C$ in differential equations leads to wrong physical predictions.
+
+**Misconception 2: "$\int(fg)\,dx = (\int f\,dx)(\int g\,dx)$."**
+
+False. Antidifferentiation does not respect products. Test: $\int x\cdot 1\,dx = x^2/2 + C$. But $(\int x\,dx)(\int 1\,dx) = (x^2/2)(x) = x^3/2$ — completely different.
+
+**Misconception 3: "Power rule always gives $\dfrac{x^{n+1}}{n+1}$."**
+
+Watch out for $n = -1$. Then $n + 1 = 0$ and you'd divide by zero. The integral of $1/x$ is $\ln|x|$, not $x^0/0$.
+
+**Misconception 4: "An antiderivative is always one explicit formula."**
+
+Some functions have antiderivatives that *cannot* be written in closed form using elementary functions. Examples: $e^{-x^2}$, $\sin(x)/x$, $1/\ln x$. Their antiderivatives exist (any continuous function has one) — they just don't simplify nicely. We use special functions or numerical methods.
+
+## Engineering Connection
+
+- **From acceleration to position:** $a(t) = $ const, so $v(t) = at + v_0$, then $x(t) = \tfrac{1}{2}at^2 + v_0 t + x_0$. The two constants come from initial velocity and position. Standard kinematics is double antidifferentiation.
+- **From load to deflection:** in a beam, the load $q(x)$ relates to the deflection $w(x)$ by $EI w'''' = q(x)$. To find $w(x)$, we antidifferentiate four times, picking up four constants — fixed by the four boundary conditions of the beam.
+- **Heat capacity to enthalpy:** specific heat $c_p(T)$ gives enthalpy via $h = \int c_p\,dT$. Below absolute zero is impossible, so the lower limit of integration sets the reference state.
+- **Streamfunction recovery:** in 2D fluid flow, knowing $u = \partial\psi/\partial y$, we antidifferentiate w.r.t. $y$ to recover $\psi$ — with an arbitrary function of $x$ as the "constant" (since $\partial/\partial y$ kills any function of $x$ alone).
+
+In every case, the unknown constants are determined by *boundary conditions*, *initial conditions*, or *reference states* — physical information that pins down which member of the family is the right answer.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Compute $\displaystyle\int (4x^3 + 2x - 5)\,dx$.
+</ExQ>
+<ExA>
+$$\int 4x^3\,dx + \int 2x\,dx - \int 5\,dx = x^4 + x^2 - 5x + C$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int \left(\sqrt{x} + \frac{1}{x^3}\right) dx$.
+</ExQ>
+<ExA>
+Rewrite as powers: $x^{1/2} + x^{-3}$.
+$$\int x^{1/2}\,dx + \int x^{-3}\,dx = \frac{x^{3/2}}{3/2} + \frac{x^{-2}}{-2} + C = \frac{2}{3}x^{3/2} - \frac{1}{2x^2} + C$$
+</ExA>
+
+### Application
+
+<ExQ>
+Find $f(x)$ if $f'(x) = 6x^2 - 4$ and $f(1) = 5$.
+</ExQ>
+<ExA>
+Antidifferentiate: $f(x) = 2x^3 - 4x + C$.
+
+Apply IC: $f(1) = 2 - 4 + C = 5 \Rightarrow C = 7$.
+
+$$\boxed{f(x) = 2x^3 - 4x + 7}$$
+</ExA>
+
+<ExQ>
+A particle has acceleration $a(t) = 6t$ m/s². Initial conditions: $v(0) = 2$ m/s, $x(0) = 0$ m. Find $x(t)$.
+</ExQ>
+<ExA>
+$v(t) = \int 6t\,dt = 3t^2 + C_1$. Apply $v(0) = 2$: $C_1 = 2$. So $v(t) = 3t^2 + 2$.
+
+$x(t) = \int(3t^2+2)\,dt = t^3 + 2t + C_2$. Apply $x(0) = 0$: $C_2 = 0$.
+
+$$\boxed{x(t) = t^3 + 2t}$$
+</ExA>
+
+<ExQ>
+Compute $\displaystyle\int \frac{e^x + 2}{e^x}\,dx$.
+</ExQ>
+<ExA>
+Split: $\dfrac{e^x + 2}{e^x} = 1 + 2e^{-x}$.
+
+$$\int 1\,dx + \int 2e^{-x}\,dx = x - 2e^{-x} + C$$
+
+(Verify: $d/dx(x - 2e^{-x}) = 1 + 2e^{-x} = (e^x + 2)/e^x$ ✓)
+</ExA>
+
+### Challenge
+
+<ExQ>
+A spring force is $F(x) = -kx$. The work done as the spring moves from $x=0$ to position $x$ is $W(x) = -\int_0^x F(s)\,ds$. Find $W(x)$ as a function of $x$, and verify $W'(x) = kx$.
+</ExQ>
+<ExA>
+$$W(x) = -\int_0^x(-ks)\,ds = \int_0^x ks\,ds = \left[\frac{ks^2}{2}\right]_0^x = \frac{kx^2}{2}$$
+
+This is the well-known elastic potential energy.
+
+Verify: $W'(x) = kx$ ✓ — the work done against the spring force equals the integral of the (opposite) force.
+</ExA>
+
+<ExQ>
+A simply supported beam carries a uniform load $q$ N/m. The bending moment satisfies $M''(x) = -q$ with $M(0) = M(L) = 0$. Find $M(x)$.
+</ExQ>
+<ExA>
+Antidifferentiate twice:
+$$M'(x) = -qx + C_1$$
+$$M(x) = -\frac{qx^2}{2} + C_1 x + C_2$$
+
+Apply BCs:
+- $M(0) = 0 \Rightarrow C_2 = 0$
+- $M(L) = 0 \Rightarrow -qL^2/2 + C_1 L = 0 \Rightarrow C_1 = qL/2$
+
+$$M(x) = -\frac{qx^2}{2} + \frac{qLx}{2} = \frac{q}{2}x(L - x)$$
+
+Maximum at midspan: $M(L/2) = qL^2/8$. This is the textbook result for a UDL on a simply supported beam.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** $\displaystyle\int f(x)g(x)\,dx = \left(\int f(x)\,dx\right)\left(\int g(x)\,dx\right)$. Justify with a specific example.
+</ExQ>
+<ExA>
+**False.** Antidifferentiation does not distribute over products.
+
+Counterexample: $f(x) = g(x) = x$.
+
+LHS: $\int x\cdot x\,dx = \int x^2\,dx = x^3/3 + C$.
+
+RHS: $(x^2/2)(x^2/2) = x^4/4$. Different.
+
+The correct rule for products is **integration by parts**, derived from the product rule of differentiation.
+</ExA>
+
+<ExQ>
+**Why $+C$?** Explain in your own words why every indefinite integral requires a constant of integration. What does the constant represent physically in the kinematics example $a(t) = $ const $\Rightarrow v(t) = at + v_0$?
+</ExQ>
+<ExA>
+The derivative of a constant is zero. So if $F(x)$ is an antiderivative of $f$, then $F(x) + C$ is also one for ANY constant $C$. The indefinite integral is a *family* of antiderivatives differing by constants.
+
+In kinematics: the constant of integration $v_0$ is the **initial velocity**. Knowing the acceleration alone doesn't determine velocity uniquely — you also need to know how fast the object was moving when you started. The constant carries that information.
+
+In general: the constant comes from a **boundary** or **initial condition** — physical information about the state at one specific point.
+</ExA>
+
+<ExQ>
+**Spot the antiderivative.** For each derivative, identify the original function (no calculation, just pattern recognition):
+(a) $\dfrac{d}{dx}[?]= 2x\cos(x^2)$
+(b) $\dfrac{d}{dx}[?]= e^{3x}$
+(c) $\dfrac{d}{dx}[?]= \dfrac{1}{x^2 + 1}$
+(d) $\dfrac{d}{dx}[?]= 2x\,e^{x^2}$
+</ExQ>
+<ExA>
+(a) $\sin(x^2)$ — chain rule with inner $x^2$.
+(b) $e^{3x}/3$ — chain rule, inner $3x$ gives factor 3.
+(c) $\arctan x$.
+(d) $e^{x^2}$ — chain rule, inner $x^2$ gives factor $2x$.
+
+Recognizing chain-rule patterns "in reverse" is the heart of u-substitution.
+</ExA>
+
+<ExQ>
+**Find a function** $f$ with $f'(x) = e^x + \cos x$ and $f(0) = 5$.
+</ExQ>
+<ExA>
+Antidifferentiate: $f(x) = e^x + \sin x + C$.
+
+Apply IC: $f(0) = 1 + 0 + C = 5 \Rightarrow C = 4$.
+
+$$\boxed{f(x) = e^x + \sin x + 4}$$
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Variable density rod.** A 1-meter rod has linear density $\rho(x) = 2 + 3x^2$ kg/m. Find the total mass and the center of mass.
+</ExQ>
+<ExA>
+**Mass:**
+$$m = \int_0^1(2 + 3x^2)\,dx = [2x + x^3]_0^1 = 3\text{ kg}$$
+
+**Center of mass:**
+$$\bar x = \frac{1}{m}\int_0^1 x\rho(x)\,dx = \frac{1}{3}\int_0^1(2x + 3x^3)\,dx = \frac{1}{3}\left[x^2 + \frac{3x^4}{4}\right]_0^1 = \frac{1}{3}\cdot\frac{7}{4} = \frac{7}{12} \approx 0.583\text{ m}$$
+
+The CM is *past* the geometric midpoint ($x = 0.5$) because density grows toward the right end. This is exactly the kind of integral used in ME for non-uniform structures.
+</ExA>
+
+<ExQ>
+**Cantilever beam.** A cantilever beam clamped at $x = 0$ (so $w(0) = w'(0) = 0$) carries a tip load $P$ at $x = L$. The bending moment is $M(x) = P(L - x)$. With $EI w'' = M$, find $w(L)$ — the tip deflection.
+</ExQ>
+<ExA>
+$$w''(x) = \frac{P(L-x)}{EI}$$
+
+Integrate once:
+$$w'(x) = \frac{P(Lx - x^2/2)}{EI} + C_1$$
+$w'(0) = 0 \Rightarrow C_1 = 0$.
+
+Integrate again:
+$$w(x) = \frac{P(Lx^2/2 - x^3/6)}{EI} + C_2$$
+$w(0) = 0 \Rightarrow C_2 = 0$.
+
+At $x = L$:
+$$w(L) = \frac{P(L^3/2 - L^3/6)}{EI} = \frac{PL^3}{3EI}$$
+
+This is the standard tip-deflection formula for cantilevers.
+</ExA>
+
+<ExQ>
+**Trajectory.** A projectile is launched horizontally with $v_0 = 10$ m/s from height $h_0 = 5$ m. Gravity gives vertical acceleration $-g = -9.81$ m/s². Find $y(t)$ and the time to hit the ground.
+</ExQ>
+<ExA>
+Vertical: $\dot v_y = -g$, $v_y(0) = 0$.
+
+$v_y(t) = -gt + 0$.
+
+$\dot y = v_y$, $y(0) = 5$:
+
+$$y(t) = -\frac{g t^2}{2} + 5$$
+
+Time to ground: $y = 0 \Rightarrow t = \sqrt{10/g} = \sqrt{10/9.81} \approx 1.01$ s.
+
+Two integrations + two ICs (initial position and initial velocity) → unique trajectory. This is the basic structure of every projectile problem.
+</ExA>
+
+<ExQ>
+**Specific heat.** The specific heat capacity of water is $c_p \approx 4186 + 0.05T$ J/(kg·K) (roughly, near room temperature). The heat needed to raise a 1 kg mass from $T_1$ to $T_2$ is $Q = \int_{T_1}^{T_2}c_p\,dT$. Find $Q$ to heat 1 kg from 20°C to 80°C.
+</ExQ>
+<ExA>
+$$Q = \int_{20}^{80}(4186 + 0.05T)\,dT = [4186T + 0.025T^2]_{20}^{80}$$
+
+$= (4186\cdot 80 + 0.025\cdot 6400) - (4186\cdot 20 + 0.025\cdot 400)$
+
+$= (334880 + 160) - (83720 + 10) = 335040 - 83730 = 251310$ J $\approx 251$ kJ.
+
+If you used constant $c_p \approx 4186$ instead: $Q \approx 4186 \times 60 = 251160$ J. The temperature-dependent term contributes only ~$0.06\%$ here, but for wider $\Delta T$ it matters more.
+</ExA>

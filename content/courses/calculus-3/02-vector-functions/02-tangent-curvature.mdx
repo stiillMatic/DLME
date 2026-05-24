@@ -1,0 +1,123 @@
+---
+title: Tangent, Normal, and Curvature
+description: The geometry of curves — how they bend in space.
+---
+
+# Tangent, Normal, and Curvature
+
+## The Big Picture
+
+A curve in 3D is more than just a path — it has *geometric structure*: how fast it moves, how sharply it turns, how it twists out of a plane. The **TNB frame** (tangent, normal, binormal) captures this with three mutually perpendicular unit vectors at each point. **Curvature** measures bending; **torsion** measures out-of-plane twist. Together they fully characterize the curve's shape.
+
+## Unit Tangent
+
+$$\hat{\mathbf{T}}(t) = \frac{\mathbf{r}'(t)}{\|\mathbf{r}'(t)\|}$$
+
+Always has unit length, points in direction of motion.
+
+## Curvature
+
+$$\kappa = \frac{\|\mathbf{T}'(t)\|}{\|\mathbf{r}'(t)\|} = \frac{\|\mathbf{r}'\times\mathbf{r}''\|}{\|\mathbf{r}'\|^3}$$
+
+For 2D curve $y = f(x)$:
+$$\kappa = \frac{|y''|}{(1 + (y')^2)^{3/2}}$$
+
+**Interpretation:** $\kappa$ measures the rate of change of direction per unit arc length. Larger $\kappa$ = sharper turn. Straight line: $\kappa = 0$.
+
+**Radius of curvature:** $\rho = 1/\kappa$. Equals the radius of the *osculating circle* (best-fitting circle to the curve at a point).
+
+## Unit Normal
+
+$$\hat{\mathbf{N}}(t) = \frac{\mathbf{T}'(t)}{\|\mathbf{T}'(t)\|}$$
+
+Perpendicular to $\hat{\mathbf{T}}$, points toward center of curvature.
+
+## Unit Binormal
+
+$$\hat{\mathbf{B}}(t) = \hat{\mathbf{T}}\times\hat{\mathbf{N}}$$
+
+Perpendicular to both — completes the right-handed orthonormal **TNB frame**.
+
+## Common Misconceptions
+
+**Misconception 1: "Curvature is the second derivative."**
+
+Not exactly. $|y''|$ alone overstates curvature when $|y'|$ is large. The correct formula divides by $(1 + (y')^2)^{3/2}$.
+
+**Misconception 2: "Straight lines have zero curvature, so they have no normal direction."**
+
+True — $\hat{\mathbf{N}}$ is undefined when $\kappa = 0$. The TNB frame requires nonzero curvature to be well-defined.
+
+**Misconception 3: "Curvature is intrinsic to the curve, parameterization-independent."**
+
+Yes — curvature is a *geometric property*. Different parameterizations give the same $\kappa$ at the same point. (This is why we can compute it via the formula involving cross products, which is parameterization-aware.)
+
+## Engineering Connection
+
+- **Highway design:** maximum curvature determines speed limit (centripetal acceleration $= v^2\kappa$).
+- **Roller coaster:** "g-forces" related to curvature × speed-squared.
+- **Robot path planning:** smooth paths have bounded curvature (rate-of-direction-change).
+- **Antenna design:** curved reflectors with specified curvature for focusing.
+- **Beam buckling:** curvature relates to bending moment via $\kappa = M/(EI)$ in Euler-Bernoulli theory.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Curvature of circle $\mathbf{r}(t) = (R\cos t, R\sin t, 0)$.
+</ExQ>
+<ExA>
+$\mathbf{r}' = (-R\sin t, R\cos t, 0)$. $\|\mathbf{r}'\| = R$.
+
+$\hat{\mathbf{T}} = (-\sin t, \cos t, 0)$. $\hat{\mathbf{T}}' = (-\cos t, -\sin t, 0)$.
+
+$\kappa = \|\hat{\mathbf{T}}'\|/\|\mathbf{r}'\| = 1/R$ ✓ (matches expected $1/R$ for circle).
+</ExA>
+
+<ExQ>
+**2.** Curvature of helix $\mathbf{r}(t) = (\cos t, \sin t, t)$ at any $t$.
+</ExQ>
+<ExA>
+$\mathbf{r}' = (-\sin t, \cos t, 1)$. $\|\mathbf{r}'\| = \sqrt 2$.
+
+$\mathbf{r}'' = (-\cos t, -\sin t, 0)$. $\mathbf{r}'\times\mathbf{r}'' = (\sin t, -\cos t, 1)$. Magnitude $\sqrt 2$.
+
+$\kappa = \sqrt 2/(\sqrt 2)^3 = 1/2$.
+
+Constant curvature — helix wraps around with same "tightness" at every point.
+</ExA>
+
+<ExQ>
+**3.** Curvature of $y = x^2$ at $x = 0$ and $x = 1$.
+</ExQ>
+<ExA>
+$y' = 2x$, $y'' = 2$.
+
+At $x = 0$: $\kappa = 2/(1+0)^{3/2} = 2$.
+At $x = 1$: $\kappa = 2/(1+4)^{3/2} = 2/(5\sqrt 5) \approx 0.179$.
+
+Curvature is highest at the vertex, decreases as the curve straightens out.
+</ExA>
+
+<ExQ>
+**4. Engineering: Highway curve.** A car at 30 m/s on circular curve. Max lateral acceleration 0.4g. Find min radius.
+</ExQ>
+<ExA>
+$a_n = v^2/R$. Set $\leq 0.4g$:
+
+$R \geq v^2/(0.4 g) = 900/3.92 = 230$ m.
+
+Curve must have radius at least 230 m for safe 30 m/s travel. Tighter curves require lower speed limits.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the unit normal direction toward the center of curvature?
+</ExQ>
+<ExA>
+$\hat{\mathbf{T}}$ rotates as the curve bends. $\hat{\mathbf{T}}'$ points "where $\hat{\mathbf{T}}$ is going" — the direction of rotation.
+
+Geometrically, this is toward the inside of the curve, i.e., toward the center of the osculating circle.
+
+This is why centripetal acceleration is "toward the center" — it's the rate of change of velocity direction.
+</ExA>

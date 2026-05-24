@@ -1,0 +1,51 @@
+{
+  "title": "Differential Equations",
+  "description": "Ordinary differential equations, systems, and Laplace transforms — the mathematical language of dynamic engineering systems.",
+  "level": "intermediate",
+  "area": "Mathematics",
+  "tags": ["ODEs", "Mathematics", "MIT 18.03"],
+  "chapters": [
+    {
+      "title": "First-Order ODEs",
+      "slug": "01-first-order",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-separable", "title": "Separable Equations", "order": 1 },
+        { "slug": "02-linear-first-order", "title": "Linear First-Order Equations", "order": 2 },
+        { "slug": "03-modeling", "title": "Modeling with First-Order ODEs", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Second-Order ODEs",
+      "slug": "02-second-order",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-homogeneous", "title": "Homogeneous Second-Order Equations", "order": 1 },
+        { "slug": "02-undetermined-coefficients", "title": "Method of Undetermined Coefficients", "order": 2 },
+        { "slug": "03-mechanical-vibrations", "title": "Mechanical Vibrations", "order": 3 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Systems of ODEs",
+      "slug": "03-systems",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-systems-intro", "title": "Introduction to Systems of ODEs", "order": 1 },
+        { "slug": "02-eigenvalue-method", "title": "Eigenvalue Method", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Laplace Transform",
+      "slug": "04-laplace",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-laplace-basics", "title": "Definition and Basic Properties", "order": 1 },
+        { "slug": "02-solving-ivps", "title": "Solving IVPs with Laplace Transforms", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

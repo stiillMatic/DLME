@@ -1,0 +1,94 @@
+---
+title: "Accelerating CFD with Physics-Informed Neural Networks"
+description: "PINNs embed governing equations directly into the loss function, enabling mesh-free flow solutions without labelled data."
+date: "2025-03-28"
+tags: ["CFD", "PINNs", "Fluid Mechanics"]
+---
+
+# Accelerating CFD with Physics-Informed Neural Networks
+
+Traditional CFD solves the Navier-Stokes equations on a discrete mesh. **Physics-Informed Neural Networks (PINNs)** take a different approach: they train a neural network whose loss function *encodes the governing equations*, so the network learns to satisfy the physics rather than fit labelled data.
+
+## The Residual Loss
+
+For incompressible, steady-state flow, the momentum equation is:
+
+$$
+(\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu \nabla^2 \mathbf{u}
+$$
+
+A PINN minimises the **PDE residual** at collocation points sampled throughout the domain:
+
+$$
+\mathcal{L} = \mathcal{L}_{\text{BC}} + \lambda \, \mathcal{L}_{\text{PDE}}
+$$
+
+where $\mathcal{L}_{\text{BC}}$ enforces boundary conditions and $\mathcal{L}_{\text{PDE}}$ penalises deviation from the governing equations.
+
+## Minimal Implementation
+
+```python
+import torch
+import torch.nn as nn
+
+class PINN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(2, 64), nn.Tanh(),
+            nn.Linear(64, 64), nn.Tanh(),
+            nn.Linear(64, 3),  # outputs: u, v, p
+        )
+
+    def forward(self, xy):
+        return self.net(xy)
+
+def pde_residual(model, xy, nu=0.01):
+    xy.requires_grad_(True)
+    out = model(xy)
+    u, v, p = out[:, 0:1], out[:, 1:2], out[:, 2:3]
+
+    def grad(f, x):
+        return torch.autograd.grad(f.sum(), x, create_graph=True)[0]
+
+    u_x = grad(u, xy)[:, 0:1]
+    u_y = grad(u, xy)[:, 1:2]
+    v_x = grad(v, xy)[:, 0:1]
+    v_y = grad(v, xy)[:, 1:2]
+    p_x = grad(p, xy)[:, 0:1]
+    p_y = grad(p, xy)[:, 1:2]
+
+    u_xx = grad(u_x, xy)[:, 0:1]
+    u_yy = grad(u_y, xy)[:, 1:2]
+    v_xx = grad(v_x, xy)[:, 0:1]
+    v_yy = grad(v_y, xy)[:, 1:2]
+
+    # Momentum residuals
+    res_u = u * u_x + v * u_y + p_x - nu * (u_xx + u_yy)
+    res_v = u * v_x + v * v_y + p_y - nu * (v_xx + v_yy)
+    # Continuity
+    res_c = u_x + v_y
+
+    return res_u, res_v, res_c
+```
+
+## Strengths and Limitations
+
+**Strengths**
+- No mesh required — works on arbitrary geometry
+- Naturally handles inverse problems (recover $\nu$ from sparse measurements)
+- Enforces physics even in data-sparse regions
+
+**Limitations**
+- Harder to train than standard networks (loss landscape is complex)
+- Can struggle with high Reynolds number flows
+- Slower than mature CFD codes for routine simulations
+
+## When PINNs Shine
+
+PINNs are particularly useful when:
+- You have **sparse experimental measurements** and want to reconstruct the full flow field
+- You need to solve a **parametric family** of flows (vary inlet velocity, geometry) efficiently
+- You are solving an **inverse problem** (identify unknown parameters from observations)
+
+For standard forward CFD problems with known geometry and boundary conditions, classical solvers (OpenFOAM, Fluent) are still usually faster and more reliable. Think of PINNs as a complementary tool, not a replacement.

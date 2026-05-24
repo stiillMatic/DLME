@@ -1,0 +1,89 @@
+---
+title: Linear Maps and Their Properties
+description: What makes a transformation linear, and how linear maps are represented by matrices.
+---
+
+# Linear Maps and Their Properties
+
+A **linear transformation** (or linear map) is a function $T: V \to W$ between vector spaces that preserves addition and scalar multiplication:
+
+$$T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}), \qquad T(c\mathbf{v}) = cT(\mathbf{v})$$
+
+These two conditions together are equivalent to:
+
+$$T(c_1\mathbf{u} + c_2\mathbf{v}) = c_1 T(\mathbf{u}) + c_2 T(\mathbf{v})$$
+
+## Examples
+
+- **Rotation** in $\mathbb{R}^2$ by angle $\theta$: $T\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}\cos\theta & -\sin\theta\\ \sin\theta & \cos\theta\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}$
+- **Projection** onto the $x$-axis: $T(x, y) = (x, 0)$
+- **Differentiation** $D: \mathcal{P}_n \to \mathcal{P}_{n-1}$: $D(p) = p'$ — linear since $(p+q)' = p' + q'$
+
+**Not linear:** $T(x) = x + 1$ (fails $T(\mathbf{0}) = \mathbf{0}$), or $T(x) = x^2$.
+
+## Matrix Representation
+
+Every linear map $T: \mathbb{R}^n \to \mathbb{R}^m$ is represented by an $m \times n$ matrix $A$:
+
+$$T(\mathbf{x}) = A\mathbf{x}$$
+
+The columns of $A$ are the images of the standard basis vectors:
+
+$$A = \begin{pmatrix} | & | & & | \\ T(\mathbf{e}_1) & T(\mathbf{e}_2) & \cdots & T(\mathbf{e}_n) \\ | & | & & | \end{pmatrix}$$
+
+## Kernel and Image
+
+- **Kernel** (nullspace): $\ker(T) = \{\mathbf{v} \in V : T(\mathbf{v}) = \mathbf{0}\}$
+- **Image** (range): $\text{im}(T) = \{T(\mathbf{v}) : \mathbf{v} \in V\}$
+
+**Rank-Nullity Theorem:**
+
+$$\dim(\ker T) + \dim(\text{im}\, T) = \dim(V)$$
+
+This is one of the most fundamental results in linear algebra: the dimensions of input "lost" and output "reached" always sum to the input dimension.
+
+## Composition of Linear Maps
+
+If $T: U \to V$ and $S: V \to W$ are linear, so is $S \circ T: U \to W$, represented by the matrix product $BA$ where $B$ represents $S$ and $A$ represents $T$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Determine whether $T: \mathbb{R}^2 \to \mathbb{R}^2$ defined by $T(x, y) = (2x - y,\ x + 3y)$ is linear. If so, find its matrix representation.
+</ExQ>
+<ExA>
+**Linearity check:**
+$$T(c_1\mathbf{u} + c_2\mathbf{v}) = (2(c_1u_1+c_2v_1)-(c_1u_2+c_2v_2),\ \ldots) = c_1T(\mathbf{u}) + c_2T(\mathbf{v}) \checkmark$$
+
+**Matrix:** Apply $T$ to standard basis vectors:
+$$T(\mathbf{e}_1) = T(1,0) = (2, 1), \quad T(\mathbf{e}_2) = T(0,1) = (-1, 3)$$
+
+$$A = \begin{pmatrix} 2 & -1 \\ 1 & 3 \end{pmatrix}$$
+</ExA>
+
+<ExQ>
+Let $T: \mathbb{R}^3 \to \mathbb{R}^2$ be represented by $A = \begin{pmatrix}1 & 2 & -1\\ 0 & 1 & 3\end{pmatrix}$. Find $\ker(T)$ and verify the Rank-Nullity Theorem.
+</ExQ>
+<ExA>
+Solve $A\mathbf{x} = \mathbf{0}$: row-reduce $A$:
+$$\begin{pmatrix}1&2&-1\\0&1&3\end{pmatrix} \to \begin{pmatrix}1&0&-7\\0&1&3\end{pmatrix}$$
+
+Free variable: $x_3 = t$. Then $x_2 = -3t$, $x_1 = 7t$.
+
+$$\ker(T) = \text{span}\left\{\begin{pmatrix}7\\-3\\1\end{pmatrix}\right\}, \quad \dim(\ker T) = 1$$
+
+$\text{rank}(A) = 2$, so $\dim(\text{im}\,T) = 2$.
+
+Rank-Nullity: $1 + 2 = 3 = \dim(\mathbb{R}^3)$ ✓
+</ExA>
+
+<ExQ>
+A stress tensor in 2D is a linear map $T: \mathbb{R}^2 \to \mathbb{R}^2$ that maps a unit normal $\hat{n}$ to the traction vector $\mathbf{t}$ on that face. If $T(\mathbf{e}_1) = (100, 40)$ MPa and $T(\mathbf{e}_2) = (40, -20)$ MPa, write the stress matrix and find the traction on a face with normal $\hat{n} = (1/\sqrt{2}, 1/\sqrt{2})$.
+</ExQ>
+<ExA>
+$$\boldsymbol{\sigma} = \begin{pmatrix}100 & 40\\ 40 & -20\end{pmatrix}\ \text{MPa}$$
+
+$$\mathbf{t} = \boldsymbol{\sigma}\hat{n} = \begin{pmatrix}100 & 40\\ 40 & -20\end{pmatrix}\begin{pmatrix}1/\sqrt{2}\\1/\sqrt{2}\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}140\\20\end{pmatrix} \approx \begin{pmatrix}98.99\\ 14.14\end{pmatrix}\ \text{MPa}$$
+</ExA>

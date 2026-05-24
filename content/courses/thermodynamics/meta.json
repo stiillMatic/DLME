@@ -1,0 +1,40 @@
+{
+  "title": "Thermodynamics",
+  "description": "Laws of thermodynamics, thermodynamic cycles, and heat transfer introduction — governing energy conversion in engines and power systems.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Thermodynamics", "Energy", "MIT 2.006"],
+  "chapters": [
+    {
+      "title": "Fundamental Laws",
+      "slug": "01-laws",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-zeroth-first", "title": "Zeroth and First Laws", "order": 1 },
+        { "slug": "02-second-law", "title": "Second Law and Entropy", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Thermodynamic Cycles",
+      "slug": "02-cycles",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-carnot", "title": "Carnot Cycle and Efficiency Limits", "order": 1 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Gas Mixtures and Psychrometrics",
+      "slug": "03-mixtures",
+      "order": 3,
+      "lessons": []
+    },
+    {
+      "title": "Introduction to Heat Transfer",
+      "slug": "04-heat-transfer-intro",
+      "order": 4,
+      "lessons": []
+    }
+  ]
+}

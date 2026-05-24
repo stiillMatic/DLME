@@ -1,0 +1,72 @@
+---
+title: Chapter 3 Practice — Chemical Equilibrium
+description: Practice on equilibrium constants and acid-base chemistry.
+---
+
+# Chapter 3 Practice — Chemical Equilibrium
+
+<ExQ>
+**1.** $K_p = 0.5$ for $A(g) \rightleftharpoons 2B(g)$. Initial 1 atm A. Equilibrium pressures?
+</ExQ>
+<ExA>
+Let $x$ = atm A dissociated. $P_A = 1-x$, $P_B = 2x$.
+
+$K_p = (2x)^2/(1-x) = 0.5 \Rightarrow 4x^2 = 0.5(1-x) \Rightarrow 4x^2 + 0.5x - 0.5 = 0$.
+
+$x = (-0.5 + \sqrt{0.25 + 8})/8 = 2.37/8 \approx 0.296$.
+
+$P_A \approx 0.704$, $P_B \approx 0.592$ atm. Total ~1.30 atm.
+</ExA>
+
+<ExQ>
+**2.** pH of 0.05 M NH₃ ($K_b = 1.8\times 10^{-5}$)?
+</ExQ>
+<ExA>
+$NH_3 + H_2O \rightleftharpoons NH_4^+ + OH^-$.
+
+$K_b = [NH_4^+][OH^-]/[NH_3] = x^2/(0.05 - x) \approx x^2/0.05$.
+
+$x = \sqrt{0.05\cdot 1.8\times 10^{-5}} = 9.49\times 10^{-4}$.
+
+$pOH = 3.02$, pH = 14 - 3.02 = **10.98**. Basic.
+</ExA>
+
+<ExQ>
+**3. Engineering: Drug ionization.** Aspirin has $pK_a = 3.5$. At stomach pH 1.5, what fraction is ionized (deprotonated)?
+</ExQ>
+<ExA>
+$pH = pK_a + \log([A^-]/[HA])$.
+
+$1.5 = 3.5 + \log([A^-]/[HA])$.
+
+$\log([A^-]/[HA]) = -2$. Ratio $= 0.01$.
+
+Fraction ionized = $A^-/(A^- + HA) = 0.01/1.01 \approx 1\%$.
+
+So in stomach, aspirin is mostly neutral (protonated), allowing it to cross gastric membranes. In intestine (pH 6+), it ionizes — gets trapped. This is why aspirin causes stomach irritation.
+</ExA>
+
+<ExQ>
+**4. Engineering: Le Chatelier in industrial NH₃ synthesis.** N₂ + 3H₂ ⇌ 2NH₃. To increase NH₃ yield, what to do?
+</ExQ>
+<ExA>
+$\Delta H < 0$, $\Delta n_{gas} = -2$.
+
+- Decrease T (favors exothermic forward) — but at cost of slow kinetics.
+- Increase P (favors fewer mol gas) — main industrial lever.
+- Remove NH₃ continuously (shifts forward) — actual industrial practice.
+- Increase N₂ or H₂ (shifts forward) — H₂ is expensive; balance economics.
+
+Combined: Haber process uses ~250-350 atm, ~400-500°C, iron catalyst, continuous NH₃ removal.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does pH change slowly near a strong buffer but rapidly past the equivalence point?
+</ExQ>
+<ExA>
+In buffer region: Henderson-Hasselbalch ratio changes slowly — pH = pKa + small log change.
+
+Past equivalence: buffer exhausted; adding more strong acid/base directly changes H+ concentration linearly — but pH = -log[H+] makes small concentration changes into large pH changes.
+
+That's why titration curves are flat in buffer regions and steep at equivalence — pH responds dramatically when buffer capacity is exceeded.
+</ExA>

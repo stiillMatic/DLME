@@ -1,0 +1,84 @@
+---
+title: Normal and Shear Stress
+description: Defining stress, sign conventions, and units — the starting point of every structural analysis.
+---
+
+# Normal and Shear Stress
+
+**Stress** is force per unit area. It quantifies the internal intensity of force within a material.
+
+## Normal Stress
+
+Normal stress $\sigma$ acts perpendicular to the cross-sectional area:
+
+$$\sigma = \frac{P}{A}$$
+
+where $P$ is the axial force and $A$ is the cross-sectional area.
+
+- **Tensile stress** ($P$ pulls): $\sigma > 0$
+- **Compressive stress** ($P$ pushes): $\sigma < 0$
+
+Units: Pa = N/m², MPa = N/mm²
+
+## Shear Stress
+
+Shear stress $\tau$ acts **parallel** to the cross-section:
+
+$$\tau = \frac{V}{A}$$
+
+where $V$ is the shear force. (This is average shear — real distributions are parabolic for beams.)
+
+## Stress on Inclined Planes
+
+For an axially loaded bar, on a plane inclined at angle $\theta$ from the cross-section:
+
+$$\sigma_\theta = \sigma_0 \cos^2\theta, \qquad \tau_\theta = \frac{\sigma_0}{2}\sin 2\theta$$
+
+**Maximum shear stress** occurs at $\theta = 45°$: $\tau_{\max} = \sigma_0/2$
+
+This is why ductile materials in tension fail at 45° — it's the plane of maximum shear.
+
+## Factor of Safety
+
+$$n = \frac{\sigma_{\text{allowable}}}{\sigma_{\text{actual}}}$$
+
+Typical design factors: $n = 1.5$–$4$ depending on application and consequence of failure.
+
+## 2D Stress State (General)
+
+At a point in a body, the full stress state requires:
+
+$$\boldsymbol{\sigma} = \begin{pmatrix} \sigma_x & \tau_{xy} \\ \tau_{xy} & \sigma_y \end{pmatrix}$$
+
+Eigenvalues of this matrix are the **principal stresses** $\sigma_1, \sigma_2$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A steel rod of diameter 20 mm carries a tensile load of 30 kN. Find the normal stress. Is it safe if the allowable stress is 150 MPa?
+</ExQ>
+<ExA>
+$$A = \frac{\pi d^2}{4} = \frac{\pi (0.02)^2}{4} = 3.14 \times 10^{-4}\ \text{m}^2$$
+
+$$\sigma = \frac{P}{A} = \frac{30{,}000}{3.14 \times 10^{-4}} = 95.5\ \text{MPa}$$
+
+Since $95.5 < 150$ MPa, the rod is **safe**. Factor of safety: $n = 150/95.5 = 1.57$.
+</ExA>
+
+<ExQ>
+An axially loaded bar has normal stress $\sigma_0 = 80$ MPa. Find the shear stress on the plane inclined at $\theta = 30°$ from the cross-section.
+</ExQ>
+<ExA>
+$$\tau_\theta = \frac{\sigma_0}{2}\sin 2\theta = \frac{80}{2}\sin 60° = 40 \times \frac{\sqrt{3}}{2} = \boxed{34.6\ \text{MPa}}$$
+</ExA>
+
+<ExQ>
+A bolt of cross-sectional area 100 mm² is in double shear, carrying a total force of 20 kN. Find the average shear stress in the bolt.
+</ExQ>
+<ExA>
+In double shear, the force is shared across **two** shear planes:
+
+$$\tau = \frac{V}{2A} = \frac{20{,}000}{2 \times 100} = \boxed{100\ \text{MPa}}$$
+</ExA>

@@ -1,0 +1,45 @@
+---
+title: Chapter 3 Practice — Bernoulli and Energy Equation
+description: Practice on Bernoulli's equation, Venturi, Pitot tubes.
+---
+
+# Chapter 3 Practice — Bernoulli
+
+<ExQ>
+**1.** Water flows in a horizontal pipe; section A: 5 m/s, 200 kPa. Section B (smaller): 12 m/s. Find $P_B$.
+</ExQ>
+<ExA>
+Bernoulli (same height): $P_B = P_A + \tfrac{1}{2}\rho(v_A^2 - v_B^2) = 200000 + 500(25 - 144) = 200000 - 59500 = 140.5$ kPa.
+</ExA>
+
+<ExQ>
+**2.** Water exits a tank from a hole 4 m below surface. Find exit velocity (Torricelli).
+</ExQ>
+<ExA>
+$v = \sqrt{2gh} = \sqrt{78.5} = 8.86$ m/s.
+</ExA>
+
+<ExQ>
+**3. Engineering: Venturi flowmeter.** Pipe area 0.01 m², throat 0.005 m². Pressure drop 50 kPa. Find flow rate. Water.
+</ExQ>
+<ExA>
+$\dot V = A_2\sqrt{2\Delta P/[\rho(1 - (A_2/A_1)^2)]}$.
+
+$= 0.005\sqrt{100000/(1000\cdot(1 - 0.25))} = 0.005\sqrt{133.3} = 0.005\cdot 11.55 = 0.0577$ m³/s = 57.7 L/s.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does pressure decrease in a constriction (Venturi effect)?
+</ExQ>
+<ExA>
+Continuity: smaller area → higher velocity. Bernoulli: higher velocity → lower pressure (along same streamline, same elevation).
+
+Energy is conserved: pressure energy converts to kinetic energy. This same effect generates lift on an airplane wing (faster flow on top → lower pressure).
+</ExA>
+
+<ExQ>
+**5. Pitot tube on aircraft.** Stagnation pressure 102 kPa, static 100 kPa. Find airspeed ($\rho = 1.2$ kg/m³).
+</ExQ>
+<ExA>
+$v = \sqrt{2\Delta P/\rho} = \sqrt{2000/1.2} = \sqrt{1667} = 40.8$ m/s ≈ 147 km/h.
+</ExA>

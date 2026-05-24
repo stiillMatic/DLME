@@ -1,0 +1,58 @@
+---
+title: Chapter 4 Practice — Vibrations
+description: Practice on free vibration of SDOF systems.
+---
+
+# Chapter 4 Practice — Vibrations
+
+<ExQ>
+**1.** $m = 5, k = 500$. $\omega_n = ?$
+</ExQ>
+<ExA>
+$\omega_n = \sqrt{100} = 10$ rad/s.
+</ExA>
+
+<ExQ>
+**2.** $m = 1, k = 25, c = 4$. Find $\zeta$ and $\omega_d$.
+</ExQ>
+<ExA>
+$\omega_n = 5$. $\zeta = 4/(2\cdot 5) = 0.4$.
+
+$\omega_d = 5\sqrt{1 - 0.16} = 5\cdot 0.917 = 4.58$ rad/s.
+</ExA>
+
+<ExQ>
+**3.** Free response: $x(0) = 0.05, \dot x(0) = 0$, $\omega_n = 10$, $\zeta = 0.1$. Write $x(t)$.
+</ExQ>
+<ExA>
+$\omega_d = 10\sqrt{0.99} = 9.95$. 
+
+$x(t) = e^{-t}(0.05\cos(9.95 t) + B\sin(9.95 t))$.
+
+$\dot x(0) = -0.05 + 9.95 B = 0 \Rightarrow B = 0.005$.
+
+$x(t) = e^{-t}(0.05\cos(9.95t) + 0.005\sin(9.95t))$.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why do lightly damped systems oscillate near $\omega_n$ but heavily damped don't oscillate at all?
+</ExQ>
+<ExA>
+Char eq: $r = -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}$.
+
+For $\zeta < 1$: complex roots, real oscillation.
+For $\zeta > 1$: two real negative roots, pure exponentials.
+
+The transition at $\zeta = 1$ is where the discriminant vanishes — the boundary between oscillating and non-oscillating.
+</ExA>
+
+<ExQ>
+**5. Engineering: Logarithmic decrement.** Pendulum amplitude drops 30% per cycle. Find $\zeta$.
+</ExQ>
+<ExA>
+$\delta = \ln(1/0.7) = 0.357$.
+
+$\delta = 2\pi\zeta/\sqrt{1-\zeta^2}$. For small $\zeta$: $\zeta \approx \delta/(2\pi) = 0.057$.
+
+About 5.7% damping. Pendulums in air have very low damping naturally.
+</ExA>

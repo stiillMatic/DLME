@@ -1,0 +1,133 @@
+---
+title: Convergence Tests in Depth
+description: A complete toolkit for determining whether infinite series converge — comparison, ratio, root, integral, alternating series tests.
+---
+
+# Convergence Tests in Depth
+
+## The Big Picture
+
+Calculus 1 introduces sequences and series. Calculus 2 dives much deeper: a full toolkit of **convergence tests** that let you determine — quickly and reliably — whether $\sum a_n$ converges. Each test exploits a different aspect of the terms (size, ratio, comparison). Mastering them lets you analyze power series, Fourier series, and many engineering computations.
+
+## The Hierarchy of Tests
+
+**Step 1: $n$-th term test.** If $\lim a_n \neq 0$, series **diverges**. (Necessary condition.)
+
+If $a_n \to 0$, can't conclude — go to step 2.
+
+**Step 2: Recognize special forms.**
+- Geometric: $\sum r^n$ converges iff $|r| < 1$.
+- $p$-series: $\sum 1/n^p$ converges iff $p > 1$.
+
+**Step 3: Comparison tests.**
+- **Direct:** if $0 \leq a_n \leq b_n$ and $\sum b_n$ converges, then $\sum a_n$ converges.
+- **Limit comparison:** if $\lim a_n/b_n = L > 0$ (finite, positive), then $\sum a_n$ and $\sum b_n$ have same convergence.
+
+**Step 4: Ratio test.** Compute $L = \lim |a_{n+1}/a_n|$.
+- $L < 1$: converges.
+- $L > 1$: diverges.
+- $L = 1$: inconclusive.
+
+Best for series with factorials or exponentials.
+
+**Step 5: Root test.** Compute $L = \lim |a_n|^{1/n}$.
+- $L < 1$: converges.
+- $L > 1$: diverges.
+
+Best for series with $n$-th powers.
+
+**Step 6: Integral test.** For $a_n = f(n)$ positive decreasing: $\sum a_n$ converges iff $\int_1^\infty f(x)\,dx$ converges.
+
+**Step 7: Alternating series test.** $\sum (-1)^n b_n$ with $b_n$ positive, decreasing, $\to 0$: converges.
+
+## Absolute vs Conditional Convergence
+
+If $\sum |a_n|$ converges, $\sum a_n$ **converges absolutely**. (Implies regular convergence.)
+
+If $\sum a_n$ converges but $\sum |a_n|$ diverges, **converges conditionally**.
+
+Example: alternating harmonic $\sum (-1)^n/n$ converges conditionally.
+
+## Common Misconceptions
+
+**Misconception 1: "Pick the easiest test."**
+
+Some tests require positive terms (comparison). Some are inconclusive when $L = 1$ (ratio, root). Match test to the structure of $a_n$.
+
+**Misconception 2: "Conditional convergence is just convergence."**
+
+Conditionally convergent series can be **rearranged** to give any sum (Riemann's theorem). Order matters!
+
+**Misconception 3: "Always start with ratio test."**
+
+Ratio test fails (gives 1) for many "borderline" cases like $\sum 1/n^p$. For polynomial-style decay, comparison or integral test is better.
+
+## Engineering Connection
+
+- **Numerical convergence:** Newton's method, fixed-point iteration → series convergence questions.
+- **Fourier series:** Dirichlet conditions guarantee convergence of $\sum a_n\cos(n\omega t)$.
+- **Power series for special functions:** radius of convergence (via ratio test) determines validity range.
+- **Probability:** $\sum P(n)$ for discrete distributions must converge to 1.
+- **Approximation theory:** truncation error bounds rely on tail estimates from convergence tests.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Does $\sum n!/2^n$ converge?
+</ExQ>
+<ExA>
+Ratio test: $a_{n+1}/a_n = (n+1)/2 \to \infty$. **Diverges**.
+</ExA>
+
+<ExQ>
+**2.** Does $\sum 1/(n^2 + n)$ converge?
+</ExQ>
+<ExA>
+Comparison: $1/(n^2 + n) < 1/n^2$. $\sum 1/n^2$ converges. So **converges**.
+
+(Or telescope: $1/n - 1/(n+1)$, sum to 1.)
+</ExA>
+
+<ExQ>
+**3.** Does $\sum (-1)^n n/(n+1)$ converge?
+</ExQ>
+<ExA>
+$|a_n| = n/(n+1) \to 1 \neq 0$. By $n$-th term test: **diverges** (terms don't shrink).
+
+Alternating series test requires $|a_n| \to 0$, which fails here.
+</ExA>
+
+<ExQ>
+**4.** Does $\sum n^2/3^n$ converge?
+</ExQ>
+<ExA>
+Ratio: $a_{n+1}/a_n = (n+1)^2/(3n^2) \to 1/3 < 1$. **Converges**.
+
+(Exponentials beat polynomials — always.)
+</ExA>
+
+<ExQ>
+**5. Engineering: Reliability series.** Failure rates $\sum r_n$ where $r_n = 1/n^{1.5}$. Does total expected failures converge?
+</ExQ>
+<ExA>
+$p$-series with $p = 1.5 > 1$. **Converges**.
+
+Means: total accumulated failure probability over infinite cycles is finite. System has bounded failure expectation — useful for warranty analysis.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why does the harmonic series $\sum 1/n$ diverge even though $1/n \to 0$?
+</ExQ>
+<ExA>
+Slow decay: $1/n$ shrinks but not fast enough. Group terms:
+
+$1 + 1/2 + (1/3 + 1/4) + (1/5 + ... + 1/8) + ...$
+
+Each group has $\geq 1/2$. Infinitely many groups → infinite sum.
+
+Compare integral test: $\int 1/x\,dx = \ln x \to \infty$.
+
+This is the classic example of "going to zero" being insufficient for convergence.
+</ExA>

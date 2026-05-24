@@ -1,0 +1,112 @@
+---
+title: Trigonometric Substitution
+description: A specialized technique for integrals involving square roots of quadratic expressions — converting algebra into trigonometry.
+---
+
+# Trigonometric Substitution
+
+## The Big Picture
+
+Some integrals contain expressions like $\sqrt{a^2 - x^2}$, $\sqrt{a^2 + x^2}$, or $\sqrt{x^2 - a^2}$ that resist standard $u$-substitution. **Trigonometric substitution** uses Pythagorean identities to convert these radicals into trig functions, transforming algebraic difficulty into trigonometric simplicity. It's the standard technique for arc length, ellipse perimeters, and many engineering integrals involving distances and curves.
+
+## The Three Standard Substitutions
+
+| Expression | Substitution | Identity |
+|---|---|---|
+| $\sqrt{a^2 - x^2}$ | $x = a\sin\theta$ | $1 - \sin^2\theta = \cos^2\theta$ |
+| $\sqrt{a^2 + x^2}$ | $x = a\tan\theta$ | $1 + \tan^2\theta = \sec^2\theta$ |
+| $\sqrt{x^2 - a^2}$ | $x = a\sec\theta$ | $\sec^2\theta - 1 = \tan^2\theta$ |
+
+The substitution turns the radical into a single trig function, eliminating the square root.
+
+## Worked Example 1: $\int\dfrac{dx}{\sqrt{4 - x^2}}$
+
+Let $x = 2\sin\theta$, $dx = 2\cos\theta\,d\theta$, $\sqrt{4-x^2} = 2\cos\theta$.
+
+$$\int\frac{2\cos\theta\,d\theta}{2\cos\theta} = \int d\theta = \theta + C = \arcsin(x/2) + C$$
+
+## Worked Example 2: $\int\dfrac{dx}{x^2\sqrt{x^2 + 9}}$
+
+Let $x = 3\tan\theta$, $dx = 3\sec^2\theta\,d\theta$, $\sqrt{x^2+9} = 3\sec\theta$, $x^2 = 9\tan^2\theta$.
+
+$$\int\frac{3\sec^2\theta\,d\theta}{9\tan^2\theta\cdot 3\sec\theta} = \frac{1}{9}\int\frac{\sec\theta}{\tan^2\theta}d\theta = \frac{1}{9}\int\frac{\cos\theta}{\sin^2\theta}d\theta = -\frac{1}{9\sin\theta} + C$$
+
+Convert back: $\sin\theta = x/\sqrt{x^2+9}$, so result $= -\sqrt{x^2+9}/(9x) + C$.
+
+## Common Misconceptions
+
+**Misconception 1: "Always use $u$-substitution first."**
+
+If $u$-substitution doesn't simplify the radical, it won't appear cleanly. Trig sub is the next tool — recognize the three patterns.
+
+**Misconception 2: "Forgot to back-substitute."**
+
+The answer must be in terms of $x$, not $\theta$. Use right triangles to convert: if $x = a\sin\theta$, draw triangle with opposite $x$, hypotenuse $a$, adjacent $\sqrt{a^2-x^2}$.
+
+**Misconception 3: "Limits don't change."**
+
+For definite integrals, change limits when substituting. Or back-substitute and use original limits — both work.
+
+## Engineering Connection
+
+- **Ellipse perimeter:** uses $\int\sqrt{a^2\sin^2\theta + b^2\cos^2\theta}\,d\theta$ — incomplete elliptic integral, derived via trig sub on the ellipse equation.
+- **Beam arc length under bending:** large-deflection beam analysis involves $\sqrt{1 + (dy/dx)^2}$ integrals.
+- **Solenoid magnetic field:** Biot-Savart integrals along finite wires use $1/\sqrt{x^2+a^2}$ factors.
+- **Center of mass of curves:** arc-length-weighted integrals frequently need trig sub.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Compute $\int\dfrac{dx}{\sqrt{1-x^2}}$.
+</ExQ>
+<ExA>
+$x = \sin\theta$. Result: $\arcsin x + C$.
+</ExA>
+
+<ExQ>
+**2.** Compute $\int\dfrac{dx}{x^2 + 4}$ using trig sub.
+</ExQ>
+<ExA>
+$x = 2\tan\theta$, $dx = 2\sec^2\theta\,d\theta$, $x^2 + 4 = 4\sec^2\theta$.
+
+$\int\dfrac{2\sec^2\theta\,d\theta}{4\sec^2\theta} = \dfrac{\theta}{2} + C = \dfrac{1}{2}\arctan(x/2) + C$.
+</ExA>
+
+<ExQ>
+**3.** Compute $\int\sqrt{4-x^2}\,dx$.
+</ExQ>
+<ExA>
+$x = 2\sin\theta$. Integrand becomes $4\cos^2\theta\,d\theta = 2(1+\cos 2\theta)\,d\theta$.
+
+Result: $2\theta + \sin(2\theta) + C = 2\arcsin(x/2) + x\sqrt{4-x^2}/2 \cdot \frac{??}{}$... Let me redo.
+
+$\int 2\cos\theta\cdot 2\cos\theta\,d\theta = 4\int\cos^2\theta\,d\theta = 2\theta + \sin 2\theta + C = 2\theta + 2\sin\theta\cos\theta + C$.
+
+Back-substitute: $\sin\theta = x/2$, $\cos\theta = \sqrt{4-x^2}/2$.
+
+Result: $2\arcsin(x/2) + x\sqrt{4-x^2}/2 + C$.
+
+(Geometric meaning: half the area under a semicircle, plus a triangle.)
+</ExA>
+
+<ExQ>
+**4. Engineering: Capacitor.** Field outside an infinite line charge: $E \propto \int\dfrac{dx}{(x^2 + r^2)^{3/2}}$. Compute this integral.
+</ExQ>
+<ExA>
+Let $x = r\tan\theta$, $dx = r\sec^2\theta\,d\theta$, $(x^2+r^2)^{3/2} = r^3\sec^3\theta$.
+
+$\int\dfrac{r\sec^2\theta\,d\theta}{r^3\sec^3\theta} = \dfrac{1}{r^2}\int\cos\theta\,d\theta = \dfrac{\sin\theta}{r^2} = \dfrac{x}{r^2\sqrt{x^2+r^2}} + C$.
+
+Used to compute electric field along a line charge.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is trig substitution called a "rationalizing" technique?
+</ExQ>
+<ExA>
+The substitution removes the square root, leaving a rational expression in trig functions. After integration in $\theta$, you back-substitute to $x$, often eliminating radicals entirely from the answer.
+
+The "irrational" expression $\sqrt{a^2 - x^2}$ becomes the rational expression $\cos\theta$ — much easier to integrate.
+</ExA>

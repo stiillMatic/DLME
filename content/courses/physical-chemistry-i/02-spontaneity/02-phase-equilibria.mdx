@@ -1,0 +1,165 @@
+---
+title: Phase Equilibria and the Clausius-Clapeyron Equation
+description: Equilibrium between phases — how pressure, temperature, and composition control whether matter is solid, liquid, or vapor.
+---
+
+# Phase Equilibria and the Clausius-Clapeyron Equation
+
+## The Big Picture
+
+Substances change phases — ice melts, water boils, solid CO₂ sublimates. Each transition is governed by thermodynamic equilibrium: at the phase boundary, the Gibbs free energy of both phases is equal. The **Clausius-Clapeyron equation** quantifies how the boundary shifts with temperature and pressure. Phase diagrams visualize this — and underlie everything from steam engines to climate models.
+
+## Equilibrium Between Phases
+
+At a phase boundary (e.g., water-vapor coexistence):
+
+$$G_{\text{phase 1}} = G_{\text{phase 2}}$$
+
+Equivalently, **chemical potentials** are equal: $\mu_1 = \mu_2$.
+
+## Clausius-Clapeyron
+
+Differentiating along the coexistence curve:
+
+$$\frac{dP}{dT} = \frac{\Delta S}{\Delta V} = \frac{\Delta H}{T\Delta V}$$
+
+For vapor-liquid (where $V_{\text{vapor}} \gg V_{\text{liquid}}$ and assuming ideal gas):
+
+$$\frac{d\ln P}{dT} = \frac{\Delta H_{\text{vap}}}{RT^2}$$
+
+Integrated form:
+
+$$\ln(P_2/P_1) = -\frac{\Delta H_{\text{vap}}}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)$$
+
+Allows: given boiling point at one pressure, predict at another.
+
+## Phase Diagram
+
+Plot of P vs T showing where each phase is stable. Key features:
+
+- **Triple point**: all three phases coexist (water: $T = 273.16$ K, $P = 611$ Pa).
+- **Critical point**: liquid-vapor distinction disappears (water: $T_c = 647$ K, $P_c = 22.1$ MPa). Above this is **supercritical fluid**.
+- **Solid-liquid line**: usually nearly vertical (slight T-dependence on melting from $\Delta V$).
+- **Liquid-vapor line**: bowed, ends at critical point.
+
+Water's solid-liquid line slopes negatively (unusual — ice is less dense than water).
+
+## Vapor Pressure and Boiling
+
+A liquid's **vapor pressure** is the P at which liquid and vapor coexist at a given T.
+
+**Boiling**: when vapor pressure equals external pressure. At 1 atm, water boils at 373 K; at lower P (high altitude), at lower T.
+
+## Phase Rule (Gibbs)
+
+For a system with $C$ components and $P$ phases in equilibrium:
+
+$$F = C - P + 2$$
+
+where $F$ = degrees of freedom (independently variable: T, P, compositions).
+
+For pure water ($C = 1$):
+- 1 phase: $F = 2$ (T, P free).
+- 2 phases (boundary): $F = 1$ (1 free, the other determined).
+- 3 phases (triple): $F = 0$ (unique T, P).
+
+## Common Misconceptions
+
+**Misconception 1: "Boiling point is a unique number."**
+
+Boiling point depends on pressure. "Normal boiling point" = at 1 atm. At 0.5 atm, water boils at ~82°C.
+
+**Misconception 2: "Sublimation happens at all pressures."**
+
+Only below triple point pressure. For water, triple = 611 Pa — well below atmospheric. So ice goes to liquid (not vapor) at normal pressures.
+
+CO₂: triple at 5.2 atm. Below this (i.e., at 1 atm), solid CO₂ sublimates directly to gas — "dry ice."
+
+**Misconception 3: "Critical point is where matter ends."**
+
+Above critical point, liquid and gas merge into supercritical fluid — has properties of both. Used in supercritical CO₂ extraction (decaf coffee, etc.).
+
+## Engineering Connection
+
+- **Steam tables:** tabulated thermodynamic data along water's saturation line. Used in every power plant calculation.
+- **Vacuum distillation:** lower pressure → lower boiling → distill heat-sensitive compounds.
+- **Supercritical fluid extraction:** decaffeination, flavor extraction with sCO₂.
+- **Cryogenics:** designing systems near triple points (liquid N₂, He).
+- **Climate models:** vapor pressure of water as T function (Clausius-Clapeyron) drives humidity changes.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Water's $\Delta H_{\text{vap}} = 40.7$ kJ/mol. Boiling point at 0.5 atm?
+</ExQ>
+<ExA>
+$\ln(0.5/1) = -40700/8.314\cdot(1/T_2 - 1/373)$.
+
+$-0.693 = -4894\cdot(1/T_2 - 0.00268)$.
+
+$1/T_2 - 0.00268 = 0.000142 \Rightarrow 1/T_2 = 0.00282$.
+
+$T_2 = 354.4$ K = 81.3°C.
+
+(Consistent with high-altitude cooking.)
+</ExA>
+
+<ExQ>
+**2.** Why does water's solid-liquid coexistence line slope negatively?
+</ExQ>
+<ExA>
+$dP/dT = \Delta S/\Delta V$. For water:
+- $\Delta S > 0$ on melting (more disorder in liquid).
+- $\Delta V < 0$ on melting (ice less dense than water — unusual!)
+
+So $dP/dT < 0$. Higher P **lowers** melting point.
+
+This is why ice skates work — pressure under blade slightly lowers melting point, creating thin water layer for lubrication. (Actually, friction also matters significantly.)
+
+Most substances: $\Delta V > 0$ on melting (liquid denser). Water is anomalous due to H-bonding structure of ice.
+</ExA>
+
+<ExQ>
+**3. Engineering: Pressure cooker.** Operates at 2 atm. Cooking temperature?
+</ExQ>
+<ExA>
+Boiling point at 2 atm. Using Clausius-Clapeyron with $\Delta H_{\text{vap}} = 40.7$ kJ/mol:
+
+$\ln 2 = 4894\cdot(1/373 - 1/T_2)$.
+
+$0.693/4894 = 1.42\times 10^{-4}$.
+
+$1/T_2 = 1/373 - 0.000142 = 0.00254$.
+
+$T_2 \approx 394$ K ≈ 121°C.
+
+Higher T cooks food faster — pressure cookers ~3-5× speedup.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why are gases "compressed" easily but liquids/solids barely?
+</ExQ>
+<ExA>
+Compressibility related to phase: gas molecules are far apart (mostly empty space), so pressure brings them closer.
+
+Liquids/solids are already at near-contact distance. Further compression must overcome strong intermolecular repulsion — requires enormous pressure.
+
+This is reflected in different $\Delta V$ across phase transitions: large between gas and liquid, small between liquid and solid.
+
+Engineering: incompressibility of liquids enables hydraulic systems; compressibility of gases enables pneumatics.
+</ExA>
+
+<ExQ>
+**5.** Why does dry ice (solid CO₂) sublimate at atmospheric pressure?
+</ExQ>
+<ExA>
+CO₂ triple point: $T = 216.6$ K (-56.6°C), $P = 5.18$ atm.
+
+At 1 atm (below triple-point pressure), CO₂ cannot exist as a liquid. Solid → gas directly = sublimation.
+
+Useful for cooling without leaving liquid residue. Also used in cloud seeding, special effects ("fog").
+
+Liquid CO₂ requires pressurized cylinders (>5 atm).
+</ExA>

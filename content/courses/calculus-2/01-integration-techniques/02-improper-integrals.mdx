@@ -1,0 +1,109 @@
+---
+title: Improper Integrals
+description: Integrals over infinite domains or with unbounded integrands — extending the definite integral via limits.
+---
+
+# Improper Integrals
+
+## The Big Picture
+
+Standard definite integrals require finite limits and a bounded integrand. **Improper integrals** relax these requirements: limits can be infinite, or the integrand can blow up. Both situations are common in physics and engineering — total probability, total energy, infinite domains, point sources. Handling them rigorously requires the language of limits, and recognizing convergence criteria is essential for knowing when answers are finite.
+
+## Type 1: Infinite Limits
+
+$$\int_a^\infty f(x)\,dx = \lim_{b\to\infty}\int_a^b f(x)\,dx$$
+
+If the limit exists (is finite), the integral **converges**. Otherwise, **diverges**.
+
+**Example:** $\int_1^\infty \dfrac{dx}{x^2} = \lim_{b\to\infty}[-1/x]_1^b = \lim(1 - 1/b) = 1$. Converges.
+
+**Counter-example:** $\int_1^\infty \dfrac{dx}{x} = \lim[\ln x]_1^b = \lim\ln b = \infty$. Diverges.
+
+The boundary: $\int_1^\infty \dfrac{dx}{x^p}$ converges if $p > 1$, diverges if $p \leq 1$.
+
+## Type 2: Discontinuous Integrand
+
+If $f$ blows up at $b$ (e.g., $f(x) = 1/\sqrt{1 - x}$ at $x = 1$):
+
+$$\int_a^b f(x)\,dx = \lim_{c\to b^-}\int_a^c f(x)\,dx$$
+
+Same idea — approach the singularity via limit.
+
+## Convergence Tests
+
+**Comparison Test:** if $0 \leq f(x) \leq g(x)$ and $\int g$ converges, then $\int f$ converges.
+
+**Limit Comparison:** if $\lim f/g = L > 0$, then $\int f$ and $\int g$ have the same convergence behavior.
+
+**$p$-test for $\int_a^\infty 1/x^p$:** converges iff $p > 1$.
+
+**$p$-test for $\int_0^a 1/x^p$:** converges iff $p < 1$ (note the *flip*).
+
+## Common Misconceptions
+
+**Misconception 1: "Improper = bad / not allowed."**
+
+Many physically meaningful integrals are improper. The Gaussian $\int_{-\infty}^\infty e^{-x^2}\,dx = \sqrt\pi$ is improper, and crucial.
+
+**Misconception 2: "Just compute and ignore the infinity."**
+
+You must take the limit explicitly. Sometimes the limit gives a finite answer; sometimes infinity. Always check.
+
+**Misconception 3: "If it converges absolutely, that's enough."**
+
+Some functions oscillate so the integral converges *conditionally* but not absolutely (cf. $\int\sin x/x\,dx$ — converges, but $\int|\sin x|/x$ diverges).
+
+## Engineering Connection
+
+- **Probability distributions:** $\int_{-\infty}^\infty p(x)\,dx = 1$ requires improper integrals.
+- **Total energy in resistive circuits:** $\int_0^\infty I^2 R\,dt$ for transient response.
+- **Far-field radiation:** flux through infinite sphere uses limits-as-radius-goes-to-infinity.
+- **Laplace and Fourier transforms:** all involve $\int_0^\infty$ or $\int_{-\infty}^\infty$.
+- **Statistics:** moments $\int x^n p(x)\,dx$ over real line.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Evaluate $\int_1^\infty \dfrac{dx}{x^3}$.
+</ExQ>
+<ExA>
+$\lim_{b\to\infty}[-1/(2x^2)]_1^b = 1/2$. Converges to $1/2$.
+</ExA>
+
+<ExQ>
+**2.** Does $\int_0^1 \dfrac{dx}{x^{1/2}}$ converge?
+</ExQ>
+<ExA>
+$\int x^{-1/2}\,dx = 2\sqrt x$. $\lim_{a\to 0^+}[2\sqrt x]_a^1 = 2$. Converges. ($p = 1/2 < 1$ for endpoint singularity.)
+</ExA>
+
+<ExQ>
+**3. Engineering: Total impulse.** Force $F(t) = e^{-2t}$ N for $t > 0$. Total impulse $\int_0^\infty F\,dt$?
+</ExQ>
+<ExA>
+$\int_0^\infty e^{-2t}\,dt = 1/2$ N·s.
+
+Even though the force acts forever, total impulse is finite. This is essential for impulse-momentum problems with exponentially decaying forces.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does $\int_0^\infty \sin x\,dx$ not converge?
+</ExQ>
+<ExA>
+$\int_0^b\sin x\,dx = 1 - \cos b$, which oscillates between 0 and 2 as $b\to\infty$. No limit exists.
+
+Some "improper" integrals don't even diverge to infinity — they just oscillate without a single value. Important for distinguishing genuine convergence from oscillating behavior.
+</ExA>
+
+<ExQ>
+**5. Comparison.** Show $\int_1^\infty \dfrac{dx}{x^2 + x}$ converges.
+</ExQ>
+<ExA>
+For $x \geq 1$: $1/(x^2 + x) < 1/x^2$.
+
+$\int_1^\infty 1/x^2\,dx$ converges. By comparison, original also converges.
+
+(Direct computation: $1/(x^2+x) = 1/x - 1/(x+1)$, gives $\ln(x/(x+1))|_1^\infty = \ln 1 - \ln(1/2) = \ln 2$.)
+</ExA>

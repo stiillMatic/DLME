@@ -1,0 +1,114 @@
+---
+title: Arc Length and Surface Area
+description: Computing the length of curves and the area of surfaces of revolution.
+---
+
+# Arc Length and Surface Area
+
+## The Big Picture
+
+How long is a curve? How much surface does a revolved curve generate? These questions arise constantly in engineering — paint needed to coat a tank, length of a cable, surface area of a heat exchanger tube. The answers come from integration: arc length and surface area integrals. The structure is the same: build infinitesimal pieces, sum (integrate) along the curve.
+
+## Arc Length
+
+For a curve $y = f(x)$ on $[a, b]$:
+
+$$L = \int_a^b \sqrt{1 + \left(\frac{dy}{dx}\right)^2}\,dx$$
+
+**Derivation:** an infinitesimal piece has $ds = \sqrt{dx^2 + dy^2} = \sqrt{1 + (dy/dx)^2}\,dx$. Sum.
+
+**Parametric:** $x(t), y(t)$ on $[t_1, t_2]$:
+$$L = \int_{t_1}^{t_2}\sqrt{(dx/dt)^2 + (dy/dt)^2}\,dt$$
+
+## Surface Area of Revolution
+
+Rotating $y = f(x)$ about the $x$-axis:
+
+$$S = \int_a^b 2\pi y\,ds = \int_a^b 2\pi f(x)\sqrt{1 + f'(x)^2}\,dx$$
+
+The $2\pi y$ factor is the circumference at height $y$; $ds$ is the slant length traced.
+
+About the $y$-axis: $S = \int 2\pi x\,ds$.
+
+## Common Misconceptions
+
+**Misconception 1: "Arc length is just $\int dy/dx$ or $\int dx$."**
+
+Neither captures the diagonal extension of the curve. The $\sqrt{1 + (dy/dx)^2}$ factor is essential — Pythagoras for infinitesimal triangle.
+
+**Misconception 2: "Arc length integrals are usually easy."**
+
+Often they're not — closed-form evaluation often requires special functions. For example, ellipse perimeter has no elementary form (incomplete elliptic integral). Numerical methods are common.
+
+**Misconception 3: "Surface area = perimeter × $2\pi r$."**
+
+That's true only for cylinders. For varying curves, you need the proper integral $\int 2\pi y\,ds$, with the *slant* element $ds$, not just $dx$.
+
+## Engineering Connection
+
+- **Cable suspensions:** length of catenary $y = \cosh(x)$ — arc length integral has surprisingly clean form.
+- **Pipe wrapping:** insulation needed for a curved pipe — surface area integral.
+- **Aerodynamic surfaces:** wing chord length, surface area for skin friction calculations.
+- **Manufacturing:** material needed to form sheet-metal parts of given profile.
+- **GPS tracks:** total path length integrating over recorded position.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Arc length of $y = x^{3/2}$ from $x = 0$ to $x = 4$.
+</ExQ>
+<ExA>
+$y' = (3/2)x^{1/2}$. $1 + (y')^2 = 1 + 9x/4$.
+
+$L = \int_0^4 \sqrt{1 + 9x/4}\,dx$. Let $u = 1 + 9x/4$, $du = (9/4)dx$.
+
+$L = (4/9)\int_1^{10}\sqrt u\,du = (4/9)(2/3)[u^{3/2}]_1^{10} = (8/27)(10^{3/2} - 1) \approx 9.07$.
+</ExA>
+
+<ExQ>
+**2.** Arc length of $y = \cosh x$ from $0$ to $1$.
+</ExQ>
+<ExA>
+$y' = \sinh x$. $1 + \sinh^2 x = \cosh^2 x$.
+
+$L = \int_0^1 \cosh x\,dx = \sinh 1 \approx 1.175$.
+
+(Catenary curve — arc length cleanly equals $\sinh$.)
+</ExA>
+
+<ExQ>
+**3.** Surface area of sphere of radius $R$ via revolving $y = \sqrt{R^2 - x^2}$.
+</ExQ>
+<ExA>
+$y' = -x/\sqrt{R^2-x^2}$. $1 + (y')^2 = R^2/(R^2 - x^2)$.
+
+$\sqrt{1+(y')^2} = R/\sqrt{R^2-x^2}$.
+
+$S = \int_{-R}^R 2\pi y\cdot R/\sqrt{R^2-x^2}\,dx = 2\pi R\int_{-R}^R\,dx = 4\pi R^2$ ✓
+
+(Standard sphere area, derived in two steps.)
+</ExA>
+
+<ExQ>
+**4. Engineering: Cable.** A power cable hangs in a catenary $y = a\cosh(x/a)$. For $a = 50$ m, find length between $x = -100$ and $x = 100$.
+</ExQ>
+<ExA>
+$y' = \sinh(x/a)$. $\sqrt{1+\sinh^2(x/a)} = \cosh(x/a)$.
+
+$L = 2\int_0^{100}\cosh(x/50)\,dx = 2\cdot 50[\sinh(x/50)]_0^{100} = 100\sinh 2 \approx 362.5$ m.
+
+So a 200 m horizontal span requires 362 m of cable — almost double, due to sag. Important for cable cost estimation.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is arc length always $\geq$ horizontal distance?
+</ExQ>
+<ExA>
+$ds = \sqrt{dx^2 + dy^2} \geq |dx|$ always (Pythagorean theorem with $dy^2 \geq 0$).
+
+So $L = \int ds \geq \int |dx|$. Equality only when $dy = 0$ (horizontal line segment).
+
+Curves are *longer* than the straight line between their endpoints. Triangle inequality in continuous form.
+</ExA>

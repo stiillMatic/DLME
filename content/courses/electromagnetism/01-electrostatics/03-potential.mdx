@@ -1,0 +1,130 @@
+---
+title: Electric Potential
+description: A scalar field whose gradient gives the electric field — the "voltage" you measure with a voltmeter.
+---
+
+# Electric Potential
+
+## The Big Picture
+
+Working with vectors (E field) everywhere is tedious. The **electric potential** $V$ is a scalar — much easier — and the electric field is just its negative gradient. Potential differences are what voltmeters measure. Potential, charges, and capacitance are the everyday language of electrical engineering. Understanding the potential view of electrostatics unlocks circuit analysis.
+
+## Definition
+
+Potential $V$ at a point = work done by external agent per unit charge to bring a test charge from infinity to that point:
+
+$$V = -\int_\infty^P\mathbf{E}\cdot d\mathbf{l}$$
+
+Units: J/C = **volts (V)**.
+
+## Relation to Field
+
+$$\mathbf{E} = -\nabla V$$
+
+Electric field points from high to low potential — toward lower energy for positive charge.
+
+For 1D: $E = -dV/dx$.
+
+## Potential from Point Charge
+
+$$V = \frac{kQ}{r}$$
+
+Falls as $1/r$ (one power slower than field). Reference: $V \to 0$ at infinity.
+
+For multiple charges: superposition gives $V = \sum kQ_i/r_i$ — simple **scalar sum**, no vectors!
+
+## Equipotential Surfaces
+
+Surfaces where $V$ is constant. Electric field is **perpendicular** to equipotentials.
+
+For point charge: equipotentials are concentric spheres.
+For infinite plane: parallel planes.
+Two parallel plates: planes parallel to the plates.
+
+Moving along an equipotential requires no work.
+
+## Capacitance
+
+A capacitor stores charge $Q$ when voltage $V$ applied:
+
+$$C = Q/V$$
+
+Units: farads (F) = C/V.
+
+For parallel plate capacitor, area $A$, separation $d$:
+
+$$C = \frac{\varepsilon_0 A}{d}$$
+
+Energy stored: $U = \tfrac{1}{2}CV^2 = \tfrac{1}{2}Q^2/C$.
+
+## Common Misconceptions
+
+**Misconception 1: "Potential at a point = its energy."**
+
+Potential is energy per unit charge — only when multiplied by $q$ gives energy $U = qV$.
+
+**Misconception 2: "Voltmeter measures absolute voltage."**
+
+Measures **difference** between two terminals. Absolute potential requires reference (often ground = 0).
+
+**Misconception 3: "Higher potential = larger charge."**
+
+Voltage depends on charge AND geometry. A small charge on a small isolated sphere can have higher V than larger charge on big sphere.
+
+## Engineering Connection
+
+- **Battery voltage:** $V = $ chemical potential difference (~1.5V for AA, ~12V for car).
+- **Power lines:** high voltage (kV, MV) for low current = low resistive loss (P = I²R).
+- **Capacitors in electronics:** filter, store, time circuits.
+- **MEMS actuators:** voltage between plates creates electrostatic force.
+- **Touchscreens (capacitive):** finger changes capacitance, detected by circuit.
+- **Defibrillators:** capacitor stores energy, dumps as heart-restarting pulse.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Point charge $Q = 3$ μC. Potential at 20 cm?
+</ExQ>
+<ExA>
+$V = kQ/r = 9\times 10^9\cdot 3\times 10^{-6}/0.2 = 1.35\times 10^5$ V = 135 kV.
+</ExA>
+
+<ExQ>
+**2.** Two charges +1 μC and −1 μC, 10 cm apart. Potential at midpoint?
+</ExQ>
+<ExA>
+$V = k(+Q)/r_1 + k(-Q)/r_2 = k\cdot Q\cdot(1/0.05 - 1/0.05) = 0$.
+
+Zero by symmetry. (But the field is NOT zero at midpoint — it points from + to −.)
+</ExA>
+
+<ExQ>
+**3.** Parallel plate capacitor: plate area 0.1 m², separation 1 mm. Capacitance?
+</ExQ>
+<ExA>
+$C = \varepsilon_0 A/d = 8.854\times 10^{-12}\cdot 0.1/0.001 \approx 8.85\times 10^{-10}$ F = 885 pF.
+</ExA>
+
+<ExQ>
+**4. Engineering: Defibrillator.** Capacitor 60 μF charged to 2000 V. Energy delivered?
+</ExQ>
+<ExA>
+$U = \tfrac{1}{2}CV^2 = 0.5\cdot 6\times 10^{-5}\cdot 4\times 10^6 = 120$ J.
+
+Discharged through chest in milliseconds → power ~kilowatts. Restarts heart's electrical rhythm.
+
+(Typical defibrillator: 200-400 J, with most energy dissipated as heat in chest, ~10% reaching heart.)
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is the inside of a charged conducting sphere at the same potential as its surface?
+</ExQ>
+<ExA>
+Inside conductor: $\mathbf{E} = 0$. From $\mathbf{E} = -\nabla V$: $V$ has zero gradient → constant.
+
+So entire interior at same V as surface — the conductor is **equipotential**.
+
+This is why birds on power lines aren't shocked: they're at the same potential as the wire (no $\Delta V$ across them). And why Faraday cages eliminate fields inside — interior is one equipotential.
+</ExA>

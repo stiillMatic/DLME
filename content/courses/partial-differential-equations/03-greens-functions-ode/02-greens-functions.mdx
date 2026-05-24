@@ -1,0 +1,82 @@
+---
+title: Green's Functions — Construction and Interpretation
+description: The Green's function is the response to a unit point source — once known, it solves any forcing problem by superposition.
+---
+
+# Green's Functions for ODEs
+
+The **Green's function** $G(x; x_0)$ of a linear differential operator $\mathcal{L}$ is the solution to:
+
+$$\mathcal{L}\,G(x; x_0) = \delta(x - x_0)$$
+
+with the same homogeneous boundary conditions as the original problem.
+
+## Why Green's Functions Are Powerful
+
+If $\mathcal{L}\,u = f(x)$, then:
+
+$$u(x) = \int G(x; x_0)\,f(x_0)\,dx_0$$
+
+This is **superposition**: integrate the point-source response over all source locations, weighted by $f(x_0)$.
+
+Once $G$ is known, the solution for **any** right-hand side $f$ is just an integral.
+
+## Construction Method
+
+For a second-order ODE $\mathcal{L} u = \delta(x-x_0)$ on $[a,b]$:
+
+1. Find two independent solutions $u_1(x)$ (satisfying BC at $a$) and $u_2(x)$ (satisfying BC at $b$)
+2. $G$ is piecewise:
+
+$$G(x; x_0) = \begin{cases} \dfrac{u_1(x)\,u_2(x_0)}{W(x_0)} & x < x_0 \\ \dfrac{u_1(x_0)\,u_2(x)}{W(x_0)} & x > x_0 \end{cases}$$
+
+where $W = u_1 u_2' - u_1' u_2$ is the **Wronskian** of $u_1$ and $u_2$.
+
+## Jump Conditions
+
+At $x = x_0$, the Green's function satisfies:
+- **Continuity:** $G(x_0^+; x_0) = G(x_0^-; x_0)$
+- **Slope jump:** $G'(x_0^+; x_0) - G'(x_0^-; x_0) = 1/p(x_0)$ (where $p$ is the leading coefficient)
+
+## Example: Beam Deflection
+
+For the equation $w'' = -M(x)/(EI)$ (simplified beam), with $w(0)=w(L)=0$:
+
+$$G(x; x_0) = \begin{cases}\dfrac{x(L-x_0)}{L} & x \leq x_0\\ \dfrac{x_0(L-x)}{L} & x \geq x_0\end{cases}$$
+
+The deflection under arbitrary loading $q(x)$:
+
+$$w(x) = \int_0^L G(x;x_0)\,q(x_0)\,dx_0$$
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the Green's function for $-u'' = f(x)$ on $[0,1]$ with $u(0) = u(1) = 0$.
+</ExQ>
+<ExA>
+Homogeneous equation $-u'' = 0 \Rightarrow u = c_1 + c_2 x$.
+
+- $u_1$ satisfying $u_1(0)=0$: $u_1(x) = x$
+- $u_2$ satisfying $u_2(1)=0$: $u_2(x) = 1-x$
+
+Wronskian: $W = u_1 u_2' - u_1'u_2 = x(-1) - (1)(1-x) = -1$. Since leading coefficient of $-u'' = f$ is $-1$, slope jump = $1/(-1) = -1$... Let me be careful: operator is $\mathcal{L}u = -u''$, so slope jump is $-1/(-1) = 1$.
+
+$$G(x;x_0) = \begin{cases} x_0(1-x) & x \geq x_0 \\ x(1-x_0) & x \leq x_0 \end{cases}$$
+
+Verify: continuous at $x=x_0$ ✓. Slope jump: $(-(1-x_0)) - (1-x_0) = \ldots$ using formula: $G_x(x_0^+) - G_x(x_0^-) = -(x_0) - (1-x_0) + $... directly: right slope $= -x_0$, left slope $= 1-x_0$. Jump $= -x_0 - (1-x_0) = -1$. Divide by $p = -1$: gives 1. ✓
+</ExA>
+
+<ExQ>
+A steel beam of length $L = 2$ m, $EI = 200$ kN·m², carries a point load $P = 10$ kN at $x_0 = 1$ m (midspan), simply supported at both ends. Using the Green's function from Example, find the midspan deflection.
+</ExQ>
+<ExA>
+For the Euler-Bernoulli beam $EI w'''' = q$, the Green's function under point load gives deflection:
+
+For a simply supported beam under midspan point load, the classical formula:
+
+$$w_{\max} = \frac{PL^3}{48EI} = \frac{10\times10^3\times(2)^3}{48\times200\times10^3} = \frac{80000}{9{,}600{,}000} = \boxed{8.33\times10^{-3}\ \text{m} = 8.33\ \text{mm}}$$
+
+This is the Green's function evaluated at $(x=L/2,\ x_0=L/2)$ scaled by $P$.
+</ExA>

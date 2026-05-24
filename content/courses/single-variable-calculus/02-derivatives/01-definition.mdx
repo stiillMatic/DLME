@@ -1,0 +1,343 @@
+---
+title: Definition of the Derivative
+description: Building the derivative from scratch — average rate of change, instantaneous rate of change, and what slopes really mean.
+---
+
+# Definition of the Derivative
+
+## The Big Picture
+
+The derivative answers a single, profound question: **how fast is a quantity changing right now?** Not over the past hour or the next minute, but at *this exact instant*. This question seems impossible — change requires two moments to compare — but the limit lets us pull off the trick. The derivative turns out to be the single most useful concept in mathematics for science and engineering, because nearly everything we care about is a *rate*: velocity, acceleration, growth, decay, current, flux, force.
+
+## Intuition First — From Average to Instantaneous
+
+You drive 60 km in 1 hour. Your *average speed* is 60 km/h. Easy.
+
+But during that hour, you didn't drive at exactly 60 km/h the whole time. You sped up, slowed down, stopped at a red light. What was your speed at exactly 4:23:17 PM? That's a different question — your *instantaneous speed*.
+
+To estimate it, you could measure your position at 4:23:17 and again at 4:23:18, divide distance by time, and call it speed. But that's still an average — over one second. To get the *instantaneous* speed, you'd want to shrink the time interval to zero.
+
+But you can't divide by zero. You can only *take the limit*.
+
+That's the derivative.
+
+## From Zero to the Definition
+
+Take any function $f(x)$. Pick two nearby points: $x = a$ and $x = a + h$, where $h$ is a small step.
+
+The **average rate of change** between them is:
+
+$$\frac{\text{change in output}}{\text{change in input}} = \frac{f(a+h) - f(a)}{h}$$
+
+Geometrically, this is the **slope of the secant line** through $(a, f(a))$ and $(a+h, f(a+h))$.
+
+Now shrink $h \to 0$. The two points merge into one. The secant line rotates and becomes the **tangent line** at $x = a$. The slope of the tangent is the *instantaneous* rate of change at $a$.
+
+<figure className="my-8 flex flex-col items-center">
+  <svg viewBox="0 0 420 280" className="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+    {/* Axes */}
+    <line x1="40" y1="240" x2="400" y2="240" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+    <line x1="40" y1="20" x2="40" y2="240" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+    <text x="408" y="245" fill="oklch(0.708 0 0)" fontSize="12" fontFamily="serif" fontStyle="italic">x</text>
+    <text x="32" y="16" fill="oklch(0.708 0 0)" fontSize="12" fontFamily="serif" fontStyle="italic">y</text>
+    {/* Parabola y = x²/4 + 50, mapped: x in [0,16] to SVG [40,360], y in [0,9] to SVG [240,60] */}
+    <path d="M 40 240 Q 200 240 360 60" stroke="oklch(0.65 0.2 264)" strokeWidth="2.5" fill="none" />
+    {/* Point P at (a, f(a)) = (8, ~150 in SVG) — the anchor */}
+    <circle cx="200" cy="170" r="4" fill="oklch(0.65 0.2 264)" />
+    <text x="206" y="186" fill="oklch(0.985 0 0)" fontSize="11" fontStyle="italic">P = (a, f(a))</text>
+    {/* Q1: far secant, large h */}
+    <circle cx="320" cy="90" r="3" fill="oklch(0.85 0.15 80)" />
+    <line x1="160" y1="200" x2="360" y2="60" stroke="oklch(0.85 0.15 80)" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.7" />
+    <text x="328" y="86" fill="oklch(0.85 0.15 80)" fontSize="10">Q (large h)</text>
+    {/* Q2: medium h */}
+    <circle cx="260" cy="130" r="3" fill="oklch(0.7 0.18 30)" />
+    <line x1="140" y1="220" x2="340" y2="92" stroke="oklch(0.7 0.18 30)" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.7" />
+    {/* Q3: small h */}
+    <circle cx="225" cy="153" r="3" fill="oklch(0.6 0.15 350)" />
+    {/* Tangent line at P (limit) */}
+    <line x1="100" y1="220" x2="350" y2="100" stroke="oklch(0.7 0.2 140)" strokeWidth="2" />
+    <text x="290" y="120" fill="oklch(0.7 0.2 140)" fontSize="11" fontWeight="600">tangent</text>
+    {/* Annotation */}
+    <text x="220" y="265" fill="oklch(0.708 0 0)" fontSize="11" textAnchor="middle">As Q → P (h → 0), the secant rotates into the tangent line.</text>
+  </svg>
+  <figcaption className="mt-2 text-sm text-muted-foreground italic">The slope of the secant line through P and Q approaches the slope of the tangent line at P as Q slides toward P.</figcaption>
+</figure>
+
+$$\boxed{f'(a) = \lim_{h\to 0}\frac{f(a+h) - f(a)}{h}}$$
+
+If this limit exists, $f$ is **differentiable** at $a$, and $f'(a)$ is the **derivative** of $f$ at $a$.
+
+## Try It — Watch h Shrink
+
+<DerivativeSecantDemo />
+
+## Equivalent Form
+
+Sometimes it's cleaner to use a different variable name:
+
+$$f'(a) = \lim_{x\to a}\frac{f(x) - f(a)}{x - a}$$
+
+Both definitions describe the same thing — the slope of the tangent line at $(a, f(a))$.
+
+## Worked Examples
+
+**Example 1.** Compute $f'(3)$ for $f(x) = x^2$.
+
+$$f'(3) = \lim_{h\to 0}\frac{(3+h)^2 - 9}{h} = \lim_{h\to 0}\frac{9 + 6h + h^2 - 9}{h}$$
+
+$$= \lim_{h\to 0}\frac{6h + h^2}{h} = \lim_{h\to 0}(6 + h) = 6$$
+
+The slope of $x^2$ at $x = 3$ is $6$. The tangent line at $(3, 9)$ has slope 6.
+
+**Example 2.** Find the general derivative function $f'(x)$ for $f(x) = x^2$.
+
+Replace $a$ with $x$ in the definition:
+
+$$f'(x) = \lim_{h\to 0}\frac{(x+h)^2 - x^2}{h} = \lim_{h\to 0}\frac{2xh + h^2}{h} = \lim_{h\to 0}(2x + h) = 2x$$
+
+So $f'(x) = 2x$. This is the derivative *function* — it tells you the slope at every point, not just one.
+
+**Example 3.** Show that $f(x) = |x|$ is *not* differentiable at $x = 0$.
+
+$$f'(0) \stackrel{?}{=} \lim_{h\to 0}\frac{|0+h| - |0|}{h} = \lim_{h\to 0}\frac{|h|}{h}$$
+
+Right limit ($h \to 0^+$): $|h|/h = 1 \to 1$.
+Left limit ($h \to 0^-$): $|h|/h = -1 \to -1$.
+
+The two-sided limit does not exist → $f$ is **not differentiable at 0**.
+
+This makes geometric sense: $y = |x|$ has a sharp corner at the origin, with no well-defined tangent direction.
+
+## Notation
+
+Several notations exist for the same derivative. Get comfortable with all of them:
+
+| Notation | Read as | Origin |
+|---|---|---|
+| $f'(x)$ | "$f$ prime of $x$" | Lagrange |
+| $\dfrac{df}{dx}$ | "$df$ by $dx$" | Leibniz |
+| $\dfrac{d}{dx}f(x)$ | "$d$ by $dx$ of $f$" | Leibniz operator |
+| $\dot{f}$ | "$f$ dot" | Newton (used for time derivatives) |
+| $D_x f$ | "$D$ of $f$ with respect to $x$" | Operator |
+
+Leibniz notation is especially useful because $df/dx$ behaves *as if* it were a fraction in many manipulations (like the chain rule).
+
+## Geometric Picture
+
+- $f'(a) > 0$: function is increasing at $a$ (tangent slopes upward)
+- $f'(a) < 0$: function is decreasing at $a$ (tangent slopes downward)
+- $f'(a) = 0$: tangent is horizontal — could be a max, min, or saddle
+
+The derivative *function* $f'(x)$ tells you the slope at every point. It's a complete map of how $f$ is changing.
+
+## Differentiability Implies Continuity
+
+**Theorem:** If $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+
+The reverse is *not* true: $|x|$ is continuous everywhere but not differentiable at 0.
+
+Why? Roughly: differentiability requires the function values to converge *smoothly enough* to define a slope. Continuity only requires them to converge to the right value. Differentiability is strictly stronger.
+
+## Common Misconceptions
+
+**Misconception 1: "$f'(a)$ is the function value at $a$."**
+
+No — $f'(a)$ is the *rate of change* at $a$, not the value. $f(a)$ and $f'(a)$ measure entirely different things. You can have $f(a)$ huge and $f'(a)$ tiny, or vice versa.
+
+**Misconception 2: "$df/dx$ is a fraction."**
+
+Strictly speaking, $df/dx$ is the limit of fractions, not itself a fraction. *However*, in many calculations (chain rule, implicit differentiation, $u$-substitution), it manipulates *as if* it were a fraction — this is one of Leibniz's brilliant insights. So treat it as a single symbol that happens to obey fraction-like rules.
+
+**Misconception 3: "All continuous functions are differentiable."**
+
+Continuity is necessary but not sufficient. Sharp corners (like $|x|$ at 0) and vertical tangents (like $\sqrt[3]{x}$ at 0) defeat differentiability. There even exist functions continuous *everywhere* but differentiable *nowhere* (Weierstrass function).
+
+**Misconception 4: "If $f'(a) = 0$, then $f$ has a max or min at $a$."**
+
+Not necessarily. $f(x) = x^3$ has $f'(0) = 0$, but $x = 0$ is a saddle point — neither max nor min. Critical points need further analysis (second derivative or sign changes).
+
+## Engineering Connection
+
+The derivative is the language of every dynamic engineering problem:
+
+- **Velocity:** $v(t) = ds/dt$ — rate of change of position
+- **Acceleration:** $a(t) = dv/dt = d^2s/dt^2$ — rate of change of velocity
+- **Power:** $P(t) = dW/dt$ — rate of energy transfer
+- **Strain rate:** $\dot{\varepsilon} = d\varepsilon/dt$ — how fast a material is deforming (controls plasticity)
+- **Heat flux:** $q = -k\,dT/dx$ (Fourier's law) — heat flow per unit area
+- **Reaction rate:** $r = d[A]/dt$ — how fast a chemical species is consumed
+
+In every case, the derivative *is* the physical quantity of interest. It's not abstract mathematics — it's how engineers measure change.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Use the definition of the derivative to find $f'(x)$ for $f(x) = 5x + 2$.
+</ExQ>
+<ExA>
+$$f'(x) = \lim_{h\to 0}\frac{[5(x+h)+2] - [5x+2]}{h} = \lim_{h\to 0}\frac{5h}{h} = \boxed{5}$$
+
+The derivative of any linear function $mx + b$ is the slope $m$.
+</ExA>
+
+<ExQ>
+Use the definition to find $f'(2)$ for $f(x) = x^3$.
+</ExQ>
+<ExA>
+$f(2) = 8$. $f(2+h) = 8 + 12h + 6h^2 + h^3$.
+
+$$f'(2) = \lim_{h\to 0}\frac{12h + 6h^2 + h^3}{h} = \lim_{h\to 0}(12 + 6h + h^2) = \boxed{12}$$
+</ExA>
+
+### Application
+
+<ExQ>
+Use the definition to find $f'(x)$ for $f(x) = 1/x$.
+</ExQ>
+<ExA>
+$$f'(x) = \lim_{h\to 0}\frac{1/(x+h) - 1/x}{h} = \lim_{h\to 0}\frac{x - (x+h)}{h\,x(x+h)} = \lim_{h\to 0}\frac{-h}{h\,x(x+h)} = \lim_{h\to 0}\frac{-1}{x(x+h)}$$
+
+$$= \boxed{-\frac{1}{x^2}}$$
+</ExA>
+
+<ExQ>
+A particle has position $s(t) = 16t - t^2$ (m, with $t$ in seconds). Find the velocity at $t = 3$ s using the definition.
+</ExQ>
+<ExA>
+$s(3) = 48 - 9 = 39$. $s(3+h) = 16(3+h) - (3+h)^2 = 48 + 16h - 9 - 6h - h^2 = 39 + 10h - h^2$.
+
+$$v(3) = \lim_{h\to 0}\frac{(39+10h-h^2) - 39}{h} = \lim_{h\to 0}(10 - h) = \boxed{10\ \text{m/s}}$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Use the definition to find $f'(x)$ for $f(x) = \sqrt{x}$ (with $x > 0$).
+</ExQ>
+<ExA>
+$$f'(x) = \lim_{h\to 0}\frac{\sqrt{x+h} - \sqrt{x}}{h}$$
+
+Multiply by conjugate $\sqrt{x+h}+\sqrt{x}$:
+$$= \lim_{h\to 0}\frac{(x+h) - x}{h(\sqrt{x+h}+\sqrt{x})} = \lim_{h\to 0}\frac{1}{\sqrt{x+h}+\sqrt{x}} = \boxed{\frac{1}{2\sqrt{x}}}$$
+</ExA>
+
+<ExQ>
+Show that $f(x) = x^{2/3}$ is continuous at $x = 0$ but not differentiable there.
+</ExQ>
+<ExA>
+**Continuity:** $\lim_{x\to 0}x^{2/3} = 0 = f(0)$ ✓
+
+**Differentiability check:**
+$$f'(0) = \lim_{h\to 0}\frac{h^{2/3} - 0}{h} = \lim_{h\to 0}h^{-1/3}$$
+
+As $h \to 0^+$, $h^{-1/3} \to +\infty$. As $h \to 0^-$, $h^{-1/3} \to -\infty$ (since cube root of negative is negative).
+
+The limit does **not exist** (it blows up). So $f$ has a *vertical tangent* at $x = 0$ — continuous, but not differentiable.
+
+This kind of "cusp" or vertical tangent appears in plasticity and fracture mechanics models.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $f$ is differentiable at $a$, then $f$ is continuous at $a$. Is the converse true? Justify with a specific example.
+</ExQ>
+<ExA>
+**True** — differentiable implies continuous. (Theorem: if the limit defining $f'(a)$ exists, then $\lim_{h\to 0}[f(a+h)-f(a)] = \lim_{h\to 0}h \cdot f'(a) = 0$, so $f$ is continuous.)
+
+**Converse FALSE** — continuity does not imply differentiability.
+
+Counterexample: $f(x) = |x|$ is continuous at 0 but has different left and right derivatives ($-1$ and $+1$), so $f'(0)$ does not exist.
+
+**Mantra:** differentiable ⊆ continuous, but the inclusion is strict.
+</ExA>
+
+<ExQ>
+**Sketch.** Sketch a function $f$ that is continuous everywhere but differentiable nowhere on a single point set. (A simple example, not the Weierstrass function.)
+</ExQ>
+<ExA>
+$f(x) = |x|$ — continuous everywhere, differentiable everywhere except $x = 0$ (sharp corner).
+
+For non-differentiable on a *set*, try $g(x) = |x - 1| + |x| + |x + 1|$ — non-differentiable at $x = -1, 0, 1$.
+
+Sharp corners (where left and right derivatives disagree) and vertical tangents (where the derivative blows up) are the two ways continuity can hold without differentiability.
+</ExA>
+
+<ExQ>
+**Numerical estimate.** For $f(x) = e^x$, estimate $f'(1)$ using the central difference $\dfrac{f(1+h)-f(1-h)}{2h}$ with $h = 0.01$. Compare to the exact value $e \approx 2.71828$.
+</ExQ>
+<ExA>
+$f(1.01) \approx 2.74560$, $f(0.99) \approx 2.69123$.
+
+$\dfrac{2.74560 - 2.69123}{0.02} = \dfrac{0.05437}{0.02} = 2.7186$.
+
+Exact: $e = 2.71828$. Error: about $3 \times 10^{-5}$.
+
+The central difference is **second-order accurate** ($O(h^2)$), much better than the forward difference ($O(h)$). This is fundamental to numerical differentiation in engineering software.
+</ExA>
+
+<ExQ>
+**Reasoning.** Suppose $f'(2) = 5$ and $g(x) = 3f(x)$. What is $g'(2)$? Now suppose $h(x) = f(x) + 7$. What is $h'(2)$? Justify using the definition.
+</ExQ>
+<ExA>
+$g'(2) = \lim_{k\to 0}\dfrac{g(2+k)-g(2)}{k} = 3\lim\dfrac{f(2+k)-f(2)}{k} = 3 f'(2) = \boxed{15}$.
+
+$h'(2) = \lim_{k\to 0}\dfrac{h(2+k)-h(2)}{k} = \lim\dfrac{[f(2+k)+7] - [f(2)+7]}{k} = f'(2) = \boxed{5}$.
+
+**Insight:** scaling a function scales its derivative; **adding a constant doesn't change the derivative**. Constants have zero rate of change.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Velocity and acceleration.** A car's position is $s(t) = 0.5t^2 + 5t$ (m, $t$ in seconds). Use the limit definition to find the velocity $v(t)$ for general $t$, then evaluate at $t = 4$ s. What is the acceleration?
+</ExQ>
+<ExA>
+$$v(t) = \lim_{h\to 0}\dfrac{s(t+h)-s(t)}{h}$$
+
+$s(t+h) = 0.5(t+h)^2 + 5(t+h) = 0.5t^2 + th + 0.5h^2 + 5t + 5h$.
+
+$s(t+h) - s(t) = th + 0.5h^2 + 5h$.
+
+$$\frac{s(t+h)-s(t)}{h} = t + 0.5h + 5 \to t + 5$$
+
+So $v(t) = t + 5$ m/s. At $t = 4$: $v(4) = 9$ m/s.
+
+Acceleration: $a(t) = v'(t) = \lim\dfrac{v(t+h)-v(t)}{h} = \lim\dfrac{(t+h+5)-(t+5)}{h} = 1$ m/s² (constant).
+
+This is uniformly accelerated motion: $s = \tfrac{1}{2}at^2 + v_0 t$ with $a = 1$ and $v_0 = 5$.
+</ExA>
+
+<ExQ>
+**Pendulum sensitivity.** A pendulum of length $L$ has period $T(L) = 2\pi\sqrt{L/g}$. Find $T'(L)$ from first principles, then evaluate at $L = 1$ m, $g = 9.81$ m/s². How sensitive is the period to a 1 cm change in length?
+</ExQ>
+<ExA>
+Use $T = 2\pi g^{-1/2}\sqrt{L}$. By the definition (or power rule):
+
+$T'(L) = 2\pi g^{-1/2}\cdot\dfrac{1}{2}L^{-1/2} = \dfrac{\pi}{\sqrt{gL}}$
+
+At $L = 1$, $g = 9.81$: $T'(1) = \pi/\sqrt{9.81} \approx 1.003$ s/m.
+
+A 1 cm = 0.01 m change in $L$ changes $T$ by approximately $0.01 \times 1.003 \approx 0.01$ s.
+
+$T(1) = 2\pi\sqrt{1/9.81} \approx 2.006$ s, so the relative change is $0.01/2.006 \approx 0.5\%$. **Half the relative change of the length** — square-root sensitivity.
+</ExA>
+
+<ExQ>
+**Backpropagation — abstract.** Define the loss $L(w) = (f(w) - y)^2$ where $f(w) = wx + b$, with $x, y, b$ constants. Use the limit definition to derive $\dfrac{dL}{dw}$.
+</ExQ>
+<ExA>
+$\dfrac{dL}{dw} = \lim_{h\to 0}\dfrac{L(w+h)-L(w)}{h}$
+
+$L(w+h) = ((w+h)x + b - y)^2$. Let $z = wx+b-y$, so $L(w) = z^2$, $L(w+h) = (z+xh)^2 = z^2 + 2zxh + x^2h^2$.
+
+$\dfrac{L(w+h)-L(w)}{h} = 2zx + x^2 h \to 2zx$.
+
+$$\frac{dL}{dw} = 2(wx + b - y)x = 2(\hat y - y)\,x$$
+
+This is the gradient used in linear regression / single-neuron training. Notice: the *error* $(\hat y - y)$ multiplied by the *input* $x$ — exactly the structure of stochastic gradient descent for linear models.
+</ExA>

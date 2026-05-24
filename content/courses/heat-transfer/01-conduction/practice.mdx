@@ -1,0 +1,54 @@
+---
+title: Chapter 1 Practice — Conduction
+description: Practice on Fourier's law, thermal resistance, and steady-state conduction.
+---
+
+# Chapter 1 Practice — Conduction
+
+<ExQ>
+**1.** Steel wall ($k = 50$ W/m·K), 0.05 m thick, $T_1 = 200$°C, $T_2 = 50$°C, area 2 m². Heat rate?
+</ExQ>
+<ExA>
+$\dot Q = kA\Delta T/L = 50\cdot 2\cdot 150/0.05 = 300{,}000$ W = 300 kW.
+</ExA>
+
+<ExQ>
+**2.** Composite wall: 5 cm brick ($k = 0.7$) + 8 cm insulation ($k = 0.04$). Per m². Total resistance?
+</ExQ>
+<ExA>
+$R_1 = 0.05/0.7 = 0.0714$ K/W·m².
+$R_2 = 0.08/0.04 = 2.0$ K/W·m².
+$R_{\text{total}} = 2.07$ K/W·m².
+
+Heat flux for $\Delta T = 30$ K: $30/2.07 = 14.5$ W/m².
+</ExA>
+
+<ExQ>
+**3.** A pin fin (length 0.05 m, diameter 5 mm, $k = 200$). Find efficiency for $h = 50$ W/m²·K. (Hint: $m = \sqrt{hP/(kA_c)}$, $\eta = \tanh(mL)/(mL)$.)
+</ExQ>
+<ExA>
+$P = \pi d = 0.0157$, $A_c = \pi d^2/4 = 1.96\times 10^{-5}$.
+$m = \sqrt{50\cdot 0.0157/(200\cdot 1.96\times 10^{-5})} = \sqrt{200} = 14.14$.
+$mL = 0.707$.
+$\eta = \tanh(0.707)/0.707 = 0.609/0.707 = 0.86$ = 86%.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is heat flux per unit area constant in 1D steady-state conduction?
+</ExQ>
+<ExA>
+Steady state: $\partial T/\partial t = 0$. By energy conservation in any slab: heat in = heat out. Since the cross-section is uniform, flux $q = $ heat rate / area must be constant.
+
+This makes 1D steady analysis especially simple: $q$ is the same everywhere along the conduction path.
+</ExA>
+
+<ExQ>
+**5. Engineering.** Spacecraft wall: outer surface absorbs 1200 W/m² solar, inner surface at 300 K. Insulation $k = 0.02$ W/m·K, thickness 0.1 m. Find outer surface temperature (assume all incoming solar is conducted in).
+</ExQ>
+<ExA>
+$q = k\Delta T/L \Rightarrow \Delta T = qL/k = 1200\cdot 0.1/0.02 = 6000$ K.
+
+$T_{\text{outer}} = 300 + 6000 = 6300$ K. (Way too hot — actual designs use radiation cooling and reflective coatings.)
+
+This shows why thermal management is critical in spacecraft.
+</ExA>

@@ -1,0 +1,76 @@
+---
+title: Application — Potential Flow in Fluid Mechanics
+description: Using analytic functions to solve 2D inviscid flow problems — the complex potential.
+---
+
+# Application: Potential Flow in Fluid Mechanics
+
+For 2D, incompressible, irrotational flow, the velocity field $\mathbf{V} = (u, v)$ satisfies:
+
+$$\nabla^2\phi = 0 \quad \text{(velocity potential)}$$
+
+where $u = \partial\phi/\partial x$ and $v = \partial\phi/\partial y$.
+
+## The Complex Potential
+
+Define the **complex potential** $w(z) = \phi(x,y) + i\psi(x,y)$, where:
+- $\phi$ = velocity potential
+- $\psi$ = streamfunction (streamlines are curves $\psi = \text{const}$)
+
+Since $w$ is analytic, the C–R equations give exactly:
+
+$$\frac{\partial\phi}{\partial x} = \frac{\partial\psi}{\partial y} = u, \qquad \frac{\partial\phi}{\partial y} = -\frac{\partial\psi}{\partial x} = v$$
+
+The **complex velocity** is:
+
+$$\frac{dw}{dz} = u - iv$$
+
+## Standard Flow Solutions
+
+| Flow | Complex potential | Description |
+|---|---|---|
+| Uniform flow (speed $U$) | $w = Uz$ | Parallel streamlines |
+| Source/sink (strength $m$) | $w = \frac{m}{2\pi}\ln z$ | Radial outflow from origin |
+| Vortex (circulation $\Gamma$) | $w = -\frac{i\Gamma}{2\pi}\ln z$ | Circular streamlines |
+| Doublet | $w = \frac{\mu}{2\pi z}$ | Pair of source+sink |
+| Flow past a cylinder | $w = U\!\left(z + \frac{a^2}{z}\right)$ | Superposition: uniform + doublet |
+
+## Flow Past a Circular Cylinder
+
+The complex potential $w = U(z + a^2/z)$ gives irrotational flow around a cylinder of radius $a$. On the cylinder surface $|z| = a$:
+
+$$\psi = 0 \quad \text{(cylinder is a streamline)}$$
+
+The velocity on the surface: $|dw/dz| = 2U|\sin\theta|$. Stagnation points at $\theta = 0, \pi$.
+
+By Bernoulli, pressure varies around the cylinder — the starting point for understanding aerodynamic drag and lift.
+
+## Conformal Mapping
+
+Analytic functions map curves to curves, **preserving angles**. The Joukowski transform $z \mapsto z + c^2/z$ maps a circle to an airfoil profile — a powerful technique for solving flow over complex geometries by mapping them to simpler ones.
+
+---
+
+## Practice Problems
+
+<ExQ>
+For uniform flow with complex potential $w = Uz$ ($U > 0$ real), find the velocity components $u$ and $v$, and sketch the streamlines.
+</ExQ>
+<ExA>
+$$\frac{dw}{dz} = U = u - iv \implies u = U,\quad v = 0$$
+
+The flow is purely horizontal at speed $U$. Streamlines are horizontal lines $y = \text{const}$ (since $\psi = Uy$).
+</ExA>
+
+<ExQ>
+A source of strength $m = 2\pi$ is placed at the origin. Find the radial velocity at distance $r = 2$ from the origin.
+</ExQ>
+<ExA>
+$w = \frac{m}{2\pi}\ln z = \ln z$
+
+$$\frac{dw}{dz} = \frac{1}{z} = \frac{1}{re^{i\theta}} = \frac{e^{-i\theta}}{r}$$
+
+At $r=2$: $|dw/dz| = 1/2$. The velocity magnitude is $1/2$, directed radially outward.
+
+Radial velocity: $v_r = m/(2\pi r) = 1/2$.
+</ExA>

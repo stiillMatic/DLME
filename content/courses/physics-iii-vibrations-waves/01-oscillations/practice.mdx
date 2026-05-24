@@ -1,0 +1,64 @@
+---
+title: Chapter 1 Practice — Oscillations
+description: Practice on SHM and damped/driven oscillators.
+---
+
+# Chapter 1 Practice — Oscillations
+
+<ExQ>
+**1.** A 2 kg mass on a spring with $k = 50$ N/m. Find angular frequency, period, and frequency.
+</ExQ>
+<ExA>
+$\omega_0 = \sqrt{50/2} = 5$ rad/s. $T = 2\pi/5 \approx 1.257$ s. $f = 1/T \approx 0.796$ Hz.
+</ExA>
+
+<ExQ>
+**2.** An oscillator decays from amplitude 10 to 1 in 5 seconds. Find $\zeta\omega_0$.
+</ExQ>
+<ExA>
+$A(t) = A_0 e^{-\zeta\omega_0 t}$. $\ln(10) = 5\zeta\omega_0 \Rightarrow \zeta\omega_0 = \ln(10)/5 \approx 0.461$ s⁻¹.
+</ExA>
+
+<ExQ>
+**3.** Energy of SHM with amplitude 0.05 m, $k = 200$ N/m.
+</ExQ>
+<ExA>
+$E = \tfrac{1}{2}kA^2 = \tfrac{1}{2}(200)(0.0025) = 0.25$ J.
+</ExA>
+
+<ExQ>
+**4. Engineering: Quartz watch.** A quartz crystal oscillates at 32{,}768 Hz with $Q = 10^5$. Estimate how long the energy lasts.
+</ExQ>
+<ExA>
+Period: $1/32768 \approx 30.5$ μs.
+
+$Q = \omega_0/(2\zeta\omega_0) = 1/(2\zeta) \Rightarrow \zeta = 5\times 10^{-6}$.
+
+Decay rate: $\zeta\omega_0 \approx 5\times 10^{-6} \cdot 2\pi\cdot 32768 \approx 1.03$ s⁻¹.
+
+Energy decays as $e^{-2\zeta\omega_0 t}\approx e^{-2t}$ — half-life around 0.35 s.
+
+But the watch driver injects energy each cycle. The crystal "rings" for ~milliseconds after each pulse, providing the timing reference.
+
+**Key insight:** high Q = sharp frequency selectivity, exactly what timekeeping needs.
+</ExA>
+
+<ExQ>
+**5.** Find the resonance peak frequency for $\zeta = 0.1$.
+</ExQ>
+<ExA>
+$\omega_{\text{peak}} = \omega_0\sqrt{1 - 2\zeta^2} = \omega_0\sqrt{0.98} \approx 0.99\omega_0$.
+
+Very close to $\omega_0$ for light damping.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why are tuning forks made of high-Q materials?
+</ExQ>
+<ExA>
+Tuning fork must produce a clean, pure tone of definite frequency. High Q = sharp resonance, sustained ringing.
+
+If Q were low (heavily damped), the fork would emit a muffled "thud" with broad frequency spread — useless for tuning.
+
+Same principle: musical instruments (strings, drums) all carefully selected to have appropriate Q for sustaining their characteristic note.
+</ExA>

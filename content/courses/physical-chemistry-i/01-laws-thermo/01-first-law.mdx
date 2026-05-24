@@ -1,0 +1,146 @@
+---
+title: Energy, Heat, and the First Law
+description: The first law of thermodynamics — energy conservation in chemical systems, with heat and work as two ways energy moves.
+---
+
+# Energy, Heat, and the First Law
+
+## The Big Picture
+
+The **first law of thermodynamics** is the statement of energy conservation applied to chemical systems. Internal energy ($U$) changes only through heat ($q$) and work ($w$). For chemical processes (mostly at constant pressure), **enthalpy** ($H = U + PV$) is more useful — its changes directly equal the heat absorbed. The first law is the bookkeeping that lets us predict heats of reactions, calorimetry data, and energy balances in any chemical process.
+
+## The First Law
+
+$$\Delta U = q + w$$
+
+- $\Delta U$ = change in internal energy (state function).
+- $q$ = heat added to system.
+- $w$ = work done on system.
+
+**Sign convention** (IUPAC, modern): both $q$ and $w$ are positive when energy enters the system.
+
+For an ideal gas at constant external pressure: $w = -P_{\text{ext}}\Delta V$.
+
+## State vs Path Functions
+
+**State functions** (depend only on initial/final states):
+- $U, H, S, G, T, P, V$
+
+**Path functions** (depend on path):
+- $q, w$
+
+You can compute $\Delta U$ for any path, but $q$ and $w$ separately depend on how the system gets from A to B.
+
+## Enthalpy: Constant-Pressure Heat
+
+For most chemical reactions, we work at constant pressure (open beaker, atmospheric).
+
+$\Delta H = \Delta U + \Delta(PV) = \Delta U + P\Delta V$ (constant P).
+
+Rearrange: $\Delta U = \Delta H - P\Delta V$.
+
+And $w = -P\Delta V$.
+
+So $q = \Delta U - w = \Delta H - P\Delta V + P\Delta V = \Delta H$.
+
+**At constant pressure: $q_p = \Delta H$**. This is why enthalpy is THE quantity for chemical reactions.
+
+## Heat Capacity
+
+$$C = q/\Delta T$$
+
+For constant volume: $C_V = (\partial U/\partial T)_V$.
+For constant pressure: $C_P = (\partial H/\partial T)_P$.
+
+For ideal gases: $C_P - C_V = nR$.
+
+## Hess's Law
+
+Enthalpy is a state function. The enthalpy change of a reaction is the sum of enthalpies of its steps — **independent of the path**.
+
+$$\Delta H_{\text{total}} = \Delta H_1 + \Delta H_2 + \ldots$$
+
+Hess's law allows computing reaction enthalpies that can't be measured directly, by summing measurable steps.
+
+## Common Misconceptions
+
+**Misconception 1: "$\Delta H = q$ always."**
+
+Only at constant pressure. At constant volume, $\Delta U = q$. Different conditions, different relationships.
+
+**Misconception 2: "Heat and energy are interchangeable terms."**
+
+**Energy** is a state property (system has it). **Heat** is a transfer (between system and surroundings). Once heat enters, it's no longer "heat" — it's internal energy.
+
+**Misconception 3: "$\Delta H < 0$ means spontaneous."**
+
+Not generally. Spontaneity requires $\Delta G < 0$, which includes entropy. Some exothermic reactions are not spontaneous; some endothermic are (driven by entropy).
+
+## Engineering Connection
+
+- **Combustion engineering:** heats of combustion (Δ$H_{\text{comb}}$) determine fuel energy content.
+- **Refrigeration cycles:** computing work and heat through phase changes.
+- **Calorimetry:** measure $\Delta H$ for reaction → predict scale-up heat removal needs.
+- **Bond dissociation energies:** $\Delta H$ values for breaking specific bonds drive synthesis design.
+- **Material processing:** annealing, melting, vaporization all governed by energy/enthalpy considerations.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Gas expands at constant $P = 1$ atm from 5 L to 15 L. Work done on system?
+</ExQ>
+<ExA>
+$w = -P_{\text{ext}}\Delta V = -1\,\text{atm}\cdot 10\,\text{L} = -10\,\text{L·atm}$.
+
+Convert: $-10\cdot 101.3 = -1013$ J.
+
+Negative — gas did work *on* surroundings, system lost energy.
+</ExA>
+
+<ExQ>
+**2.** 100 J heat added, gas does 30 J work on surroundings. $\Delta U$?
+</ExQ>
+<ExA>
+$q = +100$ J, $w = -30$ J.
+
+$\Delta U = q + w = +70$ J.
+</ExA>
+
+<ExQ>
+**3.** Combustion: $C(s) + O_2 \to CO_2(g)$, $\Delta H = -394$ kJ/mol. Heat to burn 12 g (1 mol) carbon?
+</ExQ>
+<ExA>
+$\Delta H = -394$ kJ/mol → exothermic, system releases 394 kJ to surroundings.
+
+For 1 mol (12 g): **394 kJ released**.
+</ExA>
+
+<ExQ>
+**4. Engineering: Fuel cells.** Hydrogen oxidation $H_2 + \tfrac{1}{2}O_2 \to H_2O$, $\Delta H = -286$ kJ/mol. Maximum heat from burning 1 kg H₂?
+</ExQ>
+<ExA>
+1 kg H₂ = 500 mol.
+
+Heat: $500\cdot 286 = 143000$ kJ = 143 MJ.
+
+Energy density: 143 MJ/kg — about 3× gasoline by mass. (But H₂ storage is bulky by volume.)
+
+In a fuel cell, most of this energy becomes electricity ($\Delta G$); some is unavoidable heat (Carnot losses), but more efficiently used than direct combustion.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is enthalpy useful for chemistry but internal energy is more fundamental?
+</ExQ>
+<ExA>
+$U$ is the truly conserved quantity (first law). But chemistry usually happens at constant pressure (open vessel, atmospheric).
+
+At constant P, $\Delta H = q$ — directly measurable from calorimetry without correcting for $PV$ work.
+
+$\Delta U$ requires knowing $\Delta(PV)$ for reactions involving gas changes. Inconvenient.
+
+So enthalpy is a **convenient state function for constant-P processes**, while $U$ is the underlying conserved quantity for any process.
+
+For reactions involving gases, $\Delta H - \Delta U = \Delta n_{\text{gas}}RT$. For solid/liquid-only reactions, $\Delta H \approx \Delta U$.
+</ExA>

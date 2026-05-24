@@ -1,0 +1,51 @@
+{
+  "title": "Partial Differential Equations",
+  "description": "Linear PDEs, separation of variables, special functions, Green's functions, and Poisson's equation — the mathematical framework of heat, wave, and structural problems.",
+  "level": "advanced",
+  "area": "Mathematics",
+  "tags": ["PDEs", "Mathematics", "Applied Math"],
+  "chapters": [
+    {
+      "title": "Linear Partial Differential Equations",
+      "slug": "01-linear-pdes",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-separation-of-variables", "title": "Separation of Variables and Eigenvalue Problems", "order": 1 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Special Functions",
+      "slug": "02-special-functions",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-bessel-functions", "title": "Bessel Functions", "order": 1 }
+      ]
+    },
+    {
+      "title": "Green's Functions for ODEs",
+      "slug": "03-greens-functions-ode",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-dirac-delta", "title": "The Dirac Delta Function", "order": 1 },
+        { "slug": "02-greens-functions", "title": "Green's Functions: Construction and Interpretation", "order": 2 }
+      ]
+    },
+    {
+      "title": "Poisson's Equation and Green's Functions",
+      "slug": "04-poisson-greens",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-poisson-equation", "title": "Poisson's Equation and Laplace's Equation", "order": 1 }
+      ]
+    },
+    {
+      "title": "Combined Methods",
+      "slug": "05-combined-methods",
+      "order": 5,
+      "lessons": [
+        { "slug": "01-normal-modes", "title": "Vibration Theory and Normal Modes", "order": 1 }
+      ]
+    }
+  ]
+}

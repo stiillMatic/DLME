@@ -1,0 +1,41 @@
+{
+  "title": "Solid Mechanics",
+  "description": "Stress, strain, beams, torsion, and failure criteria — the core of structural analysis for mechanical design.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Structural Analysis", "Mechanics", "MIT 2.001"],
+  "chapters": [
+    {
+      "title": "Stress and Strain",
+      "slug": "01-stress-strain",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-stress", "title": "Normal and Shear Stress", "order": 1 },
+        { "slug": "02-strain", "title": "Strain and Hooke's Law", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Beams",
+      "slug": "02-beams",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-shear-moment", "title": "Shear Force and Bending Moment Diagrams", "order": 1 },
+        { "slug": "02-bending-stress", "title": "Bending Stress and Section Modulus", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Torsion",
+      "slug": "03-torsion",
+      "order": 3,
+      "lessons": []
+    },
+    {
+      "title": "Failure Criteria",
+      "slug": "04-failure",
+      "order": 4,
+      "lessons": []
+    }
+  ]
+}

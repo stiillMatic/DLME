@@ -1,0 +1,141 @@
+---
+title: Damped and Driven Oscillators
+description: When friction dissipates energy and external forcing pumps it in — resonance, transients, and the universal response of linear systems.
+---
+
+# Damped and Driven Oscillators
+
+## The Big Picture
+
+Real oscillators lose energy to friction (damping) and respond to external forcing. The mathematics of damped, driven oscillators gives a complete picture of linear system response: transient decay, steady-state forced response, and the famous phenomenon of **resonance** where small inputs produce huge outputs. Resonance can destroy bridges (Tacoma Narrows) or enable radio reception — same equation, different context.
+
+## Damping
+
+Add a velocity-dependent friction term:
+
+$$m\ddot{x} + b\dot{x} + kx = 0$$
+
+Define **damping ratio** $\zeta = b/(2\sqrt{mk})$ and $\omega_0 = \sqrt{k/m}$.
+
+Three regimes:
+
+| Regime | Condition | Behavior |
+|---|---|---|
+| Underdamped | $\zeta < 1$ | Oscillates, amplitude decays as $e^{-\zeta\omega_0 t}$ |
+| Critically damped | $\zeta = 1$ | Returns to equilibrium fastest, no oscillation |
+| Overdamped | $\zeta > 1$ | Slow exponential return |
+
+**Underdamped solution:** $x(t) = A e^{-\zeta\omega_0 t}\cos(\omega_d t + \phi)$, where $\omega_d = \omega_0\sqrt{1-\zeta^2}$ is the **damped natural frequency**.
+
+## Try It — Sweep the Damping Ratio
+
+<DampedOscillatorDemo />
+
+## Driven Oscillator
+
+Apply a sinusoidal driving force $F_0\cos(\omega t)$:
+
+$$m\ddot{x} + b\dot{x} + kx = F_0\cos(\omega t)$$
+
+Steady-state response: $x(t) = X\cos(\omega t - \delta)$ where:
+
+$$X = \frac{F_0/k}{\sqrt{(1 - r^2)^2 + (2\zeta r)^2}}, \quad r = \omega/\omega_0$$
+
+$$\tan\delta = \frac{2\zeta r}{1 - r^2}$$
+
+## Resonance
+
+When $r \to 1$ ($\omega \to \omega_0$):
+- For $\zeta = 0$ (no damping): $X \to \infty$ — catastrophic.
+- For finite $\zeta$: $X$ peaks near $r = \sqrt{1-2\zeta^2}$, at value $X_{\max} = F_0/(k\cdot 2\zeta\sqrt{1-\zeta^2})$.
+
+**Q-factor:** $Q = 1/(2\zeta)$. High Q = sharp resonance peak. Crystal oscillators have $Q\sim 10^6$; bridges may have $Q \sim 10^2$.
+
+## Common Misconceptions
+
+**Misconception 1: "Resonance always destroys things."**
+
+Sometimes useful — radio tuning, MRI, NMR, atomic clocks. Damaging only when resonance amplitude exceeds material limits.
+
+**Misconception 2: "Damped frequency equals natural frequency."**
+
+$\omega_d = \omega_0\sqrt{1-\zeta^2} < \omega_0$. Damping slows oscillation slightly. For $\zeta = 0.1$, $\omega_d \approx 0.995\omega_0$ — small difference; for $\zeta = 0.5$, $\omega_d \approx 0.866\omega_0$.
+
+**Misconception 3: "Resonance peak occurs exactly at $\omega = \omega_0$."**
+
+Only for very small damping. Generally $\omega_{\text{peak}} = \omega_0\sqrt{1-2\zeta^2}$. Peak frequency shifts down as damping increases. Above $\zeta = 1/\sqrt 2$, no peak at all (overdamped — monotonic response).
+
+## Engineering Connection
+
+- **Tuned mass dampers** in skyscrapers (Taipei 101, Citicorp Center) shift resonance away from wind/earthquake frequencies.
+- **Automotive suspension** is critically damped (or slightly underdamped) to combine fast settling with comfort.
+- **Sonar/Ultrasound** uses driven oscillators at specific frequencies for resolution.
+- **Lock-in amplifiers** detect weak signals at known frequencies via resonant filtering.
+- **Tacoma Narrows Bridge** (1940) destroyed by vortex-shedding resonance — modern bridges include vibration suppression.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $m = 1$ kg, $k = 100$ N/m, $b = 4$ N·s/m. Find $\zeta$ and classify.
+</ExQ>
+<ExA>
+$\omega_0 = 10$ rad/s. $\zeta = 4/(2\sqrt{100}) = 0.2$. Underdamped.
+
+$\omega_d = 10\sqrt{1-0.04} \approx 9.80$ rad/s.
+</ExA>
+
+<ExQ>
+**2.** A driven system has $\omega_0 = 50$ rad/s, $\zeta = 0.05$. Find Q.
+</ExQ>
+<ExA>
+$Q = 1/(2\zeta) = 10$. Moderate quality factor.
+</ExA>
+
+<ExQ>
+**3. Engineering: Building resonance.** A 30-story building has $\omega_0 = 1$ rad/s, $\zeta = 0.02$. If wind oscillates at $\omega = 1.05$ rad/s and forces $F_0$, find the response amplification factor.
+</ExQ>
+<ExA>
+$r = 1.05$, $\zeta = 0.02$.
+
+Amplification: $1/\sqrt{(1 - r^2)^2 + (2\zeta r)^2}$.
+
+$1 - r^2 = -0.1025$. $(1-r^2)^2 = 0.0105$.
+
+$2\zeta r = 0.042$. $(2\zeta r)^2 = 0.00177$.
+
+Sum: 0.01227. Sqrt: 0.111.
+
+Amplification: $1/0.111 \approx 9$.
+
+The response is ~9× larger than the static deflection $F_0/k$. Without tuned mass dampers, this can be structurally problematic.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is critical damping the "fastest settling" without oscillation?
+</ExQ>
+<ExA>
+Below critical: system oscillates (overshoots).
+
+Above critical: two exponential decays, one slow — overall return is sluggish.
+
+Critical damping is the boundary case: just slightly under, you overshoot; just slightly over, you waste time on slow decay. The math: characteristic equation has a repeated real root, giving response $e^{-\omega_0 t}(1 + \omega_0 t)$ — single time scale, no oscillation.
+
+Used in pistol slide bumpers, door closers, instrument needles — situations where you want fast settling without oscillation.
+</ExA>
+
+<ExQ>
+**5.** Show that the energy decay rate of an underdamped oscillator over one period is $\Delta E/E = -4\pi\zeta$ (for small $\zeta$).
+</ExQ>
+<ExA>
+$E(t) \propto e^{-2\zeta\omega_0 t}$ (energy proportional to amplitude squared).
+
+Over one period $T = 2\pi/\omega_d \approx 2\pi/\omega_0$:
+
+$E(t+T)/E(t) = e^{-2\zeta\omega_0 T} = e^{-4\pi\zeta}$.
+
+For small $\zeta$: $\approx 1 - 4\pi\zeta$, so $\Delta E/E \approx -4\pi\zeta$.
+
+**Practical:** for $\zeta = 0.01$, energy loses 12.5% per period. After 100 periods, energy is $\sim e^{-12.6}\approx 3\times 10^{-6}$ of initial. This decay rate is fundamental for Q-factor measurements.
+</ExA>

@@ -1,0 +1,126 @@
+---
+title: Projectile Motion
+description: Decoupled horizontal and vertical motion under gravity — the prototype of 2D kinematics.
+---
+
+# Projectile Motion
+
+## The Big Picture
+
+A projectile launched into the air follows a parabolic path determined entirely by gravity (assuming no air resistance). The key insight: horizontal and vertical motions are **independent**. Each is governed by simple 1D kinematics. By solving each direction separately and combining, we predict trajectories of cannonballs, basketballs, water jets, and rockets near Earth's surface.
+
+## Setting Up
+
+Choose coordinates: $x$ horizontal, $y$ vertical (up). Gravity acts only in $-y$.
+
+**Initial velocity:** $\mathbf{v}_0 = (v_0\cos\theta, v_0\sin\theta)$ at launch angle $\theta$.
+
+**Equations of motion:**
+$$x(t) = x_0 + v_0\cos\theta\cdot t$$
+$$y(t) = y_0 + v_0\sin\theta\cdot t - \tfrac{1}{2}g t^2$$
+$$v_x = v_0\cos\theta \quad\text{(constant)}$$
+$$v_y = v_0\sin\theta - gt$$
+
+## Trajectory
+
+Eliminating $t$ from the equations:
+
+$$y(x) = (\tan\theta)x - \frac{g}{2v_0^2\cos^2\theta}x^2$$
+
+A parabola — the unmistakable signature of constant gravitational acceleration.
+
+## Key Quantities
+
+Assuming launch from $(0, 0)$:
+
+**Time of flight (until $y = 0$ again):** $t_f = (2 v_0\sin\theta)/g$.
+
+**Maximum height:** $h_{\max} = (v_0^2\sin^2\theta)/(2g)$.
+
+**Range (on level ground):** $R = (v_0^2\sin 2\theta)/g$.
+
+**Maximum range** at $\theta = 45°$: $R_{\max} = v_0^2/g$.
+
+## Common Misconceptions
+
+**Misconception 1: "Projectile motion has horizontal acceleration."**
+
+In vacuum, only gravity acts → $a_x = 0$, $a_y = -g$. Horizontal velocity is constant.
+
+With air resistance: yes, both directions decelerate. But then the simple parabola formulas don't apply.
+
+**Misconception 2: "Heavier objects fall faster."**
+
+In vacuum, no — Galileo's discovery. With air resistance, the *terminal velocity* depends on shape and mass, but at launch (low speed) the rate is essentially $g$ for all objects.
+
+**Misconception 3: "Maximum range is always at 45°."**
+
+Only for level ground in vacuum. With initial height $h$, the optimal angle is *less* than 45°. With air resistance, also less than 45°.
+
+## Engineering Connection
+
+- **Ballistics:** projectile motion is the basis of artillery range tables (with air drag corrections).
+- **Sports:** golf, tennis, basketball — angle and speed for desired trajectory.
+- **Water jets:** trajectory of fountains, irrigation, fire hoses.
+- **Spacecraft launch (early phase):** before Earth's curvature matters.
+- **Manufacturing:** ejection of parts from conveyors.
+
+In each case, the basic parabolic formulas apply — refined with corrections for drag, wind, or curvature.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A ball launched at 20 m/s, 30°. Find time of flight, max height, range.
+</ExQ>
+<ExA>
+$v_0\sin\theta = 10$, $v_0\cos\theta \approx 17.32$.
+
+$t_f = 2(10)/9.81 \approx 2.04$ s.
+$h_{\max} = 100/(2\cdot 9.81) \approx 5.10$ m.
+$R = 17.32\cdot 2.04 \approx 35.3$ m.
+
+Or $R = (400\cdot\sin 60°)/9.81 \approx 35.3$ m ✓.
+</ExA>
+
+<ExQ>
+A ball is thrown horizontally from 5 m height at 8 m/s. Where does it land?
+</ExQ>
+<ExA>
+Vertical: $5 = \tfrac{1}{2}(9.81)t^2 \Rightarrow t \approx 1.01$ s.
+
+Horizontal: $x = 8\cdot 1.01 \approx 8.08$ m from the launch point.
+</ExA>
+
+<ExQ>
+**Engineering: Water fountain.** A horizontal water jet exits at 15 m/s from height 2 m. How far horizontally does it land?
+</ExQ>
+<ExA>
+$2 = \tfrac{1}{2}gt^2 \Rightarrow t = \sqrt{4/9.81} \approx 0.639$ s.
+
+$x = 15\cdot 0.639 \approx 9.59$ m.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is the trajectory always a parabola (in vacuum)?
+</ExQ>
+<ExA>
+$y(t) = v_y t - \tfrac{1}{2}g t^2$ is quadratic in $t$. $x(t) = v_x t$ is linear. Eliminating $t$:
+$y = (v_y/v_x) x - g/(2 v_x^2) x^2$ — quadratic in $x$ → parabola.
+
+Universal: any constant-$\mathbf{a}$ motion in 2D produces a parabolic path. The only exception is straight-line motion (when initial velocity is parallel to acceleration).
+</ExA>
+
+<ExQ>
+**Range with launch height.** A projectile launched at angle $\theta$ from height $h$ with speed $v_0$. Show that the range satisfies a quadratic in $\tan\theta$.
+</ExQ>
+<ExA>
+Trajectory: $y(x) = h + x\tan\theta - g x^2/(2v_0^2\cos^2\theta)$.
+
+Set $y = 0$ (lands on ground): $h + x\tan\theta - g x^2(1+\tan^2\theta)/(2v_0^2) = 0$.
+
+This is quadratic in $x$ for given $\theta$. Solving, then optimizing over $\theta$, gives the optimal angle, which is *less* than 45° when $h > 0$.
+
+This is exactly the "shooting from a cliff" problem in artillery / sports.
+</ExA>

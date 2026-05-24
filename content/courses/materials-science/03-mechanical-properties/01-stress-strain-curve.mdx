@@ -1,0 +1,109 @@
+---
+title: Stress-Strain Curve Interpretation
+description: Reading the stress-strain diagram — the engineer's most fundamental material characterization.
+---
+
+# Stress-Strain Curve Interpretation
+
+## The Big Picture
+
+A tensile test on a material specimen yields the **stress-strain curve** — a single graph that captures elastic stiffness, yield strength, ultimate strength, ductility, and toughness. Every material selection decision in mechanical engineering starts here. Reading these curves fluently lets you predict failure, design for safety, and compare materials at a glance.
+
+## Key Regions
+
+For a typical ductile metal:
+
+1. **Linear elastic region:** $\sigma = E\varepsilon$. Reversible. Slope = Young's modulus $E$.
+2. **Yield point:** $\sigma_y$ — onset of permanent deformation.
+3. **Plastic deformation:** strain hardening. Material gets stronger with deformation.
+4. **Ultimate tensile strength:** $\sigma_{\text{UTS}}$ — peak stress.
+5. **Necking & fracture:** localized thinning, then rupture at strain $\varepsilon_f$.
+
+## Key Properties from the Curve
+
+- **Elastic modulus** $E$: slope of initial linear region.
+- **Yield strength** $\sigma_y$: stress at 0.2% plastic strain (offset method).
+- **Ultimate strength** $\sigma_{\text{UTS}}$: maximum stress reached.
+- **Ductility:** total strain at fracture, often expressed as % elongation or % reduction in area.
+- **Toughness:** area under the entire curve — energy absorbed before fracture (J/m³).
+- **Resilience:** area under elastic region only — energy stored elastically.
+
+## Engineering Stress vs. True Stress
+
+**Engineering stress:** $\sigma_e = F/A_0$ (original area).
+**True stress:** $\sigma_t = F/A_{\text{instant}}$ (current area, accounts for thinning).
+
+For small strains: $\sigma_t \approx \sigma_e(1 + \varepsilon)$.
+
+True stress always increases (until fracture); engineering stress peaks at UTS due to necking.
+
+## Common Misconceptions
+
+**Misconception 1: "$\sigma_{\text{UTS}}$ is when material fails."**
+
+UTS is the *peak* stress — material continues deforming after, with reduced cross-section (necking). Fracture occurs at a strain *beyond* UTS.
+
+**Misconception 2: "Brittle materials have low yield strength."**
+
+Brittle materials (cast iron, ceramics) often have *high* yield strength but low ductility and toughness. They fracture before significant plastic deformation.
+
+**Misconception 3: "Ductile = soft, brittle = hard."**
+
+Independent properties. Soft (low yield) can be ductile (lead) or brittle (chalk). Hard (high yield) can be ductile (high-strength steel) or brittle (glass).
+
+## Engineering Connection
+
+- **Material selection:** picking a material with appropriate $\sigma_y$, $\varepsilon_f$, and toughness for the application.
+- **Design factor of safety:** typical: $n = \sigma_y/\sigma_{\text{operating}} = 1.5$ for ductile, 4+ for brittle.
+- **Forming operations:** deep drawing, rolling, extrusion exploit ductile plastic regions.
+- **Crash energy absorption:** car crumple zones use ductile metals to dissipate energy via plastic work.
+- **Safety-critical components:** prefer ductile (graceful failure) over brittle (sudden failure).
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** A specimen has $\sigma_y = 350$ MPa, $\sigma_{\text{UTS}} = 500$ MPa, $\varepsilon_f = 0.20$. Find approximate toughness assuming average $\sigma$ ≈ 425 MPa over the full curve.
+</ExQ>
+<ExA>
+Toughness ≈ $\bar\sigma\cdot\varepsilon_f = 425\times 10^6\cdot 0.20 = 85$ MJ/m³.
+
+(Real toughness is the actual integral, but this gives the order of magnitude.)
+</ExA>
+
+<ExQ>
+**2.** Engineering stress 400 MPa at strain 0.15. Find true stress and true strain.
+</ExQ>
+<ExA>
+$\sigma_t = \sigma_e(1 + \varepsilon) = 400\cdot 1.15 = 460$ MPa.
+
+$\varepsilon_t = \ln(1 + \varepsilon) = \ln 1.15 = 0.140$.
+
+True strain is slightly smaller, true stress is slightly larger.
+</ExA>
+
+<ExQ>
+**3.** A bar yields at 200 MPa. Designed for safety factor 2 against yield. Maximum operating stress?
+</ExQ>
+<ExA>
+$\sigma_{\text{op,max}} = \sigma_y/n = 100$ MPa.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does necking occur after UTS?
+</ExQ>
+<ExA>
+Beyond UTS, strain hardening rate is exceeded by area-reduction rate. Any small section that thins more than others sees higher stress, thins faster — instability.
+
+Once started, necking concentrates all further deformation in the neck region until fracture. This local strain at neck can be 100s of percent, even if global elongation is modest.
+</ExA>
+
+<ExQ>
+**5. Engineering: Resilience.** A spring steel has $\sigma_y = 1000$ MPa, $E = 200$ GPa. Resilience?
+</ExQ>
+<ExA>
+Modulus of resilience = $\sigma_y^2/(2E) = (10^9)^2/(4\times 10^{11}) = 2.5\times 10^6$ J/m³ = 2.5 MJ/m³.
+
+This is energy that can be stored and released elastically per unit volume — useful for spring design.
+</ExA>

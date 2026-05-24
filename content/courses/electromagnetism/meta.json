@@ -1,0 +1,40 @@
+{
+  "title": "Electromagnetism",
+  "description": "Electric and magnetic fields, Maxwell's equations, and circuit fundamentals — required for sensors, actuators, and electromechanical systems.",
+  "level": "intermediate",
+  "area": "Physics",
+  "tags": ["Physics", "Electromagnetics", "MIT 8.02"],
+  "chapters": [
+    {
+      "title": "Electrostatics",
+      "slug": "01-electrostatics",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-electric-field", "title": "Electric Charge and Coulomb's Law", "order": 1 },
+        { "slug": "02-gauss-law", "title": "Electric Field and Gauss's Law", "order": 2 },
+        { "slug": "03-potential", "title": "Electric Potential", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Magnetism",
+      "slug": "02-magnetism",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-magnetic-force", "title": "Magnetic Force and Field", "order": 1 },
+        { "slug": "02-faraday", "title": "Faraday's Law and Induction", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Circuit Fundamentals",
+      "slug": "03-circuits",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-ohms-law", "title": "Ohm's Law, Resistance, and Power", "order": 1 },
+        { "slug": "02-rc-rl", "title": "RC and RL Circuits", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

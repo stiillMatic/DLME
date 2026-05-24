@@ -1,0 +1,140 @@
+---
+title: Reaction Rates and Rate Laws
+description: How fast a reaction proceeds — and how concentration controls speed.
+---
+
+# Reaction Rates and Rate Laws
+
+## The Big Picture
+
+Thermodynamics says what *can* happen. **Kinetics** says how fast. The **rate law** quantifies how reaction rate depends on concentrations of reactants. It comes from the reaction mechanism — the sequence of elementary steps — and lets you predict how long a reaction takes, design reactors, and engineer processes.
+
+## Rate Definition
+
+For reaction $aA + bB \to cC + dD$:
+
+$$\text{rate} = -\frac{1}{a}\frac{d[A]}{dt} = \frac{1}{c}\frac{d[C]}{dt}$$
+
+Negative signs because reactants disappear. Units: M/s.
+
+## Rate Law (Empirical)
+
+Generally:
+$$\text{rate} = k[A]^m[B]^n$$
+
+- $k$: rate constant (depends on T, not concentration).
+- $m, n$: **orders** of reaction with respect to each reactant.
+
+**Important:** orders are determined experimentally, generally NOT equal to stoichiometric coefficients.
+
+Overall order: $m + n$.
+
+## Common Orders
+
+**Zeroth order** ($m = 0$): rate is constant.
+$[A](t) = [A]_0 - kt$. Linear decay.
+
+**First order**: $\text{rate} = k[A]$.
+$[A](t) = [A]_0 e^{-kt}$.
+Half-life $t_{1/2} = \ln 2/k$ — constant!
+
+**Second order**: $\text{rate} = k[A]^2$.
+$1/[A](t) = 1/[A]_0 + kt$.
+$t_{1/2} = 1/(k[A]_0)$ — depends on initial concentration.
+
+## Determining Order
+
+**Method 1 (integrated rate law plots):** transform data — linear plot reveals order.
+- Zeroth: $[A]$ vs $t$.
+- First: $\ln[A]$ vs $t$.
+- Second: $1/[A]$ vs $t$.
+
+**Method 2 (initial rates):** vary initial concentrations, measure initial rates, fit.
+
+## Reaction Mechanisms
+
+A balanced equation is just the overall result. Real reaction = sequence of **elementary steps**:
+
+For $A + B \to P$:
+- One step (bimolecular): rate = $k[A][B]$.
+- Two-step with first step slow: rate = $k_1[A]$ (independent of B).
+
+**Rate-determining step:** slowest step. Limits overall rate.
+
+The rate law reveals the mechanism.
+
+## Common Misconceptions
+
+**Misconception 1: "Order = coefficient."**
+
+Only for elementary reactions. Multistep often has surprising orders. Need to determine experimentally.
+
+**Misconception 2: "First-order means simple one-molecule reaction."**
+
+First-order rate law can arise from many mechanisms. E.g., A + catalyst → product with catalyst saturation gives first-order in A.
+
+**Misconception 3: "Higher concentration = always faster."**
+
+True for positive orders. For inhibition reactions, can have negative orders (catalyst poisoning).
+
+## Engineering Connection
+
+- **Pharmacokinetics:** drug elimination is often first-order. Half-life sets dosing interval.
+- **Reactor design:** plug-flow vs CSTR optimal depending on order.
+- **Atmospheric chemistry:** ozone destruction rates determine policy.
+- **Polymerization kinetics:** controls molecular weight and properties.
+- **Catalytic converters:** designed using kinetic models of CO + NOx → CO₂ + N₂.
+- **Food spoilage:** Q₁₀ rule — rate doubles per 10°C rise → refrigeration extends shelf life.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** First-order, $k = 0.02$ /s. Time to drop from 2.0 M to 0.5 M?
+</ExQ>
+<ExA>
+$\ln([A]/[A]_0) = -kt \Rightarrow \ln(0.25) = -0.02 t$.
+
+$t = 1.386/0.02 = 69.3$ s.
+
+(Two half-lives: $0.5/0.02\cdot\ln 2\cdot 2 = 69.3$ ✓.)
+</ExA>
+
+<ExQ>
+**2.** Doubling [A] quadruples rate. Order in A?
+</ExQ>
+<ExA>
+$2^m = 4 \Rightarrow m = 2$. **Second order**.
+</ExA>
+
+<ExQ>
+**3.** Half-life of ¹⁴C = 5730 years (first order). Decay constant?
+</ExQ>
+<ExA>
+$k = \ln 2/t_{1/2} = 1.21\times 10^{-4}$/year.
+
+Used in radiocarbon dating: measure ¹⁴C ratio in organic material, infer age.
+</ExA>
+
+<ExQ>
+**4. Engineering: Industrial reactor.** $A \to P$ first-order, $k = 0.005$ /s. To achieve 90% conversion, residence time?
+</ExQ>
+<ExA>
+$[A]/[A]_0 = 0.1 = e^{-kt} \Rightarrow t = \ln 10/0.005 = 461$ s ≈ 7.7 min.
+
+For continuous reactor at flow rate $Q$ with volume $V$, residence time = $V/Q$. So $V = 7.7\,\text{min}\cdot Q$.
+
+This sizes the reactor for desired conversion.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is first-order half-life constant but second-order isn't?
+</ExQ>
+<ExA>
+First order: rate scales linearly with $[A]$. As $[A]$ halves, rate also halves — same time to halve again. Constant $t_{1/2}$.
+
+Second order: rate scales as $[A]^2$. As $[A]$ halves, rate goes down by 4×. Reaction slows disproportionately → longer time for next half. Half-life **doubles** as concentration halves.
+
+Constant half-life is the diagnostic fingerprint of first-order kinetics — true for radioactive decay, many drug eliminations, simple unimolecular reactions.
+</ExA>

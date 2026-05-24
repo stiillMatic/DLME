@@ -1,0 +1,337 @@
+---
+title: Chapter 4 Practice — Sequences and Series
+description: 15 mixed practice problems on series convergence, geometric series, Taylor series, and engineering applications.
+---
+
+# Chapter 4 Practice — Sequences and Series
+
+These problems test your toolkit for convergence analysis and Taylor approximation. Aim for 60–90 minutes total.
+
+---
+
+## Sequences
+
+<ExQ>
+**1.** Find $\displaystyle\lim_{n\to\infty}\frac{3n^2 - n}{n^2 + 5}$.
+</ExQ>
+<ExA>
+Divide top and bottom by $n^2$: $(3 - 1/n)/(1 + 5/n^2) \to \boxed{3}$.
+</ExA>
+
+<ExQ>
+**2.** Does $a_n = (-1)^n n/(n+1)$ converge?
+</ExQ>
+<ExA>
+$|a_n| \to 1$ but the sign alternates. $a_n$ does not approach a single value. **Diverges.**
+</ExA>
+
+<ExQ>
+**3.** Find $\displaystyle\lim_{n\to\infty}\left(1 + \frac{2}{n}\right)^n$.
+</ExQ>
+<ExA>
+General formula: $\lim_{n\to\infty}(1 + a/n)^n = e^a$. Here $a = 2$:
+$$\lim_{n\to\infty}\left(1+\frac{2}{n}\right)^n = e^2 \approx \boxed{7.389}$$
+</ExA>
+
+---
+
+## Convergence Tests
+
+<ExQ>
+**4.** Does $\displaystyle\sum_{n=1}^\infty\frac{1}{n^{3/2}}$ converge?
+</ExQ>
+<ExA>
+$p$-series with $p = 3/2 > 1$. **Converges.**
+</ExA>
+
+<ExQ>
+**5.** Does $\displaystyle\sum_{n=1}^\infty\frac{n}{2n+5}$ converge?
+</ExQ>
+<ExA>
+$a_n \to 1/2 \neq 0$. **Diverges** by $n$-th term test.
+</ExA>
+
+<ExQ>
+**6.** Use ratio test on $\displaystyle\sum_{n=1}^\infty\frac{3^n}{n!}$.
+</ExQ>
+<ExA>
+$\dfrac{a_{n+1}}{a_n} = \dfrac{3^{n+1}/(n+1)!}{3^n/n!} = \dfrac{3}{n+1} \to 0 < 1$.
+
+**Converges** absolutely.
+</ExA>
+
+<ExQ>
+**7.** Use the integral test on $\displaystyle\sum_{n=2}^\infty\frac{1}{n(\ln n)^2}$.
+</ExQ>
+<ExA>
+Let $u = \ln n$, $du = dn/n$:
+$$\int_2^\infty\frac{dn}{n(\ln n)^2} = \int_{\ln 2}^\infty\frac{du}{u^2} = \frac{1}{\ln 2} \quad \text{(finite)}$$
+
+**Converges.**
+</ExA>
+
+---
+
+## Geometric Series
+
+<ExQ>
+**8.** Compute $\displaystyle\sum_{n=0}^\infty(0.7)^n$.
+</ExQ>
+<ExA>
+Geometric, $r = 0.7$:
+$$\sum_{n=0}^\infty 0.7^n = \frac{1}{1 - 0.7} = \boxed{\frac{10}{3} \approx 3.333}$$
+</ExA>
+
+<ExQ>
+**9.** Compute $\displaystyle\sum_{n=2}^\infty\frac{1}{2^n}$.
+</ExQ>
+<ExA>
+$\sum_{n=0}^\infty (1/2)^n = 2$. Subtract $n=0,1$ terms ($1 + 1/2 = 3/2$):
+$$\sum_{n=2}^\infty\frac{1}{2^n} = 2 - \frac{3}{2} = \boxed{\frac{1}{2}}$$
+</ExA>
+
+---
+
+## Taylor Series
+
+<ExQ>
+**10.** Find the Maclaurin series of $\sin(2x)$ up to $x^5$.
+</ExQ>
+<ExA>
+$\sin u = u - u^3/6 + u^5/120 - \cdots$. Substitute $u = 2x$:
+$$\sin(2x) = 2x - \frac{8x^3}{6} + \frac{32x^5}{120} - \cdots = 2x - \frac{4x^3}{3} + \frac{4x^5}{15} - \cdots$$
+</ExA>
+
+<ExQ>
+**11.** Use the Taylor series of $\ln(1+x)$ to estimate $\ln(1.05)$ to 4 decimal places.
+</ExQ>
+<ExA>
+$\ln(1+x) = x - x^2/2 + x^3/3 - x^4/4 + \cdots$. At $x = 0.05$:
+$$0.05 - \frac{0.0025}{2} + \frac{0.000125}{3} - \cdots = 0.05 - 0.00125 + 0.0000417 - \cdots \approx \boxed{0.04879}$$
+Exact: $0.04879$, accurate to 4 decimals after just 3 terms.
+</ExA>
+
+<ExQ>
+**12.** Use a Taylor series to derive $(1 + x)^{1/2} \approx 1 + x/2 - x^2/8$ for small $x$.
+</ExQ>
+<ExA>
+$(1+x)^{1/2}$: $f(0) = 1$, $f'(0) = 1/2$, $f''(0) = -1/4$.
+
+Taylor at $0$: $f(x) \approx 1 + \dfrac{x}{2} + \dfrac{(-1/4)x^2}{2} = 1 + \dfrac{x}{2} - \dfrac{x^2}{8}$ ✓
+</ExA>
+
+---
+
+## Engineering Applications
+
+<ExQ>
+**13.** A pendulum's period to second order is $T = 2\pi\sqrt{L/g}\bigl(1 + \theta_0^2/16\bigr)$. By how many percent does $T$ exceed the small-angle estimate when $\theta_0 = 0.4$ rad?
+</ExQ>
+<ExA>
+$T/T_0 = 1 + \theta_0^2/16 = 1 + 0.16/16 = 1 + 0.01$.
+
+The period is about **1%** longer.
+</ExA>
+
+<ExQ>
+**14.** The total energy in a vibrating string is $E = \sum_{n=1}^\infty c_n n^2/n^4 = \sum c_n/n^2$ where $c_n$ are bounded. Show that this sum converges if $|c_n| \leq M$ for all $n$.
+</ExQ>
+<ExA>
+$|c_n/n^2| \leq M/n^2$. By comparison with the convergent $p$-series $\sum 1/n^2$, the original series converges (absolutely).
+
+This is why finite-element modal analyses converge: contributions of high modes shrink fast enough that finite truncation is acceptable.
+</ExA>
+
+<ExQ>
+**15.** A signal decays as $f(t) = \sum_{n=1}^\infty\dfrac{(-1)^{n+1}}{n}\sin(nt)$. Show that the series converges (in some appropriate sense) for each fixed $t$ using the alternating series test.
+</ExQ>
+<ExA>
+Treat the terms as $a_n = \sin(nt)/n$.
+
+For each fixed $t$, $|\sin(nt)| \leq 1$, so $|a_n| \leq 1/n$ — *not* absolutely summable.
+
+But the alternating series $(-1)^{n+1}/n$ converges (alternating harmonic). Combined with bounded $\sin(nt)$, the partial sums oscillate but remain bounded — the series converges *conditionally* (Dirichlet's test confirms this rigorously).
+
+This is a Fourier-style series: each frequency contributes a damped sinusoid, and the sum represents a real signal.
+</ExA>
+
+---
+
+## Conceptual Probes
+
+<ExQ>
+**P1. True or False.** If $a_n \to 0$, then $\sum a_n$ converges. Justify.
+</ExQ>
+<ExA>
+**False.** Counterexample: harmonic series $\sum 1/n$. Terms $a_n = 1/n \to 0$, but the sum diverges.
+
+The terms must shrink **fast enough** for the sum to converge — $1/n$ doesn't qualify, but $1/n^2$ does.
+
+**Mantra:** $a_n \to 0$ is **necessary** but not sufficient.
+</ExA>
+
+<ExQ>
+**P2. True or False.** If $\sum a_n$ converges and $\sum b_n$ converges, then $\sum a_n b_n$ converges. Justify.
+</ExQ>
+<ExA>
+**False.** Counterexample: $a_n = b_n = (-1)^n/\sqrt n$. Both $\sum a_n$ converges (alternating with $1/\sqrt n \to 0$ decreasing).
+
+But $a_n b_n = 1/n$, and $\sum 1/n$ **diverges** (harmonic).
+
+So term-wise products of convergent series need not be convergent — convergence is fragile under multiplication.
+</ExA>
+
+<ExQ>
+**P3. Identify the test.** For each, name the *most efficient* convergence test:
+(a) $\sum n^2/2^n$
+(b) $\sum 1/(n^2 + 1)$
+(c) $\sum 1/(n \ln^2 n)$
+(d) $\sum (-1)^n n/(n^2 + 1)$
+(e) $\sum n^n/n!$
+</ExQ>
+<ExA>
+(a) **Ratio test** (factorials/exponentials): converges.
+
+(b) **Comparison** with $1/n^2$: converges.
+
+(c) **Integral test** (logarithms): converges.
+
+(d) **Alternating series test**: converges.
+
+(e) **Ratio test**: $a_{n+1}/a_n \to e > 1$, **diverges**.
+
+Choosing the right test makes the work efficient.
+</ExA>
+
+<ExQ>
+**P4. Counterexample needed.** Find a series that converges by the alternating series test but diverges absolutely.
+</ExQ>
+<ExA>
+Alternating harmonic series $\sum (-1)^n/n$: converges (alt. test), but $\sum |(-1)^n/n| = \sum 1/n$ diverges.
+
+This is the canonical example of **conditional convergence**.
+</ExA>
+
+<ExQ>
+**P5. Reasoning.** Why does the radius of convergence of $\sum a_n x^n$ depend only on $\lim |a_{n+1}/a_n|$ (not on signs of coefficients)?
+</ExQ>
+<ExA>
+The ratio test for power series uses $|a_{n+1}x^{n+1}/(a_n x^n)| = |a_{n+1}/a_n|\cdot|x|$. The signs vanish under absolute values.
+
+The radius is determined by *absolute convergence*, which is sign-blind. Inside the radius, the series converges absolutely (and hence converges); outside, it diverges; on the boundary, signs can matter (e.g., conditional convergence).
+
+This is why we always say "radius" — a single positive number — independent of which $x$ values within the radius converge.
+</ExA>
+
+<ExQ>
+**P6. Sketch.** Sketch the partial sums $S_N$ of $\sum_{n=0}^\infty (-0.5)^n$ for $N = 1, 2, 3, 4, 5$. What pattern emerges?
+</ExQ>
+<ExA>
+Geometric with $r = -0.5$:
+- $S_1 = 1$
+- $S_2 = 1 - 0.5 = 0.5$
+- $S_3 = 0.5 + 0.25 = 0.75$
+- $S_4 = 0.75 - 0.125 = 0.625$
+- $S_5 = 0.625 + 0.0625 = 0.6875$
+
+Converges to $1/(1 - (-0.5)) = 2/3 \approx 0.667$.
+
+Pattern: oscillates around the limit, with amplitude shrinking by factor $|r| = 0.5$ each step. **Alternating series oscillate around their limit** — useful property for error bounds.
+</ExA>
+
+---
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1.** Find the sum $\sum_{n=0}^\infty \dfrac{n}{2^n}$. (Hint: differentiate the geometric series $\sum x^n = 1/(1-x)$.)
+</ExQ>
+<ExA>
+$\sum_{n=0}^\infty x^n = 1/(1-x)$ for $|x| < 1$.
+
+Differentiate both sides:
+$\sum_{n=1}^\infty n x^{n-1} = 1/(1-x)^2$
+
+Multiply by $x$:
+$\sum_{n=1}^\infty n x^n = x/(1-x)^2$
+
+Set $x = 1/2$:
+$\sum_{n=1}^\infty n/2^n = (1/2)/(1/2)^2 = 2$.
+
+(The $n = 0$ term contributes 0, so $\sum_{n=0}^\infty n/2^n = 2$.)
+
+This **differentiation trick** is one of the most powerful ways to find closed-form sums.
+</ExA>
+
+<ExQ>
+**S2.** Use the Maclaurin series for $\ln(1+x)$ to estimate $\ln(1.2)$ to 4 decimal places. State your error bound.
+</ExQ>
+<ExA>
+$\ln(1+x) = x - x^2/2 + x^3/3 - x^4/4 + x^5/5 - \cdots$
+
+At $x = 0.2$: $0.2 - 0.02 + 0.002667 - 0.0004 + 0.000064 - \ldots$
+
+Cumulative: $0.2, 0.18, 0.18267, 0.18227, 0.18233, \ldots$
+
+After 5 terms: $0.18233$. Exact: $\ln(1.2) = 0.18232...$. Error: $\sim 10^{-5}$.
+
+Error bound (alternating series): error after $N$ terms $\leq |a_{N+1}|$. Here $|a_6| = 0.2^6/6 \approx 1.07\times 10^{-5}$. So 5 terms give 4-5 digit accuracy.
+</ExA>
+
+<ExQ>
+**S3.** A vibrating system has impulse response $h(t) = \sum_{n=1}^\infty\dfrac{1}{n^2}\sin(n\omega_0 t)$. Show that $h$ is bounded for all $t$ and find an upper bound.
+</ExQ>
+<ExA>
+$|h(t)| = \left|\sum\frac{\sin(n\omega_0 t)}{n^2}\right| \leq \sum\frac{|\sin(n\omega_0 t)|}{n^2} \leq \sum\frac{1}{n^2} = \frac{\pi^2}{6}$
+
+So $|h(t)| \leq \pi^2/6 \approx 1.645$ for all $t$.
+
+Even though the series has infinitely many terms, **absolute convergence guarantees a finite, bounded sum**.
+This is why systems with $1/n^2$-decaying modes have **bounded impulse responses** — they are stable.
+</ExA>
+
+<ExQ>
+**S4.** A sphere of mass $m$ falls with quadratic drag. Its terminal velocity satisfies a transcendental equation. Use the Taylor series of $\tanh$ to estimate the velocity at $t = \tau$ where $\tau$ is the characteristic timescale.
+</ExQ>
+<ExA>
+The motion: $v(t) = v_\infty\tanh(t/\tau)$ where $v_\infty = \sqrt{mg/k}$ and $\tau = v_\infty/g$.
+
+Maclaurin: $\tanh(u) = u - u^3/3 + 2u^5/15 - \cdots$
+
+At $u = 1$ (i.e., $t = \tau$): $\tanh(1) = 1 - 1/3 + 2/15 - 17/315 + \cdots \approx 0.7616$.
+
+So $v(\tau) \approx 0.76 v_\infty$ — **after one time constant, the object has reached 76% of terminal velocity**.
+
+This is a classical engineering rule of thumb, derived from a series.
+</ExA>
+
+<ExQ>
+**S5.** A power series has $f(x) = \sum_{n=0}^\infty a_n x^n$ with radius of convergence $R$. What is the radius of convergence of $f'(x)$? Of $\int_0^x f(t)\,dt$?
+</ExQ>
+<ExA>
+**Theorem:** Term-by-term differentiation and integration *preserve* the radius of convergence.
+
+$f'(x) = \sum n a_n x^{n-1}$ — same radius $R$.
+$\int_0^x f(t)\,dt = \sum a_n x^{n+1}/(n+1)$ — same radius $R$.
+
+(The boundary behavior at $|x| = R$ may change — integration is more "smoothing", differentiation more "sharpening".)
+
+This is why power series are so useful: they're closed under calculus operations within their radius of convergence.
+</ExA>
+
+<ExQ>
+**S6.** Use the **alternating series error bound** to determine how many terms are needed to compute $\sin(0.5)$ to 6 decimal places.
+</ExQ>
+<ExA>
+$\sin x = x - x^3/3! + x^5/5! - \cdots$. Error after $N$ terms is bounded by the absolute value of the next term:
+
+$|R_N| \leq |x|^{2N+1}/(2N+1)!$
+
+For $x = 0.5$: need $0.5^{2N+1}/(2N+1)! < 5\times 10^{-7}$.
+
+Try $N = 4$ (so 5 terms): $0.5^9/9! = 0.001953/362880 \approx 5.4\times 10^{-9}$. ✓
+
+So **5 terms suffice** for 6 decimal places. Specifically: $\sin(0.5) \approx 0.5 - 0.020833 + 0.000260 - 0.00000186 + \ldots \approx 0.479426$.
+
+Exact: $\sin(0.5) = 0.4794255\ldots$ — agreement to 6 decimals.
+</ExA>

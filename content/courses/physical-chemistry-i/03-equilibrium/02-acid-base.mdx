@@ -1,0 +1,140 @@
+---
+title: Acid-Base Equilibria and pH
+description: Proton transfer equilibria — the chemistry behind pH, buffers, indicators, and life itself.
+---
+
+# Acid-Base Equilibria and pH
+
+## The Big Picture
+
+Acid-base chemistry is the chemistry of proton (H⁺) transfer. Every biological molecule, every drug, every food, every soil interacts via acid-base equilibria. The concentration of H⁺ — quantified as **pH** — controls protein function, drug solubility, soil fertility, ocean health. The mathematics of acid-base equilibria is essentially the equilibrium tools of this chapter, applied to one specific (and ubiquitous) class of reactions.
+
+## Definitions
+
+**Brønsted-Lowry:**
+- Acid: donates H⁺
+- Base: accepts H⁺
+
+A **conjugate acid-base pair** differs by one H⁺.
+
+Strong acids ($K_a > 1$, fully dissociate): HCl, HNO₃, H₂SO₄, HClO₄.
+Weak acids: acetic, carbonic, organic acids, etc.
+
+## $K_a$ and pH
+
+For $HA \rightleftharpoons H^+ + A^-$:
+
+$$K_a = \frac{[H^+][A^-]}{[HA]}, \quad pK_a = -\log K_a$$
+
+$$pH = -\log[H^+]$$
+
+Water self-ionizes: $K_w = [H^+][OH^-] = 10^{-14}$ at 25°C. So $pH + pOH = 14$.
+
+| pH | Acidity |
+|---|---|
+| 0-3 | Strongly acidic |
+| 4-6 | Weakly acidic |
+| 7 | Neutral |
+| 8-10 | Weakly basic |
+| 11-14 | Strongly basic |
+
+Each pH unit = 10× change in $[H^+]$.
+
+## Henderson-Hasselbalch
+
+For a buffer solution (weak acid + conjugate base):
+
+$$pH = pK_a + \log\frac{[A^-]}{[HA]}$$
+
+When $[A^-] = [HA]$: $pH = pK_a$. Buffer is most effective near this pH.
+
+## Buffers
+
+A buffer resists pH change when small amounts of acid/base are added. Composition: weak acid + its conjugate base (or weak base + conjugate acid).
+
+Common: acetate buffer ($pK_a$ 4.76), phosphate ($pK_a$ 7.2), Tris ($pK_a$ 8.1).
+
+**Buffer capacity** = how much acid/base it can absorb before pH shifts significantly. Highest when $[A^-] \approx [HA]$ and concentrations are large.
+
+## Titration
+
+Add base to acid (or vice versa). At equivalence point: moles base = moles acid (originally). For strong acid + strong base, equivalence at pH 7. For weak acid + strong base, equivalence at pH > 7 (basic conjugate).
+
+**Half-equivalence:** half of acid is converted to conjugate base — pH = pKa.
+
+## Common Misconceptions
+
+**Misconception 1: "Strong vs concentrated."**
+
+Strength is about $K_a$ (extent of dissociation). Concentration is amount per volume. 1 M acetic acid is concentrated but weak; $10^{-5}$ M HCl is dilute but strong.
+
+**Misconception 2: "pH 7 is always neutral."**
+
+True at 25°C. At higher T, $K_w$ increases (water self-ionization is endothermic), so neutral pH < 7. At body temperature (37°C), neutral pH ≈ 6.8.
+
+**Misconception 3: "Buffers prevent any pH change."**
+
+Buffers minimize but don't eliminate pH change. Adding enough acid/base exceeds capacity → buffer fails.
+
+## Engineering Connection
+
+- **Blood buffering:** carbonate-bicarbonate system maintains blood pH at 7.4 ± 0.05 — critical for life.
+- **Drug formulation:** pH controls solubility, stability, absorption (gastric vs intestinal pH).
+- **Wastewater treatment:** pH adjustment for precipitation of metals, microbial activity.
+- **Soil chemistry:** pH determines nutrient availability (Al toxicity at low pH, P availability at neutral).
+- **Industrial processes:** chemical synthesis often requires specific pH.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** What's the pH of 0.01 M HCl?
+</ExQ>
+<ExA>
+Strong acid, fully dissociated. $[H^+] = 0.01$ M. pH = 2.
+</ExA>
+
+<ExQ>
+**2.** Acetic acid $K_a = 1.8\times 10^{-5}$. pH of 0.1 M solution?
+</ExQ>
+<ExA>
+Let $x = [H^+]$. $K_a = x^2/(0.1 - x) \approx x^2/0.1$ (for $x \ll 0.1$).
+
+$x^2 = 1.8\times 10^{-6}$, $x = 1.34\times 10^{-3}$.
+
+pH ≈ 2.87. Weak acid — only ~1.3% dissociated.
+</ExA>
+
+<ExQ>
+**3.** Acetate buffer: 0.1 M acetic acid + 0.1 M sodium acetate. pH?
+</ExQ>
+<ExA>
+$pH = pK_a + \log([A^-]/[HA]) = 4.74 + 0 = 4.74$.
+
+Equal concentrations → pH = pKa. Most effective buffering range.
+</ExA>
+
+<ExQ>
+**4. Engineering: Blood buffer.** Carbonic acid $H_2CO_3$ ($pK_a$ 6.35). At blood pH 7.4, ratio of bicarbonate to carbonic acid?
+</ExQ>
+<ExA>
+$7.4 = 6.35 + \log([HCO_3^-]/[H_2CO_3]) \Rightarrow \log(\text{ratio}) = 1.05 \Rightarrow \text{ratio} \approx 11.2$.
+
+About 11:1 bicarbonate to carbonic acid in blood. The CO₂ from metabolism converts to H₂CO₃, which is buffered. Lungs adjust CO₂ to regulate.
+
+Combined with kidney HCO₃⁻ regulation, this is the body's primary acid-base regulation.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are buffers most effective at $pH \approx pK_a$?
+</ExQ>
+<ExA>
+Henderson-Hasselbalch: $pH = pK_a + \log([A^-]/[HA])$.
+
+Near $pH = pK_a$, ratio $[A^-]/[HA] \approx 1$. Adding small amount of acid converts some $A^-$ to $HA$, changing the ratio only slightly → small pH change.
+
+Far from $pK_a$, ratio is very different from 1. Small changes in $[A^-]$ or $[HA]$ produce big log changes → big pH change.
+
+This is why buffer choice depends on target pH — pick acid with $pK_a$ closest to desired pH.
+</ExA>

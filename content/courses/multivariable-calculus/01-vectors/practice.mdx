@@ -1,0 +1,185 @@
+---
+title: Chapter 1 Practice — Vectors and 3D Space
+description: Mixed practice on vectors, dot/cross products, lines, and planes.
+---
+
+# Chapter 1 Practice — Vectors and 3D Space
+
+## Mechanical Drills
+
+<ExQ>
+**1.** Find $\mathbf{u} + 2\mathbf{v}$ for $\mathbf{u} = \langle 1, 2, -1\rangle$, $\mathbf{v} = \langle 0, 3, 4\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{u} + 2\mathbf{v} = \langle 1, 2, -1\rangle + \langle 0, 6, 8\rangle = \langle 1, 8, 7\rangle$.
+</ExA>
+
+<ExQ>
+**2.** Compute $\mathbf{u}\cdot\mathbf{v}$ for $\mathbf{u} = \langle 3, 1, -2\rangle$, $\mathbf{v} = \langle 1, 4, 5\rangle$.
+</ExQ>
+<ExA>
+$3 + 4 - 10 = -3$.
+</ExA>
+
+<ExQ>
+**3.** Compute $\mathbf{u}\times\mathbf{v}$ for $\mathbf{u} = \langle 2, 0, 1\rangle$, $\mathbf{v} = \langle 1, -1, 3\rangle$.
+</ExQ>
+<ExA>
+$\langle 0\cdot 3 - 1\cdot(-1),\ 1\cdot 1 - 2\cdot 3,\ 2\cdot(-1) - 0\cdot 1\rangle = \langle 1, -5, -2\rangle$.
+</ExA>
+
+<ExQ>
+**4.** Find a unit vector in the direction of $\langle 3, -4, 0\rangle$.
+</ExQ>
+<ExA>
+Magnitude $= 5$. Unit vector $= \langle 3/5, -4/5, 0\rangle$.
+</ExA>
+
+<ExQ>
+**5.** Find the angle between $\mathbf{u} = \langle 1, 0, 1\rangle$ and $\mathbf{v} = \langle 1, 1, 0\rangle$.
+</ExQ>
+<ExA>
+$\cos\theta = (1 + 0 + 0)/(\sqrt 2\cdot\sqrt 2) = 1/2 \Rightarrow \theta = 60°$.
+</ExA>
+
+<ExQ>
+**6.** Find a parametric equation for the line through $(1, -1, 2)$ in the direction $\langle 2, 3, -1\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{r}(t) = \langle 1 + 2t, -1 + 3t, 2 - t\rangle$.
+</ExA>
+
+<ExQ>
+**7.** Find an equation for the plane through $(2, 0, 1)$ with normal $\langle 1, -1, 2\rangle$.
+</ExQ>
+<ExA>
+$1(x-2) - 1(y) + 2(z-1) = 0 \Rightarrow x - y + 2z = 4$.
+</ExA>
+
+<ExQ>
+**8.** Find the area of the triangle with vertices $(1, 0, 0), (0, 2, 0), (0, 0, 3)$.
+</ExQ>
+<ExA>
+Two edges: $\mathbf{a} = \langle -1, 2, 0\rangle$, $\mathbf{b} = \langle -1, 0, 3\rangle$.
+
+$\mathbf{a}\times\mathbf{b} = \langle 6, 3, 2\rangle$, magnitude $= 7$.
+
+Area $= 7/2 = 3.5$.
+</ExA>
+
+## Conceptual
+
+<ExQ>
+**P1. True or False.** $\mathbf{u}\times\mathbf{v} = \mathbf{u}\times\mathbf{w}$ implies $\mathbf{v} = \mathbf{w}$.
+</ExQ>
+<ExA>
+**False.** The cross product has a "kernel": $\mathbf{u}\times(\mathbf{v} - \mathbf{w}) = \mathbf{0}$ means $\mathbf{v} - \mathbf{w}$ is parallel to $\mathbf{u}$ (or zero). So $\mathbf{v}$ and $\mathbf{w}$ can differ by any scalar multiple of $\mathbf{u}$.
+
+This is why the cross product alone doesn't determine an unknown vector uniquely.
+</ExA>
+
+<ExQ>
+**P2. True or False.** Two non-parallel planes always intersect in a single line.
+</ExQ>
+<ExA>
+**True** in $\mathbb{R}^3$. Non-parallel planes have non-parallel normals; their intersection is a line in the direction $\mathbf{n}_1\times\mathbf{n}_2$.
+
+(In higher dimensions, the answer is more complex, but in 3D, this is always a 1D set.)
+</ExA>
+
+<ExQ>
+**P3. Sketch.** Sketch the planes $z = 0$, $z = x$, and $z = y$. Where do all three meet?
+</ExQ>
+<ExA>
+$z = 0$ is the $xy$-plane. $z = x$ tilts so it's vertical along $y$-axis. $z = y$ tilts vertical along $x$-axis.
+
+All three meet where $z = 0 = x = y$, i.e., the **origin**.
+
+This kind of "intersection of constraints" is the basis of robotic kinematics and constraint-based design.
+</ExA>
+
+<ExQ>
+**P4. Reasoning.** Why can the dot product be zero for non-zero vectors but the cross product can be zero only when vectors are parallel (or one is zero)?
+</ExQ>
+<ExA>
+Dot product: $\mathbf{u}\cdot\mathbf{v} = \|\mathbf{u}\|\|\mathbf{v}\|\cos\theta$. Zero when $\cos\theta = 0 \Rightarrow \theta = 90°$.
+
+Cross product: $\|\mathbf{u}\times\mathbf{v}\| = \|\mathbf{u}\|\|\mathbf{v}\|\sin\theta$. Zero when $\sin\theta = 0 \Rightarrow \theta = 0$ or $\pi$ (parallel/antiparallel).
+
+The two products select complementary geometric relations.
+</ExA>
+
+<ExQ>
+**P5. Counterexample.** Find vectors $\mathbf{u}, \mathbf{v}, \mathbf{w}$ with $\mathbf{u}\cdot\mathbf{v} = \mathbf{u}\cdot\mathbf{w}$ but $\mathbf{v}\neq\mathbf{w}$.
+</ExQ>
+<ExA>
+$\mathbf{u} = \langle 1, 0, 0\rangle$, $\mathbf{v} = \langle 1, 0, 0\rangle$, $\mathbf{w} = \langle 1, 5, 7\rangle$.
+
+Both dot products with $\mathbf{u}$ equal 1, but $\mathbf{v}$ and $\mathbf{w}$ differ in the $y$- and $z$-components — components $\mathbf{u}$ "doesn't see."
+
+So a single dot product captures only the projection onto $\mathbf{u}$, losing the other 2D of information.
+</ExA>
+
+<ExQ>
+**P6. Identifier.** Given vectors $\mathbf{a}, \mathbf{b}, \mathbf{c}$ in 3D, what does $\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})$ measure?
+</ExQ>
+<ExA>
+The signed volume of the parallelepiped spanned by $\mathbf{a}, \mathbf{b}, \mathbf{c}$.
+
+Sign: positive if right-handed orientation, negative if left-handed.
+
+Zero if the three vectors are coplanar (linearly dependent).
+
+This is the **scalar triple product** — useful for testing linear independence in 3D.
+</ExA>
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1.** Find the distance between the parallel planes $2x - y + 2z = 5$ and $2x - y + 2z = 14$.
+</ExQ>
+<ExA>
+Pick a point on first plane: $(0, 0, 5/2)$. Distance from this point to the second plane:
+
+$d = \dfrac{|2(0) - 1(0) + 2(5/2) - 14|}{\sqrt{4 + 1 + 4}} = \dfrac{|5 - 14|}{3} = 3$.
+</ExA>
+
+<ExQ>
+**S2.** Find a vector orthogonal to both $\langle 1, 1, 0\rangle$ and $\langle 0, 1, 1\rangle$.
+</ExQ>
+<ExA>
+$\langle 1, 1, 0\rangle\times\langle 0, 1, 1\rangle = \langle 1\cdot 1 - 0\cdot 1,\ 0\cdot 0 - 1\cdot 1,\ 1\cdot 1 - 1\cdot 0\rangle = \langle 1, -1, 1\rangle$.
+</ExA>
+
+<ExQ>
+**S3. Engineering: Bolt forces.** A bolt at position $\mathbf{r} = \langle 0.05, 0.1, 0\rangle$ m feels a force $\mathbf{F} = \langle 0, -200, 50\rangle$ N. Find the moment about the origin and its magnitude.
+</ExQ>
+<ExA>
+$\mathbf{M} = \mathbf{r}\times\mathbf{F} = \langle 0.1\cdot 50 - 0\cdot(-200),\ 0\cdot 0 - 0.05\cdot 50,\ 0.05\cdot(-200) - 0.1\cdot 0\rangle = \langle 5, -2.5, -10\rangle$ N·m.
+
+$\|\mathbf{M}\| = \sqrt{25 + 6.25 + 100} = \sqrt{131.25} \approx 11.5$ N·m.
+</ExA>
+
+<ExQ>
+**S4. Engineering: Plane through 3 points.** Three sensor positions are $A = (0, 0, 0)$, $B = (3, 0, 0)$, $C = (0, 4, 5)$. Find the plane equation.
+</ExQ>
+<ExA>
+$\vec{AB} = \langle 3, 0, 0\rangle$, $\vec{AC} = \langle 0, 4, 5\rangle$.
+
+$\mathbf{n} = \vec{AB}\times\vec{AC} = \langle 0\cdot 5 - 0\cdot 4,\ 0\cdot 0 - 3\cdot 5,\ 3\cdot 4 - 0\rangle = \langle 0, -15, 12\rangle$.
+
+Plane: $-15(y - 0) + 12(z - 0) = 0 \Rightarrow 5y - 4z = 0$ (after dividing by $-3$).
+
+This kind of triangulation is fundamental in computer vision and surveying.
+</ExA>
+
+<ExQ>
+**S5. Reasoning.** Three forces act on an object: $\mathbf{F}_1 = \langle 10, 0, 0\rangle$, $\mathbf{F}_2 = \langle -5, 5\sqrt 3, 0\rangle$, $\mathbf{F}_3 = \langle -5, -5\sqrt 3, 0\rangle$. Show the system is in equilibrium and explain the geometry.
+</ExQ>
+<ExA>
+Sum: $\mathbf{F}_1 + \mathbf{F}_2 + \mathbf{F}_3 = \langle 10 - 5 - 5,\ 0 + 5\sqrt 3 - 5\sqrt 3,\ 0\rangle = \mathbf{0}$ ✓
+
+Geometrically, three vectors of equal magnitude (each 10) at 120° angles in the $xy$-plane sum to zero — they form an equilibrium triangle.
+
+Standard structural mechanics: three-force equilibrium configurations.
+</ExA>

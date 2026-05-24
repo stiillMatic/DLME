@@ -1,0 +1,39 @@
+{
+  "title": "Fluid Mechanics",
+  "description": "Fluid statics, kinematics, Bernoulli's equation, and viscous flow — the basis of pipe systems, turbomachinery, and aerodynamics.",
+  "level": "intermediate",
+  "area": "Core ME",
+  "tags": ["Fluid Mechanics", "CFD", "MIT 2.20"],
+  "chapters": [
+    {
+      "title": "Fluid Statics",
+      "slug": "01-statics",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-pressure", "title": "Pressure and Hydrostatics", "order": 1 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Fluid Kinematics",
+      "slug": "02-kinematics",
+      "order": 2,
+      "lessons": []
+    },
+    {
+      "title": "Bernoulli and Energy Equation",
+      "slug": "03-bernoulli",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-bernoulli", "title": "Bernoulli's Equation", "order": 1 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 2 }
+      ]
+    },
+    {
+      "title": "Viscous Flow",
+      "slug": "04-navier-stokes",
+      "order": 4,
+      "lessons": []
+    }
+  ]
+}

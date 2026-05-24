@@ -1,0 +1,81 @@
+---
+title: Second Law and Entropy
+description: The second law, entropy, and why heat engines can never be 100% efficient.
+---
+
+# The Second Law of Thermodynamics
+
+The first law says energy is conserved. The second law says **not all energy conversions are equally possible** — there is a preferred direction for natural processes.
+
+## Kelvin-Planck Statement
+
+> It is impossible to construct a device that operates in a cycle and produces no effect other than the transfer of heat from a single reservoir and the production of work.
+
+No heat engine can be 100% efficient. Some heat must always be rejected.
+
+## Clausius Statement
+
+> It is impossible to construct a device that operates in a cycle and produces no effect other than the transfer of heat from a cooler body to a hotter body.
+
+Heat spontaneously flows from hot to cold — never the reverse without work input.
+
+## Entropy
+
+Entropy $S$ is a state property measuring molecular disorder. For a reversible process:
+
+$$dS = \frac{\delta Q_{\text{rev}}}{T}$$
+
+**Second law in terms of entropy:**
+
+$$\Delta S_{\text{universe}} = \Delta S_{\text{system}} + \Delta S_{\text{surroundings}} \geq 0$$
+
+Equality holds for reversible (ideal) processes. Real processes always increase total entropy.
+
+## Carnot Efficiency
+
+The Carnot cycle is the most efficient possible cycle operating between temperatures $T_H$ and $T_L$:
+
+$$\eta_{\text{Carnot}} = 1 - \frac{T_L}{T_H}$$
+
+where temperatures are in **Kelvin**. This sets the upper bound on all real heat engines.
+
+**Example:** A steam turbine with $T_H = 600$ K and $T_L = 300$ K:
+
+$$\eta_{\text{Carnot}} = 1 - \frac{300}{600} = 50\%$$
+
+Real steam plants achieve 35–45%.
+
+## Isentropic Processes
+
+A reversible adiabatic process has $\Delta S = 0$ — it is **isentropic**. For ideal gases:
+
+$$\frac{T_2}{T_1} = \left(\frac{P_2}{P_1}\right)^{(\gamma-1)/\gamma}, \quad \gamma = c_p/c_v$$
+
+Turbines and compressors are analyzed as isentropic devices (with corrections for real losses via isentropic efficiency).
+
+---
+
+## Practice Problems
+
+<ExQ>
+A heat engine receives 500 kJ from a reservoir at 1000 K and rejects heat to a reservoir at 300 K. What is the maximum possible work output?
+</ExQ>
+<ExA>
+Maximum efficiency is Carnot efficiency:
+
+$$\eta_{\text{Carnot}} = 1 - \frac{300}{1000} = 0.70 = 70\%$$
+
+Maximum work:
+$$W_{\text{max}} = \eta \times Q_H = 0.70 \times 500 = \boxed{350\ \text{kJ}}$$
+
+Heat rejected: $Q_L = 500 - 350 = 150$ kJ.
+</ExA>
+
+<ExQ>
+Air ($\gamma = 1.4$) is compressed isentropically from $T_1 = 300$ K, $P_1 = 100$ kPa to $P_2 = 800$ kPa. Find $T_2$.
+</ExQ>
+<ExA>
+$$T_2 = T_1 \left(\frac{P_2}{P_1}\right)^{(\gamma-1)/\gamma} = 300 \times \left(\frac{800}{100}\right)^{0.4/1.4}$$
+
+$$= 300 \times (8)^{0.2857} = 300 \times 1.811 = \boxed{543\ \text{K}}$$
+</ExA>

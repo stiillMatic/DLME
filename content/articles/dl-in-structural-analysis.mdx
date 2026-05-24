@@ -1,0 +1,99 @@
+---
+title: "Deep Learning as a Surrogate for FEA"
+description: "How neural networks can replace finite element solvers for rapid structural analysis — 1000× faster at inference time."
+date: "2025-04-15"
+tags: ["FEA", "Surrogate Models", "PyTorch"]
+---
+
+# Deep Learning as a Surrogate for FEA
+
+Finite element analysis (FEA) is the gold standard for structural simulation, but a single high-fidelity solve can take minutes to hours for complex geometries. When you need thousands of evaluations — for optimisation, uncertainty quantification, or real-time feedback — a **surrogate model** trained on FEA data becomes invaluable.
+
+## The Core Idea
+
+You train a neural network $f_\theta$ to approximate the FEA solver $f_{\text{FEA}}$:
+
+$$
+f_\theta(\mathbf{x}) \approx f_{\text{FEA}}(\mathbf{x})
+$$
+
+where $\mathbf{x}$ encodes geometry parameters and loading conditions, and the output is the quantity of interest (e.g., maximum von Mises stress or peak displacement).
+
+At inference time, $f_\theta$ runs in milliseconds on a GPU — orders of magnitude faster than the solver.
+
+## Dataset Construction
+
+1. Define your design space (geometry parameters, loads, boundary conditions)
+2. Sample it with Latin Hypercube Sampling (LHS) for good coverage
+3. Run FEA for each sample — this is the expensive offline step
+4. Store input–output pairs as your training set
+
+```python
+import numpy as np
+from scipy.stats import qmc
+
+# 500 samples from a 6-dimensional design space
+sampler = qmc.LatinHypercube(d=6, seed=42)
+samples = sampler.random(500)
+
+# Scale to physical ranges
+lower = np.array([0.01, 0.005, 50e3, 0.0, 0.0, 0.0])
+upper = np.array([0.05, 0.020, 500e3, 30.0, 45.0, 90.0])
+X = qmc.scale(samples, lower, upper)
+```
+
+## Network Architecture
+
+For scalar outputs (max stress), a simple MLP works well:
+
+```python
+import torch.nn as nn
+
+class FEASurrogate(nn.Module):
+    def __init__(self, n_inputs: int):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(n_inputs, 128),
+            nn.SiLU(),
+            nn.Linear(128, 128),
+            nn.SiLU(),
+            nn.Linear(128, 64),
+            nn.SiLU(),
+            nn.Linear(64, 1),
+        )
+
+    def forward(self, x):
+        return self.net(x)
+```
+
+## Normalisation Is Critical
+
+FEA outputs can span many orders of magnitude. Always normalise inputs and outputs to zero mean / unit variance:
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+scaler_x = StandardScaler().fit(X_train)
+scaler_y = StandardScaler().fit(y_train.reshape(-1, 1))
+
+X_train_n = scaler_x.transform(X_train)
+y_train_n = scaler_y.transform(y_train.reshape(-1, 1)).ravel()
+```
+
+## When to Use This Approach
+
+| Scenario | Good fit? |
+|---|---|
+| Parametric geometry, fixed topology | ✅ Excellent |
+| Topology optimisation (changing mesh) | ⚠️ Harder — needs graph nets |
+| Few FEA runs available (< 100) | ❌ Consider Gaussian processes instead |
+| Probabilistic output needed | ⚠️ Add Monte Carlo Dropout or ensembles |
+
+## Accuracy Expectations
+
+With 500–2000 training samples and a well-tuned MLP, you can typically achieve:
+
+- **Max stress**: relative error < 2%
+- **Peak displacement**: relative error < 1%
+
+Always validate on a held-out test set and report errors on the *physical* (unnormalised) quantities.

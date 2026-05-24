@@ -1,0 +1,169 @@
+---
+title: Chapter 2 Practice — Partial Derivatives
+description: Mixed practice on partial derivatives, gradients, chain rule, and optimization.
+---
+
+# Chapter 2 Practice — Partial Derivatives
+
+## Mechanical Drills
+
+<ExQ>
+**1.** Find $f_x$ and $f_y$ for $f(x, y) = x^3 + 4xy - y^2$.
+</ExQ>
+<ExA>
+$f_x = 3x^2 + 4y$, $f_y = 4x - 2y$.
+</ExA>
+
+<ExQ>
+**2.** Find $\nabla f$ for $f(x, y, z) = xyz + x^2 z$ at $(1, 2, -1)$.
+</ExQ>
+<ExA>
+$f_x = yz + 2xz = -2 - 2 = -4$.
+$f_y = xz = -1$.
+$f_z = xy + x^2 = 2 + 1 = 3$.
+
+$\nabla f = \langle -4, -1, 3\rangle$.
+</ExA>
+
+<ExQ>
+**3.** Find the directional derivative of $f(x, y) = x^2 - y^2$ at $(1, 1)$ in the direction of $\mathbf{v} = \langle 3, 4\rangle$.
+</ExQ>
+<ExA>
+$\nabla f = \langle 2x, -2y\rangle = \langle 2, -2\rangle$ at $(1,1)$.
+
+$\hat{\mathbf{v}} = \langle 3/5, 4/5\rangle$.
+
+$D_{\hat{\mathbf{v}}}f = 6/5 - 8/5 = -2/5$.
+</ExA>
+
+<ExQ>
+**4.** Find the equation of the tangent plane to $z = x^2 + y^2$ at $(1, 2, 5)$.
+</ExQ>
+<ExA>
+$z_x = 2x = 2$, $z_y = 2y = 4$.
+
+Tangent plane: $z - 5 = 2(x-1) + 4(y-2)$, i.e., $z = 2x + 4y - 5$.
+</ExA>
+
+<ExQ>
+**5.** Find critical points of $f(x, y) = x^2 + xy + y^2 - 3x$.
+</ExQ>
+<ExA>
+$f_x = 2x + y - 3 = 0$, $f_y = x + 2y = 0 \Rightarrow x = -2y$.
+
+Substitute: $-4y + y - 3 = 0 \Rightarrow y = -1$, $x = 2$.
+
+Hessian: $f_{xx} = 2$, $f_{yy} = 2$, $f_{xy} = 1$, $D = 3 > 0$, $f_{xx} > 0$ → local **min** at $(2, -1)$.
+</ExA>
+
+## Conceptual
+
+<ExQ>
+**P1. True or False.** $\nabla f$ always points in the direction of fastest decrease.
+</ExQ>
+<ExA>
+**False.** $\nabla f$ points in the direction of fastest **increase**.
+
+The direction of fastest decrease is $-\nabla f$ — used in gradient descent.
+</ExA>
+
+<ExQ>
+**P2. Reasoning.** A function $f(x, y)$ has $\nabla f(1, 2) = \langle 0, 0\rangle$ but the second-derivative test gives $D = 0$. What can you conclude?
+</ExQ>
+<ExA>
+The point is a critical point, but the second-order test is **inconclusive**. Could be max, min, saddle, or none of these.
+
+Higher-order analysis or examination along curves is needed. Examples: $f = x^4$ has $D = 0$ at origin but it's a min; $f = x^3$ has $D = 0$ at origin but it's a saddle (along the $x$-axis).
+</ExA>
+
+<ExQ>
+**P3. Counterexample.** Find $f$ with $f_{xy}(0,0) \neq f_{yx}(0,0)$.
+</ExQ>
+<ExA>
+The classic pathological example: $f(x, y) = \dfrac{xy(x^2 - y^2)}{x^2 + y^2}$ for $(x, y) \neq (0, 0)$, $f(0, 0) = 0$.
+
+Computing: $f_{xy}(0, 0) = -1$, $f_{yx}(0, 0) = 1$ — different!
+
+Clairaut's theorem requires the second partials to be **continuous**; this $f$ has discontinuous second partials at origin. Most engineering functions are smooth enough that mixed partials commute.
+</ExA>
+
+<ExQ>
+**P4. Lagrange interpretation.** A bridge design minimizes weight subject to maximum stress = 250 MPa. The Lagrange multiplier at the optimum is $\lambda = -2.0$ kg/MPa. What does this tell the design engineer?
+</ExQ>
+<ExA>
+$\lambda$ measures sensitivity: relaxing the stress constraint by 1 MPa would change optimal weight by $\lambda$ kg = -2.0 kg (i.e., 2.0 kg lighter).
+
+So if the engineer can use a stronger steel (allowable stress 251 MPa), the optimal design saves about 2 kg.
+
+This is the **shadow price** of the constraint — invaluable for negotiating specs and material trade-offs.
+</ExA>
+
+## Multi-Step Synthesis
+
+<ExQ>
+**S1.** A heat sink has temperature $T(x, y) = 100 - 2x^2 - 3y^2$ °C. Find the position of maximum temperature on the constraint $x + y = 1$.
+</ExQ>
+<ExA>
+Lagrange: $\nabla T = \langle -4x, -6y\rangle$, $\nabla g = \langle 1, 1\rangle$.
+
+$-4x = \lambda$, $-6y = \lambda \Rightarrow 4x = 6y \Rightarrow x = 3y/2$.
+
+Constraint: $3y/2 + y = 1 \Rightarrow y = 2/5$, $x = 3/5$.
+
+$T(3/5, 2/5) = 100 - 2(9/25) - 3(4/25) = 100 - 30/25 = 98.8$°C.
+</ExA>
+
+<ExQ>
+**S2. Engineering: Optimization.** A rectangular box (no top) has volume 32 m³. Find dimensions minimizing surface area.
+</ExQ>
+<ExA>
+$V = xyz = 32$, $A = xy + 2xz + 2yz$ (no top).
+
+Lagrange or substitution: $z = 32/(xy)$.
+
+$A(x, y) = xy + 2x\cdot 32/(xy) + 2y\cdot 32/(xy) = xy + 64/y + 64/x$.
+
+$\partial A/\partial x = y - 64/x^2 = 0 \Rightarrow yx^2 = 64$.
+$\partial A/\partial y = x - 64/y^2 = 0 \Rightarrow xy^2 = 64$.
+
+Divide: $x/y = 1 \Rightarrow x = y$. Then $x^3 = 64 \Rightarrow x = y = 4$ m, $z = 2$ m.
+
+Optimal: $4\times 4\times 2$ m box.
+</ExA>
+
+<ExQ>
+**S3. Backprop.** $L = (a - y)^2$ with $a = w_2 \sigma(w_1 x + b_1) + b_2$. Compute $\partial L/\partial w_1$ symbolically.
+</ExQ>
+<ExA>
+Define intermediates: $z_1 = w_1 x + b_1$, $h = \sigma(z_1)$, $a = w_2 h + b_2$, $L = (a-y)^2$.
+
+Chain rule: $\partial L/\partial w_1 = (\partial L/\partial a)(\partial a/\partial h)(\partial h/\partial z_1)(\partial z_1/\partial w_1)$
+
+$= 2(a-y)\cdot w_2\cdot\sigma'(z_1)\cdot x$
+
+This is the gradient flow through one hidden unit — the heart of backpropagation.
+</ExA>
+
+<ExQ>
+**S4. Heat flow.** Temperature in a metal slab is $T(x, y) = 100 e^{-(x^2 + y^2)/4}$. Heat flux is $\mathbf{q} = -k\nabla T$. Find the magnitude of heat flux at $(1, 0)$, with $k = 50$ W/(m·K).
+</ExQ>
+<ExA>
+$\nabla T = -100\cdot e^{-(x^2+y^2)/4}\cdot\langle x/2, y/2\rangle$.
+
+At $(1, 0)$: $T = 100 e^{-1/4} \approx 77.88$. $\nabla T = 77.88\cdot\langle -1/2, 0\rangle = \langle -38.94, 0\rangle$.
+
+$\mathbf{q} = 50\cdot\langle 38.94, 0\rangle = \langle 1947, 0\rangle$ W/m².
+
+Magnitude: 1947 W/m². Heat flows in $+x$ direction (away from origin, where temperature is highest).
+</ExA>
+
+<ExQ>
+**S5. Reasoning.** Why can the gradient be used to predict if you're at a maximum, but the Hessian is needed to confirm?
+</ExQ>
+<ExA>
+The gradient $\nabla f = \mathbf{0}$ identifies *critical points* — places where the function is locally flat. But "flat" doesn't mean "max." It could be a max, min, or saddle.
+
+The Hessian (matrix of second derivatives) describes the *curvature* — whether the function bends up or down in different directions. Both eigenvalues positive: bowl (min). Both negative: dome (max). Mixed: saddle.
+
+The gradient gives a **necessary** condition; the Hessian gives the **sufficient** classification.
+</ExA>

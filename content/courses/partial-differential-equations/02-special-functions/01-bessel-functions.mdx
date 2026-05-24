@@ -1,0 +1,81 @@
+---
+title: Bessel Functions
+description: The eigenfunctions of radial problems — essential for cylindrical geometries in heat transfer, acoustics, and structural analysis.
+---
+
+# Bessel Functions
+
+Bessel functions arise whenever the Laplacian is expressed in cylindrical coordinates. The **Bessel equation of order $\nu$** is:
+
+$$r^2 y'' + ry' + (r^2 - \nu^2)y = 0$$
+
+This appears when separating variables in cylindrical coordinates for problems like heat conduction in a rod, vibration of a circular membrane, or electromagnetic waveguides.
+
+## Solutions: $J_\nu$ and $Y_\nu$
+
+Two linearly independent solutions:
+- $J_\nu(r)$: **Bessel function of the first kind** — bounded at $r=0$
+- $Y_\nu(r)$: **Bessel function of the second kind** (Neumann function) — singular at $r=0$
+
+For problems with a solid cylinder (including $r=0$), only $J_\nu$ is physical.
+
+## Key Properties
+
+**Series representation:**
+$$J_n(r) = \sum_{k=0}^\infty \frac{(-1)^k}{k!\,(n+k)!}\left(\frac{r}{2}\right)^{2k+n}$$
+
+**Recurrence relations:**
+$$J_{\nu-1}(r) + J_{\nu+1}(r) = \frac{2\nu}{r}J_\nu(r)$$
+
+**Orthogonality:** The zeros $\alpha_{n,m}$ of $J_n$ define an orthogonal set:
+$$\int_0^R r\,J_n\!\left(\frac{\alpha_{n,m}r}{R}\right)J_n\!\left(\frac{\alpha_{n,k}r}{R}\right)dr = 0 \quad m \neq k$$
+
+## Engineering Application: Vibrating Circular Membrane
+
+The transverse displacement $w(r,\theta,t)$ of a circular drum of radius $R$ satisfies:
+
+$$w_{tt} = c^2\nabla^2 w, \quad w(R,\theta,t) = 0$$
+
+Separating variables: $w = J_n(\alpha_{n,m} r/R)\cos(n\theta)\cos(\omega_{n,m}t)$
+
+Natural frequencies: $\omega_{n,m} = c\,\alpha_{n,m}/R$
+
+The fundamental mode ($n=0$, $m=1$) uses $\alpha_{0,1} \approx 2.405$.
+
+## Bessel Functions of Half-Integer Order
+
+$$J_{1/2}(r) = \sqrt{\frac{2}{\pi r}}\sin r, \quad J_{-1/2}(r) = \sqrt{\frac{2}{\pi r}}\cos r$$
+
+These relate Bessel functions to the spherical problem (separating the Helmholtz equation in spherical coordinates).
+
+---
+
+## Practice Problems
+
+<ExQ>
+Show that $J_0(r)$ satisfies the Bessel equation of order 0: $r y'' + y' + ry = 0$.
+</ExQ>
+<ExA>
+Using the series $J_0(r) = \sum_{k=0}^\infty \frac{(-1)^k}{(k!)^2}\left(\frac{r}{2}\right)^{2k}$:
+
+$$J_0' = \sum_{k=1}^\infty \frac{(-1)^k \cdot 2k}{(k!)^2 \cdot 4^k} r^{2k-1}, \quad J_0'' = \sum_{k=1}^\infty \frac{(-1)^k \cdot 2k(2k-1)}{(k!)^2 \cdot 4^k}r^{2k-2}$$
+
+Substituting into $ry'' + y' + ry$ and collecting powers of $r$ shows all coefficients cancel term by term — confirming $J_0$ satisfies the equation.
+</ExA>
+
+<ExQ>
+A solid steel cylinder of radius $R = 0.1$ m is suddenly heated on its outer surface. Using the heat equation in cylindrical coordinates, what is the fundamental frequency of temperature oscillation (i.e., the mode that decays most slowly)?
+</ExQ>
+<ExA>
+The radial heat equation in a cylinder: $u_t = \alpha(u_{rr} + u_r/r)$.
+
+Separating: $R'' + R'/r + \lambda R = 0$ (Bessel equation, order 0), with $R(R_0) = 0$ (fixed surface temperature).
+
+Eigenvalues: $\lambda_m = (\alpha_{0,m}/R_0)^2$ where $\alpha_{0,m}$ are zeros of $J_0$.
+
+Slowest decay: $\lambda_1 = (\alpha_{0,1}/R_0)^2 = (2.405/0.1)^2 = 578\ \text{m}^{-2}$
+
+Decay time constant: $\tau = 1/(\alpha\lambda_1)$. For steel ($\alpha \approx 1.2\times10^{-5}$ m²/s):
+
+$$\tau = \frac{1}{1.2\times10^{-5}\times578} \approx \boxed{144\ \text{s} \approx 2.4\ \text{min}}$$
+</ExA>

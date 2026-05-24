@@ -1,0 +1,80 @@
+---
+title: Singular Values and Rectangular Matrices
+description: Extending eigenvalue analysis to non-square matrices via singular value decomposition.
+---
+
+# Singular Values and Rectangular Matrices
+
+Eigenvalues are defined only for square matrices. For rectangular matrices $A \in \mathbb{R}^{m\times n}$, **singular values** play the analogous role.
+
+## Definition of Singular Values
+
+The **singular values** $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0$ of $A$ are the positive square roots of the eigenvalues of $A^TA$ (equivalently, of $AA^T$):
+
+$$\sigma_i = \sqrt{\lambda_i(A^TA)}$$
+
+## The Singular Value Decomposition (SVD)
+
+Any $m\times n$ matrix $A$ of rank $r$ can be written as:
+
+$$A = U\Sigma V^T$$
+
+where:
+- $U \in \mathbb{R}^{m\times m}$: orthogonal matrix, columns are **left singular vectors** (eigenvectors of $AA^T$)
+- $V \in \mathbb{R}^{n\times n}$: orthogonal matrix, columns are **right singular vectors** (eigenvectors of $A^TA$)
+- $\Sigma \in \mathbb{R}^{m\times n}$: diagonal with $\sigma_1, \ldots, \sigma_r$ on the diagonal
+
+## Geometric Interpretation
+
+SVD decomposes any linear map into three stages:
+1. $V^T$: rotate in input space
+2. $\Sigma$: stretch along coordinate axes by singular values
+3. $U$: rotate in output space
+
+Every matrix — regardless of shape — is just a rotation, scaling, and rotation.
+
+## Rank via SVD
+
+The rank of $A$ equals the number of non-zero singular values. The **economy SVD** (thin SVD) retains only the $r$ non-zero singular values:
+
+$$A = \sum_{i=1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^T$$
+
+Each term $\sigma_i \mathbf{u}_i\mathbf{v}_i^T$ is a rank-1 matrix. This is the most important formula for data compression.
+
+## Condition Number
+
+$$\kappa(A) = \frac{\sigma_{\max}}{\sigma_{\min}}$$
+
+A large condition number means the matrix is nearly singular — small errors in $\mathbf{b}$ cause large errors in $\hat{\mathbf{x}}$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the singular values of $A = \begin{pmatrix}3&0\\0&2\\0&0\end{pmatrix}$.
+</ExQ>
+<ExA>
+$$A^TA = \begin{pmatrix}3&0&0\\0&2&0\end{pmatrix}\begin{pmatrix}3&0\\0&2\\0&0\end{pmatrix} = \begin{pmatrix}9&0\\0&4\end{pmatrix}$$
+
+Eigenvalues of $A^TA$: 9 and 4.
+
+Singular values: $\sigma_1 = 3$, $\sigma_2 = 2$.
+
+The SVD is $A = U\begin{pmatrix}3&0\\0&2\\0&0\end{pmatrix}V^T$ where $U = I_3$, $V = I_2$ (already in principal directions).
+</ExA>
+
+<ExQ>
+A data matrix $A \in \mathbb{R}^{100 \times 50}$ has singular values: $\sigma_1 = 10, \sigma_2 = 8, \sigma_3 = 1, \ldots, \sigma_{50} \approx 0.01$. If you approximate $A$ by its rank-2 truncation $A_2 = \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T$, what fraction of the "energy" (Frobenius norm squared) is captured?
+</ExQ>
+<ExA>
+Total energy (Frobenius norm squared) = $\sum_i \sigma_i^2 \approx 100 + 64 + 1 + \cdots$
+
+Energy in rank-2 approximation: $10^2 + 8^2 = 100 + 64 = 164$
+
+If remaining singular values are small (say total $\sum_{i=3}^{50}\sigma_i^2 \approx 5$):
+
+Fraction captured $\approx \frac{164}{169} \approx 97\%$
+
+This is the basis of PCA, low-rank approximation in deep learning, and image compression — a few singular values capture most of the information.
+</ExA>

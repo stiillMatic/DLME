@@ -1,0 +1,52 @@
+---
+title: Chapter 3 Practice — Radiation
+description: Practice on blackbody radiation, emissivity, and radiative exchange.
+---
+
+# Chapter 3 Practice — Radiation
+
+<ExQ>
+**1.** A blackbody at 1500 K emits how much per m²?
+</ExQ>
+<ExA>
+$E_b = \sigma T^4 = 5.67\times 10^{-8}\cdot (1500)^4 = 287$ kW/m².
+</ExA>
+
+<ExQ>
+**2.** Compute the dominant wavelength via Wien's law for 6000 K (sun's surface).
+</ExQ>
+<ExA>
+$\lambda_{\max} = 2898/T = 2898/6000 = 0.483$ μm. Visible light, peaking in green-blue.
+</ExA>
+
+<ExQ>
+**3.** A surface ($\varepsilon = 0.7$) at 800 K in 300 K surroundings. Net radiation per m²?
+</ExQ>
+<ExA>
+$\dot q = \varepsilon\sigma(T_s^4 - T_\infty^4) = 0.7\cdot 5.67\times 10^{-8}\cdot(800^4 - 300^4)$
+$= 3.97\times 10^{-8}\cdot 4.10\times 10^{11} - \text{negligible}$
+$= 16{,}260$ W/m² ≈ 16.3 kW/m².
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does emissivity matter when designing radiative coolers?
+</ExQ>
+<ExA>
+Radiative heat transfer scales with $\varepsilon$. High emissivity (≈1) maximizes radiation. Low (mirror-like) minimizes it.
+
+For radiator: want high $\varepsilon$ in IR (where surface emits) — black coatings.
+
+For thermal insulation in vacuum (cryogenic): want low $\varepsilon$ — mirrors and reflective foils.
+
+Spacecraft radiators paint white (high IR emissivity, low solar absorption) to dump heat without absorbing too much sunlight.
+</ExA>
+
+<ExQ>
+**5. Engineering.** Two infinite parallel plates: $T_1 = 500$ K, $T_2 = 300$ K, both $\varepsilon = 0.5$. Find net radiative flux.
+</ExQ>
+<ExA>
+For two parallel plates:
+$\dot q = \dfrac{\sigma(T_1^4 - T_2^4)}{1/\varepsilon_1 + 1/\varepsilon_2 - 1}$
+$= \dfrac{5.67\times 10^{-8}\cdot(500^4 - 300^4)}{2 + 2 - 1}$
+$= \dfrac{5.67\times 10^{-8}\cdot 5.44\times 10^{10}}{3} = 1029$ W/m².
+</ExA>

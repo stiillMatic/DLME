@@ -1,0 +1,373 @@
+---
+title: The Definite Integral and FTC
+description: Building the definite integral as a Riemann sum, and unveiling the deep connection between integration and differentiation.
+---
+
+# The Definite Integral and the Fundamental Theorem of Calculus
+
+## The Big Picture
+
+The definite integral does for "summing infinitely many infinitesimal pieces" what the derivative does for "infinitesimal change." It computes accumulated quantities: total work, total mass, total flow, area under a curve. The **Fundamental Theorem of Calculus (FTC)** then makes a stunning claim: the two great operations of calculus — differentiation and integration — are **inverses** of each other. This isn't an accident; it's the deepest result in elementary calculus, and it's what lets us actually compute integrals without summing forever.
+
+## Intuition First — Areas, Sums, and Integrals
+
+Imagine driving for one hour at varying speed. You want the total distance traveled. If your speed were constant at 60 km/h, the answer is easy: $60 \times 1 = 60$ km. But if your speed varied?
+
+Approximate. Break the hour into 60 minutes. In each minute, assume the speed is roughly constant. Add up minute-by-minute distances. The total is approximately the distance traveled — and the approximation gets better as we use more, smaller intervals.
+
+In the limit of infinitely many infinitesimal intervals, this sum becomes an **integral**:
+
+$$\text{distance} = \int_0^1 v(t)\,dt$$
+
+Geometrically, you're computing the **area under the velocity-vs-time curve**. Integrals and areas are inseparable in 1D.
+
+## From Riemann Sums to the Definite Integral
+
+To define $\int_a^b f(x)\,dx$ rigorously:
+
+1. Partition $[a, b]$ into $n$ subintervals of width $\Delta x = (b-a)/n$.
+2. In each subinterval, pick a sample point $x_i^*$.
+3. Form the **Riemann sum**:
+
+$$S_n = \sum_{i=1}^n f(x_i^*)\Delta x$$
+
+This sum represents the total area of $n$ rectangles approximating the region under the curve.
+
+4. Take $n \to \infty$:
+
+$$\int_a^b f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x$$
+
+If this limit exists (and the same value is reached regardless of how sample points $x_i^*$ are chosen), then $f$ is **integrable** on $[a, b]$ and the integral equals the limit.
+
+For continuous functions, this limit always exists.
+
+<figure className="my-8 flex flex-col items-center">
+  <svg viewBox="0 0 600 220" className="w-full max-w-2xl" xmlns="http://www.w3.org/2000/svg">
+    {/* Two panels: coarse n=5 vs fine n=15 */}
+    {/* Panel 1: n = 5 */}
+    <g>
+      <text x="140" y="20" fill="oklch(0.985 0 0)" fontSize="13" textAnchor="middle" fontWeight="600">n = 5 rectangles</text>
+      <line x1="40" y1="180" x2="240" y2="180" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      <line x1="40" y1="40" x2="40" y2="180" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      {/* 5 rectangles using left endpoints for f(x) = (x-1)² + 0.5 mapped to fit panel */}
+      <rect x="40" y="60" width="40" height="120" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="1" />
+      <rect x="80" y="100" width="40" height="80" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="1" />
+      <rect x="120" y="130" width="40" height="50" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="1" />
+      <rect x="160" y="100" width="40" height="80" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="1" />
+      <rect x="200" y="60" width="40" height="120" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="1" />
+      {/* Curve overlay */}
+      <path d="M 40 60 Q 140 200 240 60" stroke="oklch(0.85 0.15 80)" strokeWidth="2.5" fill="none" />
+      <text x="140" y="205" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">coarse approximation</text>
+    </g>
+    {/* Panel 2: n = 15 */}
+    <g>
+      <text x="460" y="20" fill="oklch(0.985 0 0)" fontSize="13" textAnchor="middle" fontWeight="600">n = 15 rectangles</text>
+      <line x1="360" y1="180" x2="560" y2="180" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      <line x1="360" y1="40" x2="360" y2="180" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      {/* 15 rectangles approximating downward parabola y = 1-4(x-0.5)² */}
+      <rect x="360" y="178" width="13" height="2" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="373" y="148" width="13" height="32" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="386" y="121" width="13" height="59" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="399" y="98" width="13" height="82" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="412" y="78" width="13" height="102" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="425" y="65" width="13" height="115" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="438" y="58" width="13" height="122" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="451" y="56" width="13" height="124" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="464" y="58" width="13" height="122" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="477" y="65" width="13" height="115" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="490" y="78" width="13" height="102" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="503" y="98" width="13" height="82" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="516" y="121" width="13" height="59" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="529" y="148" width="13" height="32" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      <rect x="542" y="178" width="13" height="2" fill="oklch(0.65 0.2 264 / 0.25)" stroke="oklch(0.65 0.2 264)" strokeWidth="0.5" />
+      {/* Curve overlay */}
+      <path d="M 360 178 Q 460 -50 560 178" stroke="oklch(0.85 0.15 80)" strokeWidth="2.5" fill="none" />
+      <text x="460" y="205" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">refined approximation</text>
+    </g>
+  </svg>
+  <figcaption className="mt-2 text-sm text-muted-foreground italic">As n → ∞, the rectangles fill the area exactly. The integral is this limit.</figcaption>
+</figure>
+
+## Try It — Watch the Sum Converge
+
+<RiemannDemo />
+
+## The Fundamental Theorem of Calculus
+
+**Part 1 (FTC1):** If $f$ is continuous on $[a, b]$ and $F(x) = \displaystyle\int_a^x f(t)\,dt$, then $F$ is differentiable and $F'(x) = f(x)$.
+
+In words: **integrating with a variable upper limit and then differentiating gets you back where you started**.
+
+**Part 2 (FTC2, the Evaluation Theorem):** If $f$ is continuous on $[a, b]$ and $F$ is *any* antiderivative of $f$, then:
+
+$$\int_a^b f(x)\,dx = F(b) - F(a)$$
+
+In words: **to compute a definite integral, find an antiderivative and evaluate it at the endpoints**.
+
+This is the bridge: integration (a process of summing) is computed via antidifferentiation (the inverse of differentiation).
+
+## Why FTC Is Astonishing
+
+Before the FTC, integrals were defined as limits of sums — a *process*. Antiderivatives were defined as inverses of derivatives — completely different.
+
+The FTC says these two seemingly unrelated operations are tightly linked: every integral evaluation reduces to finding an antiderivative. We don't actually compute Riemann sums by hand; we use FTC2 and find $F$.
+
+This is *why* differentiation and integration are studied together. The connection isn't deeply hidden — it's a direct consequence of how change accumulates.
+
+## Worked Examples
+
+**Example 1.** $\displaystyle\int_0^{\pi}\sin x\,dx$.
+
+Antiderivative: $F(x) = -\cos x$.
+
+$$\int_0^\pi\sin x\,dx = -\cos\pi - (-\cos 0) = -(-1) - (-1) = 1 + 1 = 2$$
+
+The area under one arch of $\sin x$ is exactly $2$ — a beautiful result.
+
+**Example 2.** $\displaystyle\int_1^4 (3x^2 - 2x + 1)\,dx$.
+
+Antiderivative: $F(x) = x^3 - x^2 + x$.
+
+$$F(4) - F(1) = (64 - 16 + 4) - (1 - 1 + 1) = 52 - 1 = 51$$
+
+**Example 3.** Find $\dfrac{d}{dx}\displaystyle\int_1^x \sqrt{1 + t^3}\,dt$.
+
+By FTC1, the derivative is the integrand evaluated at the upper limit:
+
+$$\frac{d}{dx}\int_1^x\sqrt{1+t^3}\,dt = \sqrt{1+x^3}$$
+
+The antiderivative of $\sqrt{1+t^3}$ has no elementary form, but we don't need it — FTC1 gives us the derivative directly.
+
+## Properties of Definite Integrals
+
+| Property | Identity |
+|---|---|
+| Reverse limits | $\int_a^b f = -\int_b^a f$ |
+| Equal limits | $\int_a^a f = 0$ |
+| Splitting | $\int_a^b f = \int_a^c f + \int_c^b f$ |
+| Linearity | $\int_a^b(\alpha f + \beta g) = \alpha\int_a^b f + \beta\int_a^b g$ |
+
+Splitting is especially useful for piecewise integrands or when you want to integrate over symmetric or geometric regions.
+
+## Common Misconceptions
+
+**Misconception 1: "$\int_a^b f$ equals the area."**
+
+Almost. It equals the **signed area** — positive where $f > 0$, negative where $f < 0$. For total geometric area, integrate $|f|$.
+
+**Misconception 2: "If $\int_a^b f = 0$, then $f = 0$ everywhere on $[a, b]$."**
+
+False. The signed areas could cancel. $\int_{-1}^1 x\,dx = 0$ even though $x \neq 0$ except at the origin.
+
+**Misconception 3: "Apply FTC blindly even if $f$ is discontinuous."**
+
+FTC requires continuity (or at most a finite number of jumps). For genuinely discontinuous $f$, you must split the integral at the discontinuities.
+
+**Misconception 4: "I have to find an antiderivative; if it doesn't exist in closed form, I can't compute the integral."**
+
+False. Many definite integrals can be computed numerically (Simpson's rule, Gaussian quadrature) even when no closed-form antiderivative exists. The integral *exists*; we just compute it differently.
+
+**Misconception 5: "FTC1 says the integral equals the function."**
+
+FTC1 says the *derivative* of the integral (with variable upper limit) equals the function. The integral itself is generally a different function (the antiderivative).
+
+## Engineering Connection
+
+The definite integral computes **accumulated quantities** — fundamental in every engineering field:
+
+- **Work done by a variable force:** $W = \int_{x_1}^{x_2} F(x)\,dx$
+- **Mass of a non-uniform rod:** $m = \int_0^L \rho(x)A(x)\,dx$
+- **Total heat transfer:** $Q = \int_{t_1}^{t_2}\dot{Q}(t)\,dt$
+- **Center of mass:** $\bar{x} = \dfrac{\int x\rho\,dV}{\int \rho\,dV}$
+- **Strain energy in a beam:** $U = \dfrac{1}{2}\int_0^L\dfrac{M^2(x)}{EI}\,dx$
+- **Volumetric flow rate through a cross-section:** $Q = \int_A v\,dA$
+- **Total electric charge:** $Q = \int_t i(t)\,dt$
+
+Whenever a "rate" or "density" varies and you need a "total," it's an integral.
+
+The FTC makes these calculations tractable: instead of summing infinitely many infinitesimal contributions, find an antiderivative and evaluate at endpoints.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Evaluate $\displaystyle\int_0^2 (x^2 + 3)\,dx$.
+</ExQ>
+<ExA>
+Antiderivative: $F(x) = x^3/3 + 3x$.
+
+$$F(2) - F(0) = (8/3 + 6) - 0 = \frac{8}{3} + 6 = \frac{26}{3}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\int_1^4\frac{1}{\sqrt{x}}\,dx$.
+</ExQ>
+<ExA>
+$\int x^{-1/2}\,dx = 2\sqrt{x} + C$.
+
+$$\left[2\sqrt{x}\right]_1^4 = 2(2) - 2(1) = \boxed{2}$$
+</ExA>
+
+### Application
+
+<ExQ>
+A force $F(x) = 100 - 10x$ N acts on an object as it moves from $x = 0$ to $x = 8$ m. Find the work done.
+</ExQ>
+<ExA>
+$$W = \int_0^8 (100 - 10x)\,dx = \left[100x - 5x^2\right]_0^8 = 800 - 320 = \boxed{480\ \text{J}}$$
+</ExA>
+
+<ExQ>
+Find $\dfrac{d}{dx}\displaystyle\int_2^x e^{-t^2}\,dt$.
+</ExQ>
+<ExA>
+By FTC1, evaluate the integrand at the upper limit:
+$$\frac{d}{dx}\int_2^x e^{-t^2}\,dt = e^{-x^2}$$
+
+(The antiderivative of $e^{-t^2}$ has no elementary form, but FTC1 gives the derivative for free.)
+</ExA>
+
+<ExQ>
+Find the area between the curve $y = x^2$ and the $x$-axis from $x = 0$ to $x = 3$.
+</ExQ>
+<ExA>
+Since $x^2 \geq 0$, signed area = geometric area:
+$$\int_0^3 x^2\,dx = \left[\frac{x^3}{3}\right]_0^3 = 9$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Evaluate $\displaystyle\int_{-2}^{2}|x|\,dx$ by splitting at $x = 0$.
+</ExQ>
+<ExA>
+$|x| = -x$ for $x < 0$, $|x| = x$ for $x \geq 0$.
+
+$$\int_{-2}^0(-x)\,dx + \int_0^2 x\,dx = \left[-\frac{x^2}{2}\right]_{-2}^0 + \left[\frac{x^2}{2}\right]_0^2 = (0-(-2)) + (2 - 0) = \boxed{4}$$
+</ExA>
+
+<ExQ>
+A simply supported beam of length $L = 6$ m carries a triangular load $q(x) = 1000 \cdot x/L$ N/m. The total load is $W = \int_0^L q(x)\,dx$. Compute $W$.
+</ExQ>
+<ExA>
+$$W = \int_0^6 \frac{1000 x}{6}\,dx = \frac{1000}{6}\cdot\frac{x^2}{2}\bigg|_0^6 = \frac{1000}{6}\cdot 18 = \boxed{3000\ \text{N}}$$
+
+This equals the area of the triangle $\tfrac{1}{2}\cdot 6\cdot 1000 = 3000$ — geometric reasoning confirms the integral.
+</ExA>
+
+<ExQ>
+The temperature in a 2-meter rod at time $t = 0$ is $T(x) = 50\sin(\pi x/2)$ °C. Find the average temperature, defined as $\bar{T} = \frac{1}{L}\int_0^L T(x)\,dx$.
+</ExQ>
+<ExA>
+$$\bar{T} = \frac{1}{2}\int_0^2 50\sin(\pi x/2)\,dx = 25\int_0^2\sin(\pi x/2)\,dx$$
+
+Antiderivative of $\sin(\pi x/2)$: $-\dfrac{2}{\pi}\cos(\pi x/2)$.
+
+$$\bar{T} = 25\cdot\left[-\frac{2}{\pi}\cos(\pi x/2)\right]_0^2 = 25\cdot\frac{-2}{\pi}\bigl(\cos\pi - \cos 0\bigr) = 25\cdot\frac{-2}{\pi}(-2) = \frac{100}{\pi} \approx \boxed{31.8°\text{C}}$$
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** $\displaystyle\int_a^b f(x)\,dx$ equals the area between $f$ and the $x$-axis on $[a, b]$. Justify with an example.
+</ExQ>
+<ExA>
+**False (in general).** The integral gives **signed area** — positive where $f > 0$, negative where $f < 0$.
+
+Counterexample: $\int_{-1}^1 x\,dx = 0$. The two regions have equal magnitude but opposite signs, so they cancel. The geometric (unsigned) area is $1/2 + 1/2 = 1 \neq 0$.
+
+For geometric area, integrate $|f(x)|$, splitting the integral wherever $f$ changes sign.
+</ExA>
+
+<ExQ>
+**Without computing.** Determine the sign of each integral, and explain:
+(a) $\int_{-2}^2 x^3\,dx$
+(b) $\int_0^2 x^3\,dx$
+(c) $\int_{-1}^1 \cos(x)\,dx$
+(d) $\int_0^{2\pi}\sin x\,dx$
+</ExQ>
+<ExA>
+(a) **Zero** — odd function on symmetric interval.
+(b) **Positive** — integrand positive throughout.
+(c) **Positive** — even function, both halves positive.
+(d) **Zero** — full period of sine cancels.
+
+Symmetry arguments save algebra and develop intuition. They are routinely used in ME (e.g., zero net force on a symmetric body in symmetric flow).
+</ExA>
+
+<ExQ>
+**FTC concept.** What does the Fundamental Theorem of Calculus say about the relationship between $f(x)$ and $G(x) = \int_a^x f(t)\,dt$? Why is this surprising?
+</ExQ>
+<ExA>
+**Statement (FTC1):** If $f$ is continuous, then $G(x) = \int_a^x f(t)\,dt$ is differentiable, and $G'(x) = f(x)$.
+
+**Why surprising:** integration is a *summing* process — accumulating all values of $f$ from $a$ up to $x$. Differentiation is an *instantaneous rate* operation. The FTC says these two seemingly different operations are *inverses*: differentiating an integral with variable upper limit gives back the integrand.
+
+This connection is what makes calculus *useful*: instead of computing infinite Riemann sums, we just find an antiderivative.
+</ExA>
+
+<ExQ>
+**Symmetry trap.** What is $\displaystyle\int_{-1}^1\dfrac{1}{x^2}\,dx$? Compute and reflect.
+</ExQ>
+<ExA>
+**Trap:** the integrand is undefined at $x = 0$. The integral is **improper** and actually **diverges** ($\to +\infty$).
+
+Naively applying FTC: $[-1/x]_{-1}^1 = -1 - 1 = -2$? That's nonsense — a positive integrand can't have negative integral.
+
+**Lesson:** FTC requires continuity on the entire interval. When the integrand has singularities, you must split the integral and analyze improper limits carefully. Many students lose points here.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**RMS value.** For a sinusoidal signal $v(t) = V_0\sin(\omega t)$, the root-mean-square value is $V_{\text{rms}} = \sqrt{\frac{1}{T}\int_0^T v^2(t)\,dt}$ where $T = 2\pi/\omega$ is one period. Compute $V_{\text{rms}}$.
+</ExQ>
+<ExA>
+$$V_{\text{rms}}^2 = \frac{1}{T}\int_0^T V_0^2\sin^2(\omega t)\,dt = \frac{V_0^2}{T}\int_0^T\frac{1-\cos(2\omega t)}{2}\,dt$$
+
+$$= \frac{V_0^2}{T}\cdot\frac{1}{2}\left[t - \frac{\sin(2\omega t)}{2\omega}\right]_0^T = \frac{V_0^2}{T}\cdot\frac{T}{2} = \frac{V_0^2}{2}$$
+
+$$V_{\text{rms}} = \frac{V_0}{\sqrt 2}$$
+
+This is the classic AC formula: 110 V RMS in your wall outlet means a peak of $110\sqrt 2 \approx 156$ V.
+</ExA>
+
+<ExQ>
+**Heat dissipated.** A resistor with $R = 100\,\Omega$ has current $i(t) = 2e^{-t}$ A flowing for $t \in [0, 5]$ s. Find the total heat dissipated.
+</ExQ>
+<ExA>
+Power: $P(t) = i^2 R = 400 e^{-2t}$ W.
+
+Heat: $Q = \int_0^5 P\,dt = 400\int_0^5 e^{-2t}\,dt = 400\cdot\left[-\frac{e^{-2t}}{2}\right]_0^5 = 200(1 - e^{-10})$.
+
+$\approx 200(1 - 0.0000454) \approx 199.99$ J.
+
+Almost all energy is dissipated in the first second or two — exponential decay concentrates contributions near $t=0$.
+</ExA>
+
+<ExQ>
+**Volume by slicing.** A solid has triangular cross-sections perpendicular to the $x$-axis with base on the $x$-axis from $0$ to $4$ m. The base of each triangle is $b(x) = \sqrt{x}$ and its height is $h(x) = 2x$. Find the volume.
+</ExQ>
+<ExA>
+Each cross-section has area $A(x) = \tfrac{1}{2}b(x)h(x) = \tfrac{1}{2}\sqrt{x}\cdot 2x = x^{3/2}$.
+
+$$V = \int_0^4 x^{3/2}\,dx = \left[\frac{2x^{5/2}}{5}\right]_0^4 = \frac{2}{5}\cdot 32 = \boxed{12.8\text{ m}^3}$$
+
+Volume by slicing converts a 3D problem into a 1D integral — a key technique in fluid mechanics and structural design.
+</ExA>
+
+<ExQ>
+**Variable load.** A beam of length $L$ carries a triangular load $q(x) = q_0 x/L$. Find the total downward force, and locate its centroid (point of resultant).
+</ExQ>
+<ExA>
+Total force:
+$$F = \int_0^L q_0 x/L\,dx = \frac{q_0}{L}\cdot\frac{L^2}{2} = \frac{q_0 L}{2}$$
+
+Centroid:
+$$\bar x = \frac{1}{F}\int_0^L x\cdot q(x)\,dx = \frac{2}{q_0 L}\int_0^L \frac{q_0 x^2}{L}\,dx = \frac{2}{L^2}\cdot\frac{L^3}{3} = \frac{2L}{3}$$
+
+The resultant of a triangular distributed load is $q_0 L/2$ acting at $2L/3$ from the start. Standard structural engineering result.
+</ExA>

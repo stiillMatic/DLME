@@ -1,0 +1,289 @@
+---
+title: Limit Laws and Techniques
+description: How limits behave under arithmetic, and the toolkit for evaluating tricky limits — factoring, conjugates, and the squeeze theorem.
+---
+
+# Limit Laws and Techniques
+
+## The Big Picture
+
+Once we understand what a limit *is*, we need rules for actually *computing* them. The good news: limits play nicely with arithmetic. If you know the limits of two pieces, you can combine them. The challenge is that some limits look like $0/0$ or $\infty - \infty$ — *indeterminate forms* that demand cleverness. This lesson is your toolkit.
+
+## Intuition First — Why Limits "Distribute"
+
+If you are walking toward a point, and your friend is also walking toward a point, then your *combined position* is also walking toward a point — the sum of the two destinations. This intuition is exactly what makes limits behave well under addition, subtraction, multiplication, and (usually) division.
+
+The key insight: **the limit operation is "linear" in the sense that it commutes with continuous arithmetic operations**. Why? Because arithmetic operations themselves are continuous — they don't suddenly jump.
+
+The exception: division can fail when the denominator approaches zero. That's where indeterminate forms appear, and they require special handling.
+
+## The Limit Laws
+
+If $\lim_{x\to a} f(x) = L$ and $\lim_{x\to a} g(x) = M$, then:
+
+| Law | Statement |
+|---|---|
+| Sum | $\lim(f + g) = L + M$ |
+| Difference | $\lim(f - g) = L - M$ |
+| Product | $\lim(f \cdot g) = L \cdot M$ |
+| Constant multiple | $\lim(cf) = cL$ |
+| Quotient | $\lim(f/g) = L/M$ provided $M \neq 0$ |
+| Power | $\lim(f^n) = L^n$ |
+| Root | $\lim\sqrt[n]{f} = \sqrt[n]{L}$ (with sign restrictions) |
+
+These are not new "facts" — they're consequences of the precise definition of a limit.
+
+## Direct Substitution
+
+For "nice" functions (polynomials, rational functions, trig, exp, log — wherever they're continuous), the limit is just the function value:
+
+$$\lim_{x\to a}f(x) = f(a)$$
+
+This is why $\lim_{x\to 3}(x^2 + 1) = 10$ — no algebraic gymnastics needed.
+
+## When Direct Substitution Fails: Indeterminate Forms
+
+The key indeterminate forms:
+
+$$\frac{0}{0}, \quad \frac{\infty}{\infty}, \quad 0 \cdot \infty, \quad \infty - \infty, \quad 0^0, \quad 1^\infty, \quad \infty^0$$
+
+These are *not* answers — they're invitations to do more work. The strategies:
+
+### Technique 1: Factoring (most common for $0/0$)
+
+$$\lim_{x\to 2}\frac{x^2 - 4}{x - 2} = \lim_{x\to 2}\frac{(x-2)(x+2)}{x-2} = \lim_{x\to 2}(x+2) = 4$$
+
+Look for a common factor that cancels.
+
+### Technique 2: Rationalizing (multiplying by conjugate)
+
+For square roots in $0/0$ form:
+
+$$\lim_{x\to 0}\frac{\sqrt{x+1} - 1}{x}$$
+
+Multiply by the conjugate $\sqrt{x+1}+1$ over itself:
+
+$$= \lim_{x\to 0}\frac{(\sqrt{x+1}-1)(\sqrt{x+1}+1)}{x(\sqrt{x+1}+1)} = \lim_{x\to 0}\frac{(x+1) - 1}{x(\sqrt{x+1}+1)} = \lim_{x\to 0}\frac{1}{\sqrt{x+1}+1} = \frac{1}{2}$$
+
+The conjugate trick converts subtraction into a difference of squares — clearing the radical.
+
+### Technique 3: Combining Fractions ($\infty - \infty$)
+
+$$\lim_{x\to 0}\left(\frac{1}{x} - \frac{1}{x(x+1)}\right) = \lim_{x\to 0}\frac{(x+1) - 1}{x(x+1)} = \lim_{x\to 0}\frac{x}{x(x+1)} = \lim_{x\to 0}\frac{1}{x+1} = 1$$
+
+Subtract the fractions first, then simplify.
+
+### Technique 4: Squeeze (Sandwich) Theorem
+
+If $g(x) \leq f(x) \leq h(x)$ near $a$, and both $g$ and $h$ tend to $L$ at $a$, then $f$ tends to $L$ as well.
+
+**Classic application:** $\lim_{x\to 0}x^2\cos(1/x) = 0$, since $-x^2 \leq x^2\cos(1/x) \leq x^2$ and both bounds tend to 0.
+
+The squeeze theorem is the only way to handle limits where the function oscillates — direct calculation is impossible, but you can still corner the answer.
+
+### Technique 5: Known Limits
+
+Some limits are foundational and worth memorizing:
+
+$$\lim_{x\to 0}\frac{\sin x}{x} = 1, \qquad \lim_{x\to 0}\frac{1 - \cos x}{x^2} = \frac{1}{2}$$
+
+$$\lim_{x\to 0}\frac{e^x - 1}{x} = 1, \qquad \lim_{x\to\infty}\left(1 + \frac{1}{x}\right)^x = e$$
+
+These are derived from definitions and used as tools.
+
+## Common Misconceptions
+
+**Misconception 1: "I can split $\lim(f/g)$ into $(\lim f)/(\lim g)$ even when $\lim g = 0$."**
+
+The quotient law *requires* $M \neq 0$. If both limits are 0, you have a $0/0$ situation that needs separate analysis. Splitting blindly will hide the indeterminacy.
+
+**Misconception 2: "$\infty - \infty = 0$."**
+
+No! $\infty$ is not a number, just shorthand for unbounded growth. $\infty - \infty$ depends entirely on *how fast* each side grows. For example:
+
+- $\lim_{x\to\infty}(x^2 - x) = +\infty$ ($x^2$ grows faster)
+- $\lim_{x\to\infty}((x+1) - x) = 1$ (steady gap)
+- $\lim_{x\to\infty}((x - x^2)) = -\infty$
+
+Always rewrite as a single fraction or factor before evaluating.
+
+**Misconception 3: "L'Hôpital's rule fixes everything."**
+
+L'Hôpital is powerful but only applies to $0/0$ or $\infty/\infty$. Apply it to $\lim_{x\to 1}(x+1)/(x+2) = 2/3$ — which is *not* indeterminate — and you get $1/1 = 1$, completely wrong. Always verify the indeterminate form *first*.
+
+**Misconception 4: "Cancelling $(x-a)$ changes the function."**
+
+After cancellation, the new function agrees with the original *except* at $x = a$ (where the original was undefined). Since limits don't care about the value at $a$, this cancellation is perfectly legal **for the purpose of computing the limit**.
+
+## Engineering Connection
+
+Indeterminate-form limits appear constantly in engineering analysis:
+
+- **Stress concentration factors:** Near a sharp corner, both stress and a geometric quantity blow up. The ratio (the *concentration factor*) is a finite limit of an $\infty/\infty$ form.
+- **Asymptotic analysis:** When studying "small parameter" behavior in fluid mechanics (e.g., Reynolds number → 0), we evaluate limits of expressions where multiple terms tend to zero or infinity simultaneously.
+- **Numerical instability:** When a numerical scheme gives $0/0$ or large numbers from cancellation of large numbers, recognizing the underlying limit lets us *reformulate* the calculation to be stable.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x \to 2}\frac{x^2 + 3x - 1}{x + 4}$.
+</ExQ>
+<ExA>
+The denominator is non-zero at $x = 2$ ($= 6$), so direct substitution works:
+$$\frac{4 + 6 - 1}{6} = \boxed{\frac{9}{6} = \frac{3}{2}}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x \to -2}\frac{x^2 - 4}{x + 2}$.
+</ExQ>
+<ExA>
+$0/0$. Factor: $(x-2)(x+2)/(x+2) = x - 2$.
+$$\lim_{x\to -2}(x-2) = \boxed{-4}$$
+</ExA>
+
+### Application
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x \to 0}\frac{\sqrt{x + 4} - 2}{x}$.
+</ExQ>
+<ExA>
+$0/0$. Multiply by the conjugate $\sqrt{x+4}+2$:
+$$\frac{(\sqrt{x+4}-2)(\sqrt{x+4}+2)}{x(\sqrt{x+4}+2)} = \frac{x+4-4}{x(\sqrt{x+4}+2)} = \frac{1}{\sqrt{x+4}+2}$$
+
+$$\lim_{x\to 0}\frac{1}{\sqrt{x+4}+2} = \frac{1}{2+2} = \boxed{\frac{1}{4}}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x \to 0}\frac{\sin(3x)}{x}$.
+</ExQ>
+<ExA>
+Use the known limit $\sin u/u \to 1$. Rewrite:
+$$\frac{\sin(3x)}{x} = 3\cdot\frac{\sin(3x)}{3x}$$
+
+Let $u = 3x$, so $u\to 0$ as $x\to 0$:
+$$\lim_{x\to 0}3\cdot\frac{\sin u}{u} = 3\cdot 1 = \boxed{3}$$
+
+The general result: $\lim_{x\to 0}\sin(kx)/x = k$.
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x\to\infty}\left(\sqrt{x^2 + x} - x\right)$.
+</ExQ>
+<ExA>
+$\infty - \infty$. Multiply by conjugate:
+$$\sqrt{x^2+x}-x = \frac{(\sqrt{x^2+x}-x)(\sqrt{x^2+x}+x)}{\sqrt{x^2+x}+x} = \frac{x}{\sqrt{x^2+x}+x}$$
+
+Divide top and bottom by $x$ (assuming $x>0$, so $\sqrt{x^2}=x$):
+$$\frac{1}{\sqrt{1+1/x}+1} \to \frac{1}{1+1} = \boxed{\frac{1}{2}}$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Evaluate $\displaystyle\lim_{x\to 0}\frac{1-\cos x}{x^2}$ using the half-angle identity $1-\cos x = 2\sin^2(x/2)$.
+</ExQ>
+<ExA>
+$$\frac{1-\cos x}{x^2} = \frac{2\sin^2(x/2)}{x^2} = \frac{1}{2}\cdot\left(\frac{\sin(x/2)}{x/2}\right)^2$$
+
+As $x\to 0$, $\sin(x/2)/(x/2) \to 1$, so:
+$$\lim_{x\to 0}\frac{1-\cos x}{x^2} = \frac{1}{2}\cdot 1^2 = \boxed{\frac{1}{2}}$$
+
+This identity drives the second-order Taylor expansion $\cos x \approx 1 - x^2/2$ — the basis of small-angle approximation in dynamics.
+</ExA>
+
+<ExQ>
+A pendulum has period $T(\theta_0) = 2\pi\sqrt{L/g}\cdot K(\theta_0)$ where $K(\theta_0) \to 1$ as $\theta_0 \to 0$. Use limit techniques to verify this gives the expected small-angle period $T_0 = 2\pi\sqrt{L/g}$.
+</ExQ>
+<ExA>
+The exact relation: $T(\theta_0) = 2\pi\sqrt{L/g}\cdot K(\theta_0)$.
+
+$$\lim_{\theta_0\to 0}T(\theta_0) = 2\pi\sqrt{L/g}\cdot\lim_{\theta_0\to 0}K(\theta_0) = 2\pi\sqrt{L/g}\cdot 1 = T_0$$
+
+This is the formal justification for small-angle pendulum analysis. The limit lets us *replace* the exact (complicated) period with the simple formula, with controlled error for small $\theta_0$.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $\lim_{x\to 0}f(x)g(x) = 0$, then either $\lim_{x\to 0}f(x) = 0$ or $\lim_{x\to 0}g(x) = 0$. Justify.
+</ExQ>
+<ExA>
+**False.** A counterexample: $f(x) = x$, $g(x) = \sin(1/x)$.
+
+$\lim_{x\to 0}f(x) = 0$ exists, but $\lim_{x\to 0}g(x)$ does **not** exist (oscillates).
+
+The product $f(x)g(x) = x\sin(1/x) \to 0$ by squeeze theorem.
+
+So a product can have limit zero even when one factor has no limit at all. The product limit law $\lim(fg) = \lim f \cdot \lim g$ only applies when **both** limits exist.
+</ExA>
+
+<ExQ>
+**Identify the indeterminate form** for each, and state whether it must be evaluated further:
+(a) $\lim_{x\to\infty}(\sqrt{x+1}-\sqrt{x})$
+(b) $\lim_{x\to 0}\dfrac{\sin x}{x^2}$
+(c) $\lim_{x\to\infty}\dfrac{\ln x}{x}$
+(d) $\lim_{x\to 0^+}x^x$
+</ExQ>
+<ExA>
+(a) $\infty - \infty$ — indeterminate. Must rationalize. (Result: $0$.)
+
+(b) $0/0$ — indeterminate. Note $\sin x \sim x$, so $\sin x/x^2 \sim 1/x \to \infty$.
+
+(c) $\infty/\infty$ — indeterminate. By L'Hôpital or growth-rate hierarchy: $\ln x \ll x$, so limit is $0$.
+
+(d) $0^0$ — indeterminate. Take $\ln$: $x\ln x \to 0$, so $x^x \to e^0 = 1$.
+
+Recognizing the indeterminate form is *step 1*; you cannot guess the answer from the form alone.
+</ExA>
+
+<ExQ>
+**Counterexample needed.** Give an example of two functions $f$ and $g$ with $\lim_{x\to 0}f(x) = \lim_{x\to 0}g(x) = 0$ such that $\lim_{x\to 0}f(x)/g(x) = 17$.
+</ExQ>
+<ExA>
+Take $f(x) = 17x$, $g(x) = x$.
+
+$\lim f = 0$, $\lim g = 0$, but $\lim f/g = \lim 17 = 17$.
+
+This shows $0/0$ is genuinely indeterminate — the answer depends on the *relative rates* at which numerator and denominator approach zero, not just on each piece individually.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Asymptotic drag.** The drag force on an object moving at velocity $v$ in air is $F(v) = \tfrac{1}{2}\rho C_D A v^2$. Show that $\lim_{v\to 0}F(v)/v = 0$. Why does this matter physically?
+</ExQ>
+<ExA>
+$\dfrac{F(v)}{v} = \dfrac{1}{2}\rho C_D A v \to 0$ as $v\to 0$.
+
+**Physical meaning:** at low speeds, the *force-per-unit-velocity* (effective damping) becomes negligibly small in this model. This actually shows a flaw — at very low speeds, viscous drag (linear in $v$, not $v^2$) dominates. So this quadratic model is only valid for high $Re$. The limit reveals where a model breaks down.
+</ExA>
+
+<ExQ>
+**Beam stiffness limit.** A simply supported beam of length $L$ under uniform load $q$ has midspan deflection $\delta = \dfrac{5qL^4}{384 EI}$. What is $\lim_{EI\to\infty}\delta$? Interpret.
+</ExQ>
+<ExA>
+$\lim_{EI\to\infty}\dfrac{5qL^4}{384 EI} = 0$.
+
+**Interpretation:** infinite stiffness ($EI\to\infty$) means the beam is rigid — no deflection. This limit defines a *bounding case* used in approximate analyses (e.g., treating very stiff members as rigid links in a structural model).
+
+The limit also tells us that to halve deflection, we need to **double** $EI$ — a linear sensitivity, very useful for design rules of thumb.
+</ExA>
+
+<ExQ>
+**Multi-step.** Find $\lim_{x\to 0}\dfrac{\tan(2x) - 2x}{x^3}$ using known limits and Taylor expansion.
+</ExQ>
+<ExA>
+Taylor series: $\tan u = u + u^3/3 + 2u^5/15 + \cdots$.
+
+$\tan(2x) = 2x + (2x)^3/3 + O(x^5) = 2x + 8x^3/3 + O(x^5)$.
+
+$\tan(2x) - 2x = 8x^3/3 + O(x^5)$.
+
+$$\frac{\tan(2x)-2x}{x^3} = \frac{8/3 + O(x^2)}{1} \to \boxed{\frac{8}{3}}$$
+
+This kind of limit is exactly what L'Hôpital handles, but the Taylor approach is often faster and reveals the structure better.
+</ExA>

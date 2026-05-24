@@ -1,0 +1,149 @@
+---
+title: Free Body Diagrams
+description: The single most useful problem-solving tool in mechanics — isolate one body, draw all the forces, then apply Newton's laws.
+---
+
+# Free Body Diagrams
+
+## The Big Picture
+
+A **free body diagram (FBD)** is a sketch showing all forces acting on a single isolated body. It's the gateway to every dynamics problem. Done right, the FBD reduces a complex situation (multiple objects, pulleys, inclines) to a clean vector sum that Newton's second law can crunch. Done sloppily, it's the source of every wrong answer in mechanics.
+
+## The 5-Step Procedure
+
+1. **Choose** the body of interest (one object at a time).
+2. **Sketch** it as a simple shape (often just a box or point).
+3. **Identify** all external forces acting on it:
+   - Weight $mg$ (downward, at center)
+   - Normal $N$ (perpendicular to contact surface)
+   - Tension $T$ (along rope, away from object)
+   - Friction $f$ (parallel to surface, opposing motion or tendency)
+   - Applied forces (pushes, pulls)
+4. **Choose axes** (often along motion direction for convenience).
+5. **Apply** $\sum\mathbf{F} = m\mathbf{a}$ in each direction.
+
+## What Forces to Include — and Exclude
+
+**Include only**: forces from *other bodies* acting on the chosen one.
+**Exclude**: forces the chosen body exerts on others (those go on *their* FBDs).
+
+Example: Block on table.
+- ON block: weight (Earth pulls), normal (table pushes).
+- BY block on table: weight (block pushes down on table) — not on block's FBD!
+
+## Worked Example: Two Blocks on a Pulley (Atwood)
+
+Two masses $m_1, m_2$ connected by rope over frictionless pulley.
+
+**FBD of $m_1$:** weight $m_1 g$ down, tension $T$ up.
+**FBD of $m_2$:** weight $m_2 g$ down, tension $T$ up.
+
+Newton's 2nd law on each (taking $m_2 > m_1$, so $m_2$ accelerates down, $m_1$ up; same acceleration magnitude $a$):
+- $m_1$: $T - m_1 g = m_1 a$
+- $m_2$: $m_2 g - T = m_2 a$
+
+Adding: $(m_2 - m_1)g = (m_1 + m_2)a \Rightarrow a = \dfrac{(m_2 - m_1)g}{m_1 + m_2}$.
+
+Then $T = m_1(g + a)$.
+
+## Coupled Systems
+
+For systems of multiple objects: separate FBDs, separate equations. Internal forces (like tensions) appear with opposite signs in different equations and often cancel when added.
+
+## Common Misconceptions
+
+**Misconception 1: "Include all forces around the object."**
+
+Include only forces ON the object, not from it.
+
+**Misconception 2: "Centripetal force is a force you draw."**
+
+Centripetal force is the *net* of real forces (tension, gravity, etc.). It's the *role*, not a separate arrow. In an FBD, draw the real forces; their sum equals $ma_c$ if circular motion.
+
+**Misconception 3: "Forces are independent of the choice of body."**
+
+Forces always come in pairs (Newton's third law). Switching to a different body changes which forces are external.
+
+**Misconception 4: "Diagonal forces should be drawn diagonally then 'projected later'."**
+
+Always **decompose** into chosen axes immediately. Easier to track signs and balance equations.
+
+## Engineering Connection
+
+- **Structural analysis:** truss members analyzed via FBDs at joints (method of joints).
+- **Robotics:** every link of a robot arm has its FBD; assemble for inverse dynamics.
+- **Vehicle dynamics:** FBD of vehicle, tires, suspension — used for handling/stability design.
+- **Aircraft:** FBD shows lift, drag, weight, thrust — the four fundamental aerodynamic forces.
+- **Failure analysis:** complex assemblies broken down via FBDs to find the over-stressed component.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Block on frictionless incline angle 30°, $m = 5$ kg. Acceleration down the slope?
+</ExQ>
+<ExA>
+FBD: weight $mg$ down, normal $N$ perpendicular to slope.
+
+Along slope: $mg\sin 30° = ma$, so $a = g\sin 30° = 4.9$ m/s².
+
+Perpendicular: $N = mg\cos 30° = 42.4$ N (used if friction present).
+</ExA>
+
+<ExQ>
+**2.** Block 10 kg on horizontal surface, applied force 50 N at 30° above horizontal. $\mu_k = 0.2$. Acceleration?
+</ExQ>
+<ExA>
+FBD: weight, normal, applied force at 30°, friction opposing motion.
+
+Vertical: $N + 50\sin 30° = mg \Rightarrow N = 98.1 - 25 = 73.1$ N.
+
+Friction: $f_k = 0.2\cdot 73.1 = 14.6$ N.
+
+Horizontal: $50\cos 30° - 14.6 = ma \Rightarrow a = (43.3 - 14.6)/10 = 2.87$ m/s².
+
+Lifting reduces normal force, reducing friction — useful trick.
+</ExA>
+
+<ExQ>
+**3.** Two blocks ($m_1 = 3$ kg, $m_2 = 5$ kg) connected on frictionless pulley. Acceleration and tension?
+</ExQ>
+<ExA>
+$a = (m_2 - m_1)g/(m_1 + m_2) = 2\cdot 9.81/8 = 2.45$ m/s².
+
+$T = m_1(g + a) = 3\cdot 12.26 = 36.8$ N.
+
+Always: $m_1 g < T < m_2 g$ in this Atwood setup.
+</ExA>
+
+<ExQ>
+**4. Engineering: Crane.** Box of 200 kg lifted by 2 cables, each at 45° from vertical. Tension in each?
+</ExQ>
+<ExA>
+FBD on box: weight $mg = 1962$ N down, two cable tensions $T$ each at 45° from vertical.
+
+Vertical: $2T\cos 45° = mg \Rightarrow T = mg/(2\cos 45°) = 1962/1.414 \approx 1387$ N.
+
+Each cable carries 1387 N — higher than half the weight! Acute angle increases tension. Vertical lift would have $T = mg/2 = 981$ N each.
+
+This is why lifting slings should hang close to vertical — angled slings amplify tension dangerously.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why isn't normal force always equal to weight?
+</ExQ>
+<ExA>
+$N = mg$ only when:
+- Object on horizontal surface AND
+- Vertical equilibrium AND
+- No other vertical forces.
+
+In other cases:
+- Incline: $N = mg\cos\theta$.
+- Accelerating elevator: $N = m(g \pm a)$.
+- Pushed down or pulled up: $N$ adjusts.
+- In free fall: $N = 0$ (apparent weightlessness).
+
+Normal force is just the surface's response to keep object from penetrating — it adjusts as needed.
+</ExA>

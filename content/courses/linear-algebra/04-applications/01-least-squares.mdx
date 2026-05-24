@@ -1,0 +1,193 @@
+---
+title: Least Squares and Regression
+description: Finding the "best" solution when no exact solution exists — the foundation of fitting data, calibrating models, and machine learning.
+---
+
+# Least Squares and Regression
+
+## The Big Picture
+
+Real engineering data is noisy. Real measurements have error. So when you have a system $A\mathbf{x} = \mathbf{b}$ with **more equations than unknowns**, there's usually *no exact solution* — every choice of $\mathbf{x}$ leaves a residual. **Least squares** picks the $\mathbf{x}$ that minimizes the total squared error. It's the linear algebra of fitting models to data, and it's the conceptual foundation of all statistical and ML estimation.
+
+## Intuition First — Projection
+
+Geometrically: $\mathbf{b}$ doesn't live in the column space of $A$. The "best" we can do is **project** $\mathbf{b}$ onto Col($A$) and solve $A\mathbf{x} = \mathbf{b}_{\text{proj}}$.
+
+The projection minimizes the distance $\|\mathbf{b} - A\mathbf{x}\|$ — i.e., the **residual**.
+
+So least squares = projecting + solving the resulting solvable system.
+
+## The Normal Equations
+
+The least-squares solution satisfies:
+
+$$A^TA\,\mathbf{x} = A^T\mathbf{b}$$
+
+**Derivation:** the residual $\mathbf{r} = \mathbf{b} - A\mathbf{x}$ should be orthogonal to Col($A$), i.e., $A^T\mathbf{r} = 0$. Expanding: $A^T(\mathbf{b} - A\mathbf{x}) = 0 \Rightarrow A^TA\mathbf{x} = A^T\mathbf{b}$.
+
+If $A^TA$ is invertible:
+
+$$\mathbf{x}^* = (A^TA)^{-1}A^T\mathbf{b}$$
+
+The matrix $(A^TA)^{-1}A^T$ is the **left pseudo-inverse** of $A$ (sometimes written $A^+$).
+
+## Worked Example: Linear Regression
+
+Fit $y = m x + c$ to data points $(x_i, y_i)$. The system:
+
+$$\begin{pmatrix}x_1 & 1\\ x_2 & 1\\ \vdots & \vdots\\ x_n & 1\end{pmatrix}\begin{pmatrix}m\\ c\end{pmatrix} = \begin{pmatrix}y_1\\ y_2\\ \vdots\\ y_n\end{pmatrix}$$
+
+That's $A\mathbf{x} = \mathbf{b}$ with $n$ rows, 2 unknowns. Apply normal equations:
+
+$$\begin{pmatrix}\sum x_i^2 & \sum x_i\\ \sum x_i & n\end{pmatrix}\begin{pmatrix}m\\ c\end{pmatrix} = \begin{pmatrix}\sum x_iy_i\\ \sum y_i\end{pmatrix}$$
+
+This 2x2 system gives the classical regression coefficients.
+
+## Beyond Linear: Polynomial Regression
+
+Fit $y = c_0 + c_1 x + c_2 x^2 + \cdots + c_p x^p$ by setting up:
+
+$$A = \begin{pmatrix}1 & x_1 & x_1^2 & \cdots\\ 1 & x_2 & x_2^2 & \cdots\\ \vdots\end{pmatrix}$$
+
+Same machinery — different basis.
+
+## Why "Squared" Error?
+
+Why minimize $\sum r_i^2$ instead of $\sum |r_i|$ or $\sum r_i^4$?
+
+1. **Smoothness:** squared error is differentiable everywhere; normal equations are linear.
+2. **Statistical justification:** if errors are Gaussian, least squares = maximum likelihood.
+3. **Geometric clarity:** corresponds to orthogonal projection.
+
+Different objectives exist (L1 / Huber for robustness), but L2 is by far most common.
+
+## Common Misconceptions
+
+**Misconception 1: "Least squares always has a unique solution."**
+
+Requires $A^TA$ invertible, i.e., $A$ has full column rank. Otherwise infinite solutions — use **regularization** (Ridge regression) or **pseudo-inverse**.
+
+**Misconception 2: "Use $\mathbf{x} = A^{-1}\mathbf{b}$ for overdetermined systems."**
+
+$A^{-1}$ doesn't exist for non-square $A$. The normal equations or pseudo-inverse $A^+$ are the proper tools.
+
+**Misconception 3: "Solving normal equations directly is best."**
+
+Numerically poor. $A^TA$ has condition number $\kappa(A)^2$ — squared sensitivity. For better numerical stability use QR decomposition or SVD.
+
+**Misconception 4: "Least squares is only for linear models."**
+
+You can fit *nonlinear* models that are *linear in parameters* (like polynomials, splines, Fourier series) — still linear least squares.
+
+For models nonlinear in parameters, need iterative nonlinear least squares (Gauss-Newton, Levenberg-Marquardt).
+
+## Engineering Connection
+
+- **Calibrating sensors:** fit voltage→pressure relationship from calibration measurements.
+- **System identification:** estimate transfer function parameters from input-output data.
+- **Computer vision:** estimate camera homography from corresponding points.
+- **GPS positioning:** triangulate position from satellite range measurements — over-determined system, least squares.
+- **Machine learning:** linear regression is the simplest predictive model and the building block for many others.
+- **Curve fitting in experiments:** smooth noisy measurements with polynomial / spline regression.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Fit $y = mx$ to points $(1, 2), (2, 3), (3, 4)$.
+</ExQ>
+<ExA>
+$A = (1, 2, 3)^T$, $\mathbf{b} = (2, 3, 4)^T$.
+
+$A^TA = 14$, $A^T\mathbf{b} = 2 + 6 + 12 = 20$.
+
+$m = 20/14 = 10/7 \approx 1.43$.
+
+Best line through origin has slope $\approx 1.43$.
+</ExA>
+
+<ExQ>
+**2.** Fit $y = c$ (constant) to $y$-values $\{2, 4, 5, 9\}$.
+</ExQ>
+<ExA>
+$A = (1, 1, 1, 1)^T$, $\mathbf{b} = (2, 4, 5, 9)^T$.
+
+$A^TA = 4$, $A^T\mathbf{b} = 20$.
+
+$c = 5$. **Just the mean** — the least-squares constant is always the sample mean.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** Fit $y = mx + c$ to $(1, 1), (2, 3), (3, 4), (4, 7)$.
+</ExQ>
+<ExA>
+$A = \begin{pmatrix}1 & 1\\ 2 & 1\\ 3 & 1\\ 4 & 1\end{pmatrix}$, $\mathbf{b} = (1, 3, 4, 7)^T$.
+
+$A^TA = \begin{pmatrix}30 & 10\\ 10 & 4\end{pmatrix}$, $A^T\mathbf{b} = \begin{pmatrix}51\\ 15\end{pmatrix}$.
+
+Solve: $\det = 120 - 100 = 20$, $(A^TA)^{-1} = \frac{1}{20}\begin{pmatrix}4 & -10\\ -10 & 30\end{pmatrix}$.
+
+$\mathbf{x} = (A^TA)^{-1}A^T\mathbf{b} = \frac{1}{20}(4\cdot 51 - 10\cdot 15, -10\cdot 51 + 30\cdot 15) = \frac{1}{20}(54, -60) = (2.7, -3)$.
+
+Wait, let me redo: $(204 - 150, -510 + 450) = (54, -60)$. Divided by 20: $(2.7, -3)$.
+
+$m = 2.7$, $c = -3$. Hmm, let me sanity check: at $x = 1$, $y = -0.3$ (actual 1). At $x = 4$, $y = 7.8$ (actual 7).
+
+The line $y = 2.7x - 3$ passes near the data — reasonable fit.
+
+Actually let me recompute: $\bar x = 2.5, \bar y = 15/4 = 3.75$. Slope $m = (\text{sum}(x_iy_i) - n\bar x\bar y)/(\text{sum}(x_i^2) - n\bar x^2)$.
+
+$\sum x_iy_i = 1 + 6 + 12 + 28 = 47$. Hmm I had 51. Let me recompute: $1\cdot 1 + 2\cdot 3 + 3\cdot 4 + 4\cdot 7 = 1 + 6 + 12 + 28 = 47$.
+
+So $A^T\mathbf{b} = (47, 15)$.
+
+$\mathbf{x} = (4\cdot 47 - 10\cdot 15, -10\cdot 47 + 30\cdot 15)/20 = (188-150, -470+450)/20 = (38, -20)/20 = (1.9, -1)$.
+
+So $m = 1.9, c = -1$. Line: $y = 1.9x - 1$. At $x=1$: 0.9 (vs 1). At $x=4$: 6.6 (vs 7). Better fit.
+</ExA>
+
+<ExQ>
+**4. Engineering: Spring constant from data.** Force-extension data: $(F, x) = (10, 0.5), (20, 1.1), (30, 1.4), (40, 2.0)$ N, mm. Find best $k$ for $F = kx$.
+</ExQ>
+<ExA>
+Fit $F = kx$, so $A = (0.5, 1.1, 1.4, 2.0)^T$, $\mathbf{b} = (10, 20, 30, 40)^T$.
+
+$A^TA = 0.25 + 1.21 + 1.96 + 4 = 7.42$.
+$A^T\mathbf{b} = 5 + 22 + 42 + 80 = 149$.
+
+$k = 149/7.42 \approx 20.08$ N/mm.
+
+Spring constant is approximately 20 N/mm. The data has slight nonlinearity (real springs aren't perfectly Hookean), but least squares gives a useful linear estimate.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** Least squares minimizes the maximum residual. Justify.
+</ExQ>
+<ExA>
+**False.** Least squares minimizes the **sum of squared** residuals — i.e., the 2-norm.
+
+Minimizing the maximum residual (∞-norm) is a different problem called **Chebyshev approximation** — solved by linear programming, not normal equations.
+
+Least squares is sensitive to outliers (squaring amplifies large residuals); robust methods like L1 (sum of absolute values) are less affected.
+</ExA>
+
+<ExQ>
+**6.** Why is $A^TA$ always symmetric, and why does this matter for least squares?
+</ExQ>
+<ExA>
+$(A^TA)^T = A^T(A^T)^T = A^TA$ — symmetric by construction.
+
+Why it matters:
+- Symmetric positive-semidefinite matrices have **real, nonnegative eigenvalues**.
+- Numerical solvers can use specialized algorithms (Cholesky factorization) — twice as fast as general LU.
+- The condition number squares: $\kappa(A^TA) = \kappa(A)^2$, sometimes causing numerical issues.
+
+The symmetric structure is what makes least squares so tractable — but the condition-squaring warns us to use QR or SVD methods for ill-conditioned systems.
+</ExA>

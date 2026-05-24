@@ -1,0 +1,72 @@
+---
+title: Complex Numbers and the Complex Plane
+description: Algebra of complex numbers, the complex plane, modulus, argument, and conjugates.
+---
+
+# Complex Numbers and the Complex Plane
+
+A **complex number** is $z = x + iy$ where $x, y \in \mathbb{R}$ and $i^2 = -1$.
+
+- **Real part:** $\text{Re}(z) = x$
+- **Imaginary part:** $\text{Im}(z) = y$
+- **Modulus:** $|z| = \sqrt{x^2 + y^2}$
+- **Complex conjugate:** $\bar{z} = x - iy$
+
+## The Complex Plane ($z$-plane)
+
+Complex numbers are points in a 2D plane: the horizontal axis is $\text{Re}(z)$, the vertical axis is $\text{Im}(z)$.
+
+Key identity: $z\bar{z} = x^2 + y^2 = |z|^2$
+
+## Arithmetic
+
+$$z_1 + z_2 = (x_1+x_2) + i(y_1+y_2)$$
+
+$$z_1 \cdot z_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + x_2y_1)$$
+
+$$\frac{z_1}{z_2} = \frac{z_1\bar{z}_2}{|z_2|^2} \qquad (z_2 \neq 0)$$
+
+## Triangle Inequality
+
+$$|z_1 + z_2| \leq |z_1| + |z_2|$$
+
+## Why Complex Numbers Appear in Engineering
+
+- **Vibrations:** response of a damped system to $e^{i\omega t}$ is complex; real part gives physical motion
+- **Electrical circuits:** impedance $Z = R + i\omega L + 1/(i\omega C)$ is complex
+- **Fluid mechanics:** the complex potential $w = \phi + i\psi$ encodes both velocity potential and streamfunction
+- **Signal processing:** Fourier transforms use complex exponentials
+
+---
+
+## Practice Problems
+
+<ExQ>
+Compute $(2 + 3i)(1 - 2i)$ and express in the form $a + bi$.
+</ExQ>
+<ExA>
+$$(2+3i)(1-2i) = 2(1) + 2(-2i) + 3i(1) + 3i(-2i)$$
+$$= 2 - 4i + 3i - 6i^2 = 2 - i + 6 = \boxed{8 - i}$$
+</ExA>
+
+<ExQ>
+Compute $\dfrac{3+4i}{1-2i}$ and express in $a + bi$ form.
+</ExQ>
+<ExA>
+Multiply numerator and denominator by $\overline{(1-2i)} = 1+2i$:
+
+$$\frac{(3+4i)(1+2i)}{(1-2i)(1+2i)} = \frac{3+6i+4i+8i^2}{1+4} = \frac{3+10i-8}{5} = \frac{-5+10i}{5} = \boxed{-1+2i}$$
+</ExA>
+
+<ExQ>
+Show that $|z_1 z_2| = |z_1||z_2|$ for $z_1 = 1+i$ and $z_2 = 2-3i$.
+</ExQ>
+<ExA>
+$z_1 z_2 = (1+i)(2-3i) = 2-3i+2i-3i^2 = 2-i+3 = 5-i$
+
+$|z_1 z_2| = \sqrt{25+1} = \sqrt{26}$
+
+$|z_1| = \sqrt{1+1} = \sqrt{2}$, $|z_2| = \sqrt{4+9} = \sqrt{13}$
+
+$|z_1||z_2| = \sqrt{2}\cdot\sqrt{13} = \sqrt{26}$ ✓
+</ExA>

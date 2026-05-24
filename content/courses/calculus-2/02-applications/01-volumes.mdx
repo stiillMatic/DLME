@@ -1,0 +1,118 @@
+---
+title: Volumes by Slicing and Shells
+description: Computing volumes of 3D solids by integrating cross-sections — disks, washers, and cylindrical shells.
+---
+
+# Volumes by Slicing and Shells
+
+## The Big Picture
+
+Many engineering shapes — tanks, pipes, turbine blades, lenses — are obtained by rotating 2D regions around an axis. Computing their volume becomes a 1D integral once we slice the solid into cross-sections. The two main techniques are **disk/washer method** (slices perpendicular to the axis of rotation) and **cylindrical shells** (slices parallel to the axis). Both transform 3D volume problems into 1D calculus.
+
+## Method 1: Disk / Washer (Perpendicular Slicing)
+
+For a solid of revolution about the $x$-axis, with outer radius $R(x)$ and inner radius $r(x)$:
+
+$$V = \int_a^b \pi[R(x)^2 - r(x)^2]\,dx$$
+
+If solid (no hole), $r(x) = 0$ and we get **disks**: $V = \pi\int_a^b R(x)^2\,dx$.
+
+With a hole: **washers**.
+
+## Method 2: Cylindrical Shells (Parallel Slicing)
+
+Rotate around $y$-axis, radius $x$, height $h(x)$, thickness $dx$. Each shell has surface area $2\pi x\cdot h(x)$.
+
+$$V = \int_a^b 2\pi x\,h(x)\,dx$$
+
+When to use which:
+- Disks: when integration variable matches the axis of rotation.
+- Shells: when integration variable is *perpendicular* to the axis, or disks would require solving for inverse.
+
+## General Slicing (Any Cross-Section)
+
+Volume = $\int A(x)\,dx$ where $A(x)$ is the area of the cross-section at $x$.
+
+This generalizes: any solid (not just revolutions) can be sliced. Famous example: solid with circular base whose vertical slices are equilateral triangles.
+
+## Worked Example: Sphere
+
+Rotate $y = \sqrt{R^2 - x^2}$ around $x$-axis from $-R$ to $R$:
+
+$$V = \pi\int_{-R}^R (R^2 - x^2)\,dx = \pi[R^2 x - x^3/3]_{-R}^R = \pi(R^3 - R^3/3 - (-R^3 + R^3/3)) = \frac{4\pi R^3}{3}$$
+
+Standard sphere volume — derived in 2 lines.
+
+## Common Misconceptions
+
+**Misconception 1: "Always use disks."**
+
+Sometimes shells are dramatically easier — when the function is more naturally expressed in $x$ but rotation is about $y$-axis, shells avoid solving for inverse.
+
+**Misconception 2: "Forgot $\pi$."**
+
+Each disk has area $\pi R^2$. Forgetting $\pi$ is a common error — every revolution-volume integral includes it.
+
+**Misconception 3: "$dx$ is always the thickness."**
+
+For shells: $dx$ is the *radial* thickness. For disks: $dx$ is the slice thickness (perpendicular to axis). Different physical interpretations.
+
+## Engineering Connection
+
+- **Tank design:** volume of cylindrical, conical, spherical tanks computed via these methods.
+- **Lens design:** lens volume from rotation of profile curve.
+- **Turbine/pump impellers:** complex profiles integrated via washer method.
+- **Material amounts:** how much material to cast a cone-shaped part.
+- **Fluid volumes:** in irregularly shaped containers.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Volume of cone (radius $R$, height $h$) by integration.
+</ExQ>
+<ExA>
+$y = (R/h)x$ for $x \in [0, h]$ (rotated about $x$-axis).
+
+$V = \pi\int_0^h (Rx/h)^2\,dx = \pi R^2/h^2 \cdot h^3/3 = \pi R^2 h/3$.
+</ExA>
+
+<ExQ>
+**2.** Volume from rotating $y = x^2$ on $[0, 2]$ around $x$-axis.
+</ExQ>
+<ExA>
+$V = \pi\int_0^2 x^4\,dx = \pi\cdot 32/5 = 32\pi/5 \approx 20.1$.
+</ExA>
+
+<ExQ>
+**3.** Same region rotated around $y$-axis (use shells).
+</ExQ>
+<ExA>
+$V = 2\pi\int_0^2 x\cdot x^2\,dx = 2\pi\int x^3\,dx = 2\pi\cdot 4 = 8\pi \approx 25.1$.
+</ExA>
+
+<ExQ>
+**4. Engineering: Tank.** A cylindrical tank, radius 2 m, height 5 m. With base shape $y = x^2/4$ (parabolic bottom). Volume?
+</ExQ>
+<ExA>
+Solid bounded above by $y = 5$, below by $y = x^2/4$, with $x^2 \leq 16$ (i.e., $|x| \leq 4$, but let's take radius 2 → $|x| \leq 2$).
+
+Disk method (rotated): $V = \pi\int_0^5 r^2(y)\,dy$ where $r^2 = 4y$ from inverting $y = r^2/4$.
+
+For $y \in [0, 1]$ (parabolic bottom): $V_{\text{bottom}} = \pi\int_0^1 4y\,dy = 2\pi$.
+
+For $y \in [1, 5]$ (cylinder): $V = \pi\cdot 4\cdot 4 = 16\pi$.
+
+Total: $18\pi \approx 56.5$ m³.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** When does the shell method beat the disk method?
+</ExQ>
+<ExA>
+- When the integration is cleaner in one variable.
+- When inverting the curve to express it as $x = f(y)$ is hard.
+
+Example: rotating $y = e^x$ on $[0, 1]$ about $y$-axis. Disk method needs $x = \ln y$, awkward limits. Shell method: $V = 2\pi\int_0^1 x e^x\,dx$ — solvable via parts.
+</ExA>

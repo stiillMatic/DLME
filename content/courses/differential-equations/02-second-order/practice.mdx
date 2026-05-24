@@ -1,0 +1,75 @@
+---
+title: Chapter 2 Practice — Second-Order ODEs
+description: Mixed practice on homogeneous, inhomogeneous, and mechanical-vibration problems.
+---
+
+# Chapter 2 Practice — Second-Order ODEs
+
+<ExQ>
+**1.** Solve $y'' - y = 0$, $y(0) = 1$, $y'(0) = 0$.
+</ExQ>
+<ExA>
+Char: $r^2 - 1 = 0 \Rightarrow r = \pm 1$. $y = (e^t + e^{-t})/2 = \cosh t$.
+</ExA>
+
+<ExQ>
+**2.** Solve $y'' + 2y' + y = 0$, $y(0) = 1, y'(0) = 1$.
+</ExQ>
+<ExA>
+Char: $(r+1)^2 = 0$, repeated root $r = -1$. $y = (C_1 + C_2 t)e^{-t}$.
+
+IC: $C_1 = 1$, $-C_1 + C_2 = 1 \Rightarrow C_2 = 2$. $y = (1 + 2t)e^{-t}$.
+</ExA>
+
+<ExQ>
+**3.** Solve $y'' + 4y = \sin t$.
+</ExQ>
+<ExA>
+$y_h = C_1\cos 2t + C_2\sin 2t$. Try $y_p = A\sin t$: $-A + 4A = 1 \Rightarrow A = 1/3$.
+
+$y = C_1\cos 2t + C_2\sin 2t + \sin(t)/3$.
+</ExA>
+
+<ExQ>
+**4. Engineering.** A spring system: $\ddot x + 4\dot x + 5x = 0$, $x(0) = 1, \dot x(0) = 0$. Classify damping; solve.
+</ExQ>
+<ExA>
+$\omega_n = \sqrt 5$, $\zeta = 4/(2\sqrt 5) \approx 0.894 < 1$ — underdamped.
+
+Char: $r = -2 \pm i$. $x = e^{-2t}(C_1\cos t + C_2\sin t)$.
+
+ICs: $C_1 = 1$, $-2 + C_2 = 0 \Rightarrow C_2 = 2$.
+
+$x = e^{-2t}(\cos t + 2\sin t)$.
+</ExA>
+
+<ExQ>
+**5. Resonance.** Solve $y'' + y = \cos t$ (forcing matches natural frequency!).
+</ExQ>
+<ExA>
+$y_h = C_1\cos t + C_2\sin t$.
+
+Modified guess: $y_p = t(A\cos t + B\sin t)$. Compute and substitute (algebra-heavy): $A = 0$, $B = 1/2$.
+
+$y_p = t\sin(t)/2$. Amplitude grows linearly with time — **resonance**.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why does damping prevent infinite resonant amplitudes?
+</ExQ>
+<ExA>
+With damping ($c > 0$), the steady-state amplitude is $X = F_0/\sqrt{(k - m\omega^2)^2 + (c\omega)^2}$.
+
+At resonance ($k = m\omega^2$), the first term vanishes but the second remains: $X = F_0/(c\omega)$, finite as long as $c \neq 0$.
+
+Damping dissipates energy, balancing the energy injection from forcing. Without damping, $X \to \infty$ at resonance — infinite amplitude.
+</ExA>
+
+<ExQ>
+**7. Multi-step.** A pendulum's small-angle equation: $\ddot\theta + (g/L)\theta = 0$. Find period $T$ in terms of $g, L$.
+</ExQ>
+<ExA>
+$\omega_n = \sqrt{g/L}$. $T = 2\pi/\omega_n = 2\pi\sqrt{L/g}$.
+
+For $L = 1$ m, $g = 9.81$: $T \approx 2.006$ s. Pendulum approximation.
+</ExA>

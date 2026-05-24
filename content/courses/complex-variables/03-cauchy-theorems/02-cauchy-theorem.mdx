@@ -1,0 +1,70 @@
+---
+title: Cauchy–Goursat Theorem and Consequences
+description: The most important theorem in complex analysis — analytic functions have zero integral over closed curves.
+---
+
+# Cauchy–Goursat Theorem
+
+**Theorem:** If $f(z)$ is analytic in a simply connected region $D$, and $C$ is any closed curve in $D$, then:
+
+$$\oint_C f(z)\,dz = 0$$
+
+This is remarkable: **any** closed path integral of an analytic function vanishes — regardless of the path shape.
+
+## Consequences
+
+**1. Path independence:** If $f$ is analytic in $D$, then $\int_{z_1}^{z_2} f(z)\,dz$ depends only on the endpoints, not the path.
+
+**2. Deformation of contours:** Two paths from $z_1$ to $z_2$ give the same integral, as long as $f$ is analytic in the region between them.
+
+**3. Antiderivative:** In a simply connected region, analytic functions have an analytic antiderivative $F$ with $F'(z) = f(z)$.
+
+## Cauchy Integral Formula
+
+If $f$ is analytic inside and on a simple closed contour $C$ (counterclockwise), and $z_0$ is inside $C$:
+
+$$f(z_0) = \frac{1}{2\pi i}\oint_C \frac{f(z)}{z - z_0}\,dz$$
+
+This extraordinary result says the value of an analytic function **anywhere inside** a region is completely determined by its values on the boundary.
+
+**Derivatives:**
+
+$$f^{(n)}(z_0) = \frac{n!}{2\pi i}\oint_C \frac{f(z)}{(z-z_0)^{n+1}}\,dz$$
+
+## Implications for Analytic Functions
+
+- Analytic functions are infinitely differentiable (all derivatives exist)
+- They satisfy the mean value property: $f(z_0)$ = average of $f$ on any circle around $z_0$
+- They cannot have isolated "peaks" — the maximum modulus occurs on the boundary
+
+## Engineering Application
+
+The Cauchy integral formula is used to **invert Laplace transforms** — recovering a time-domain signal from its frequency-domain representation by evaluating a contour integral in the complex $s$-plane.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Evaluate $\displaystyle\oint_C \frac{e^z}{z-1}\,dz$ where $C$ is the circle $|z| = 2$ (counterclockwise).
+</ExQ>
+<ExA>
+$f(z) = e^z$ is analytic everywhere. The point $z_0 = 1$ is inside $|z| = 2$.
+
+By the Cauchy Integral Formula:
+
+$$\oint_C \frac{e^z}{z-1}\,dz = 2\pi i\, f(1) = 2\pi i\, e^1 = \boxed{2\pi i\, e}$$
+</ExA>
+
+<ExQ>
+Evaluate $\displaystyle\oint_C \frac{\cos z}{z^3}\,dz$ where $C$ is $|z| = 1$ (counterclockwise).
+</ExQ>
+<ExA>
+Use the formula for derivatives with $f(z) = \cos z$, $z_0 = 0$, $n = 2$:
+
+$$\oint_C \frac{\cos z}{z^3}\,dz = \oint_C \frac{\cos z}{(z-0)^{2+1}}\,dz = \frac{2\pi i}{2!}f''(0)$$
+
+$f''(z) = -\cos z$, so $f''(0) = -1$.
+
+$$= \frac{2\pi i}{2}(-1) = \boxed{-\pi i}$$
+</ExA>

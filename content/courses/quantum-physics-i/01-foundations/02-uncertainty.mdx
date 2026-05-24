@@ -1,0 +1,143 @@
+---
+title: The Heisenberg Uncertainty Principle
+description: A fundamental limit on how precisely you can know complementary properties — position vs momentum, energy vs time.
+---
+
+# The Heisenberg Uncertainty Principle
+
+## The Big Picture
+
+Heisenberg's 1927 principle states that certain pairs of properties — position and momentum, energy and time — cannot both be precisely known. This isn't a measurement limitation; it's a fundamental property of nature. The uncertainty principle is what makes quantum mechanics qualitatively different from classical physics. It explains why atoms are stable, why zero-point energy exists, and why the ground state of every quantum system is fuzzy.
+
+## Statement
+
+For position and momentum:
+
+$$\Delta x \cdot \Delta p \geq \hbar/2$$
+
+For energy and time:
+
+$$\Delta E \cdot \Delta t \geq \hbar/2$$
+
+$\Delta$ denotes the standard deviation. The product cannot be reduced below $\hbar/2$.
+
+## Intuition From Waves
+
+Localizing a wave in space requires superposing many wavelengths. A pulse with $\Delta x$ narrow has $\Delta k$ broad: $\Delta x\cdot\Delta k \gtrsim 1$. 
+
+Since $p = \hbar k$: $\Delta x\cdot\Delta p \gtrsim \hbar$.
+
+This is **Fourier uncertainty**, true for all wave phenomena — and the underlying mathematics of Heisenberg's principle.
+
+## Try It — Trade Position for Momentum
+
+<GaussianUncertaintyDemo />
+
+## Worked Example: Hydrogen Atom Stability
+
+Classically, an electron should spiral into the nucleus. Why doesn't it?
+
+Confining electron to small $\Delta x$ requires large $\Delta p$ (uncertainty). Kinetic energy $\sim p^2/(2m)$ scales as $1/\Delta x^2$. Potential energy $\sim -1/\Delta x$.
+
+Total energy minimized at some optimal $\Delta x$ — the **Bohr radius** $a_0 \approx 0.529\,\text{Å}$.
+
+Without uncertainty, atoms would collapse. The principle is why matter has structure.
+
+## Energy-Time Form
+
+Short-lived particles have intrinsic energy spread:
+
+$$\Delta E \gtrsim \hbar/\Delta t$$
+
+A particle living $\Delta t = 10^{-23}$ s has $\Delta E \gtrsim 10^{-11}$ J ≈ 100 MeV. Used in particle physics to extract particle lifetimes from decay widths.
+
+**Virtual particles:** can exist for time $\Delta t$ if their energy violates conservation by $\Delta E\sim\hbar/\Delta t$. Basis of Feynman diagrams in QFT.
+
+## Common Misconceptions
+
+**Misconception 1: "Uncertainty is a measurement limitation."**
+
+It's intrinsic. Even with perfect instruments, the *quantum state* itself has uncertainty $\geq\hbar/2$ in conjugate variables.
+
+**Misconception 2: "Knowing one variable destroys the other."**
+
+Sort of. Measurement collapses the state, projecting onto an eigenstate of the measured observable. After measurement, the conjugate variable becomes maximally uncertain.
+
+**Misconception 3: "$\Delta E\cdot\Delta t \geq\hbar/2$ means time is an operator."**
+
+No — time isn't an observable in standard QM. $\Delta t$ is interpreted as "duration over which the state changes significantly," not as a quantum operator with uncertainty.
+
+## Engineering Connection
+
+- **Electron microscope resolution limits:** at higher resolution, electrons need higher momentum, but quantum mechanics imposes a floor.
+- **Atomic clock stability:** Allan variance ultimately limited by energy-time uncertainty.
+- **Squeezed states in interferometry:** trade-off uncertainties to enhance precision in one direction (LIGO uses squeezed light).
+- **Quantum noise in amplifiers:** sets minimum noise level (standard quantum limit).
+- **Zero-point energy in MEMS:** intrinsic vibration even at $T = 0$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Electron confined to atomic dimensions ~$0.1$ nm. Minimum momentum uncertainty?
+</ExQ>
+<ExA>
+$\Delta p \geq \hbar/(2\Delta x) = 1.055\times 10^{-34}/(2\cdot 10^{-10}) \approx 5.27\times 10^{-25}$ kg·m/s.
+
+Corresponding velocity: $\Delta v = \Delta p/m \approx 5.8\times 10^5$ m/s.
+
+So an atomic electron has ~10⁶ m/s velocity from uncertainty alone — not stationary.
+</ExA>
+
+<ExQ>
+**2.** A particle with lifetime 1 ns. Energy uncertainty?
+</ExQ>
+<ExA>
+$\Delta E \geq \hbar/(2\cdot 10^{-9}) \approx 5.3\times 10^{-26}$ J ≈ 0.33 μeV.
+
+(Resonance line width in absorption spectra reflects this.)
+</ExA>
+
+<ExQ>
+**3. Engineering: AFM tip resolution.** AFM tip mass 10⁻¹⁵ kg, position resolution 1 pm. Momentum and velocity uncertainty?
+</ExQ>
+<ExA>
+$\Delta p \geq \hbar/(2\cdot 10^{-12}) \approx 5.3\times 10^{-23}$ kg·m/s.
+
+$\Delta v = \Delta p/m \approx 5.3\times 10^{-8}$ m/s.
+
+Quantum noise sets a position-velocity trade-off. Modern AFMs operate near (but not at) this limit. Cooling and active control narrow the practical uncertainty further.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does uncertainty mean atoms can't collapse to a point?
+</ExQ>
+<ExA>
+Confining the electron to smaller $\Delta x$ requires larger $\Delta p$, hence larger kinetic energy $\sim p^2/(2m)$.
+
+The potential energy goes as $-e^2/(4\pi\varepsilon_0 r)$, which becomes more negative for smaller $r$. But kinetic energy grows as $1/r^2$ — faster.
+
+So at some radius (the Bohr radius), the total energy is minimum. Smaller $r$ costs more in kinetic energy than it saves in potential.
+
+This is why atoms are stable and have a definite size. Uncertainty principle is the **physics behind chemistry**.
+</ExA>
+
+<ExQ>
+**5.** Use uncertainty to estimate the ground state energy of a harmonic oscillator.
+</ExQ>
+<ExA>
+For oscillator: $E = p^2/(2m) + (1/2)kx^2$.
+
+With $\Delta x\cdot\Delta p \approx \hbar/2$, estimate $E\sim p^2/(2m) + (1/2)k x^2$ with $p \approx \hbar/(2x)$:
+
+$E(x) = \hbar^2/(8mx^2) + (1/2)kx^2$.
+
+Minimize w.r.t. $x$: $dE/dx = -\hbar^2/(4mx^3) + kx = 0$.
+
+$x^4 = \hbar^2/(4mk)$, $x^2 = \hbar/(2\sqrt{mk}) = \hbar/(2m\omega)$.
+
+$E_{\min} = \hbar^2/(8m)\cdot 2m\omega/\hbar + (1/2)k\cdot\hbar/(2m\omega) = \hbar\omega/4 + \hbar\omega/4 = \hbar\omega/2$.
+
+Matches exact result: $E_0 = \hbar\omega/2$. **Zero-point energy** — vibration persists even at absolute zero, by uncertainty.
+</ExA>

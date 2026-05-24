@@ -1,0 +1,122 @@
+---
+title: Rectilinear and Curvilinear Motion
+description: Describing motion of particles along straight or curved paths — the kinematic foundation of dynamics.
+---
+
+# Rectilinear and Curvilinear Motion
+
+## The Big Picture
+
+Dynamics describes the motion of bodies under forces. Before getting to forces, we need a complete language for describing motion itself: position, velocity, acceleration in 1D (rectilinear) and 2D/3D (curvilinear). The most useful insight: in curved motion, acceleration has both a *tangential* (changing speed) and *normal* (changing direction) component. Mastering this decomposition unlocks the dynamics of cars on roads, satellites in orbit, and pendulums.
+
+## Rectilinear (1D) Motion
+
+Position $s(t)$, velocity $v = ds/dt$, acceleration $a = dv/dt = d^2s/dt^2$.
+
+Useful relation: $a\,ds = v\,dv$ (eliminate $t$). Used when $a$ depends on $s$ rather than $t$.
+
+**Example.** Spring force gives $a = -ks/m$. Then:
+$\int v\,dv = -k/m\int s\,ds \Rightarrow v^2/2 = -(k/m)s^2/2 + C$ — energy-like result.
+
+## Curvilinear Motion: Tangent-Normal (TN) Coordinates
+
+Along a curved path, decompose velocity and acceleration along:
+
+- $\hat{\mathbf{t}}$: unit tangent (direction of motion)
+- $\hat{\mathbf{n}}$: unit normal (perpendicular, toward center of curvature)
+
+**Velocity:** $\mathbf{v} = v\hat{\mathbf{t}}$ (always along path).
+
+**Acceleration:**
+$$\mathbf{a} = \frac{dv}{dt}\hat{\mathbf{t}} + \frac{v^2}{\rho}\hat{\mathbf{n}}$$
+
+- Tangential: $a_t = dv/dt$ (changes speed)
+- Normal: $a_n = v^2/\rho$ (changes direction; $\rho$ = radius of curvature)
+
+For uniform circular motion: $a_t = 0$, $a_n = v^2/r$ — constant centripetal.
+
+## Curvilinear Motion: Polar Coordinates
+
+In 2D with origin and angle $\theta$:
+
+**Position:** $\mathbf{r} = r\hat{\mathbf{r}}$.
+
+**Velocity:** $\mathbf{v} = \dot r\hat{\mathbf{r}} + r\dot\theta\hat{\boldsymbol{\theta}}$.
+
+**Acceleration:** $\mathbf{a} = (\ddot r - r\dot\theta^2)\hat{\mathbf{r}} + (r\ddot\theta + 2\dot r\dot\theta)\hat{\boldsymbol{\theta}}$.
+
+The "$2\dot r\dot\theta$" is the **Coriolis-like** term — appears when both radial and angular motion change.
+
+## Common Misconceptions
+
+**Misconception 1: "Acceleration always points the way velocity points."**
+
+In curvilinear motion, $\mathbf{a}$ has both tangential AND normal components. Even at constant speed (turning), acceleration is nonzero — pointing toward the center.
+
+**Misconception 2: "Centripetal force is a separate force."**
+
+It's not — it's the *resultant* of real forces (tension, gravity, friction) directed toward center. The "centripetal" label describes its function, not its origin.
+
+**Misconception 3: "Polar coordinate acceleration is just $\ddot r$ and $r\ddot\theta$."**
+
+The complete radial acceleration includes $-r\dot\theta^2$ (centripetal); the angular includes $2\dot r\dot\theta$ (Coriolis-like). Forgetting these gives wrong dynamics.
+
+## Engineering Connection
+
+- **Vehicle dynamics:** lateral acceleration $v^2/r$ in turns determines tire force needed and roll-over risk.
+- **Roller coaster design:** $a_n$ at loops sets the gravity multiples ("g-forces") felt by riders.
+- **Satellite orbits:** $v_{\text{orbit}}^2/r = g_{\text{eff}}$ at orbital altitude — circular orbit speed.
+- **Robotic arm trajectory planning:** specify desired path and speed profile, compute joint accelerations via TN decomposition.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** A car accelerates at constant 2 m/s² along a circular track of radius 100 m, starting from rest. Find the magnitude of acceleration after 5 s.
+</ExQ>
+<ExA>
+At $t=5$: $v = 10$ m/s.
+$a_t = 2$ m/s², $a_n = v^2/r = 100/100 = 1$ m/s².
+$|a| = \sqrt{4 + 1} = \sqrt 5 \approx 2.24$ m/s².
+</ExA>
+
+<ExQ>
+**2.** A particle moves along $y = x^2$ at constant speed 5 m/s. Find $a_n$ at $x = 1$.
+</ExQ>
+<ExA>
+Curvature $\kappa = |y''|/(1 + y'^2)^{3/2}$. At $x = 1$: $y' = 2$, $y'' = 2$, $\kappa = 2/(5)^{3/2} = 0.179$.
+
+$a_n = v^2 \kappa = 25\cdot 0.179 = 4.47$ m/s².
+</ExA>
+
+<ExQ>
+**3. Engineering: Race car.** Track radius 50 m, speed 30 m/s. Find $a_n$. If $\mu = 0.8$, can the tires sustain this turn?
+</ExQ>
+<ExA>
+$a_n = 900/50 = 18$ m/s².
+
+Max friction acceleration = $\mu g = 0.8\cdot 9.81 = 7.85$ m/s². 
+
+$18 > 7.85$ — tires CANNOT sustain the turn. Car would skid. Maximum safe speed: $v = \sqrt{\mu g r} = \sqrt{392.4} \approx 19.8$ m/s ≈ 71 km/h.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is the Coriolis-like term $2\dot r\dot\theta$ in polar coordinates not zero, even at constant $r$?
+</ExQ>
+<ExA>
+At constant $r$, $\dot r = 0$, so the term IS zero. The Coriolis term arises only when both radial and angular motion are nonzero — i.e., a particle moving outward in a rotating frame.
+
+Famously: water spinning down a drain (in idealized Coriolis-only context) curves due to this term in rotating coordinates.
+</ExA>
+
+<ExQ>
+**5. Multi-step.** A satellite in circular orbit at altitude 400 km. Earth radius 6378 km, $g$ at orbit ≈ 8.66 m/s². Find orbital speed and period.
+</ExQ>
+<ExA>
+$g = v^2/r \Rightarrow v = \sqrt{g r} = \sqrt{8.66\cdot 6{,}778{,}000} = 7659$ m/s ≈ 27,600 km/h.
+
+Period: $T = 2\pi r/v = 5559$ s ≈ 92.6 min.
+
+This matches LEO satellite values (ISS, ~93 min orbit).
+</ExA>

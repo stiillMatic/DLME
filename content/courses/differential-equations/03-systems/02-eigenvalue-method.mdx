@@ -1,0 +1,136 @@
+---
+title: Eigenvalue Method
+description: Solving linear systems using eigenvectors — turning calculus into linear algebra.
+---
+
+# Eigenvalue Method for Linear Systems
+
+## The Big Picture
+
+For a constant-coefficient linear system $\dot{\mathbf{x}} = A\mathbf{x}$, **eigenvectors of $A$ are decoupled directions**: along each eigenvector, the system reduces to a scalar exponential. By expressing solutions in the eigenvector basis, we convert a coupled system into independent 1D problems. The eigenvalues directly tell us stability, oscillation, and decay rates. This is one of the cleanest examples of how linear algebra and ODEs reinforce each other.
+
+## The Core Idea
+
+Try $\mathbf{x}(t) = e^{\lambda t}\mathbf{v}$ for some constant vector $\mathbf{v}$.
+
+Then $\dot{\mathbf{x}} = \lambda e^{\lambda t}\mathbf{v}$, and $A\mathbf{x} = e^{\lambda t}A\mathbf{v}$.
+
+Equality requires $A\mathbf{v} = \lambda\mathbf{v}$ — exactly the **eigenvalue equation**.
+
+## Solution
+
+If $A$ has $n$ linearly independent eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_n$ with eigenvalues $\lambda_1, \ldots, \lambda_n$:
+
+$$\mathbf{x}(t) = c_1 e^{\lambda_1 t}\mathbf{v}_1 + c_2 e^{\lambda_2 t}\mathbf{v}_2 + \cdots + c_n e^{\lambda_n t}\mathbf{v}_n$$
+
+The constants $c_i$ are determined by ICs.
+
+## Stability Classification
+
+Eigenvalues $\lambda$ of $A$ classify the equilibrium at origin:
+
+| Eigenvalue type | System behavior |
+|---|---|
+| All real, negative | Stable node — exponential decay |
+| All real, positive | Unstable node — exponential growth |
+| Real, mixed signs | Saddle — unstable in some directions |
+| Complex with negative real part | Stable spiral — damped oscillation |
+| Complex with positive real part | Unstable spiral — growing oscillation |
+| Complex purely imaginary | Center — pure oscillation |
+
+This classification is universal — it applies to mechanical systems, ecological models, and control loops alike.
+
+## Worked Example
+
+$\dot{\mathbf{x}} = \begin{pmatrix}1 & 2\\ 4 & 3\end{pmatrix}\mathbf{x}$, $\mathbf{x}(0) = (1, 0)^T$.
+
+**Eigenvalues:** $\det(A - \lambda I) = (1-\lambda)(3-\lambda) - 8 = \lambda^2 - 4\lambda - 5 = 0 \Rightarrow \lambda = 5, -1$.
+
+**Eigenvectors:**
+$\lambda = 5$: $(A - 5I)\mathbf{v} = 0 \Rightarrow \mathbf{v}_1 = (1, 2)^T$.
+$\lambda = -1$: $\mathbf{v}_2 = (1, -1)^T$.
+
+$\mathbf{x}(t) = c_1 e^{5t}(1, 2)^T + c_2 e^{-t}(1, -1)^T$.
+
+ICs: $c_1 + c_2 = 1$, $2 c_1 - c_2 = 0 \Rightarrow c_2 = 2c_1$, $3c_1 = 1$, $c_1 = 1/3$, $c_2 = 2/3$.
+
+$\mathbf{x}(t) = \tfrac{1}{3}e^{5t}(1, 2) + \tfrac{2}{3}e^{-t}(1, -1)$.
+
+The system has a **saddle**: one direction grows ($\lambda = 5$), one decays ($\lambda = -1$). Long-term, the growing mode dominates.
+
+## Complex Eigenvalues
+
+If $\lambda = \alpha + i\beta$ with eigenvector $\mathbf{v} = \mathbf{a} + i\mathbf{b}$, the *real* solution is:
+
+$$e^{\alpha t}[\cos(\beta t)\mathbf{a} - \sin(\beta t)\mathbf{b}], \quad e^{\alpha t}[\sin(\beta t)\mathbf{a} + \cos(\beta t)\mathbf{b}]$$
+
+These give two real linearly independent solutions. The complex algebra is just intermediate.
+
+## Common Misconceptions
+
+**Misconception 1: "Eigenvalue method requires diagonalizable $A$."**
+
+For nondiagonalizable $A$ (defective), use *generalized eigenvectors* and Jordan form. The principle is the same; the algebra is more involved.
+
+**Misconception 2: "Stability is determined by trace alone."**
+
+Trace = sum of eigenvalues; determinant = product. Stability requires *all* eigenvalues to have negative real parts. For 2D: need trace $< 0$ AND determinant $> 0$.
+
+**Misconception 3: "Real eigenvalues mean exponential, not oscillatory."**
+
+Yes — pure real eigenvalues give exponential modes. Oscillation requires complex (conjugate-pair) eigenvalues.
+
+## Engineering Connection
+
+- **Modal analysis of structures:** eigenvalues of stiffness/mass matrices give natural frequencies; eigenvectors give mode shapes.
+- **State-space control:** pole placement = choosing $A$ (via feedback) so its eigenvalues are in desired locations for desired transient behavior.
+- **Linearized fluid stability:** eigenvalues of linearized Navier-Stokes operators determine if a base flow is stable to perturbations (Kelvin-Helmholtz, Tollmien-Schlichting waves).
+- **Population dynamics:** eigenvalues of community matrices determine ecosystem stability.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the general solution of $\dot{\mathbf{x}} = \begin{pmatrix}3 & 1\\ 1 & 3\end{pmatrix}\mathbf{x}$.
+</ExQ>
+<ExA>
+$\det(A - \lambda I) = (3-\lambda)^2 - 1 = 0 \Rightarrow \lambda = 2, 4$.
+
+$\lambda = 2$: $\mathbf{v} = (1, -1)^T$. $\lambda = 4$: $\mathbf{v} = (1, 1)^T$.
+
+$\mathbf{x}(t) = c_1 e^{2t}(1, -1)^T + c_2 e^{4t}(1, 1)^T$.
+
+Both eigenvalues positive → **unstable** equilibrium at origin.
+</ExA>
+
+<ExQ>
+For the system with matrix $A = \begin{pmatrix}-2 & 1\\ -1 & -2\end{pmatrix}$, find the eigenvalues and classify the equilibrium.
+</ExQ>
+<ExA>
+$\det(A - \lambda I) = (\lambda + 2)^2 + 1 = 0 \Rightarrow \lambda = -2 \pm i$.
+
+Complex with negative real part → **stable spiral**. Trajectories spiral inward to origin with frequency 1 rad/s and decay rate 2/s.
+</ExA>
+
+<ExQ>
+**Engineering: Predator-prey linearization.** A linearized system near an equilibrium has $A = \begin{pmatrix}0 & -2\\ 1 & 0\end{pmatrix}$. Determine the dynamics.
+</ExQ>
+<ExA>
+$\det(A - \lambda I) = \lambda^2 + 2 = 0 \Rightarrow \lambda = \pm i\sqrt 2$.
+
+Pure imaginary eigenvalues → **center**. Trajectories are closed orbits — the populations cycle indefinitely.
+
+This matches the famous **Lotka-Volterra cycles** observed in real ecosystems (e.g., Canadian lynx and snowshoe hare populations).
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does the eigenvalue method "decouple" the system into independent equations?
+</ExQ>
+<ExA>
+In the eigenvector basis, $A$ becomes diagonal: $\Lambda = P^{-1}AP$. The transformed coordinates $\mathbf{y} = P^{-1}\mathbf{x}$ satisfy $\dot{\mathbf{y}} = \Lambda\mathbf{y}$ — each component independent of the others.
+
+Each $y_i$ evolves as $y_i(t) = c_i e^{\lambda_i t}$. Once you've solved for all $y_i$, transform back: $\mathbf{x}(t) = P\mathbf{y}(t)$.
+
+This is the same idea as principal axes in mechanics: rotate to diagonal form, work in that basis, then transform back.
+</ExA>

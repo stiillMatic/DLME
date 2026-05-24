@@ -1,0 +1,51 @@
+{
+  "title": "Multivariable Calculus",
+  "description": "Extends calculus to functions of several variables — essential for field equations in mechanics, thermodynamics, and electromagnetics.",
+  "level": "intermediate",
+  "area": "Mathematics",
+  "tags": ["Calculus", "Mathematics", "MIT 18.02"],
+  "chapters": [
+    {
+      "title": "Vectors and 3D Space",
+      "slug": "01-vectors",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-vectors-dot-cross", "title": "Vectors, Dot Product, and Cross Product", "order": 1 },
+        { "slug": "02-lines-planes", "title": "Lines, Planes, and Quadric Surfaces", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Partial Derivatives",
+      "slug": "02-partial-derivatives",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-partial-derivatives", "title": "Partial Derivatives and the Gradient", "order": 1 },
+        { "slug": "02-chain-rule", "title": "Multivariable Chain Rule", "order": 2 },
+        { "slug": "03-optimization", "title": "Optimization with Lagrange Multipliers", "order": 3 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Multiple Integrals",
+      "slug": "03-multiple-integrals",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-double-integrals", "title": "Double Integrals", "order": 1 },
+        { "slug": "02-triple-integrals", "title": "Triple Integrals and Change of Variables", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Vector Calculus",
+      "slug": "04-vector-calculus",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-line-integrals", "title": "Line Integrals and Green's Theorem", "order": 1 },
+        { "slug": "02-surface-integrals", "title": "Surface Integrals and Stokes' Theorem", "order": 2 },
+        { "slug": "03-divergence-theorem", "title": "Divergence Theorem", "order": 3 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 4 }
+      ]
+    }
+  ]
+}

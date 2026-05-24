@@ -1,0 +1,79 @@
+---
+title: Change of Basis for Linear Transformations
+description: How the matrix of a linear map changes when you change the coordinate system.
+---
+
+# Change of Basis for Linear Transformations
+
+The same linear transformation $T$ can be represented by different matrices in different bases. Knowing how to change between them is essential for finding the simplest (diagonal) representation.
+
+## Basis and Coordinates
+
+Given a basis $\mathcal{B} = \{\mathbf{b}_1, \ldots, \mathbf{b}_n\}$ for $V$, every vector $\mathbf{v}$ has a unique representation:
+
+$$\mathbf{v} = c_1\mathbf{b}_1 + \cdots + c_n\mathbf{b}_n$$
+
+The coordinates $[c_1, \ldots, c_n]^T$ are denoted $[\mathbf{v}]_\mathcal{B}$.
+
+## The Change-of-Basis Matrix
+
+Let $\mathcal{B} = \{\mathbf{b}_1, \ldots, \mathbf{b}_n\}$ and $\mathcal{C} = \{\mathbf{c}_1, \ldots, \mathbf{c}_n\}$ be two bases. The **change-of-basis matrix** $P_{\mathcal{B} \to \mathcal{C}}$ satisfies:
+
+$$[\mathbf{v}]_\mathcal{C} = P_{\mathcal{B} \to \mathcal{C}}\, [\mathbf{v}]_\mathcal{B}$$
+
+Its columns are the coordinates of the old basis vectors expressed in the new basis.
+
+## Transformation Matrix Under Change of Basis
+
+If $A$ is the matrix of $T$ in the standard basis, and $P$ is the matrix whose columns are the new basis vectors, then the matrix of $T$ in the new basis is:
+
+$$A' = P^{-1} A P$$
+
+Two matrices related this way are called **similar**. Similar matrices represent the same linear transformation in different bases — they have the same eigenvalues, determinant, and trace.
+
+## Diagonalization via Eigenvectors
+
+The most important application: if $A$ has $n$ linearly independent eigenvectors $\mathbf{p}_1, \ldots, \mathbf{p}_n$, let $P = [\mathbf{p}_1 \cdots \mathbf{p}_n]$. Then:
+
+$$P^{-1}AP = \Lambda = \begin{pmatrix}\lambda_1 & & \\ & \ddots & \\ & & \lambda_n\end{pmatrix}$$
+
+In the eigenvector basis, the transformation is purely scaling — the simplest possible form.
+
+## Orthogonal Transformations
+
+When the new basis is **orthonormal**, $P$ is orthogonal ($P^{-1} = P^T$), so:
+
+$$A' = P^T A P$$
+
+This is the basis of the principal axis transformation in mechanics, where we rotate to the principal stress/strain directions.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Matrix $A = \begin{pmatrix}3&1\\0&2\end{pmatrix}$ is expressed in the standard basis. Find its representation in the basis $\mathcal{B} = \{(1,0),(1,1)\}$.
+</ExQ>
+<ExA>
+Change-of-basis matrix (columns = new basis vectors in standard coordinates):
+$$P = \begin{pmatrix}1&1\\0&1\end{pmatrix}, \quad P^{-1} = \begin{pmatrix}1&-1\\0&1\end{pmatrix}$$
+
+$$A' = P^{-1}AP = \begin{pmatrix}1&-1\\0&1\end{pmatrix}\begin{pmatrix}3&1\\0&2\end{pmatrix}\begin{pmatrix}1&1\\0&1\end{pmatrix}$$
+$$= \begin{pmatrix}3&-1\\0&2\end{pmatrix}\begin{pmatrix}1&1\\0&1\end{pmatrix} = \begin{pmatrix}3&2\\0&2\end{pmatrix}$$
+</ExA>
+
+<ExQ>
+The stress tensor $\boldsymbol{\sigma} = \begin{pmatrix}80&30\\30&20\end{pmatrix}$ MPa is given in the $x$-$y$ frame. Find the principal stresses (eigenvalues) and the principal directions (eigenvectors), and verify that $\boldsymbol{\sigma}$ is diagonal in the eigenvector basis.
+</ExQ>
+<ExA>
+**Eigenvalues:** $\det(\boldsymbol{\sigma} - \lambda I) = (80-\lambda)(20-\lambda) - 900 = 0$
+
+$$\lambda^2 - 100\lambda + 700 = 0 \implies \lambda = \frac{100 \pm \sqrt{10000-2800}}{2} = \frac{100 \pm 84.85}{2}$$
+
+$$\sigma_1 = 92.4\ \text{MPa}, \quad \sigma_2 = 7.6\ \text{MPa}$$
+
+In the principal (eigenvector) basis:
+$$\boldsymbol{\sigma}' = \begin{pmatrix}92.4 & 0\\ 0 & 7.6\end{pmatrix}\ \text{MPa}$$
+
+No shear stress acts on principal planes — this is the defining property of principal stresses.
+</ExA>

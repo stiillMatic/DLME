@@ -1,0 +1,121 @@
+---
+title: Carnot Cycle and Efficiency Limits
+description: The most efficient possible cycle — and the universal limit on heat-engine performance.
+---
+
+# Carnot Cycle and Efficiency Limits
+
+## The Big Picture
+
+The Carnot cycle is the *theoretically most efficient* heat engine operating between two temperature reservoirs. No real engine can exceed Carnot efficiency. Understanding why — and what causes real engines to fall short — is essential for designing engines, refrigerators, and any cyclic thermal device. The Carnot result is a profound consequence of the second law.
+
+## The Carnot Cycle
+
+A reversible cycle composed of four processes:
+
+1. **Isothermal expansion** at $T_H$ (heat $Q_H$ absorbed)
+2. **Adiabatic expansion** ($T$ drops from $T_H$ to $T_L$)
+3. **Isothermal compression** at $T_L$ (heat $Q_L$ rejected)
+4. **Adiabatic compression** ($T$ rises from $T_L$ to $T_H$)
+
+## Carnot Efficiency
+
+$$\eta_{\text{Carnot}} = 1 - \frac{T_L}{T_H}$$
+
+(Temperatures in Kelvin.)
+
+**Examples:**
+- $T_H = 600$ K, $T_L = 300$ K: $\eta = 50\%$
+- $T_H = 1500$ K, $T_L = 300$ K: $\eta = 80\%$ (high-temperature gas turbine)
+
+## Why No Real Engine Reaches Carnot
+
+Real engines have:
+- **Finite-time heat transfer** (not isothermal in reality)
+- **Friction**
+- **Non-reversibility** (mixing, turbulence)
+- **Heat loss** through walls
+
+Each of these *increases entropy* and reduces efficiency below Carnot.
+
+## Refrigerators and Heat Pumps
+
+Run a Carnot cycle in reverse:
+
+**COP (cooling):** $\text{COP}_{\text{ref}} = T_L/(T_H - T_L)$
+**COP (heating):** $\text{COP}_{\text{HP}} = T_H/(T_H - T_L)$
+
+A heat pump delivers more heat than the work input — by "scooping up" ambient heat.
+
+## Common Misconceptions
+
+**Misconception 1: "Carnot is achievable in practice."**
+
+It's a *theoretical limit* — only achieved in the limit of infinitely slow, frictionless operation. Real engines run finite cycles with finite power, sacrificing some efficiency.
+
+**Misconception 2: "Higher $T_H$ alone improves efficiency."**
+
+Both higher $T_H$ AND lower $T_L$ improve $\eta$. In practice, $T_L$ is constrained by ambient (sea, river, atmosphere) — so improving real engines means raising $T_H$ via better materials.
+
+**Misconception 3: "Efficiency = work output / fuel mass."**
+
+That's *fuel-specific* efficiency. The thermodynamic efficiency is work / heat input. They're related but distinct.
+
+## Engineering Connection
+
+- **Power plants:** modern combined-cycle gas turbines reach ~60% efficiency vs. Carnot ~75% at their operating temperatures.
+- **Internal combustion engines:** typically 25-35% efficient — far below Carnot due to non-ideal cycle and friction.
+- **Refrigerators:** kitchen fridge has COP ~3–4 vs. Carnot COP ~10 between freezer and ambient.
+- **Heat pumps:** for heating, COP > 1 means more heat delivered than electric power consumed — basis of efficient HVAC.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A Carnot engine operates between 800 K and 300 K. Efficiency?
+</ExQ>
+<ExA>
+$\eta = 1 - 300/800 = 0.625 = 62.5\%$.
+</ExA>
+
+<ExQ>
+A Carnot engine produces 100 kJ of work, with input from 500 K reservoir and rejecting to 300 K. Find $Q_H$ and $Q_L$.
+</ExQ>
+<ExA>
+$\eta = 1 - 300/500 = 0.4$. So $Q_H = W/\eta = 250$ kJ.
+
+$Q_L = Q_H - W = 150$ kJ.
+</ExA>
+
+<ExQ>
+A refrigerator removes 200 kJ from inside at 0°C, ambient 30°C. Find min work needed.
+</ExQ>
+<ExA>
+COP$_{\text{Carnot}} = 273/(303 - 273) = 9.1$.
+
+$W_{\text{min}} = Q_L/\text{COP} = 200/9.1 = 22.0$ kJ.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why can't entropy decrease in a cycle?
+</ExQ>
+<ExA>
+For a complete cycle, the working fluid returns to its initial state, so $\Delta S_{\text{system}} = 0$ (state function).
+
+But the *universe's* entropy changes: $\Delta S_{\text{univ}} = \Delta S_{\text{system}} + \Delta S_{\text{surr}} \geq 0$.
+
+For a reversible (Carnot) cycle: $\Delta S_{\text{univ}} = 0$. For real cycles: $> 0$.
+
+The "entropy generation" inside is what makes real cycles less efficient than Carnot.
+</ExA>
+
+<ExQ>
+**Engineering.** Two heat engines: Engine A (Carnot) at $T_H = 1000$ K, $T_L = 300$ K. Engine B (Carnot) at $T_H = 600$ K, $T_L = 300$ K. Compare efficiencies.
+</ExQ>
+<ExA>
+$\eta_A = 1 - 0.3 = 70\%$.
+$\eta_B = 1 - 0.5 = 50\%$.
+
+Higher $T_H$ → higher efficiency. This is why power plants push for ever-higher steam/gas temperatures (limited by metallurgy of turbine blades).
+</ExA>

@@ -1,0 +1,59 @@
+---
+title: Chapter 1 Practice — Vectors and 3D Geometry
+description: Practice on 3D coordinates, dot/cross products.
+---
+
+# Chapter 1 Practice — Vectors and 3D Geometry
+
+<ExQ>
+**1.** Find unit vector along $(2, -2, 1)$.
+</ExQ>
+<ExA>
+$|\mathbf{v}| = 3$. $\hat{\mathbf{v}} = (2/3, -2/3, 1/3)$.
+</ExA>
+
+<ExQ>
+**2.** Are $(1, 2, 3), (2, 4, 6), (1, 1, 1)$ coplanar?
+</ExQ>
+<ExA>
+Check triple product. $(2,4,6)\times(1,1,1) = (4-6, 6-2, 2-4) = (-2, 4, -2)$.
+
+$(1,2,3)\cdot(-2, 4, -2) = -2 + 8 - 6 = 0$.
+
+Triple product = 0 → **coplanar**.
+</ExA>
+
+<ExQ>
+**3.** Equation of plane through $(1, 0, 1)$ perpendicular to $(2, -1, 3)$.
+</ExQ>
+<ExA>
+$2(x-1) - (y) + 3(z-1) = 0 \Rightarrow 2x - y + 3z = 5$.
+</ExA>
+
+<ExQ>
+**4.** Distance from $(3, 1, 2)$ to plane $2x + y - z = 4$.
+</ExQ>
+<ExA>
+$d = |2(3) + 1 - 2 - 4|/\sqrt{4+1+1} = |1|/\sqrt 6 = 1/\sqrt 6 \approx 0.408$.
+</ExA>
+
+<ExQ>
+**5. Engineering.** Three GPS satellites at $(0, 0, 20000)$, $(20000, 0, 0)$, $(0, 20000, 0)$ km. Find the plane through them.
+</ExQ>
+<ExA>
+Two edge vectors: $(20000, 0, -20000), (0, 20000, -20000)$.
+
+Normal: cross product = $(0\cdot(-20000) - (-20000)\cdot 20000, (-20000)\cdot 0 - 20000\cdot(-20000), 20000^2 - 0)$
+$= (4\times 10^8, 4\times 10^8, 4\times 10^8)$.
+
+Plane: $x + y + z = 20000$.
+</ExA>
+
+<ExQ>
+**6. Conceptual.** Why does the cross product give the normal to a plane spanned by two vectors?
+</ExQ>
+<ExA>
+Cross product is perpendicular to *both* operands by definition. Two non-parallel vectors define a unique plane; their cross product is normal to it.
+
+This is why $\mathbf{r}_u\times\mathbf{r}_v$ gives the surface normal in parametric surface integrals — the partials span the tangent plane.
+</ExA>

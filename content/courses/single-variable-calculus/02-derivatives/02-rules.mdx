@@ -1,0 +1,321 @@
+---
+title: Differentiation Rules
+description: The toolkit that lets you compute derivatives in seconds — power, product, quotient rules, and the patterns that make them work.
+---
+
+# Differentiation Rules
+
+## The Big Picture
+
+We *could* compute every derivative from the limit definition — but life is too short. Mathematicians figured out the patterns long ago: a small set of rules covers virtually every function you'll encounter. These rules aren't arbitrary tricks; they're consequences of the limit definition combined with algebraic manipulation. Once internalized, you'll differentiate complex expressions almost as fast as you can read them.
+
+## Intuition First — Why Rules Exist
+
+Imagine you had to redo arithmetic from base principles every time. You'd never finish. Instead, you memorize $7 \times 8 = 56$ and move on.
+
+Differentiation is the same. Yes, $\dfrac{d}{dx}x^7 = 7x^6$ comes from the limit definition. But once you've derived it, you don't redo the work — you remember the *pattern*: "power rule says drop the exponent in front, reduce by one."
+
+The rules below are *all* derived from the same limit machinery. Knowing where they come from helps you remember them and apply them correctly.
+
+## Rule 1: The Constant Rule
+
+$$\frac{d}{dx}[c] = 0$$
+
+A constant function has no change. Slope = 0.
+
+## Rule 2: The Power Rule
+
+$$\frac{d}{dx}\!\left[x^n\right] = nx^{n-1}$$
+
+Valid for **any** real exponent $n$ (positive, negative, fractional, irrational).
+
+**Derivation sketch (positive integer $n$):** Use the binomial expansion in the limit definition:
+
+$$\frac{(x+h)^n - x^n}{h} = \frac{x^n + nx^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots - x^n}{h} = nx^{n-1} + (\text{terms with }h)$$
+
+As $h \to 0$, only $nx^{n-1}$ survives.
+
+**Examples:**
+- $\dfrac{d}{dx}x^5 = 5x^4$
+- $\dfrac{d}{dx}\sqrt{x} = \dfrac{d}{dx}x^{1/2} = \dfrac{1}{2}x^{-1/2} = \dfrac{1}{2\sqrt{x}}$
+- $\dfrac{d}{dx}\dfrac{1}{x^3} = \dfrac{d}{dx}x^{-3} = -3x^{-4} = -\dfrac{3}{x^4}$
+
+## Rule 3: Sum & Constant Multiple Rules
+
+$$\frac{d}{dx}[f \pm g] = f' \pm g', \qquad \frac{d}{dx}[c\,f] = c\,f'$$
+
+Differentiation distributes over addition. You can pull out constants. This is the **linearity** of differentiation — a property it shares with integration, limits, and most "nice" operations.
+
+**Example:**
+$$\frac{d}{dx}(3x^4 - 5x^2 + 7) = 12x^3 - 10x + 0 = 12x^3 - 10x$$
+
+## Rule 4: The Product Rule
+
+$$\frac{d}{dx}[f \cdot g] = f'g + fg'$$
+
+In words: "derivative of first times second, plus first times derivative of second."
+
+**Why isn't $(fg)' = f'g'$?** Because differentiation does NOT distribute over products. Counter-example: $f = g = x$. Then $(fg)' = (x^2)' = 2x$. But $f'g' = 1 \cdot 1 = 1$. They disagree.
+
+**Derivation:** Add and subtract a clever zero:
+
+$$\frac{f(x+h)g(x+h) - f(x)g(x)}{h} = \frac{f(x+h)g(x+h) - f(x)g(x+h) + f(x)g(x+h) - f(x)g(x)}{h}$$
+
+$$= g(x+h)\frac{f(x+h)-f(x)}{h} + f(x)\frac{g(x+h)-g(x)}{h}$$
+
+As $h\to 0$: $g(x+h)\to g(x)$, the first quotient $\to f'(x)$, the second $\to g'(x)$. Result: $f'g + fg'$.
+
+**Example:** Differentiate $h(x) = x^2 \sin x$.
+
+$f = x^2$, $g = \sin x$, $f' = 2x$, $g' = \cos x$.
+
+$$h'(x) = 2x\sin x + x^2\cos x$$
+
+## Rule 5: The Quotient Rule
+
+$$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \frac{f'g - fg'}{g^2}$$
+
+In words: "low D-high minus high D-low, all over the square of low" (mnemonic).
+
+**Derivation insight:** Write $f/g = f \cdot g^{-1}$ and apply product + chain rule, or derive directly. The structure mirrors the product rule but with a minus sign and a $g^2$ denominator.
+
+**Example:** Differentiate $h(x) = \dfrac{x^2 + 1}{x - 3}$.
+
+$f = x^2+1$, $g = x-3$, $f' = 2x$, $g' = 1$.
+
+$$h'(x) = \frac{2x(x-3) - (x^2+1)(1)}{(x-3)^2} = \frac{2x^2 - 6x - x^2 - 1}{(x-3)^2} = \frac{x^2 - 6x - 1}{(x-3)^2}$$
+
+## Rule 6: Trig and Exp/Log
+
+$$\frac{d}{dx}\sin x = \cos x, \qquad \frac{d}{dx}\cos x = -\sin x$$
+
+$$\frac{d}{dx}e^x = e^x, \qquad \frac{d}{dx}\ln x = \frac{1}{x}$$
+
+$$\frac{d}{dx}\tan x = \sec^2 x, \qquad \frac{d}{dx}\sec x = \sec x \tan x$$
+
+The exponential function $e^x$ is the *unique* function (up to scaling) equal to its own derivative — a profound property that makes it appear in every differential equation.
+
+**Why $\frac{d}{dx}\sin x = \cos x$?** From the limit definition:
+
+$$\frac{\sin(x+h) - \sin x}{h} = \frac{\sin x\cos h + \cos x\sin h - \sin x}{h} = \sin x\cdot\frac{\cos h - 1}{h} + \cos x\cdot\frac{\sin h}{h}$$
+
+The first quotient → 0, the second → 1 (known limits). Result: $\cos x$.
+
+## Common Misconceptions
+
+**Misconception 1: "$(fg)' = f'g'$."**
+
+Wrong, as shown above. Always use the product rule.
+
+**Misconception 2: "$(f/g)' = f'/g'$."**
+
+Also wrong. Use the quotient rule. Test: $(x^2/x)' = (x)' = 1$, but $(x^2)'/(x)' = 2x/1 = 2x$. They disagree.
+
+**Misconception 3: "Power rule applies only to integer exponents."**
+
+It works for *all* real exponents, including $\sqrt{x} = x^{1/2}$, $1/x = x^{-1}$, even $x^\pi$. The proof for non-integer exponents uses logarithms but the formula is the same.
+
+**Misconception 4: "I can apply the power rule to $a^x$ where $a$ is a constant base."**
+
+NO. $a^x$ is an *exponential* function, not a power function. Different rule:
+$$\frac{d}{dx}a^x = a^x\ln a$$
+Power rule applies to $x$ raised to a constant; exponential rule applies to a constant raised to $x$.
+
+**Misconception 5: "Differentiating a polynomial reduces its degree by 1 each time, eventually reaching zero."**
+
+True for polynomials specifically: $f(x) = x^n$ becomes $0$ after $n+1$ differentiations. But this is a *property of polynomials*, not of differentiation in general — $\sin x$ keeps producing trig functions forever, and $e^x$ stays $e^x$.
+
+## Engineering Connection
+
+These rules show up in *every* engineering derivation:
+
+- **Beam deflection:** $w(x)$ is differentiated 4 times to get the load distribution. The product rule appears when stiffness varies along the beam: $EI(x) w'(x) \to (EI w')' = E'Iw' + EIw''$.
+- **Reaction kinetics:** the rate of an autocatalytic reaction $r = k[A][B]$ involves products of concentrations. The product rule gives $dr/dt$ in terms of how each species changes.
+- **Power in mechanics:** $P = Fv$ (force times velocity). When force varies with time, $dP/dt = F'v + Fv'$ via the product rule.
+- **Numerical differentiation:** simple finite-difference formulas like $f'(x) \approx (f(x+h) - f(x-h))/(2h)$ are direct consequences of the limit definition. Knowing the rules tells you *what* the answer should be when $h \to 0$.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Differentiate $f(x) = 7x^5 - 4x^3 + 6x - 11$.
+</ExQ>
+<ExA>
+Apply power rule to each term:
+$$f'(x) = 35x^4 - 12x^2 + 6$$
+</ExA>
+
+<ExQ>
+Differentiate $g(x) = \sqrt{x} + \dfrac{1}{x^2}$.
+</ExQ>
+<ExA>
+Rewrite: $g(x) = x^{1/2} + x^{-2}$.
+$$g'(x) = \frac{1}{2}x^{-1/2} + (-2)x^{-3} = \frac{1}{2\sqrt{x}} - \frac{2}{x^3}$$
+</ExA>
+
+### Application
+
+<ExQ>
+Differentiate $h(x) = x^3 e^x$ using the product rule.
+</ExQ>
+<ExA>
+$f = x^3$, $g = e^x$. $f' = 3x^2$, $g' = e^x$.
+
+$$h'(x) = 3x^2 e^x + x^3 e^x = x^2 e^x(3 + x)$$
+</ExA>
+
+<ExQ>
+Differentiate $f(x) = \dfrac{\sin x}{x}$ (the famous "sinc" function).
+</ExQ>
+<ExA>
+Quotient rule: $u = \sin x$, $v = x$, $u' = \cos x$, $v' = 1$.
+
+$$f'(x) = \frac{x\cos x - \sin x}{x^2}$$
+</ExA>
+
+<ExQ>
+Find $\dfrac{d}{dx}[x^2 \ln x]$.
+</ExQ>
+<ExA>
+Product rule: $f = x^2$, $g = \ln x$.
+$$f'g + fg' = 2x\ln x + x^2\cdot\frac{1}{x} = 2x\ln x + x = x(2\ln x + 1)$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Find the equation of the tangent line to $y = x^3 - 2x + 1$ at $x = 2$.
+</ExQ>
+<ExA>
+$y(2) = 8 - 4 + 1 = 5$. Point: $(2, 5)$.
+
+Slope: $y'(x) = 3x^2 - 2$, so $y'(2) = 12 - 2 = 10$.
+
+Tangent line: $y - 5 = 10(x - 2) \implies \boxed{y = 10x - 15}$
+</ExA>
+
+<ExQ>
+A small machine part has volume $V(t) = (3 - 0.1t)^3$ (cm³, $t$ in hours, due to thermal expansion). Find the rate of volume change at $t = 5$ hours.
+</ExQ>
+<ExA>
+We need the chain rule (or expand). Let $u = 3 - 0.1t$, so $V = u^3$, $du/dt = -0.1$.
+
+$$\frac{dV}{dt} = 3u^2 \cdot (-0.1) = -0.3(3-0.1t)^2$$
+
+At $t = 5$: $u = 2.5$, so $dV/dt = -0.3(6.25) = \boxed{-1.875\ \text{cm}^3/\text{h}}$
+</ExA>
+
+<ExQ>
+The position of an oscillating sensor probe is $s(t) = e^{-t}\cos(2t)$ (mm). Find the velocity $v(t)$.
+</ExQ>
+<ExA>
+Product rule with $f = e^{-t}$, $g = \cos(2t)$.
+
+$f' = -e^{-t}$ (chain rule on $e^{-t}$), $g' = -2\sin(2t)$ (chain rule on $\cos(2t)$).
+
+$$v(t) = -e^{-t}\cos(2t) + e^{-t}(-2\sin(2t)) = -e^{-t}[\cos(2t) + 2\sin(2t)]$$
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** $\dfrac{d}{dx}[f(x)g(x)] = f'(x)g'(x)$. Justify and provide a counterexample.
+</ExQ>
+<ExA>
+**False.** The correct rule is the **product rule**: $(fg)' = f'g + fg'$.
+
+Counterexample: $f = g = x$. Then $(fg)' = (x^2)' = 2x$. But $f'g' = 1\cdot 1 = 1$. They disagree.
+
+Why students often fall for this: differentiation distributes over **addition**, so it feels natural to expect distribution over multiplication too. But it doesn't. The product rule is *needed* to keep track of the cross-terms.
+</ExA>
+
+<ExQ>
+**Sketch.** Sketch a function whose derivative is $f'(x) = 0$ at $x = -1$ and $x = 1$, $f'(x) > 0$ for $|x| > 1$, and $f'(x) < 0$ for $|x| < 1$.
+</ExQ>
+<ExA>
+The signs say: $f$ is decreasing on $(-1, 1)$, increasing elsewhere. Critical points at $\pm 1$.
+
+Shape: $f$ has a local max at $x = -1$ and a local min at $x = 1$.
+
+A specific example: $f(x) = x^3 - 3x$. Verify: $f'(x) = 3x^2 - 3 = 3(x-1)(x+1)$, which is $0$ at $\pm 1$, negative on $(-1, 1)$, positive elsewhere. Sketch is a cubic with bumps at $\pm 1$.
+
+This *reading the derivative* skill is essential for analyzing function behavior without doing computations.
+</ExA>
+
+<ExQ>
+**Identify the rule.** For each function, name the differentiation rule(s) needed (do NOT differentiate):
+(a) $f(x) = x^3 \cos x$
+(b) $f(x) = (x^2 + 1)/(x^2 - 1)$
+(c) $f(x) = \sin(x^2)$
+(d) $f(x) = e^{x\ln x}$
+</ExQ>
+<ExA>
+(a) **Product rule** — two factors $x^3$ and $\cos x$.
+
+(b) **Quotient rule** — numerator/denominator.
+
+(c) **Chain rule** — composition: outer $\sin$, inner $x^2$.
+
+(d) **Chain rule** for $e^{u}$ + **product rule** inside (or use $u = x\ln x$ and product rule on it). Multi-step.
+
+Recognizing structure before computing is half the skill of differentiation.
+</ExA>
+
+<ExQ>
+**Build a function.** Find a specific $f$ such that $f'(x) = \cos x \cdot e^{\sin x}$. (Hint: think about the chain rule.)
+</ExQ>
+<ExA>
+Notice $\dfrac{d}{dx}[e^{\sin x}] = \cos x\cdot e^{\sin x}$ by chain rule (outer $e^u$, inner $\sin x$).
+
+So $f(x) = e^{\sin x}$ (plus any constant) is an antiderivative.
+
+Reading derivative patterns *backwards* is the spirit of integration. The factor $\cos x$ acts as a "tag" that tells you the chain rule applied to $\sin x$ inside.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Power dissipation.** A resistor with resistance varying as $R(T) = R_0(1 + \alpha T)$ carries current $I(t)$. The power dissipated is $P(t) = I^2 R$. Express $dP/dt$ when both $I$ and $T$ depend on $t$.
+</ExQ>
+<ExA>
+$P = I^2 R = I^2 R_0(1 + \alpha T)$.
+
+By product rule (and chain rule):
+$$\frac{dP}{dt} = 2I\frac{dI}{dt}\cdot R + I^2\cdot R_0\alpha\frac{dT}{dt}$$
+$$= 2I\dot I\,R_0(1+\alpha T) + I^2 R_0\alpha\dot T$$
+
+The first term: power changes from current changing. The second: power changes from temperature-induced resistance change. Both effects matter for thermal-electrical coupled systems (e.g., heated wires).
+</ExA>
+
+<ExQ>
+**Stiffness sensitivity.** Beam deflection at midspan is $\delta(L, EI) = \dfrac{5qL^4}{384 EI}$. Find $\partial\delta/\partial L$ and $\partial\delta/\partial(EI)$ at $L = 4$ m, $q = 1000$ N/m, $EI = 10^5$ N·m². Which parameter is more sensitive in relative terms?
+</ExQ>
+<ExA>
+$\delta = \dfrac{5q}{384}\cdot L^4\cdot(EI)^{-1}$.
+
+$\dfrac{\partial\delta}{\partial L} = \dfrac{5q}{384}\cdot 4L^3\cdot(EI)^{-1} = \dfrac{20qL^3}{384EI}$
+
+At given values: $= \dfrac{20\cdot 1000\cdot 64}{384\cdot 10^5} = 0.0333$ m/m.
+
+$\dfrac{\partial\delta}{\partial(EI)} = -\dfrac{5qL^4}{384(EI)^2} = -\dfrac{5\cdot 1000\cdot 256}{384\cdot 10^{10}} = -3.33\times 10^{-7}$ m/(N·m²).
+
+**Relative sensitivity** $\dfrac{x}{\delta}\dfrac{\partial\delta}{\partial x}$: for $L$, this is $4$ (deflection scales as $L^4$). For $EI$, this is $-1$ (deflection scales as $1/EI$).
+
+**Length is 4× more sensitive in relative terms** — small length changes produce 4× the relative deflection change. This is why beam length is a critical design parameter.
+</ExA>
+
+<ExQ>
+**Multi-step.** A neural-net layer computes $y = \tanh(wx + b)$. Find $dy/dw$ and $dy/dx$. (Use $\tanh'(z) = 1 - \tanh^2(z)$.)
+</ExQ>
+<ExA>
+Chain rule: let $z = wx + b$, $y = \tanh(z)$.
+
+$\dfrac{dy}{dw} = \tanh'(z)\cdot\dfrac{\partial z}{\partial w} = (1 - \tanh^2(z))\cdot x = (1 - y^2)\,x$.
+
+$\dfrac{dy}{dx} = \tanh'(z)\cdot w = (1 - y^2)\,w$.
+
+Note that the gradient with respect to the *weight* depends on the *input*, while the gradient with respect to the *input* depends on the *weight*. This asymmetry is fundamental to backpropagation — it's why gradients flow backward through the network.
+</ExA>

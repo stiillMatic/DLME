@@ -1,0 +1,143 @@
+---
+title: Shear Force and Bending Moment Diagrams
+description: The two fundamental internal forces in beams — and how to read them off a structural drawing.
+---
+
+# Shear Force and Bending Moment Diagrams
+
+## The Big Picture
+
+A beam under load develops internal **shear forces** ($V$) and **bending moments** ($M$) that vary along its length. To design the beam — pick its cross-section, check stress, predict deflection — we need to know $V(x)$ and $M(x)$. Drawing **shear and moment diagrams** is the universal first step in structural analysis. Once you can read these diagrams, you can locate critical points (max shear, max moment) and design accordingly.
+
+## Sign Conventions
+
+Cut the beam at section $x$. Internal forces on the left part of the cut:
+
+- **Shear $V$:** positive if it acts downward on the *left* face (and upward on the right).
+- **Moment $M$:** positive if it tends to bend the beam concave-up (sagging).
+
+(Conventions vary by textbook; consistency matters more than absolute sign.)
+
+## Relationships (FUNDAMENTAL)
+
+For distributed load $w(x)$ (downward positive):
+
+$$\frac{dV}{dx} = -w(x), \qquad \frac{dM}{dx} = V(x)$$
+
+In words: the slope of $V$ equals the negative load; the slope of $M$ equals the shear.
+
+These come from equilibrium of an infinitesimal beam element.
+
+**Consequences:**
+- Concentrated loads cause **jumps** in $V$.
+- Concentrated moments cause **jumps** in $M$.
+- $V = 0$ at a maximum or minimum of $M$.
+
+## Procedure
+
+1. Find reactions at supports (statics).
+2. Cut the beam at convenient sections.
+3. Apply equilibrium to find $V$, $M$ at each section.
+4. Plot $V(x)$ and $M(x)$.
+
+## Worked Example — Simply Supported Beam, Point Load at Center
+
+Length $L$, point load $P$ at $x = L/2$. Reactions: $R_A = R_B = P/2$.
+
+**For $0 < x < L/2$:** Cut at $x$. Sum of forces on left = $R_A - V = 0 \Rightarrow V = P/2$.
+
+Moment about cut: $M = R_A x = Px/2$ (linear, increasing).
+
+**For $L/2 < x < L$:** $V = R_A - P = -P/2$ (constant).
+
+$M = R_A x - P(x - L/2) = Px/2 - P(x - L/2) = -Px/2 + PL/2$ (linear, decreasing).
+
+**Maximum $M = PL/4$ at midspan.** Shear has a sign change at midspan.
+
+## Common Misconceptions
+
+**Misconception 1: "Bending moment is at supports."**
+
+Actually max moment usually occurs *between* supports — where shear changes sign.
+
+**Misconception 2: "Distributed load = constant shear."**
+
+Distributed load gives **linearly varying** shear ($V(x) = R - wx$). Constant shear means *no* distributed load.
+
+**Misconception 3: "Cantilever has zero moment at fixed end."**
+
+Cantilever has *maximum* reaction moment at the fixed end. The free end has zero moment (no load beyond it).
+
+## Engineering Connection
+
+- **Beam design:** size cross-section to handle max moment without yielding.
+- **Bridge design:** moment diagrams under different live load patterns determine safety.
+- **Truss vs. beam:** trusses carry only axial loads; beams carry shear and moment too.
+- **Crane booms:** the bending moment along the boom dictates structural design.
+- **Aircraft wings:** bending moment due to aerodynamic loads sizes the spars.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Simply supported beam, length 6 m, uniform load $w = 2$ kN/m. Find max shear and max moment.
+</ExQ>
+<ExA>
+Reactions: $R = wL/2 = 6$ kN at each end.
+
+$V(x) = 6 - 2x$. Max at supports: $|V_{\max}| = 6$ kN.
+
+$M(x) = 6x - x^2$. Maximum at midspan: $M_{\max} = 18 - 9 = 9$ kN·m.
+
+(Or directly: $M_{\max} = wL^2/8 = 9$ ✓.)
+</ExA>
+
+<ExQ>
+**2.** Cantilever beam, length 4 m, fixed at left, point load 5 kN at right tip. Find $V$ and $M$ at the fixed end.
+</ExQ>
+<ExA>
+Free body: at fixed end, support exerts $V = 5$ kN (upward) and $M = 5\cdot 4 = 20$ kN·m (counterclockwise).
+
+Throughout beam: $V = 5$ kN constant. $M$ varies linearly from 20 (fixed end) to 0 (tip).
+</ExA>
+
+<ExQ>
+**3. Conceptual.** Why does $V = 0$ at the location of maximum bending moment?
+</ExQ>
+<ExA>
+$dM/dx = V$. At a maximum (or minimum) of $M$, the derivative is zero.
+
+So locating points where $V = 0$ pinpoints where $M$ is at extrema — the most critical sections for stress.
+</ExA>
+
+<ExQ>
+**4. Engineering.** A simply supported beam (length 8 m) carries a triangular load: zero at left, $w_0 = 4$ kN/m at right. Find the location and value of max moment.
+</ExQ>
+<ExA>
+Total load: $W = w_0 L/2 = 16$ kN, centroid at $2L/3 = 5.33$ m from left.
+
+Reactions: $R_A + R_B = 16$. Sum moments about A: $R_B\cdot 8 = 16\cdot 5.33 \Rightarrow R_B = 10.67$, $R_A = 5.33$.
+
+$w(x) = w_0 x/L = x/2$ kN/m. $V(x) = R_A - \int_0^x w\,dx' = 5.33 - x^2/4$.
+
+$V = 0$: $x^2 = 21.33 \Rightarrow x = 4.62$ m.
+
+$M(4.62) = R_A\cdot 4.62 - \int_0^{4.62}(x'/2)(4.62 - x')\,dx'$. Computing: $M_{\max} \approx 16.4$ kN·m.
+
+(Triangular loads have asymmetric reactions and offset max-moment points.)
+</ExA>
+
+<ExQ>
+**5. Multi-step.** Two point loads of 10 kN at 2 m and 4 m from left of a 6 m simply supported beam. Find max moment.
+</ExQ>
+<ExA>
+Reactions by symmetry: $R_A = R_B = 10$ kN.
+
+For $0 < x < 2$: $V = 10$, $M = 10x$.
+At $x = 2$: $M = 20$.
+For $2 < x < 4$: $V = 0$, $M = 20$ (constant).
+For $4 < x < 6$: $V = -10$, $M = 20 - 10(x-4)$, ending at 0.
+
+Max $M = 20$ kN·m, between the two point loads.
+</ExA>

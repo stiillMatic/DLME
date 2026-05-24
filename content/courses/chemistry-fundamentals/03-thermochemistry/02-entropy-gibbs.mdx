@@ -1,0 +1,153 @@
+---
+title: Entropy and Gibbs Free Energy
+description: The thermodynamic criteria that decide which reactions can happen — and how much useful work they can do.
+---
+
+# Entropy and Gibbs Free Energy
+
+## The Big Picture
+
+Enthalpy tells you the heat of reaction. **Entropy** ($S$) tells you the disorder. **Gibbs free energy** ($G = H - TS$) combines them into a single spontaneity criterion: $\Delta G < 0$ means the reaction will happen at constant T, P. Understanding entropy and Gibbs is the difference between memorizing reactions and *predicting* them.
+
+## Entropy
+
+Quantifies disorder / number of microstates. Higher entropy means more ways the molecules can be arranged.
+
+**Trends:**
+- Gases > liquids > solids (more positions, momenta).
+- Hotter > colder (more thermal motion).
+- Larger molecules > smaller.
+- Solution > pure (mixing).
+- More moles of gas > fewer.
+
+**Third law:** $S = 0$ at $T = 0$ K for perfect crystal. Sets absolute scale.
+
+Tabulated $S^\circ$ values are absolute (J/(mol·K)).
+
+## Second Law (Chemistry Version)
+
+$\Delta S_{\text{universe}} > 0$ for any spontaneous process.
+
+$\Delta S_{\text{univ}} = \Delta S_{\text{sys}} + \Delta S_{\text{surr}}$.
+
+System entropy can decrease (e.g., crystallization) if surroundings' entropy increases more (heat released to surroundings increases their entropy).
+
+## Gibbs Free Energy
+
+$$\Delta G = \Delta H - T\Delta S$$
+
+At constant T, P:
+- $\Delta G < 0$ → **spontaneous**.
+- $\Delta G > 0$ → non-spontaneous (reverse is spontaneous).
+- $\Delta G = 0$ → equilibrium.
+
+Maximum non-PV work obtainable: $|\Delta G|$.
+
+## Four Cases
+
+| $\Delta H$ | $\Delta S$ | Behavior |
+|---|---|---|
+| < 0 | > 0 | Always spontaneous |
+| > 0 | < 0 | Never spontaneous |
+| < 0 | < 0 | Low T spontaneous |
+| > 0 | > 0 | High T spontaneous |
+
+Crossover: $T = \Delta H/\Delta S$.
+
+## Standard $\Delta G$
+
+For reaction at standard states (1 bar, 25°C typically):
+
+$\Delta G^\circ = \sum n\Delta G^\circ_{f,\text{products}} - \sum n\Delta G^\circ_{f,\text{reactants}}$.
+
+Equilibrium constant: $\Delta G^\circ = -RT\ln K$.
+
+## Common Misconceptions
+
+**Misconception 1: "Negative ΔS means non-spontaneous."**
+
+Not necessarily — if $\Delta H$ is sufficiently negative, $\Delta G$ can still be negative.
+
+**Misconception 2: "Spontaneous means fast."**
+
+Means thermodynamically possible — could still be kinetically slow (diamond → graphite is spontaneous but takes geological time).
+
+**Misconception 3: "ΔG depends only on temperature."**
+
+Also depends on concentrations: $\Delta G = \Delta G^\circ + RT\ln Q$. As reaction proceeds, $Q$ approaches $K$, $\Delta G$ approaches 0.
+
+## Engineering Connection
+
+- **Metallurgy:** smelting reactions become spontaneous at specific temperatures.
+- **Battery design:** voltage = $-\Delta G^\circ/nF$ — Gibbs energy converts to electricity.
+- **Process design:** $\Delta G$ tells you which way reactions go, $\Delta H$ tells you heat to manage.
+- **Refrigeration:** heat pump moves heat against natural flow — requires input work.
+- **Biological energy:** ATP hydrolysis ($\Delta G \approx -30$ kJ/mol) drives biological reactions.
+- **Combustion vs fuel cells:** combustion delivers $|\Delta H|$ as heat; fuel cells deliver $|\Delta G|$ as electricity — higher efficiency.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\Delta H = -100$ kJ, $\Delta S = -250$ J/K. Spontaneous at 300 K?
+</ExQ>
+<ExA>
+$\Delta G = -100 - 300(-0.250) = -100 + 75 = -25$ kJ.
+
+**Spontaneous** at 300 K.
+
+At higher T (400 K): $\Delta G = -100 + 100 = 0$ — equilibrium.
+
+Above 400 K: non-spontaneous.
+</ExA>
+
+<ExQ>
+**2.** Sign of $\Delta S$ for $H_2O(l) \to H_2O(g)$?
+</ExQ>
+<ExA>
+Liquid → gas: huge increase in disorder (volume goes from cm³ to ~10⁵ cm³).
+
+$\Delta S > 0$. About +109 J/(mol·K) for water at 100°C.
+
+Even though $\Delta H > 0$ (must absorb heat), high T makes $T\Delta S$ overcome $\Delta H$ → boiling spontaneous above 100°C.
+</ExA>
+
+<ExQ>
+**3.** $\Delta G^\circ = -25$ kJ. K at 25°C?
+</ExQ>
+<ExA>
+$\ln K = -\Delta G^\circ/RT = 25000/(8.314\cdot 298) = 10.1$.
+
+$K = e^{10.1} \approx 2.4\times 10^4$.
+
+Strong product preference. Forward reaction goes nearly to completion.
+</ExA>
+
+<ExQ>
+**4. Engineering: Ammonia synthesis.** $N_2 + 3H_2 \to 2NH_3$ has $\Delta H = -92$ kJ, $\Delta S = -198$ J/K. Crossover temperature?
+</ExQ>
+<ExA>
+$T^* = \Delta H/\Delta S = -92000/-198 \approx 465$ K = 192°C.
+
+Below this: spontaneous; above: not.
+
+But at 192°C, the reaction is too slow (kinetics). Industrial Haber process runs at ~400-500°C — fast enough kinetically, slightly above thermodynamic threshold (so equilibrium yield is modest, only ~15-25%). Compensated by **high pressure** (favors fewer moles gas) and **recycling**.
+
+This thermodynamics + kinetics + process design balance is classic chemical engineering.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why can dissolving solid in water be endothermic but still happen?
+</ExQ>
+<ExA>
+$\Delta H_{\text{soln}} > 0$ (energy absorbed to break lattice, hydrate ions).
+
+But $\Delta S_{\text{soln}} > 0$ (ions in solution have many more accessible states than in lattice).
+
+If $T\Delta S > \Delta H$ → $\Delta G < 0$ → spontaneous despite cooling.
+
+Example: NH₄NO₃ in water — temperature drops noticeably (heat absorbed from surroundings to drive process). Basis of "instant cold packs" used in first aid.
+
+Entropy can drive endothermic processes — fundamental insight.
+</ExA>

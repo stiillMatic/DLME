@@ -1,0 +1,129 @@
+---
+title: Bending Stress and Section Modulus
+description: How bending moments produce stresses in beams — and how to size a beam's cross-section for safety.
+---
+
+# Bending Stress and Section Modulus
+
+## The Big Picture
+
+When a beam bends, the top and bottom fibers experience opposite stresses — one in compression, the other in tension. The maximum bending stress, on the extreme fiber, must stay below the allowable stress to prevent failure. The relationship is captured by a single, beautiful formula: $\sigma = M y/I$. Combined with section modulus $S = I/c$, sizing beams becomes a one-line calculation. This is the heart of structural engineering for bending members.
+
+## The Bending Stress Formula
+
+For a beam with bending moment $M$ at a cross-section:
+
+$$\sigma(y) = \frac{My}{I}$$
+
+where:
+- $y$ = distance from the **neutral axis** (the axis of zero strain, passing through the centroid)
+- $I$ = second moment of area (moment of inertia) about the neutral axis
+
+**Maximum stress** occurs at the outer fiber, where $|y| = c$ (the half-depth):
+
+$$\sigma_{\max} = \frac{Mc}{I} = \frac{M}{S}$$
+
+where $S = I/c$ is the **section modulus**.
+
+## Section Properties
+
+| Cross-section | $I$ about centroidal horizontal axis | $S = I/c$ |
+|---|---|---|
+| Rectangle ($b\times h$) | $bh^3/12$ | $bh^2/6$ |
+| Circular (radius $r$) | $\pi r^4/4$ | $\pi r^3/4$ |
+| I-beam | tabulated | tabulated |
+
+The $h^3$ term in rectangles tells you that **doubling height = 8× stronger in bending**, but only 2× stronger in axial loading. This is why beams are tall, not square.
+
+## Design Procedure
+
+To design a beam:
+1. Determine max moment $M_{\max}$ from analysis.
+2. Choose allowable stress $\sigma_{\text{allow}}$ (= yield/factor of safety).
+3. Required section modulus: $S \geq M_{\max}/\sigma_{\text{allow}}$.
+4. Select a section meeting this requirement.
+
+## Common Misconceptions
+
+**Misconception 1: "Stress is uniform across the cross-section."**
+
+Bending stress is **linear** with $y$ — zero at the neutral axis, maximum at extremes. Tension on one side, compression on the other.
+
+**Misconception 2: "$I$ is the same as moment of inertia in dynamics."**
+
+In dynamics: $I = \int r^2\,dm$ (mass moment of inertia, units kg·m²).
+
+In beams: $I = \int y^2\,dA$ (area moment of inertia, units m⁴).
+
+Same letter, different concept. Both measure "resistance to rotation" but in different contexts.
+
+**Misconception 3: "I-beams are stronger because they're hollow."**
+
+I-beams concentrate material *far from* the neutral axis (large $y$), where it contributes most to $I$ ($y^2$ in the integral). Hollowness in the middle saves weight without much loss of strength.
+
+## Engineering Connection
+
+- **Buildings:** floor beams sized by max moment from gravity loads.
+- **Bridges:** girders, deck slabs, all bending members analyzed via this formula.
+- **Aircraft wings:** spar caps placed at extreme fibers to maximize bending strength.
+- **Railroad tracks:** the I-shape minimizes weight while maximizing $I$.
+- **Robotic links:** lightweight, stiff link design via bending analysis.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Rectangular beam, $b = 0.1$ m, $h = 0.2$ m. Find $I$ and $S$.
+</ExQ>
+<ExA>
+$I = bh^3/12 = 0.1\cdot 0.008/12 = 6.67\times 10^{-5}$ m⁴.
+
+$S = bh^2/6 = 0.1\cdot 0.04/6 = 6.67\times 10^{-4}$ m³.
+</ExA>
+
+<ExQ>
+**2.** Beam with section modulus $S = 2\times 10^{-4}$ m³, $\sigma_{\text{allow}} = 200$ MPa. Find max allowable moment.
+</ExQ>
+<ExA>
+$M = \sigma S = 200\times 10^6\cdot 2\times 10^{-4} = 40$ kN·m.
+</ExA>
+
+<ExQ>
+**3. Engineering: Beam sizing.** A simply supported beam (length 4 m, $w = 5$ kN/m) is rectangular with $b = 0.1$ m. Find required $h$ so $\sigma_{\max} \leq 150$ MPa.
+</ExQ>
+<ExA>
+$M_{\max} = wL^2/8 = 10$ kN·m.
+
+Required $S = M/\sigma = 10\times 10^3/(150\times 10^6) = 6.67\times 10^{-5}$ m³.
+
+$S = bh^2/6 \Rightarrow h^2 = 6S/b = 4\times 10^{-3} \Rightarrow h = 0.063$ m = 63 mm.
+
+So beam needs $h \geq 63$ mm. Round up for safety: 75 mm or 100 mm.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is the neutral axis through the centroid (for symmetric, linear-elastic bending)?
+</ExQ>
+<ExA>
+Force balance: the net axial force from bending stresses must be zero (pure bending).
+
+$\int\sigma\,dA = \int (My/I)\,dA = (M/I)\int y\,dA = 0$
+
+The integral $\int y\,dA = 0$ defines the centroid. So neutral axis = centroidal axis.
+
+For non-symmetric or composite cross-sections, the location of the centroid (= neutral axis) is more complex but the principle is the same.
+</ExA>
+
+<ExQ>
+**5. Multi-step.** A 6-m steel I-beam has $I = 3\times 10^{-5}$ m⁴, $c = 0.075$ m, allowable stress 200 MPa. Carries uniform load $w$. Find max $w$.
+</ExQ>
+<ExA>
+$S = I/c = 4\times 10^{-4}$ m³.
+
+$M_{\max,\text{allow}} = \sigma\cdot S = 80$ kN·m.
+
+For UDL: $M_{\max} = wL^2/8 \Rightarrow w \leq 8\cdot 80/36 = 17.8$ kN/m.
+
+Beam can support up to about 18 kN/m of distributed load.
+</ExA>

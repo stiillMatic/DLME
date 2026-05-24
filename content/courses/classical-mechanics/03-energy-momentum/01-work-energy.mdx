@@ -1,0 +1,126 @@
+---
+title: Work and Kinetic Energy
+description: The work-energy theorem — connecting forces and motion through the concept of energy.
+---
+
+# Work and Kinetic Energy
+
+## The Big Picture
+
+Newton's laws relate forces and acceleration. The **work-energy theorem** transforms this into a statement about **energy**: the work done on an object equals its change in kinetic energy. This perspective is often more powerful than F=ma directly — energy is a *scalar*, doesn't care about path geometry, and reveals conservation principles that simplify hard problems. Energy methods are the default for analyzing collisions, springs, gravity, and friction.
+
+## Definitions
+
+**Work** by a constant force $\mathbf{F}$ over displacement $\mathbf{d}$:
+$$W = \mathbf{F}\cdot\mathbf{d} = Fd\cos\theta$$
+
+**Variable force along a path:**
+$$W = \int_C\mathbf{F}\cdot d\mathbf{r}$$
+
+**Kinetic energy:**
+$$K = \tfrac{1}{2}mv^2$$
+
+## Work-Energy Theorem
+
+$$W_{\text{net}} = \Delta K = K_f - K_i$$
+
+The total work by all forces equals the change in kinetic energy. This is the energy-form of Newton's second law.
+
+**Derivation sketch (1D):** $W = \int F\,dx = \int m(dv/dt)dx = \int mv\,dv = \tfrac{1}{2}mv^2\big|_i^f$.
+
+## Power
+
+**Average power:** $\bar P = W/\Delta t$.
+
+**Instantaneous power:** $P = \mathbf{F}\cdot\mathbf{v}$.
+
+For a car with constant power: $P = Fv$, so force decreases as speed increases. This is why acceleration drops at higher speeds.
+
+## Conservative vs. Non-Conservative Forces
+
+**Conservative** (gravity, springs): work depends only on endpoints, not path. Have associated potential energies.
+
+**Non-conservative** (friction, drag): work depends on path. Energy is dissipated.
+
+For a closed loop:
+- Conservative: $\oint\mathbf{F}\cdot d\mathbf{r} = 0$
+- Non-conservative: $\oint\mathbf{F}\cdot d\mathbf{r} \neq 0$ (typically negative for friction)
+
+## Common Misconceptions
+
+**Misconception 1: "Work means physical exertion."**
+
+Holding a heavy box without moving it: zero work (no displacement). Physically tiring, but mathematically zero work.
+
+**Misconception 2: "Force and motion always do positive work."**
+
+If force opposes motion (e.g., braking, friction), work is negative. Negative work removes kinetic energy.
+
+**Misconception 3: "Kinetic energy can be negative."**
+
+$K = \tfrac{1}{2}mv^2 \geq 0$ always (mass and $v^2$ both non-negative).
+
+## Engineering Connection
+
+- **Vehicle performance:** $P = Fv$ relates engine power to top speed and acceleration.
+- **Brake design:** kinetic energy = heat in brakes during stop. $\tfrac{1}{2}mv^2$ must be dissipated.
+- **Pump and turbine analysis:** work-energy applied to fluid → Bernoulli's equation derivation.
+- **Spring-loaded mechanisms:** energy stored in springs released as kinetic energy.
+- **Roller coasters:** kinetic ⇄ potential, with friction losses → design ramp heights and tube lengths.
+
+---
+
+## Practice Problems
+
+<ExQ>
+A 10 kg object is pushed with 50 N for 4 m on frictionless surface. Find work and final velocity (starting from rest).
+</ExQ>
+<ExA>
+$W = Fd = 200$ J.
+
+$200 = \tfrac{1}{2}(10)v^2 \Rightarrow v = \sqrt{40} \approx 6.32$ m/s.
+</ExA>
+
+<ExQ>
+A 1500 kg car decelerates from 25 m/s to 10 m/s by friction over 100 m. Find the friction force.
+</ExQ>
+<ExA>
+$\Delta K = \tfrac{1}{2}(1500)(100 - 625) = -393{,}750$ J.
+
+$W = F\cdot 100\cos 180° = -100 F$.
+
+$-100 F = -393{,}750 \Rightarrow F = 3938$ N $\approx 3.9$ kN.
+</ExA>
+
+<ExQ>
+**Spring.** A spring has $k = 200$ N/m, compressed 0.1 m. Find the energy stored, and the speed of a 0.5 kg mass released from rest by the spring.
+</ExQ>
+<ExA>
+$U = \tfrac{1}{2}k x^2 = \tfrac{1}{2}(200)(0.01) = 1$ J.
+
+Conservation: $1 = \tfrac{1}{2}(0.5)v^2 \Rightarrow v = 2$ m/s.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why is the work-energy theorem often easier than $F = ma$ for variable forces?
+</ExQ>
+<ExA>
+$F = ma$ requires knowing $a(t)$ pointwise — often difficult for variable forces. Then integrate twice for $x(t)$.
+
+Work-energy gives a single integral $W = \int F\,dx$, directly relating *energy* changes to displacement. For path-independent (conservative) forces, $W$ depends only on endpoints — even easier.
+
+Energy methods *bypass* the time-dependence of motion when only "before vs. after" matters.
+</ExA>
+
+<ExQ>
+**Multi-step.** A pendulum (mass $m$, length $L$) is released from rest at angle $\theta_0$. Find its speed at the bottom.
+</ExQ>
+<ExA>
+Height drop: $h = L(1 - \cos\theta_0)$.
+
+Energy conservation: $mgh = \tfrac{1}{2}mv^2 \Rightarrow v = \sqrt{2gh} = \sqrt{2gL(1 - \cos\theta_0)}$.
+
+For small $\theta_0$: $1 - \cos\theta_0 \approx \theta_0^2/2$, so $v \approx \theta_0\sqrt{gL}$.
+
+This is far simpler than solving the pendulum ODE — just energy conservation.
+</ExA>

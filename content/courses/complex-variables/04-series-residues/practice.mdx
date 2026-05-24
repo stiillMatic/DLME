@@ -1,0 +1,62 @@
+---
+title: Chapter 4 Practice — Series and Residues
+description: Practice on Taylor/Laurent series, residues, and contour integration.
+---
+
+# Chapter 4 Practice — Series and Residues
+
+<ExQ>
+**1.** Find residue of $f(z) = 1/(z(z-1))$ at $z = 0$ and $z = 1$.
+</ExQ>
+<ExA>
+At $z=0$: $\lim_{z\to 0} z\cdot 1/(z(z-1)) = -1$. Residue = $-1$.
+
+At $z=1$: $\lim_{z\to 1}(z-1)/(z(z-1)) = 1$. Residue = $1$.
+</ExA>
+
+<ExQ>
+**2.** Compute $\oint_{|z|=2}\frac{e^z}{z(z-1)}dz$.
+</ExQ>
+<ExA>
+Both poles inside.
+
+Res at 0: $\lim z\cdot e^z/(z(z-1)) = 1/(-1) = -1$.
+Res at 1: $\lim (z-1)e^z/(z(z-1)) = e/1 = e$.
+
+Integral $= 2\pi i(-1 + e) = 2\pi i(e - 1)$.
+</ExA>
+
+<ExQ>
+**3.** Compute $\int_{-\infty}^\infty\dfrac{dx}{x^2+1}$ using residues.
+</ExQ>
+<ExA>
+Pole at $z = i$ in upper half-plane. Res $= 1/(2i)$.
+
+$\int = 2\pi i\cdot 1/(2i) = \pi$.
+
+(Matches $\arctan x|_{-\infty}^\infty = \pi$.)
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does the residue theorem reduce contour integration to algebra?
+</ExQ>
+<ExA>
+$\oint = 2\pi i\sum\text{Res}$. Computing residues is a local algebraic operation (limit / partial fractions). The hard work of integration is replaced by computing a few residues.
+
+This enables computation of many real integrals (Type 2, 3 from the lesson) that have no elementary antiderivative.
+</ExA>
+
+<ExQ>
+**5. Engineering: Inverse Laplace.** A transfer function $H(s) = 1/(s^2 + 4)$. Find time-domain by Bromwich contour: poles at $s = \pm 2i$. Find $h(t)$.
+</ExQ>
+<ExA>
+$h(t) = \dfrac{1}{2\pi i}\oint\dfrac{e^{st}}{s^2+4}ds$. Sum residues:
+
+Res at $s=2i$: $\lim_{s\to 2i}(s-2i)\cdot e^{st}/((s-2i)(s+2i)) = e^{2it}/(4i)$.
+
+Res at $s=-2i$: $e^{-2it}/(-4i)$.
+
+Sum: $(e^{2it} - e^{-2it})/(4i) = 2i\sin(2t)/(4i) = \sin(2t)/2$.
+
+So $h(t) = \sin(2t)/2$ — the impulse response of a 2 rad/s undamped oscillator. Standard result.
+</ExA>

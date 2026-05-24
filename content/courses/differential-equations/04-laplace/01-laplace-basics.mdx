@@ -1,0 +1,144 @@
+---
+title: Laplace Transform — Basics
+description: Converting differential equations into algebraic ones — the engineer's most-used integral transform.
+---
+
+# Laplace Transform — Basics
+
+## The Big Picture
+
+The Laplace transform converts differential equations into algebraic equations. Linear ODEs in time become polynomial equations in a complex variable $s$. Solve algebraically; transform back. This trick is the foundation of **transfer functions** in control theory, **circuit analysis** in electrical engineering, and **system identification** in signal processing. If you work in any field where linear ODEs appear with input/output structure, Laplace is essential.
+
+## Definition
+
+For a function $f(t)$ defined for $t \geq 0$:
+
+$$F(s) = \mathcal{L}\{f(t)\} = \int_0^\infty f(t)\,e^{-st}\,dt$$
+
+The integral converges for $\text{Re}(s) > a$ where $a$ depends on $f$'s growth.
+
+## Common Transforms
+
+| $f(t)$ | $F(s)$ |
+|---|---|
+| 1 | $1/s$ |
+| $t^n$ | $n!/s^{n+1}$ |
+| $e^{at}$ | $1/(s-a)$ |
+| $\sin(\omega t)$ | $\omega/(s^2 + \omega^2)$ |
+| $\cos(\omega t)$ | $s/(s^2 + \omega^2)$ |
+| $e^{at}\sin(\omega t)$ | $\omega/((s-a)^2 + \omega^2)$ |
+| $\delta(t - t_0)$ | $e^{-st_0}$ |
+| $H(t - t_0)$ | $e^{-st_0}/s$ |
+
+The transform turns simple time-domain functions into rational functions in $s$.
+
+## Key Properties
+
+**Linearity:** $\mathcal{L}\{af + bg\} = aF + bG$.
+
+**Derivative:**
+
+$$\mathcal{L}\{f'(t)\} = sF(s) - f(0)$$
+$$\mathcal{L}\{f''(t)\} = s^2 F(s) - sf(0) - f'(0)$$
+
+This is the magic — derivatives become multiplications by $s$ (with initial-condition adjustments). Linear ODEs become algebra.
+
+**Shift in $s$:** $\mathcal{L}\{e^{at}f(t)\} = F(s - a)$.
+
+**Shift in $t$:** $\mathcal{L}\{f(t-a)H(t-a)\} = e^{-as}F(s)$.
+
+**Convolution:** $\mathcal{L}\{(f * g)(t)\} = F(s)G(s)$ — products in $s$-domain are convolutions in $t$-domain.
+
+## Worked Example
+
+Solve $y'' + 4y' + 3y = 0$, $y(0) = 1$, $y'(0) = 0$.
+
+Take Laplace: $s^2 Y - s\cdot 1 - 0 + 4(sY - 1) + 3Y = 0$.
+
+Solve algebraically: $(s^2 + 4s + 3)Y = s + 4 \Rightarrow Y = (s+4)/[(s+1)(s+3)]$.
+
+**Partial fractions:** $Y = A/(s+1) + B/(s+3)$. $A = (s+4)/(s+3)|_{s=-1} = 3/2$. $B = -1/2$.
+
+Inverse: $y(t) = \tfrac{3}{2}e^{-t} - \tfrac{1}{2}e^{-3t}$.
+
+The ODE became algebra; the solution required no calculus on $t$.
+
+## Common Misconceptions
+
+**Misconception 1: "Laplace works on any function."**
+
+Requires $f$ defined for $t \geq 0$ and not growing too fast (exponential bound). Most engineering signals satisfy this.
+
+**Misconception 2: "Inverse transforms are difficult."**
+
+Most inverse transforms come from a table + partial fractions. The skill is recognizing forms (rational, with quadratic factors → sine/cosine, etc.).
+
+**Misconception 3: "The variable $s$ is just abstract."**
+
+In control theory, $s$ has physical meaning — its real part = decay rate, imaginary part = oscillation frequency. The poles of $F(s)$ are the natural modes of the system.
+
+## Engineering Connection
+
+- **Transfer function:** $H(s) = Y(s)/X(s)$ for an LTI system. Encodes the entire input-output relationship.
+- **Pole-zero analysis:** the poles of $H(s)$ determine stability and transient behavior; zeros affect frequency response.
+- **Step / impulse response:** Laplace makes these computable easily.
+- **Circuit analysis:** capacitors and inductors transform into impedances $1/(sC)$ and $sL$ — circuits become algebra.
+- **PID controller design:** Laplace converts time-domain specifications into frequency-domain conditions on poles and zeros.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find $\mathcal{L}\{3 + 2t + e^{-t}\}$.
+</ExQ>
+<ExA>
+By linearity:
+$\mathcal{L}\{3\} + \mathcal{L}\{2t\} + \mathcal{L}\{e^{-t}\} = 3/s + 2/s^2 + 1/(s+1)$.
+</ExA>
+
+<ExQ>
+Find $\mathcal{L}\{t^2 e^{-2t}\}$.
+</ExQ>
+<ExA>
+$\mathcal{L}\{t^2\} = 2/s^3$. Shift: $\mathcal{L}\{t^2 e^{-2t}\} = 2/(s+2)^3$.
+</ExA>
+
+<ExQ>
+Find the inverse Laplace of $F(s) = (s + 5)/(s^2 + 4s + 8)$.
+</ExQ>
+<ExA>
+Complete the square: $s^2 + 4s + 8 = (s+2)^2 + 4$.
+
+Rewrite numerator: $s + 5 = (s+2) + 3$.
+
+$F(s) = (s+2)/[(s+2)^2 + 4] + 3/[(s+2)^2 + 4]$
+
+Recognize: $(s-a)/[(s-a)^2 + \omega^2]$ ↔ $e^{at}\cos\omega t$; $\omega/[(s-a)^2 + \omega^2]$ ↔ $e^{at}\sin\omega t$.
+
+So $f(t) = e^{-2t}\cos(2t) + (3/2)e^{-2t}\sin(2t)$.
+</ExA>
+
+<ExQ>
+**Engineering: RC step response.** An RC circuit with $V(t) = V_0 H(t)$ obeys $RC\dot V_C + V_C = V$. Use Laplace to find $V_C(t)$ given $V_C(0) = 0$.
+</ExQ>
+<ExA>
+Laplace: $RC\cdot sV_C + V_C = V_0/s$. Solve: $V_C(s) = V_0/(s(RCs+1))$.
+
+Partial fractions: $V_C = V_0/s - V_0/(s + 1/(RC))$.
+
+Inverse: $V_C(t) = V_0(1 - e^{-t/(RC)})$.
+
+Standard RC step response — derived without explicitly solving the ODE.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why are initial conditions naturally handled by the Laplace transform?
+</ExQ>
+<ExA>
+The derivative formula $\mathcal{L}\{f'\} = sF - f(0)$ contains $f(0)$ explicitly. So when we transform an ODE, ICs appear in the algebraic equation as constants.
+
+Compare to general solution + IC method: you find the family first, then plug in ICs. With Laplace, ICs are baked in from the start — gives directly the IC-satisfying solution.
+
+For systems and high-order ODEs, this saves enormous bookkeeping.
+</ExA>

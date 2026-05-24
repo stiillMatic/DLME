@@ -1,0 +1,213 @@
+---
+title: Vectors, Dot Product, and Cross Product
+description: The geometric and algebraic foundations for working in 3D space — angles, areas, and projections.
+---
+
+# Vectors, Dot Product, and Cross Product
+
+## The Big Picture
+
+Real-world engineering happens in 3D. Forces have direction; flows have orientation; rotations involve axes. Scalar arithmetic isn't enough — we need **vectors**. The dot and cross products are the two fundamental ways to multiply vectors, and each captures a different geometric idea: the dot product measures **alignment** (projection, angle, work), while the cross product measures **rotation** (torque, area, orientation). Understanding both deeply is essential for every other topic in mechanics, fluid dynamics, and electromagnetism.
+
+## Intuition First — Two Ways to Multiply
+
+Imagine pushing a heavy box. What matters is *how much* of your force is in the direction of motion. If you push at an angle, only the component along the path does work. That's the **dot product** — it strips out the misaligned part and keeps only the parallel component.
+
+Now imagine using a wrench. What matters is *how perpendicular* your push is to the wrench arm. A push along the wrench does nothing; a push perpendicular gives maximum torque. That's the **cross product** — it captures perpendicular interaction.
+
+Two vectors. Two products. Two completely different geometric meanings.
+
+## Vectors in 3D
+
+A vector $\mathbf{v} = \langle v_1, v_2, v_3\rangle$ has:
+- **Magnitude:** $\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2 + v_3^2}$
+- **Direction:** unit vector $\hat{\mathbf{v}} = \mathbf{v}/\|\mathbf{v}\|$
+
+The standard basis is $\hat{\mathbf{i}} = \langle 1,0,0\rangle$, $\hat{\mathbf{j}} = \langle 0,1,0\rangle$, $\hat{\mathbf{k}} = \langle 0,0,1\rangle$.
+
+## Dot Product (Scalar Product)
+
+$$\mathbf{u}\cdot\mathbf{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = \|\mathbf{u}\|\|\mathbf{v}\|\cos\theta$$
+
+The result is a **scalar**.
+
+**Properties:**
+- Commutative: $\mathbf{u}\cdot\mathbf{v} = \mathbf{v}\cdot\mathbf{u}$
+- $\mathbf{u}\cdot\mathbf{v} = 0 \iff \mathbf{u}\perp\mathbf{v}$ (or one is zero)
+- $\mathbf{u}\cdot\mathbf{u} = \|\mathbf{u}\|^2$
+
+**Geometric meaning:**
+
+$$\cos\theta = \frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}$$
+
+This is **the** way to compute angles between vectors. Sign of dot product:
+- Positive: angle $< 90°$ (vectors "agree")
+- Zero: $90°$ (orthogonal)
+- Negative: angle $> 90°$ (vectors "disagree")
+
+## Projection
+
+The projection of $\mathbf{u}$ onto $\mathbf{v}$ is:
+
+$$\text{proj}_\mathbf{v}\mathbf{u} = \frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{v}\|^2}\mathbf{v}$$
+
+Its magnitude is $\|\mathbf{u}\|\cos\theta$ — the "shadow" of $\mathbf{u}$ along $\mathbf{v}$.
+
+This is exactly how forces decompose into components, how stress vectors separate normal vs tangential parts, and how least-squares finds the best approximation in regression.
+
+## Cross Product (Vector Product)
+
+$$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\hat{\mathbf{i}} & \hat{\mathbf{j}} & \hat{\mathbf{k}} \\ u_1 & u_2 & u_3 \\ v_1 & v_2 & v_3\end{vmatrix} = \langle u_2 v_3 - u_3 v_2,\ u_3 v_1 - u_1 v_3,\ u_1 v_2 - u_2 v_1\rangle$$
+
+The result is a **vector** — perpendicular to both $\mathbf{u}$ and $\mathbf{v}$, with magnitude:
+
+$$\|\mathbf{u}\times\mathbf{v}\| = \|\mathbf{u}\|\|\mathbf{v}\|\sin\theta$$
+
+(The area of the parallelogram spanned by $\mathbf{u}$ and $\mathbf{v}$.)
+
+**Direction:** by the right-hand rule.
+
+**Properties:**
+- Anticommutative: $\mathbf{u}\times\mathbf{v} = -\mathbf{v}\times\mathbf{u}$
+- $\mathbf{u}\times\mathbf{v} = \mathbf{0} \iff \mathbf{u}\parallel\mathbf{v}$
+- Distributive: $\mathbf{u}\times(\mathbf{v}+\mathbf{w}) = \mathbf{u}\times\mathbf{v}+\mathbf{u}\times\mathbf{w}$
+
+## Triple Products
+
+**Scalar triple product:** $\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})$ = signed volume of the parallelepiped.
+
+**Vector triple product:** $\mathbf{u}\times(\mathbf{v}\times\mathbf{w}) = (\mathbf{u}\cdot\mathbf{w})\mathbf{v} - (\mathbf{u}\cdot\mathbf{v})\mathbf{w}$ ("BAC - CAB" rule).
+
+## Common Misconceptions
+
+**Misconception 1: "Dot product gives a vector."**
+
+No — dot product gives a **scalar**. Cross product gives a vector. The names ("scalar product" and "vector product") are explicit about this.
+
+**Misconception 2: "Cross product is commutative."**
+
+It's *anticommutative*: $\mathbf{u}\times\mathbf{v} = -\mathbf{v}\times\mathbf{u}$. Order matters! Reverse the order, flip the sign.
+
+**Misconception 3: "Cross product works in any dimension."**
+
+The cross product as a binary operation is special to 3D (and 7D). In 2D, you'd get a "scalar cross product" (the $z$-component). In 4D+, you need the wedge product or generalized formulations.
+
+**Misconception 4: "$\mathbf{u}\cdot\mathbf{v} = 0$ means $\mathbf{u} = \mathbf{0}$ or $\mathbf{v} = \mathbf{0}$."**
+
+It also occurs when they're perpendicular. The dot product is zero whenever any of the three conditions holds: zero vector, perpendicular, or both.
+
+## Engineering Connection
+
+- **Work done by a force:** $W = \mathbf{F}\cdot\mathbf{d}$ (only the component of force along displacement matters)
+- **Torque:** $\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F}$ (perpendicular distance × perpendicular force)
+- **Angular momentum:** $\mathbf{L} = \mathbf{r}\times\mathbf{p}$
+- **Magnetic force on charge:** $\mathbf{F} = q\mathbf{v}\times\mathbf{B}$
+- **Area vector** of a surface element: $d\mathbf{A} = (\partial\mathbf{r}/\partial u)\times(\partial\mathbf{r}/\partial v)\,du\,dv$
+- **Stress vector / traction:** $\mathbf{t} = \boldsymbol{\sigma}\cdot\hat{\mathbf{n}}$ — dot product of stress tensor with surface normal
+
+In every case, the choice between dot and cross product encodes a deep physical idea about which directional component matters.
+
+---
+
+## Practice Problems
+
+### Mechanical Drills
+
+<ExQ>
+Compute $\mathbf{u}\cdot\mathbf{v}$ for $\mathbf{u} = \langle 2, -1, 3\rangle$ and $\mathbf{v} = \langle 4, 0, -2\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{u}\cdot\mathbf{v} = (2)(4) + (-1)(0) + (3)(-2) = 8 + 0 - 6 = \boxed{2}$
+</ExA>
+
+<ExQ>
+Find the angle between $\mathbf{u} = \langle 1, 1, 0\rangle$ and $\mathbf{v} = \langle 1, 0, 1\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{u}\cdot\mathbf{v} = 1$, $\|\mathbf{u}\| = \sqrt 2$, $\|\mathbf{v}\| = \sqrt 2$.
+
+$\cos\theta = 1/2 \Rightarrow \theta = \boxed{60°}$
+</ExA>
+
+<ExQ>
+Compute $\mathbf{u}\times\mathbf{v}$ for $\mathbf{u} = \langle 1, 2, 3\rangle$, $\mathbf{v} = \langle 4, 5, 6\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{u}\times\mathbf{v} = \langle 2\cdot 6 - 3\cdot 5,\ 3\cdot 4 - 1\cdot 6,\ 1\cdot 5 - 2\cdot 4\rangle = \langle -3, 6, -3\rangle$
+</ExA>
+
+<ExQ>
+Find the area of the parallelogram with sides $\mathbf{u} = \langle 2, 1, 0\rangle$ and $\mathbf{v} = \langle 1, 3, 2\rangle$.
+</ExQ>
+<ExA>
+$\mathbf{u}\times\mathbf{v} = \langle 1\cdot 2 - 0\cdot 3,\ 0\cdot 1 - 2\cdot 2,\ 2\cdot 3 - 1\cdot 1\rangle = \langle 2, -4, 5\rangle$.
+
+Area $= \|\mathbf{u}\times\mathbf{v}\| = \sqrt{4 + 16 + 25} = \sqrt{45} = 3\sqrt 5 \approx 6.71$
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $\mathbf{u}\cdot\mathbf{v} = 0$ and $\mathbf{u}\times\mathbf{v} = \mathbf{0}$, then at least one of $\mathbf{u}, \mathbf{v}$ must be zero.
+</ExQ>
+<ExA>
+**True.** Dot product zero means perpendicular OR zero. Cross product zero means parallel OR zero. Two non-zero vectors cannot be both perpendicular and parallel. So one (or both) must be zero.
+
+This is a useful diagnostic: if both products vanish, you have a "degenerate" pair.
+</ExA>
+
+<ExQ>
+**Reasoning.** Why does $\mathbf{u}\times\mathbf{u} = \mathbf{0}$ for any vector $\mathbf{u}$?
+</ExQ>
+<ExA>
+A vector is parallel to itself, and parallel vectors have cross product zero. Algebraically: $\sin 0° = 0$, so magnitude is zero. Or: anticommutativity says $\mathbf{u}\times\mathbf{u} = -\mathbf{u}\times\mathbf{u}$, which forces it to be zero.
+</ExA>
+
+<ExQ>
+**Sketch.** Two vectors $\mathbf{u}, \mathbf{v}$ in the $xy$-plane have $\mathbf{u}\times\mathbf{v} = \langle 0, 0, 5\rangle$. What does this tell you about their relative orientation?
+</ExQ>
+<ExA>
+The cross product is along $+\hat{\mathbf{k}}$, so by right-hand rule, $\mathbf{v}$ is counterclockwise from $\mathbf{u}$ when viewed from above (positive $z$-axis). The magnitude $5$ is the area of the parallelogram they span.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Work calculation.** A force $\mathbf{F} = \langle 3, 2, -1\rangle$ N moves a particle along displacement $\mathbf{d} = \langle 4, 0, 5\rangle$ m. Find the work done.
+</ExQ>
+<ExA>
+$W = \mathbf{F}\cdot\mathbf{d} = 12 + 0 - 5 = \boxed{7\text{ J}}$
+</ExA>
+
+<ExQ>
+**Torque.** A wrench has handle along $\mathbf{r} = \langle 0.3, 0, 0\rangle$ m. A force $\mathbf{F} = \langle 0, 50, 30\rangle$ N is applied at the end. Find the torque about the origin.
+</ExQ>
+<ExA>
+$\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F} = \langle 0\cdot 30 - 0\cdot 50,\ 0\cdot 0 - 0.3\cdot 30,\ 0.3\cdot 50 - 0\cdot 0\rangle = \langle 0, -9, 15\rangle$ N·m
+
+Magnitude: $\sqrt{81 + 225} = \sqrt{306} \approx 17.5$ N·m.
+</ExA>
+
+<ExQ>
+**Volume of parallelepiped.** Three edges of a parallelepiped are $\mathbf{a} = \langle 1, 0, 0\rangle$, $\mathbf{b} = \langle 1, 1, 0\rangle$, $\mathbf{c} = \langle 1, 1, 1\rangle$. Find its volume.
+</ExQ>
+<ExA>
+$V = |\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})|$.
+
+$\mathbf{b}\times\mathbf{c} = \langle 1\cdot 1 - 0\cdot 1,\ 0\cdot 1 - 1\cdot 1,\ 1\cdot 1 - 1\cdot 1\rangle = \langle 1, -1, 0\rangle$.
+
+$\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c}) = 1 + 0 + 0 = 1$. $V = \boxed{1}$.
+</ExA>
+
+<ExQ>
+**Plane of bolts.** Three bolts on a flange are at positions $\mathbf{p}_1 = (0,0,0)$, $\mathbf{p}_2 = (3, 0, 0)$, $\mathbf{p}_3 = (0, 4, 0)$. Find a unit normal to the flange plane.
+</ExQ>
+<ExA>
+Two edges: $\mathbf{p}_2 - \mathbf{p}_1 = \langle 3, 0, 0\rangle$, $\mathbf{p}_3 - \mathbf{p}_1 = \langle 0, 4, 0\rangle$.
+
+Normal: $\mathbf{n} = \langle 3,0,0\rangle\times\langle 0,4,0\rangle = \langle 0\cdot 0 - 0\cdot 4,\ 0\cdot 0 - 3\cdot 0,\ 3\cdot 4 - 0\rangle = \langle 0, 0, 12\rangle$.
+
+Unit: $\hat{\mathbf{n}} = \langle 0, 0, 1\rangle$.
+
+The flange is in the $xy$-plane — its normal is along $\hat{\mathbf{k}}$, as expected.
+</ExA>

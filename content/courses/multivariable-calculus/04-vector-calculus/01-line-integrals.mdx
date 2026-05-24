@@ -1,0 +1,162 @@
+---
+title: Line Integrals and Green's Theorem
+description: Integrating along curves — work, circulation, and the deep link between line integrals and double integrals.
+---
+
+# Line Integrals and Green's Theorem
+
+## The Big Picture
+
+A line integral sums a quantity along a curve — work done by a force along a path, circulation of a flow around a loop, charge accumulated along a wire. **Green's theorem** then provides a stunning connection: the line integral of a 2D vector field around a closed loop equals the double integral of the *curl* over the enclosed region. This is one of the deepest results in vector calculus and the prototype for Stokes' and Divergence theorems.
+
+## Intuition First — Walking and Adding
+
+Imagine walking along a path while a force field pushes on you. The total work done is the sum of (force component along path) × (distance walked) at each step. In the limit of infinitesimal steps, this becomes a line integral $\int_C\mathbf{F}\cdot d\mathbf{r}$.
+
+Two key observations:
+- Only the *tangential* component of $\mathbf{F}$ contributes (perpendicular forces do no work).
+- The result depends on the path AND the field.
+
+For "nice" fields (conservative ones), the integral depends only on endpoints — like potential energy. For others, the path matters. This distinction is at the heart of physics.
+
+## Line Integral of a Vector Field
+
+Given a curve $C: \mathbf{r}(t)$ for $t \in [a, b]$, and a vector field $\mathbf{F}(x, y, z)$:
+
+$$\int_C\mathbf{F}\cdot d\mathbf{r} = \int_a^b\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt$$
+
+This integrates the tangential component of $\mathbf{F}$ along the curve.
+
+**Work interpretation:** $W = \int_C\mathbf{F}\cdot d\mathbf{r}$ is the work done by force $\mathbf{F}$ along path $C$.
+
+## Line Integral of a Scalar Field
+
+For a scalar function $f$ along curve $C$:
+
+$$\int_C f\,ds = \int_a^b f(\mathbf{r}(t))\,\|\mathbf{r}'(t)\|\,dt$$
+
+Used for: arc length ($f = 1$), mass of a wire ($f$ = density), average value of a field along a curve.
+
+## Conservative Fields and Path Independence
+
+A vector field $\mathbf{F}$ is **conservative** if $\mathbf{F} = \nabla\phi$ for some scalar potential $\phi$. Equivalent conditions (in simply connected domains):
+
+- $\nabla\times\mathbf{F} = \mathbf{0}$ (zero curl)
+- $\oint_C\mathbf{F}\cdot d\mathbf{r} = 0$ for any closed loop
+- $\int_C\mathbf{F}\cdot d\mathbf{r}$ depends only on endpoints
+
+For conservative fields, $\int_A^B\mathbf{F}\cdot d\mathbf{r} = \phi(B) - \phi(A)$ — the **fundamental theorem for line integrals**.
+
+This is why gravitational and electrostatic forces have *potential energies* — they're conservative.
+
+## Green's Theorem
+
+For a positively oriented (counterclockwise) simple closed curve $C$ enclosing region $D$, and a 2D vector field $\mathbf{F} = \langle P, Q\rangle$:
+
+$$\oint_C P\,dx + Q\,dy = \iint_D\left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dA$$
+
+The integrand on the right is the **2D curl** $\partial Q/\partial x - \partial P/\partial y$, measuring local "rotation" of the field.
+
+**Why is this surprising?** A 1D integral around the boundary equals a 2D integral over the interior. The boundary "knows" about the interior — through the curl.
+
+## Two Special Cases of Green
+
+**Area:** Choosing $P = -y/2$, $Q = x/2$:
+$$\text{area}(D) = \frac{1}{2}\oint_C(x\,dy - y\,dx)$$
+This computes area from boundary alone — useful when interior is unknown.
+
+**Circulation:** $\oint_C\mathbf{F}\cdot d\mathbf{r}$ measures total "rotation" of the field around the loop. Green's theorem says circulation = total curl inside.
+
+## Common Misconceptions
+
+**Misconception 1: "All line integrals are path-independent."**
+
+Only conservative fields give path-independent integrals. Most fields aren't conservative.
+
+**Misconception 2: "$d\mathbf{r}$ and $ds$ are the same."**
+
+$d\mathbf{r}$ is a *vector* differential along the curve (tangent direction × infinitesimal length). $ds$ is its magnitude — a scalar. Used in different integrals.
+
+**Misconception 3: "Green's theorem requires the curve to be a simple shape."**
+
+Just needs to be **simple** (non-self-intersecting) and **closed** with **positive orientation**. Can be any reasonable shape — circle, polygon, star, etc.
+
+**Misconception 4: "Curl = zero means conservative."**
+
+In a *simply connected* domain, yes. With holes (e.g., punctured plane), zero curl doesn't guarantee conservative — line integrals around the hole can be nonzero.
+
+## Engineering Connection
+
+- **Work in mechanics:** $W = \int_C\mathbf{F}\cdot d\mathbf{r}$ — work done by variable forces along curved paths.
+- **Circulation in fluid dynamics:** $\Gamma = \oint_C\mathbf{v}\cdot d\mathbf{r}$ — measures rotation of flow; relates to lift on airfoils via Kutta-Joukowski theorem.
+- **Ampère's law:** $\oint\mathbf{B}\cdot d\mathbf{r} = \mu_0 I_{\text{enc}}$ — relates magnetic field around a loop to enclosed current.
+- **Green's theorem in CFD:** used to derive vorticity and stream function relations.
+- **Surveying:** computing land area from boundary GPS coordinates uses Green's theorem (the "surveyor's formula").
+
+---
+
+## Practice Problems
+
+<ExQ>
+Compute $\int_C(x + y)\,dx + (y - x)\,dy$ where $C$ is the line segment from $(0, 0)$ to $(1, 2)$.
+</ExQ>
+<ExA>
+Parameterize: $x = t$, $y = 2t$, $t \in [0, 1]$. Then $dx = dt$, $dy = 2\,dt$.
+
+$\int_0^1[(t + 2t) + (2t - t)\cdot 2]\,dt = \int_0^1(3t + 2t)\,dt = \int_0^1 5t\,dt = 5/2$
+</ExA>
+
+<ExQ>
+Show that $\mathbf{F} = \langle 2xy, x^2 + 1\rangle$ is conservative, find a potential, and use it to evaluate $\int_C\mathbf{F}\cdot d\mathbf{r}$ from $(0, 0)$ to $(2, 3)$.
+</ExQ>
+<ExA>
+**Curl check:** $\partial Q/\partial x - \partial P/\partial y = 2x - 2x = 0$ ✓
+
+**Find potential:** $\phi_x = 2xy \Rightarrow \phi = x^2 y + g(y)$. Then $\phi_y = x^2 + g'(y) = x^2 + 1 \Rightarrow g(y) = y$.
+
+So $\phi = x^2 y + y$.
+
+$\int_C\mathbf{F}\cdot d\mathbf{r} = \phi(2, 3) - \phi(0, 0) = (4\cdot 3 + 3) - 0 = 15$.
+</ExA>
+
+<ExQ>
+Use Green's theorem to evaluate $\oint_C(y\,dx + x\,dy)$ where $C$ is the unit circle.
+</ExQ>
+<ExA>
+By Green's theorem: $\oint = \iint_D(\partial Q/\partial x - \partial P/\partial y)\,dA = \iint(1 - 1)\,dA = 0$.
+
+Field $\langle y, x\rangle$ has zero curl — conservative — so loop integral is zero. (And in fact, $\phi = xy$ works as potential.)
+</ExA>
+
+<ExQ>
+Use Green's theorem to compute $\oint_C(-y\,dx + x\,dy)$ where $C$ is the boundary of the rectangle $[0, 2]\times[0, 3]$.
+</ExQ>
+<ExA>
+$\partial Q/\partial x - \partial P/\partial y = 1 - (-1) = 2$.
+
+$\oint = \iint_D 2\,dA = 2\cdot\text{area} = 2\cdot 6 = 12$.
+
+Recall this integral is twice the area when computed via Green — a special case of the area formula.
+</ExA>
+
+<ExQ>
+**Engineering: Work calculation.** A force field $\mathbf{F}(x, y) = \langle xy, x + y\rangle$ N pushes a particle along the curve $\mathbf{r}(t) = (t, t^2)$ from $(0, 0)$ to $(1, 1)$. Find the work done.
+</ExQ>
+<ExA>
+$\mathbf{r}'(t) = \langle 1, 2t\rangle$. $\mathbf{F}(\mathbf{r}(t)) = \langle t\cdot t^2, t + t^2\rangle = \langle t^3, t + t^2\rangle$.
+
+$\mathbf{F}\cdot\mathbf{r}' = t^3 + 2t(t + t^2) = t^3 + 2t^2 + 2t^3 = 3t^3 + 2t^2$.
+
+$W = \int_0^1(3t^3 + 2t^2)\,dt = 3/4 + 2/3 = 17/12$ J ≈ 1.42 J.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does Green's theorem fail if the region $D$ has a hole?
+</ExQ>
+<ExA>
+Green's theorem requires the boundary to enclose a *simply connected* region. With a hole, you have an outer boundary AND an inner boundary; both must be included with proper orientation (outer CCW, inner CW).
+
+The corrected statement: $\iint_D(\partial Q/\partial x - \partial P/\partial y)\,dA = \oint_{C_\text{outer}}\mathbf{F}\cdot d\mathbf{r} - \oint_{C_\text{inner}}\mathbf{F}\cdot d\mathbf{r}$.
+
+This is the engine behind **residue theorem in complex analysis** (which is essentially Cauchy's theorem on a multiply-connected region).
+</ExA>

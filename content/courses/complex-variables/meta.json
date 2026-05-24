@@ -1,0 +1,46 @@
+{
+  "title": "Complex Variables",
+  "description": "Complex numbers, analytic functions, Cauchy's theorems, residues, and engineering applications including potential flow and inverse Laplace transforms.",
+  "level": "advanced",
+  "area": "Mathematics",
+  "tags": ["Complex Analysis", "Mathematics", "Applied Math"],
+  "chapters": [
+    {
+      "title": "Basic Concepts",
+      "slug": "01-basic-concepts",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-complex-numbers", "title": "Complex Numbers and the Complex Plane", "order": 1 },
+        { "slug": "02-polar-form", "title": "Polar Form, Euler's Formula, and Complex Exponentials", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Analytic Functions",
+      "slug": "02-analytic-functions",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-cauchy-riemann", "title": "Differentiability and the Cauchy–Riemann Equations", "order": 1 },
+        { "slug": "03-potential-flow", "title": "Application: Potential Flow in Fluid Mechanics", "order": 2 }
+      ]
+    },
+    {
+      "title": "Cauchy Integral Theorems",
+      "slug": "03-cauchy-theorems",
+      "order": 3,
+      "lessons": [
+        { "slug": "02-cauchy-theorem", "title": "Cauchy–Goursat Theorem and Consequences", "order": 1 }
+      ]
+    },
+    {
+      "title": "Series Expansions and Residues",
+      "slug": "04-series-residues",
+      "order": 4,
+      "lessons": [
+        { "slug": "02-residues", "title": "Residues and the Residue Theorem", "order": 1 },
+        { "slug": "03-real-integrals", "title": "Evaluating Real Integrals via Contour Integration", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

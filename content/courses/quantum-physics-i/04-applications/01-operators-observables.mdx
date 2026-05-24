@@ -1,0 +1,137 @@
+---
+title: Operators, Eigenvalues, and Observables
+description: Every observable corresponds to a Hermitian operator — measurement returns eigenvalues with probabilities given by overlap with eigenstates.
+---
+
+# Operators, Eigenvalues, and Observables
+
+## The Big Picture
+
+In quantum mechanics, **observables** (measurable quantities like position, momentum, energy) are represented by **Hermitian operators**. Measurement of an observable returns one of its eigenvalues; the probability is given by the squared overlap between the state and the corresponding eigenstate. This postulate — together with state evolution via Schrödinger — is the operational core of quantum theory.
+
+## Key Operators
+
+| Observable | Operator |
+|---|---|
+| Position | $\hat x = x\cdot$ |
+| Momentum | $\hat p = -i\hbar\partial/\partial x$ |
+| Energy | $\hat H = \hat p^2/(2m) + V(\hat x)$ |
+| Angular momentum (z) | $\hat L_z = -i\hbar\partial/\partial\phi$ |
+| Spin | $\hat S_i = (\hbar/2)\sigma_i$ (Pauli matrices) |
+
+## Hermitian Operators
+
+$\hat O$ is Hermitian if $\int\psi^* (\hat O\phi)\,dx = \int(\hat O\psi)^*\phi\,dx$ for all $\psi, \phi$.
+
+**Consequences:**
+- Eigenvalues are real (physical observables must be).
+- Eigenstates with different eigenvalues are orthogonal.
+- Eigenstates form a complete basis — any state expands in them.
+
+## Measurement Postulate
+
+If $\hat O$ has eigenvalues $\{o_n\}$ and eigenstates $\{|o_n\rangle\}$:
+
+1. Measurement of $O$ returns some $o_n$.
+2. Probability of $o_n$: $P(o_n) = |\langle o_n|\psi\rangle|^2$.
+3. After measurement, $|\psi\rangle$ collapses to $|o_n\rangle$.
+
+If the spectrum is continuous (position, momentum), replace sums with integrals.
+
+## Commutators and Compatibility
+
+Two observables are **compatible** (can be simultaneously measured precisely) iff their operators commute: $[\hat A, \hat B] = 0$.
+
+Famous non-commuting pair: $[\hat x, \hat p] = i\hbar$ → cannot simultaneously know both.
+
+Compatible observables share a complete set of common eigenstates.
+
+## Ehrenfest's Theorem
+
+Expectation values evolve "classically":
+
+$$\frac{d\langle\hat O\rangle}{dt} = \frac{1}{i\hbar}\langle[\hat O, \hat H]\rangle + \langle\partial\hat O/\partial t\rangle$$
+
+For position and momentum:
+$d\langle x\rangle/dt = \langle p\rangle/m$, $d\langle p\rangle/dt = -\langle\partial V/\partial x\rangle$.
+
+These recover Newton's equations in the classical limit.
+
+## Common Misconceptions
+
+**Misconception 1: "Measurement returns expectation value."**
+
+Returns an eigenvalue — *some specific value*, not the average. Expectation value is the average *over many measurements* of identically prepared systems.
+
+**Misconception 2: "State collapse is just changing your knowledge."**
+
+Quantum collapse is unlike classical Bayesian updating — interference experiments demonstrate that wavefunctions are physical, and collapse is a real physical event (though the mechanism is interpretation-dependent).
+
+**Misconception 3: "If $[\hat A, \hat B] = 0$, both have the same eigenstates."**
+
+Commuting observables share a complete *set* of common eigenstates, not that all eigenstates of one are eigenstates of the other.
+
+## Engineering Connection
+
+- **Stern-Gerlach experiments:** measure spin components — Hermitian Pauli operators.
+- **NMR/MRI:** measure nuclear spin operators in time-varying fields.
+- **Polarization measurements:** photon polarization operators on a 2D Hilbert space.
+- **Spectroscopy:** absorption lines = energy eigenvalue differences.
+- **Tunneling current in STM:** related to local density of states (eigenstate sum at energy E).
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** $\hat A = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$. Eigenvalues and eigenvectors?
+</ExQ>
+<ExA>
+Already diagonal. Eigenvalues: $+1, -1$. Eigenvectors: $(1, 0)^T, (0, 1)^T$.
+
+(This is $\hat\sigma_z$ in spin-1/2 — spin "up" and "down" along $z$.)
+</ExA>
+
+<ExQ>
+**2.** Show $\hat x$ is Hermitian.
+</ExQ>
+<ExA>
+$\int\psi^*(\hat x\phi)\,dx = \int\psi^*(x\phi)\,dx = \int(x\psi)^*\phi\,dx = \int(\hat x\psi)^*\phi\,dx$ ✓
+
+(Real-valued multiplicative operators are automatically Hermitian.)
+</ExA>
+
+<ExQ>
+**3.** $[\hat L_x, \hat L_y]$ in terms of $\hat L_z$? (Without computing in detail.)
+</ExQ>
+<ExA>
+Famous angular momentum commutation: $[\hat L_x, \hat L_y] = i\hbar\hat L_z$.
+
+Cyclic permutations: $[\hat L_y, \hat L_z] = i\hbar\hat L_x$, $[\hat L_z, \hat L_x] = i\hbar\hat L_y$.
+
+This algebra defines $SU(2)$ — the symmetry group of rotations in QM.
+</ExA>
+
+<ExQ>
+**4. Engineering: Quantum bit.** A qubit state is $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$. Measure $\hat\sigma_z$. Outcomes and probabilities?
+</ExQ>
+<ExA>
+$\hat\sigma_z$ eigenvalues: $+1$ for $|0\rangle$, $-1$ for $|1\rangle$.
+
+Probabilities: $P(+1) = |\alpha|^2$, $P(-1) = |\beta|^2$.
+
+Normalization requires $|\alpha|^2 + |\beta|^2 = 1$.
+
+After measurement, state collapses to $|0\rangle$ or $|1\rangle$. This is the basic readout in quantum computing.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why must observables correspond to Hermitian operators?
+</ExQ>
+<ExA>
+Physical measurement outcomes are real numbers. Eigenvalues of Hermitian operators are guaranteed real. Eigenvalues of non-Hermitian operators can be complex.
+
+Also: Hermitian operators have complete orthonormal eigenstates, ensuring well-defined probabilities sum to 1.
+
+These mathematical requirements correspond exactly to physical demands: real outcomes, total probability conservation. Hermitian operators are *the* natural mathematical structure for observables.
+</ExA>

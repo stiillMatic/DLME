@@ -1,0 +1,152 @@
+---
+title: Activation Energy and Arrhenius Equation
+description: The energy barrier reactants must climb — and how temperature exponentially controls rate.
+---
+
+# Activation Energy and Arrhenius Equation
+
+## The Big Picture
+
+Even thermodynamically favored reactions don't happen instantly — they have an **activation energy** ($E_a$), an energy barrier the reactants must overcome. Temperature provides the thermal energy; at higher T, more molecules have enough energy to cross the barrier, exponentially speeding the reaction. The **Arrhenius equation** quantifies this. Combined with catalysis (which lowers $E_a$), this picture explains how to control reaction rates in industrial, biological, and environmental contexts.
+
+## Activation Energy
+
+Imagine the energy profile along the reaction coordinate. There's a "hill" (transition state) between reactants and products. Even for exothermic reactions, you have to climb the hill first.
+
+$E_a$ = height of the hill from reactants.
+
+## Arrhenius Equation
+
+$$k = A e^{-E_a/(RT)}$$
+
+- $A$: pre-exponential factor (collision frequency × orientation factor).
+- $E_a$: activation energy (J/mol).
+- $R$: gas constant.
+- $T$: absolute temperature.
+
+Logarithmic form:
+$$\ln k = \ln A - E_a/(RT)$$
+
+Plot $\ln k$ vs $1/T$ → slope $-E_a/R$.
+
+## Temperature Sensitivity
+
+For typical $E_a \sim 50$ kJ/mol: rate roughly **doubles per 10°C** near room temperature.
+
+Rigorously: $\dfrac{k_2}{k_1} = \exp\!\left[\dfrac{E_a}{R}\left(\dfrac{1}{T_1} - \dfrac{1}{T_2}\right)\right]$.
+
+## Why Exponential?
+
+Boltzmann distribution: fraction of molecules with energy ≥ $E_a$ is $\propto e^{-E_a/(RT)}$.
+
+Only these molecules can react. So rate $\propto$ this fraction × collision frequency × orientation. The exponential is intrinsic to thermal physics.
+
+## Catalysis
+
+A **catalyst** provides an alternative reaction path with lower $E_a$ — without being consumed.
+
+| Aspect | Without catalyst | With catalyst |
+|---|---|---|
+| Rate | Slower | Faster |
+| $E_a$ | High | Lower |
+| $\Delta G$ | Same | **Same** |
+| Equilibrium | Same position | Same |
+
+Catalyst doesn't shift equilibrium; just gets there faster.
+
+## Types of Catalysis
+
+- **Homogeneous:** same phase (acid catalysis in solution).
+- **Heterogeneous:** different phase (Pt on solid support for car exhaust).
+- **Enzymes:** biological — extraordinary rate enhancements ($10^6-10^{17}$).
+
+## Common Misconceptions
+
+**Misconception 1: "Catalysts speed up forward only."**
+
+Speed forward and reverse equally. Equilibrium position unchanged.
+
+**Misconception 2: "Higher T always means more product."**
+
+Higher T speeds rate but can shift equilibrium against product if exothermic. Trade-off is a key process engineering question.
+
+**Misconception 3: "$E_a$ is the energy of the bond breaking."**
+
+$E_a$ is the energy to reach the *transition state*, often less than full bond dissociation (since new bonds form partially as old break).
+
+## Engineering Connection
+
+- **Catalytic converters** in cars: Pt/Pd/Rh catalysts convert CO, NOx, hydrocarbons.
+- **Haber process**: iron catalyst makes NH₃ synthesis economically feasible.
+- **Enzymes in industry**: detergent proteases, glucose isomerase, lipases.
+- **Drug shelf life**: Arrhenius extrapolation from accelerated aging (e.g., 40°C for 3 months ≈ 25°C for 2 years).
+- **Atmospheric chemistry**: catalytic cycles for ozone destruction.
+- **Pharmaceutical metabolism**: liver enzymes (CYP450) determine drug half-lives.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Rate doubles when T rises from 290 K to 300 K. $E_a$?
+</ExQ>
+<ExA>
+$\ln 2 = (E_a/R)(1/290 - 1/300) = (E_a/8.314)(1.15\times 10^{-4})$.
+
+$E_a = 0.693\cdot 8.314/1.15\times 10^{-4} \approx 50{,}100$ J/mol = 50 kJ/mol.
+
+This is the "typical" value behind the doubling-per-10K rule.
+</ExA>
+
+<ExQ>
+**2.** Catalyst lowers $E_a$ from 75 to 50 kJ/mol at 300 K. Rate ratio?
+</ExQ>
+<ExA>
+$k_{cat}/k_{uncat} = \exp(25000/(8.314\cdot 300)) = \exp(10.02) \approx 22{,}500$.
+
+~22,500× faster. Typical industrial catalyst boost.
+</ExA>
+
+<ExQ>
+**3.** Reaction with $E_a = 100$ kJ/mol, $k$ at 25°C = $10^{-5}$/s. At 100°C?
+</ExQ>
+<ExA>
+$\ln(k_2/k_1) = (100000/8.314)(1/298 - 1/373) = 12030\cdot 6.74\times 10^{-4} = 8.11$.
+
+$k_2/k_1 = e^{8.11} \approx 3328$.
+
+$k_{100°C} \approx 3.3\times 10^{-2}$/s. About 3000× faster — illustrates why cooking, drug spoilage, biological processes accelerate with T.
+</ExA>
+
+<ExQ>
+**4. Engineering: Drug shelf life.** A drug at 25°C has shelf life 2 years, $E_a = 90$ kJ/mol. At 40°C?
+</ExQ>
+<ExA>
+$k_{40}/k_{25} = \exp((90000/8.314)(1/298 - 1/313)) = \exp(10825\cdot 1.61\times 10^{-4}) = \exp(1.74) \approx 5.7$.
+
+Shelf life inversely scales with $k$: $T_{40} = 2/5.7 \approx 0.35$ years ≈ 4 months.
+
+Refrigeration ($\sim 4°C$): about 8x **longer** shelf life than 25°C.
+
+Standard accelerated stability testing extrapolates room-T shelf life from elevated-T data.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why are biological enzymes so much more efficient than industrial catalysts?
+</ExQ>
+<ExA>
+Enzymes evolved over billions of years:
+- **Specifically bind** substrates in optimized orientation.
+- **Stabilize transition state** through multiple weak interactions.
+- **Use cofactors** for electron/proton transfer.
+- Achieve rate enhancements of $10^{10}-10^{17}$.
+
+Industrial catalysts:
+- Designed in years/decades, not eons.
+- Robust to harsh conditions enzymes can't withstand.
+- Typical $10^6-10^9$ rate enhancement.
+
+For specific reactions, **biocatalysis** is increasingly used industrially — high-fructose corn syrup (glucose isomerase), detergent proteases, biofuels.
+
+This is a major area of green chemistry — enzymes operate at room T, neutral pH, in water.
+</ExA>

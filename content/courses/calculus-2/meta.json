@@ -1,0 +1,50 @@
+{
+  "title": "Calculus II",
+  "description": "Integration techniques, applications of integration, parametric and polar coordinates, and infinite series — the second semester of calculus.",
+  "level": "intermediate",
+  "area": "Mathematics",
+  "tags": ["Calculus", "Mathematics", "Integration"],
+  "chapters": [
+    {
+      "title": "Advanced Integration Techniques",
+      "slug": "01-integration-techniques",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-trig-substitution", "title": "Trigonometric Substitution", "order": 1 },
+        { "slug": "02-improper-integrals", "title": "Improper Integrals", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Applications of Integration",
+      "slug": "02-applications",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-volumes", "title": "Volumes by Slicing and Shells", "order": 1 },
+        { "slug": "02-arc-length", "title": "Arc Length and Surface Area", "order": 2 },
+        { "slug": "03-work-fluid-force", "title": "Work and Fluid Pressure", "order": 3 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Parametric Equations and Polar Coordinates",
+      "slug": "03-parametric-polar",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-parametric-curves", "title": "Parametric Curves and Their Calculus", "order": 1 },
+        { "slug": "02-polar-coordinates", "title": "Polar Coordinates and Polar Curves", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Sequences and Infinite Series",
+      "slug": "04-series",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-convergence-tests", "title": "Convergence Tests in Depth", "order": 1 },
+        { "slug": "02-power-series", "title": "Power Series and Radius of Convergence", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

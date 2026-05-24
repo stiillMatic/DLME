@@ -1,0 +1,153 @@
+---
+title: Principal Component Analysis (PCA)
+description: Finding the directions of greatest variance in data — the workhorse of dimensionality reduction and feature engineering.
+---
+
+# Principal Component Analysis (PCA)
+
+## The Big Picture
+
+Real datasets are high-dimensional, but often the "interesting" variation lives in a much lower-dimensional subspace. **PCA** finds the directions of largest variance and projects onto them. The result: a low-dimensional representation that preserves most of the information, ideal for visualization, compression, and feeding into downstream ML models. It's just SVD applied to mean-centered data — but the engineering implications are enormous.
+
+## Intuition First — Find the Long Axis of the Cloud
+
+Imagine a 3D point cloud shaped like a flattened pancake. Most variance is along the pancake's long axis; some along its width; very little along its thinness.
+
+PCA finds these three axes — sorted by how much variance they capture. Project onto the first two and you have a 2D picture of the pancake that retains 99% of the structure.
+
+This generalizes to any dimension. PCA literally **rotates the coordinate system** so the new axes (principal components) align with directions of decreasing variance.
+
+## The Algorithm
+
+Given data matrix $X$ where rows are samples, columns are features:
+
+1. **Center the data:** subtract column means. $X_c = X - \bar{X}$.
+2. **Compute covariance:** $C = X_c^T X_c / (n - 1)$, a symmetric $d\times d$ matrix.
+3. **Eigendecompose** $C$: $C = V\Lambda V^T$. Eigenvalues sorted: $\lambda_1 \geq \lambda_2 \geq \cdots$.
+4. **Project** onto top $k$ eigenvectors: $Z = X_c V_k$.
+
+Equivalently, via SVD: $X_c = U\Sigma V^T$. Singular values squared (divided by $n-1$) are the variances along each principal direction.
+
+## What Each Quantity Means
+
+- **Principal components** = columns of $V$. Orthogonal directions of decreasing variance.
+- **Variance explained** by component $i$: $\lambda_i / \sum_j \lambda_j$.
+- **Scores** $Z = X_c V_k$ are the coordinates in the new basis.
+
+## How Many Components?
+
+Common heuristics:
+- **Variance threshold:** keep enough components for 95% (or 90%, 99%) of total variance.
+- **Scree plot:** plot eigenvalues; find the "elbow" where adding components stops helping much.
+- **Domain knowledge:** physically motivated number of latent factors.
+
+## Worked Example
+
+Suppose 2D data with covariance matrix $C = \begin{pmatrix}4 & 2\\ 2 & 3\end{pmatrix}$.
+
+Eigenvalues: $\lambda^2 - 7\lambda + 8 = 0 \Rightarrow \lambda = (7\pm\sqrt{17})/2 \approx 5.56, 1.44$.
+
+Variance ratios: $5.56/7 = 79\%$ vs $1.44/7 = 21\%$.
+
+The first PC explains 79% of variance — most information.
+
+## Common Misconceptions
+
+**Misconception 1: "PCA gives the most informative features."**
+
+PCA gives directions of largest **variance**, not necessarily most "informative" for a task. For supervised problems, this can fail — variance might correlate with noise, not with target. **LDA** or **supervised PCA** addresses this.
+
+**Misconception 2: "Centering doesn't matter."**
+
+It does — without centering, you'd get directions toward the data mean, not toward the variance structure. **Always center.** (Sometimes also scale features to unit variance — "standardize.")
+
+**Misconception 3: "Principal components are interpretable features."**
+
+Sometimes — PCs are linear combinations of original features. The combination may or may not have natural interpretation. Be cautious assigning meaning ("eigenfaces" do happen to look face-like; many other domains don't have such luck).
+
+**Misconception 4: "PCA is the best dimensionality reduction."**
+
+It's *one* method, optimal for variance preservation under linear projection. Nonlinear methods (t-SNE, UMAP, autoencoders) capture nonlinear structure but lose other guarantees.
+
+## Engineering Connection
+
+- **Sensor data compression:** monitoring system with 100 sensors → reduce to 5 components for telemetry transmission.
+- **Image processing:** "eigenfaces" — face recognition by projecting onto top PCs.
+- **Vibration analysis:** **POD** (proper orthogonal decomposition) is PCA on fluid velocity / displacement fields.
+- **Quality control:** detect anomalies by monitoring out-of-PCA-subspace excursions.
+- **Feature engineering for ML:** decorrelate features before training; reduce dimension to fight curse of dimensionality.
+- **Modal analysis** in structural dynamics: PCs of measured response fields = empirical modes.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+**1.** Data has covariance $C = \begin{pmatrix}5 & 0\\ 0 & 1\end{pmatrix}$. First PC?
+</ExQ>
+<ExA>
+$C$ is diagonal; eigenvectors are standard basis vectors. First PC = $(1, 0)^T$ (corresponding to eigenvalue 5, the larger).
+
+First PC explains $5/6 \approx 83\%$ of variance.
+</ExA>
+
+<ExQ>
+**2.** If 4 PCs have eigenvalues $\lambda = 10, 4, 1, 0.1$, what fraction of variance is captured by the top 2?
+</ExQ>
+<ExA>
+Top 2: $10 + 4 = 14$. Total: $10 + 4 + 1 + 0.1 = 15.1$.
+
+Fraction: $14/15.1 \approx 92.7\%$.
+
+So 2 dimensions captures almost all variance — strong signal that data is essentially 2D.
+</ExA>
+
+### Application
+
+<ExQ>
+**3.** Center the data $X = \begin{pmatrix}1 & 2\\ 3 & 4\\ 5 & 6\end{pmatrix}$.
+</ExQ>
+<ExA>
+Column means: $\bar X = (3, 4)$.
+
+$X_c = \begin{pmatrix}-2 & -2\\ 0 & 0\\ 2 & 2\end{pmatrix}$.
+
+Notice all rows of $X_c$ are multiples of $(1, 1)$ — data lies on a line through origin in centered coordinates. Rank 1.
+</ExA>
+
+<ExQ>
+**4. Engineering: Strain field analysis.** A strain gauge array gives a $1000\times 50$ matrix (1000 time samples × 50 sensors). PCA reveals top 3 PCs explain 98% variance. What does this say physically?
+</ExQ>
+<ExA>
+The 50-dimensional sensor response really lives in a 3D subspace — there are effectively **3 dominant modes** of strain.
+
+Physical interpretation: the structure is responding with 3 dominant modes of deformation; the 50 sensors are highly correlated, redundantly measuring these few modes. This corresponds to the first 3 vibrational mode shapes (or quasi-static deformation modes).
+
+This is the foundation of **modal identification** from operational data.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**5. True or False.** PCA is invariant under rotations of the data. Justify.
+</ExQ>
+<ExA>
+**True (essentially).** Rotating the data $X \to XR$ for an orthogonal $R$ leads to PCs rotated correspondingly: same variance structure, expressed in new axes.
+
+What PCA *does* depend on: **scaling** of features. If one feature has 1000× the scale of another, PCA will be dominated by that feature. This is why standardization (dividing each column by its std deviation) is often used.
+</ExA>
+
+<ExQ>
+**6.** Why does PCA work with the eigendecomposition of the **covariance matrix** rather than the data matrix directly?
+</ExQ>
+<ExA>
+The eigenvectors of $C = X_c^T X_c/(n-1)$ are the directions of variance.
+
+**Why covariance?** $C_{ij}$ = covariance between features $i$ and $j$. The eigendecomposition finds an orthogonal basis where features become **uncorrelated** ($C$ becomes diagonal in the eigen-basis).
+
+Equivalently, this is the right-singular-vector matrix from SVD of $X_c$. Eigendecomposition of $C$ and SVD of $X_c$ give the same PCs — but SVD is more numerically stable (avoids forming $C$ explicitly).
+
+For very large data, SVD with random projection or iterative methods is the practical algorithm.
+</ExA>

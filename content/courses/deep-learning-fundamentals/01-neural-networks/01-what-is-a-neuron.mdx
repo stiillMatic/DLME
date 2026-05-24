@@ -1,0 +1,51 @@
+---
+title: What Is a Neuron?
+description: Understand the artificial neuron as a simple linear model with a nonlinearity.
+---
+
+# What Is a Neuron?
+
+A biological neuron fires when the sum of its inputs exceeds a threshold. An **artificial neuron** does the same thing mathematically.
+
+## The Math
+
+Given inputs $x_1, x_2, \ldots, x_n$ and weights $w_1, w_2, \ldots, w_n$, a neuron computes:
+
+$$
+z = \sum_{i=1}^{n} w_i x_i + b
+$$
+
+then passes $z$ through an **activation function** $\sigma$:
+
+$$
+a = \sigma(z)
+$$
+
+The output $a$ is what gets passed to the next layer.
+
+## ME Analogy
+
+Think of a strain gauge array measuring stress at multiple points. Each measurement $x_i$ is multiplied by a sensitivity weight $w_i$. The sum gives an overall stress estimate — that's the dot product. The activation function is like a nonlinear material response (e.g., plasticity threshold).
+
+## PyTorch Example
+
+```python
+import torch
+import torch.nn as nn
+
+# A single linear layer = one layer of neurons
+layer = nn.Linear(in_features=3, out_features=1)
+
+x = torch.tensor([1.0, 2.0, 3.0])
+z = layer(x)          # w · x + b
+a = torch.relu(z)     # activation
+print(a)
+```
+
+## Key Takeaways
+
+- A neuron is a **weighted sum + bias + nonlinearity**
+- The weights $w_i$ are what the network *learns*
+- Without the activation function, stacking neurons is useless (they collapse to a single linear transform)
+
+In the next lesson we look at the most common activation functions and why the choice matters.

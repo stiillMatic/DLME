@@ -1,0 +1,53 @@
+{
+  "title": "Single Variable Calculus",
+  "description": "Limits, derivatives, integrals, and infinite series — the mathematical foundation of all engineering analysis. Deep intuition, full derivations, and abundant practice problems.",
+  "level": "beginner",
+  "area": "Mathematics",
+  "tags": ["Calculus", "Mathematics", "MIT 18.01"],
+  "chapters": [
+    {
+      "title": "Limits and Continuity",
+      "slug": "01-limits",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-the-limit", "title": "The Concept of a Limit", "order": 1 },
+        { "slug": "02-limit-laws", "title": "Limit Laws and Techniques", "order": 2 },
+        { "slug": "03-continuity", "title": "Continuity", "order": 3 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Derivatives",
+      "slug": "02-derivatives",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-definition", "title": "Definition of the Derivative", "order": 1 },
+        { "slug": "02-rules", "title": "Differentiation Rules", "order": 2 },
+        { "slug": "03-chain-rule", "title": "Chain Rule and Implicit Differentiation", "order": 3 },
+        { "slug": "04-applications", "title": "Applications: Optimization and Related Rates", "order": 4 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 5 }
+      ]
+    },
+    {
+      "title": "Integration",
+      "slug": "03-integrals",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-antiderivatives", "title": "Antiderivatives and the Indefinite Integral", "order": 1 },
+        { "slug": "02-definite-integral", "title": "The Definite Integral and FTC", "order": 2 },
+        { "slug": "03-techniques", "title": "Integration Techniques", "order": 3 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 4 }
+      ]
+    },
+    {
+      "title": "Infinite Series",
+      "slug": "04-series",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-sequences", "title": "Sequences and Series", "order": 1 },
+        { "slug": "02-taylor", "title": "Taylor and Maclaurin Series", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

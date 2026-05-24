@@ -1,0 +1,147 @@
+---
+title: Electric Field and Gauss's Law
+description: The flux of E through a closed surface equals the enclosed charge divided by ε₀ — a powerful symmetry-based tool.
+---
+
+# Electric Field and Gauss's Law
+
+## The Big Picture
+
+The electric field $\mathbf{E}$ tells you the force per unit charge at every point in space. **Gauss's law** relates the total field "flowing out" of a closed surface (electric flux) to the charge enclosed inside. For systems with high symmetry, Gauss's law is dramatically faster than direct integration via Coulomb's law. It's the first of Maxwell's four equations.
+
+## The Electric Field
+
+$$\mathbf{E} = \mathbf{F}/q$$
+
+A vector at each point — the force a test charge would experience per unit of its charge.
+
+For point charge $Q$ at origin: $\mathbf{E} = \dfrac{kQ}{r^2}\hat{r}$, where $k = 1/(4\pi\varepsilon_0)$.
+
+## Electric Flux
+
+For uniform $\mathbf{E}$ through flat surface area $\mathbf{A}$:
+
+$$\Phi_E = \mathbf{E}\cdot\mathbf{A} = EA\cos\theta$$
+
+For general surface: $\Phi_E = \displaystyle\int\mathbf{E}\cdot d\mathbf{A}$.
+
+## Gauss's Law
+
+$$\oiint_S\mathbf{E}\cdot d\mathbf{A} = \frac{Q_{\text{enc}}}{\varepsilon_0}$$
+
+The flux out of a closed surface equals enclosed charge / $\varepsilon_0$.
+
+**Choice of surface:** for a given problem, you choose the surface to exploit symmetry. Common choices: spheres (for point/spherical charge), cylinders (for line/cylindrical charge), boxes (for plane charges).
+
+## Worked Example: Field of Infinite Line Charge
+
+Linear charge density $\lambda$ (C/m). Choose **cylindrical Gaussian surface** of length $L$, radius $r$, coaxial with line.
+
+By symmetry, $\mathbf{E}$ is radial. Only the curved side contributes:
+
+$$\Phi = E\cdot 2\pi rL = Q_{\text{enc}}/\varepsilon_0 = \lambda L/\varepsilon_0$$
+
+$$E = \frac{\lambda}{2\pi\varepsilon_0 r}$$
+
+Field falls as $1/r$ (not $1/r^2$) — characteristic of line sources.
+
+## Symmetric Charge Configurations
+
+| Source | E formula |
+|---|---|
+| Point charge $Q$ | $kQ/r^2$ |
+| Infinite line, $\lambda$ | $\lambda/(2\pi\varepsilon_0 r)$ |
+| Infinite plane, $\sigma$ | $\sigma/(2\varepsilon_0)$ — uniform! |
+| Outside sphere $Q$ | $kQ/r^2$ (as if all charge at center) |
+| Inside uniform sphere | $kQr/R^3$ (linear) |
+
+## Conductors in Equilibrium
+
+In electrostatic equilibrium inside a conductor: $\mathbf{E} = 0$ (otherwise charges would still move).
+
+Consequences:
+- All excess charge resides on the surface.
+- Field inside cavities is zero (Faraday cage effect).
+- Surface field perpendicular to surface, magnitude $\sigma/\varepsilon_0$.
+
+## Common Misconceptions
+
+**Misconception 1: "Gauss's law applies only to spherical surfaces."**
+
+It applies to **any** closed surface. Choosing the right one (matched to symmetry) makes the calculation easy.
+
+**Misconception 2: "Field inside a conductor is shielded by external charges."**
+
+The interior field cancels because surface charges rearrange — it's a self-shielding effect.
+
+**Misconception 3: "Flux through a surface = field on that surface."**
+
+Flux is $E\cos\theta\cdot A$ — depends on **angle** too. Field perpendicular gives max flux; parallel gives zero.
+
+## Engineering Connection
+
+- **Faraday cages:** electronics enclosures, lightning protection, MRI rooms.
+- **Coaxial cables:** field structure $\sim 1/r$ between inner and outer conductors enables predictable impedance.
+- **Capacitors:** parallel plates with $\sigma$ → uniform $E$ → stored energy.
+- **MEMS sensors:** charge-induced field changes detected to measure displacement.
+- **Photocopiers/laser printers:** charge patterns attract toner.
+- **Cathode ray tubes:** uniform E from parallel plates deflects electron beam (historic TVs, oscilloscopes).
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Point charge $Q = 2$ μC. Field at distance 10 cm?
+</ExQ>
+<ExA>
+$E = kQ/r^2 = 9\times 10^9\cdot 2\times 10^{-6}/0.01 = 1.8\times 10^6$ N/C.
+</ExA>
+
+<ExQ>
+**2.** Infinite plane with $\sigma = 10^{-9}$ C/m². Field 1 cm and 10 m away — compare.
+</ExQ>
+<ExA>
+$E = \sigma/(2\varepsilon_0) = 10^{-9}/(2\cdot 8.854\times 10^{-12}) \approx 56.5$ N/C.
+
+**Same at both distances!** Infinite plane gives uniform field — independent of distance. Far from finite planes, this breaks down.
+
+This is why parallel-plate capacitors have uniform field (between plates, away from edges).
+</ExA>
+
+<ExQ>
+**3. Engineering: Coaxial cable.** Inner conductor radius 1 mm at potential $V$, outer at 0. Field at 5 mm from axis (between conductors).
+</ExQ>
+<ExA>
+Apply Gauss to cylindrical surface radius 5 mm:
+
+$E\cdot 2\pi r L = \lambda L/\varepsilon_0$, so $E = \lambda/(2\pi\varepsilon_0 r)$.
+
+For specific values, need $\lambda$ from voltage. $V = \int_a^b E\,dr = \lambda/(2\pi\varepsilon_0)\ln(b/a)$.
+
+So $E(r) = V/[r\ln(b/a)]$.
+
+For $a = 1$ mm, $b = 5$ mm (assume): $\ln 5 = 1.609$. $E(5\text{ mm}) = V/(0.005\cdot 1.609) = 124V$ V/m per V applied.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does Gauss's law work for any surface, not just symmetric ones?
+</ExQ>
+<ExA>
+Gauss's law is a general theorem from divergence: $\oint\mathbf{E}\cdot d\mathbf{A} = \int\nabla\cdot\mathbf{E}\,dV = \int(\rho/\varepsilon_0)dV = Q_{enc}/\varepsilon_0$.
+
+Holds for ANY closed surface, regardless of shape. It's the symmetry of the *source* that determines whether we can extract $E$ easily from the flux integral.
+
+For arbitrary sources, we typically need direct integration. Gauss's law is the integral form of Maxwell's first equation — true universally.
+</ExA>
+
+<ExQ>
+**5.** Charge $Q$ at center of hollow conducting sphere. Field outside? Field inside conductor?
+</ExQ>
+<ExA>
+**Inside conductor:** $E = 0$ (electrostatic equilibrium).
+
+**Outside conductor:** $E = kQ/r^2$, as if all charge at center.
+
+(The conductor develops induced charge on inner surface −Q, outer surface +Q — the outer surface mimics the original point charge externally.)
+</ExA>

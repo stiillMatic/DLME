@@ -1,0 +1,127 @@
+---
+title: Angular Momentum
+description: The conserved quantity of rotation — why ice skaters spin faster when arms tuck in, and why planets keep orbiting.
+---
+
+# Angular Momentum
+
+## The Big Picture
+
+**Angular momentum** is the rotational equivalent of linear momentum. Like linear momentum, it's conserved when no external torque acts. This conservation is the deep reason behind a host of phenomena: spinning skaters, orbiting planets, gyroscope stability, neutron stars. Understanding angular momentum is essential for any rotating system.
+
+## Definition
+
+For a particle: $\mathbf{L} = \mathbf{r}\times\mathbf{p}$.
+
+For a rigid body rotating about an axis: $L = I\omega$.
+
+Units: kg·m²/s = J·s.
+
+## Conservation of Angular Momentum
+
+For isolated system (no external torque):
+
+$$\mathbf{L} = \text{const}$$
+
+When mass distribution changes (changing $I$), $\omega$ adjusts: $I_1\omega_1 = I_2\omega_2$.
+
+This is why a skater pulling arms in spins faster.
+
+## Newton's Second Law for Rotation (General Form)
+
+$$\boldsymbol{\tau} = \frac{d\mathbf{L}}{dt}$$
+
+For constant $I$: $\tau = I\alpha$ (as before).
+For changing $I$: more general form needed.
+
+## Rotational Kinetic Energy
+
+$$KE_{\text{rot}} = \tfrac{1}{2}I\omega^2 = \tfrac{L^2}{2I}$$
+
+When $L$ conserved but $I$ decreases (skater pulls in arms): KE **increases**. Where does the energy come from? The skater's muscles — work done pulling arms inward against centrifugal effect.
+
+## Gyroscopic Precession
+
+A spinning gyroscope under torque doesn't fall — it **precesses**. Direction of $L$ rotates around vertical axis.
+
+Precession rate: $\Omega = \tau/L = mgr/(I\omega)$.
+
+The faster $\omega$ (larger $L$), the slower the precession. This stability is why bicycles can balance, why planets maintain their axes, why guidance gyroscopes work.
+
+## Common Misconceptions
+
+**Misconception 1: "Angular momentum applies only to spinning objects."**
+
+A particle moving in a straight line *also* has angular momentum about any axis not on its path. $L = mvr_\perp$.
+
+**Misconception 2: "Rotational KE is conserved when $L$ is."**
+
+No — these are independent conservation laws. KE conserved only without dissipation. $L$ conserved only without external torque. They can both hold or one can hold without the other.
+
+**Misconception 3: "Gravity provides torque on orbital motion."**
+
+For circular orbit, gravity points toward center (parallel to $\mathbf{r}$). Torque $\mathbf{r}\times\mathbf{F} = 0$ — central forces produce no torque. Hence orbital angular momentum is conserved (Kepler's second law).
+
+## Engineering Connection
+
+- **Gyroscopes:** navigation in aircraft, spacecraft, missiles. Heading inferred from $L$ direction.
+- **Reaction wheels:** spacecraft attitude control via internal momentum transfer.
+- **Helicopter rotors:** transfer angular momentum to air; tail rotor compensates.
+- **Pulsars / neutron stars:** collapsed stars spin extremely fast (conservation as $I$ shrinks dramatically).
+- **Power generation:** turbine rotors carry massive angular momentum, providing inertial stability to grids.
+- **Bicycle stability:** wheel angular momentum aids balance.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Disk $I = 2$ kg·m² at $\omega = 10$ rad/s. Angular momentum?
+</ExQ>
+<ExA>
+$L = I\omega = 20$ kg·m²/s.
+</ExA>
+
+<ExQ>
+**2.** Skater $I_1 = 5$ kg·m² spinning at 2 rev/s. Pulls in arms, $I_2 = 1$ kg·m². New rate?
+</ExQ>
+<ExA>
+$L$ conserved: $I_1\omega_1 = I_2\omega_2$.
+
+$\omega_2 = (5/1)\cdot 2 = 10$ rev/s. 5× faster.
+
+Skater works against pseudo-centrifugal force when pulling in — energy comes from muscles.
+</ExA>
+
+<ExQ>
+**3.** Particle 0.5 kg moving at 4 m/s, perpendicular distance 3 m from axis. Angular momentum?
+</ExQ>
+<ExA>
+$L = mvr_\perp = 0.5\cdot 4\cdot 3 = 6$ kg·m²/s.
+
+Linear motion has angular momentum about any external axis.
+</ExA>
+
+<ExQ>
+**4. Engineering: Reaction wheel.** Satellite has $I = 100$ kg·m². Wheel inside spins up by 50 rad/s, $I_{wheel} = 0.5$ kg·m². Satellite angular speed change?
+</ExQ>
+<ExA>
+Total $L$ conserved (no external torque). $\Delta L_{wheel} = 0.5\cdot 50 = 25$ kg·m²/s.
+
+Satellite must absorb opposite: $\Delta\omega_{sat} = -25/100 = -0.25$ rad/s.
+
+Satellite rotates the opposite way. This is **reaction wheel attitude control** — change orientation by spinning internal wheels. No fuel needed. Used in Hubble, ISS, most modern satellites.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does a neutron star spin so fast (up to 700 Hz)?
+</ExQ>
+<ExA>
+Original star had angular momentum $L = I\omega$. Upon collapse to neutron star, radius shrinks from $\sim 10^9$ m to $\sim 10^4$ m → $I \propto R^2$ decreases by $\sim 10^{10}$.
+
+Conservation: $\omega$ must increase by same factor. Original $\omega$ (~1/month) becomes ~700 Hz.
+
+This is exactly how figure skaters work, just at cosmic scale. Pulsars are stars that "tucked their arms in."
+
+The same physics ties everything from atoms to galaxies.
+</ExA>

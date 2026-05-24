@@ -1,0 +1,119 @@
+---
+title: Enthalpy and Hess's Law
+description: Heat of chemical reactions — and why the path doesn't matter, only the start and end.
+---
+
+# Enthalpy and Hess's Law
+
+## The Big Picture
+
+Chemical reactions release or absorb heat. **Enthalpy** ($H$) is the thermodynamic quantity that captures this — and a key insight: enthalpy is a *state function*, depending only on initial and final states, not on path. **Hess's law** lets us compute reaction enthalpies indirectly by combining easier-to-measure reactions. This is the foundation of thermochemistry — sizing chemical reactors, designing fuel cells, predicting feasibility of combustion.
+
+## Definitions
+
+**Enthalpy:** $H = U + PV$.
+
+For reactions at constant pressure: $\Delta H = Q_{\text{rxn}}$.
+
+- $\Delta H < 0$: exothermic (releases heat)
+- $\Delta H > 0$: endothermic (absorbs heat)
+
+## Standard Enthalpy of Formation
+
+$\Delta H_f^\circ$: enthalpy change when 1 mol of compound forms from elements in standard states.
+
+By convention, $\Delta H_f^\circ = 0$ for elements (e.g., O₂, N₂, C(graphite)).
+
+## Hess's Law
+
+$$\Delta H_{\text{rxn}} = \sum\Delta H_f^\circ(\text{products}) - \sum\Delta H_f^\circ(\text{reactants})$$
+
+Adding two reactions: enthalpies add. Reversing a reaction: sign of $\Delta H$ flips. Multiplying by stoichiometric factor: scales $\Delta H$.
+
+## Worked Example
+
+Combustion of methane: $\text{CH}_4 + 2\text{O}_2 \to \text{CO}_2 + 2\text{H}_2\text{O}$.
+
+$\Delta H_f^\circ$: CH₄ = -75, CO₂ = -394, H₂O = -286 kJ/mol; O₂ = 0.
+
+$\Delta H_{\text{rxn}} = (-394) + 2(-286) - (-75) - 0 = -891$ kJ/mol.
+
+So 891 kJ released per mole CH₄ — basis of natural-gas heating energy.
+
+## Common Misconceptions
+
+**Misconception 1: "Enthalpy is the same as energy."**
+
+$H = U + PV$. At constant pressure, $\Delta H$ equals heat. But strictly, $H$ includes the $PV$ work term — different from $U$.
+
+**Misconception 2: "Reaction with $\Delta H < 0$ always happens."**
+
+Spontaneity depends on Gibbs free energy: $\Delta G = \Delta H - T\Delta S$. Some exothermic reactions are slow (kinetically blocked); some endothermic are spontaneous (entropy-driven, e.g., dissolution).
+
+**Misconception 3: "Standard enthalpy of formation = bond energy."**
+
+$\Delta H_f$ accounts for *whole molecule formation* from elements. Bond energy is per-bond. Related but distinct.
+
+## Engineering Connection
+
+- **Combustion engine design:** heat of combustion sets the energy available per cycle.
+- **Heat exchangers in chemical plants:** balance reaction heat with cooling capacity.
+- **Battery energy density:** related to enthalpy of electrochemical reactions.
+- **Industrial furnaces:** size to deliver $\Delta H_{\text{rxn}}$ per unit time.
+- **Process safety:** runaway reactions release $\Delta H$ rapidly — sizing relief systems requires knowing this.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Find $\Delta H$ for $2\text{H}_2 + \text{O}_2 \to 2\text{H}_2\text{O}$ (liquid). $\Delta H_f^\circ$(H₂O,l) = -286 kJ/mol.
+</ExQ>
+<ExA>
+$\Delta H = 2(-286) - 2(0) - 0 = -572$ kJ.
+
+286 kJ per mole of water formed. Energy from hydrogen fuel cells.
+</ExA>
+
+<ExQ>
+**2.** $\text{C} + \text{O}_2 \to \text{CO}_2$, $\Delta H_1 = -394$ kJ/mol.
+$\text{CO} + \tfrac{1}{2}\text{O}_2 \to \text{CO}_2$, $\Delta H_2 = -283$ kJ/mol.
+
+Find $\Delta H$ for $\text{C} + \tfrac{1}{2}\text{O}_2 \to \text{CO}$.
+</ExQ>
+<ExA>
+Subtract: $\Delta H_1 - \Delta H_2 = -394 - (-283) = -111$ kJ/mol.
+
+Hess's law: combine known reactions to find unknown.
+</ExA>
+
+<ExQ>
+**3. Engineering: Heating value.** Methane $\Delta H_{\text{combustion}} = -891$ kJ/mol. How much heat from 1 kg CH₄?
+</ExQ>
+<ExA>
+1 kg CH₄ = 1000/16 = 62.5 mol.
+
+Heat = $62.5\cdot 891 = 55.7$ MJ.
+
+Compare gasoline (~44 MJ/kg) — methane has higher specific energy.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why is Hess's law useful for reactions you cannot directly measure?
+</ExQ>
+<ExA>
+Many reactions are too slow, dangerous, or impossible at standard conditions. But you can often *measure* combustion (with O₂) easily.
+
+Combine measurable reactions algebraically to compute the inaccessible one. This is how most modern thermochemical tables are constructed.
+</ExA>
+
+<ExQ>
+**5.** Reaction at constant pressure: $\Delta H = -200$ kJ. If volume increases by 0.5 L at 1 atm, find $\Delta U$.
+</ExQ>
+<ExA>
+$\Delta H = \Delta U + \Delta(PV)$. Const $P$: $\Delta(PV) = P\Delta V = 101325\cdot 5\times 10^{-4} = 50.7$ J ≈ 0.05 kJ.
+
+$\Delta U = \Delta H - P\Delta V = -200 - 0.05 = -200.05$ kJ ≈ $-200$ kJ.
+
+For most chemical reactions in solution, $\Delta H \approx \Delta U$ (PV term small). For gas-phase reactions, the PV term can be significant.
+</ExA>

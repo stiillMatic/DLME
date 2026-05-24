@@ -1,0 +1,115 @@
+---
+title: Parametric Curves and Their Calculus
+description: Curves defined by a parameter rather than y = f(x) — and how to do calculus on them.
+---
+
+# Parametric Curves and Their Calculus
+
+## The Big Picture
+
+Many curves can't be expressed as $y = f(x)$ — circles, helices, projectile paths, robot trajectories. **Parametric equations** describe curves by a third variable $t$ (often time): $x = x(t)$, $y = y(t)$. This view is more general and natural for motion. Calculus on parametric curves — slopes, arc length, areas — is essential for trajectory design, kinematics, and computer graphics.
+
+## Parametric Form
+
+A curve in 2D: $(x(t), y(t))$ for $t \in [a, b]$.
+
+**Examples:**
+- Line: $x = x_0 + at$, $y = y_0 + bt$.
+- Circle: $x = r\cos t$, $y = r\sin t$.
+- Cycloid (rolling circle): $x = r(t - \sin t)$, $y = r(1 - \cos t)$.
+- Helix (3D): $x = r\cos t$, $y = r\sin t$, $z = ct$.
+
+## Slope of Tangent
+
+$$\frac{dy}{dx} = \frac{dy/dt}{dx/dt}$$
+
+(Chain rule, treating $t$ as the parameter and dividing.)
+
+**Example:** Circle. $dx/dt = -r\sin t$, $dy/dt = r\cos t$. So $dy/dx = -\cos t/\sin t = -\cot t$.
+
+## Arc Length
+
+$$L = \int_a^b\sqrt{(dx/dt)^2 + (dy/dt)^2}\,dt$$
+
+For circle of radius $r$ over $[0, 2\pi]$: $L = \int 0^{2\pi} r\,dt = 2\pi r$ ✓.
+
+## Area Enclosed
+
+For closed parametric curve traversed counterclockwise:
+
+$$A = \frac{1}{2}\oint(x\,dy - y\,dx) = \frac{1}{2}\int_a^b(x\,\dot y - y\,\dot x)\,dt$$
+
+(Green's theorem in disguise.)
+
+## Common Misconceptions
+
+**Misconception 1: "Parametric curves can always be converted to $y = f(x)$."**
+
+Not always — circle would need $y = \pm\sqrt{R^2 - x^2}$, two branches. Spirals (e.g., logarithmic spiral) can't be expressed as a single $y = f(x)$ at all.
+
+**Misconception 2: "Faster $t$ = different curve."**
+
+Different parameterizations of the *same curve* trace it at different speeds. The geometric curve is unchanged. But arc length integral is invariant — any parameterization gives the same length.
+
+**Misconception 3: "$dy/dx = (dy/dt)(dx/dt)$ — multiply, not divide."**
+
+Divide. $dy/dx = (dy/dt)/(dx/dt)$. Arises from $dy/dx = (dy/dt)\cdot(dt/dx) = (dy/dt)/(dx/dt)$.
+
+## Engineering Connection
+
+- **Robotic trajectories:** end-effector path described parametrically; speed profile separate from path.
+- **Mechanism design:** linkage outputs (e.g., 4-bar) are parametric in the input angle.
+- **CFD streamlines:** trajectory of fluid particles parameterized by time.
+- **Gear tooth profiles:** involute curves are parametric.
+- **CAD curves:** splines, Bezier curves — all parametric.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Eliminate the parameter: $x = 2t, y = t^2$.
+</ExQ>
+<ExA>
+$t = x/2$, so $y = (x/2)^2 = x^2/4$. Parabola.
+</ExA>
+
+<ExQ>
+**2.** Find $dy/dx$ for $x = t^2 + 1, y = t^3 - t$ at $t = 2$.
+</ExQ>
+<ExA>
+$dx/dt = 2t = 4$. $dy/dt = 3t^2 - 1 = 11$.
+
+$dy/dx = 11/4$.
+</ExA>
+
+<ExQ>
+**3.** Arc length of $x = \cos t, y = \sin t$ from 0 to $\pi$.
+</ExQ>
+<ExA>
+$\sqrt{\sin^2 t + \cos^2 t} = 1$. $L = \int_0^\pi 1\,dt = \pi$ (half circumference).
+</ExA>
+
+<ExQ>
+**4. Engineering: Cycloid.** A cycloid is $x = r(t - \sin t), y = r(1 - \cos t)$. Find arc length over one arch ($t = 0$ to $2\pi$).
+</ExQ>
+<ExA>
+$\dot x = r(1-\cos t), \dot y = r\sin t$.
+
+$\dot x^2 + \dot y^2 = r^2(1 - 2\cos t + \cos^2 t + \sin^2 t) = 2r^2(1 - \cos t) = 4r^2\sin^2(t/2)$.
+
+$\sqrt{\cdot} = 2r|\sin(t/2)|$.
+
+$L = \int_0^{2\pi}2r\sin(t/2)\,dt = -4r\cos(t/2)|_0^{2\pi} = -4r(-1 - 1) = 8r$.
+
+A cycloid arch length = $8r$ (independent of $\pi$!) — surprising elegant result.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why is arc length parameterization-independent?
+</ExQ>
+<ExA>
+Substituting a different parameter $\tau(t)$ gives Jacobian factor $d\tau/dt$ in the integral, which cancels with how $dx/d\tau, dy/d\tau$ rescale. Geometric length is a property of the *curve*, not the parameterization.
+
+Important: speed varies with parameterization, but total length is invariant.
+</ExA>

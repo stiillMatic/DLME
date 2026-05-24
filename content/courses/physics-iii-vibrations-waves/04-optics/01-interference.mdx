@@ -1,0 +1,142 @@
+---
+title: Interference — Two-Slit and Thin Films
+description: When two coherent waves meet, they add — sometimes reinforcing, sometimes canceling. Interference reveals the wave nature of light.
+---
+
+# Interference — Two-Slit and Thin Films
+
+## The Big Picture
+
+Interference is the **defining wave phenomenon**: two waves at the same place add according to their phase. Constructive interference enhances; destructive interference cancels. The 1801 Young's two-slit experiment demonstrated light's wave nature definitively. Modern applications include holography, interferometry (LIGO), anti-reflective coatings, and optical computing.
+
+## Two-Slit Interference
+
+Two coherent slits separated by $d$ illuminate a screen at distance $L \gg d$.
+
+**Path difference** to a point at angle $\theta$ from center: $\Delta = d\sin\theta$.
+
+**Constructive interference** (bright fringes): $\Delta = n\lambda$, i.e., $d\sin\theta = n\lambda$.
+
+**Destructive interference** (dark): $\Delta = (n + \tfrac{1}{2})\lambda$.
+
+For small $\theta$, position on screen: $y = L\tan\theta \approx L\theta$. Bright fringe spacing:
+
+$$\Delta y = \lambda L/d$$
+
+Measure fringe spacing → calculate $\lambda$. This was how Young first measured the wavelength of light.
+
+## Intensity Pattern
+
+For two slits of equal intensity:
+
+$$I(\theta) = I_0\cos^2(\pi d\sin\theta/\lambda)$$
+
+Maxima at $d\sin\theta = n\lambda$; zeros between.
+
+## Thin Film Interference
+
+Light reflecting off the top and bottom of a thin film interferes. Path difference: $2nt$ where $n$ is index of refraction, $t$ is film thickness.
+
+Phase shift on reflection: $\pi$ at low-to-high index, none at high-to-low.
+
+For soap film (air-soap-air, low-high-low), top reflection adds $\pi$ phase but bottom doesn't.
+
+**Constructive:** $2nt = (m + \tfrac{1}{2})\lambda$ (accounting for the $\pi$).
+
+This explains:
+- Soap bubble colors
+- Oil slick rainbow patterns
+- Anti-reflective lens coatings
+
+## Coherence
+
+For interference, sources must be **coherent**: stable phase relationship over time and space.
+
+- **Laser:** ideal coherent source.
+- **Sunlight:** coherence length ~1 μm — barely usable for interference (Young used pinhole-filtered sunlight).
+- **LED:** more coherent than incandescent, less than laser.
+
+Modern interferometry (LIGO) requires laser coherence over kilometers — feat of engineering.
+
+## Common Misconceptions
+
+**Misconception 1: "Interference creates or destroys energy."**
+
+Total energy is conserved. Interference redistributes energy — bright in some places, dark elsewhere. Sum over the entire pattern equals what would arrive without interference.
+
+**Misconception 2: "Need exactly two sources."**
+
+Multi-slit interference (gratings) is more powerful — sharper peaks. Holography is interference with arbitrarily many sources.
+
+**Misconception 3: "Fringe spacing depends on slit width."**
+
+Slit width affects envelope (single-slit diffraction). Fringe spacing depends on slit *separation* $d$. These two effects combine in real experiments.
+
+## Engineering Connection
+
+- **Anti-reflective coatings on lenses:** thin film $t = \lambda/(4n)$ creates destructive interference for the reflection — improves transmission.
+- **LIGO gravitational wave detector:** interferometer detects $\sim 10^{-18}$ m path differences (~1000× smaller than a proton).
+- **Optical coherence tomography (OCT):** medical imaging via interferometry; sub-cellular resolution.
+- **Holography:** records full interference pattern, reconstructs 3D image.
+- **Newton's rings:** measure curvature of lenses via interference.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Two-slit pattern: $d = 0.1$ mm, $L = 1$ m, $\lambda = 600$ nm. Fringe spacing?
+</ExQ>
+<ExA>
+$\Delta y = \lambda L/d = (600\times 10^{-9})(1)/(10^{-4}) = 6\times 10^{-3}$ m = 6 mm.
+
+Easily visible on screen.
+</ExA>
+
+<ExQ>
+**2.** Anti-reflective coating: $n_{\text{coating}} = 1.38$, target $\lambda = 550$ nm. Thickness?
+</ExQ>
+<ExA>
+Quarter-wave: $t = \lambda/(4n) = 550/(4\cdot 1.38) \approx 99.6$ nm.
+
+This thin film of MgF₂ (n=1.38) gives near-zero reflection at the design wavelength.
+</ExA>
+
+<ExQ>
+**3.** Soap film thickness 200 nm in air, $n = 1.33$. Reflected wavelengths visible?
+</ExQ>
+<ExA>
+Constructive: $2nt = (m + 1/2)\lambda$ where the phase shift on reflection accounts for the 1/2.
+
+$2\cdot 1.33\cdot 200 = 532 = (m + 1/2)\lambda \Rightarrow \lambda = 1064/(2m+1)$.
+
+$m = 0$: 1064 nm (IR, invisible).
+$m = 1$: 355 nm (UV, invisible).
+$m = 2$: 213 nm (UV).
+
+This film mostly transmits — between visible peaks. Different thicknesses give the rainbow colors in soap bubbles.
+
+(Specifically, in the gradient of a real soap film, you see all colors as thickness varies.)
+</ExA>
+
+<ExQ>
+**4. Engineering: LIGO.** Path length 4 km. Detect strain $h \sim 10^{-21}$. Path change?
+</ExQ>
+<ExA>
+$\Delta L = h\cdot L = 10^{-21}\cdot 4000 = 4\times 10^{-18}$ m.
+
+10000× smaller than a proton's diameter (~10⁻¹⁵ m).
+
+LIGO does this via Fabry-Perot interferometer, multiplying effective path by ~300, plus extraordinary engineering. Detected first gravitational wave 2015.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why don't ordinary light bulbs produce visible interference patterns easily?
+</ExQ>
+<ExA>
+**Coherence:** incandescent bulbs emit thermal radiation — broadband (no single wavelength) and incoherent (random phases).
+
+Different wavelengths produce overlapping interference patterns that wash out. Different photons have uncorrelated phases.
+
+You **can** see interference with thermal light using a pinhole + filter (Young's original method), but a laser does it effortlessly. This is why lasers transformed optics.
+</ExA>

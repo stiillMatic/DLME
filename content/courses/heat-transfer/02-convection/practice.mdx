@@ -1,0 +1,49 @@
+---
+title: Chapter 2 Practice — Convection
+description: Practice on forced and natural convection.
+---
+
+# Chapter 2 Practice — Convection
+
+<ExQ>
+**1.** Air over plate, $h = 25$ W/m²·K, area 0.5 m², $T_s = 80$°C, $T_\infty = 20$°C. Heat rate?
+</ExQ>
+<ExA>
+$\dot Q = hA\Delta T = 25\cdot 0.5\cdot 60 = 750$ W.
+</ExA>
+
+<ExQ>
+**2.** Compute $Re$ for water at 1 m/s in 2 cm pipe ($\rho = 1000$, $\mu = 10^{-3}$).
+</ExQ>
+<ExA>
+$Re = 1000\cdot 1\cdot 0.02/10^{-3} = 20{,}000$ (turbulent).
+</ExA>
+
+<ExQ>
+**3.** Find $Nu$ for water in turbulent pipe flow, $Re = 50{,}000$, $Pr = 5$, heating.
+</ExQ>
+<ExA>
+$Nu = 0.023\cdot 50000^{0.8}\cdot 5^{0.4} = 0.023\cdot 5772\cdot 1.90 = 252$.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does increasing flow rate increase heat transfer but also pressure drop?
+</ExQ>
+<ExA>
+Higher velocity → larger $Re$ → larger $Nu$ → larger $h$ (better heat transfer).
+
+But higher velocity → larger friction (pressure drop scales as $v^2$ in turbulent flow).
+
+Trade-off: optimal flow rate balances heat transfer benefit against pumping cost. Standard engineering optimization.
+</ExA>
+
+<ExQ>
+**5. Engineering.** A condenser tube (1 cm diameter, water at 1 m/s, $h = 4000$ W/m²·K). Per meter length, find heat transfer for $\Delta T = 10$ K.
+</ExQ>
+<ExA>
+Surface area per meter: $\pi D L = \pi\cdot 0.01\cdot 1 = 0.0314$ m².
+
+$\dot Q = hA\Delta T = 4000\cdot 0.0314\cdot 10 = 1257$ W/m.
+
+Bundle of 100 tubes: 125 kW total.
+</ExA>

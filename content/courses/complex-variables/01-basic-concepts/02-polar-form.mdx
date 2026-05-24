@@ -1,0 +1,77 @@
+---
+title: Polar Form, Euler's Formula, and Complex Exponentials
+description: The polar representation of complex numbers and Euler's formula — the most beautiful equation in mathematics.
+---
+
+# Polar Form and Euler's Formula
+
+Every complex number $z = x + iy$ can be written in **polar form**:
+
+$$z = r e^{i\theta} = r(\cos\theta + i\sin\theta)$$
+
+where $r = |z| = \sqrt{x^2+y^2}$ and $\theta = \arg(z) = \arctan(y/x)$.
+
+## Euler's Formula
+
+$$e^{i\theta} = \cos\theta + i\sin\theta$$
+
+This is the bridge between exponential and trigonometric functions. At $\theta = \pi$:
+
+$$e^{i\pi} + 1 = 0$$
+
+**Engineering significance:** Any oscillation $A\cos(\omega t + \phi)$ is the real part of $Ae^{i(\omega t + \phi)}$. Working with exponentials is far easier algebraically than with trigonometric functions — this is why complex numbers dominate AC circuit analysis and vibration theory.
+
+## Multiplication in Polar Form
+
+$$z_1 z_2 = r_1 r_2\, e^{i(\theta_1+\theta_2)}$$
+
+Multiplication **rotates** and **scales**: moduli multiply, arguments add.
+
+## De Moivre's Theorem
+
+$$(e^{i\theta})^n = e^{in\theta} \implies (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta)$$
+
+## Roots of Complex Numbers
+
+The $n$-th roots of $z = re^{i\theta}$ are:
+
+$$z^{1/n} = r^{1/n} e^{i(\theta + 2\pi k)/n}, \quad k = 0, 1, \ldots, n-1$$
+
+There are exactly $n$ roots, equally spaced on a circle of radius $r^{1/n}$.
+
+## Phasor Representation
+
+In AC circuits and vibrations, quantities of the form $A\cos(\omega t + \phi)$ are represented as phasors $\tilde{A} = Ae^{i\phi}$ (complex amplitude). The physical quantity is $\text{Re}[\tilde{A}e^{i\omega t}]$.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Write $z = -1 + i\sqrt{3}$ in polar form $re^{i\theta}$.
+</ExQ>
+<ExA>
+$r = \sqrt{1+3} = 2$
+
+$\theta = \arctan(\sqrt{3}/(-1))$ — in the second quadrant: $\theta = \pi - \pi/3 = 2\pi/3$
+
+$$z = 2e^{i\cdot 2\pi/3}$$
+</ExA>
+
+<ExQ>
+Use De Moivre's theorem to find $(\cos30° + i\sin30°)^6$.
+</ExQ>
+<ExA>
+$$(\cos30°+i\sin30°)^6 = \cos(180°)+i\sin(180°) = -1 + 0i = \boxed{-1}$$
+</ExA>
+
+<ExQ>
+Find all cube roots of $z = 8$.
+</ExQ>
+<ExA>
+Write $8 = 8e^{i\cdot 0}$. Cube roots: $r^{1/3} = 2$, $\theta_k = 2\pi k/3$ for $k = 0, 1, 2$.
+
+$$z_0 = 2e^{0} = 2$$
+$$z_1 = 2e^{i\cdot 2\pi/3} = 2(-\tfrac{1}{2}+i\tfrac{\sqrt{3}}{2}) = -1+i\sqrt{3}$$
+$$z_2 = 2e^{i\cdot 4\pi/3} = -1-i\sqrt{3}$$
+</ExA>

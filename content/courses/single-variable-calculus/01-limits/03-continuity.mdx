@@ -1,0 +1,354 @@
+---
+title: Continuity
+description: What it means for a function to be "smooth" — no jumps, no holes, no breaks — and why every theorem of calculus depends on it.
+---
+
+# Continuity
+
+## The Big Picture
+
+Continuity is the mathematical formalization of **smooth and unbroken**. It is the condition under which our intuition about functions matches reality: a continuous function takes neighboring inputs to neighboring outputs. Without continuity, every theorem of calculus collapses — there's no Intermediate Value Theorem, no Extreme Value Theorem, no guarantee that solutions exist or that algorithms converge. **Calculus is the calculus of continuous functions.**
+
+## Intuition First — The Pencil Test
+
+Can you draw the graph of a function from left to right *without lifting your pencil*? If yes, the function is continuous. If you have to skip over a hole, jump across a gap, or shoot up to infinity, it's discontinuous at that point.
+
+This pencil test is naïve but captures the essence: **continuity = no surprises**. Wherever you are on the curve, all nearby values are also nearby on the curve.
+
+The deeper reason this matters: in physics and engineering, real-world quantities (temperature, position, stress) tend to be continuous in space and time. A discontinuity in such a model usually signals an idealization (a shock wave, a contact interface, an instantaneous switch). Most of the time, we model with continuous functions because that matches reality.
+
+## From Limits to Continuity
+
+A function $f$ is **continuous at $a$** if three conditions hold:
+
+1. $f(a)$ is defined (the function has a value there)
+2. $\lim_{x\to a}f(x)$ exists (the function approaches *something*)
+3. $\lim_{x\to a}f(x) = f(a)$ (what it approaches is what it actually is)
+
+In short: **the limit equals the value**.
+
+If any condition fails, $f$ is **discontinuous** at $a$.
+
+## Three Types of Discontinuity
+
+**Type 1: Removable Discontinuity**
+
+The limit exists, but $f(a)$ doesn't equal it (or isn't defined).
+
+Example: $f(x) = (x^2-1)/(x-1)$ has $\lim_{x\to 1}f = 2$, but $f(1)$ is undefined. We could "remove" the discontinuity by defining $f(1) = 2$.
+
+**Type 2: Jump Discontinuity**
+
+Left and right limits both exist but disagree.
+
+Example: the Heaviside step function $H(x) = 0$ for $x < 0$, $H(x) = 1$ for $x \geq 0$.
+
+**Type 3: Infinite (Essential) Discontinuity**
+
+The function blows up to $\pm\infty$ at $a$.
+
+Example: $f(x) = 1/x^2$ at $x = 0$.
+
+<figure className="my-8 flex flex-col items-center">
+  <svg viewBox="0 0 600 200" className="w-full max-w-2xl" xmlns="http://www.w3.org/2000/svg">
+    {/* Three panels — Removable, Jump, Infinite */}
+    {/* Panel 1: Removable */}
+    <g>
+      <text x="100" y="20" fill="oklch(0.985 0 0)" fontSize="13" textAnchor="middle" fontWeight="600">Removable</text>
+      <line x1="20" y1="170" x2="180" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      <line x1="20" y1="40" x2="20" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      {/* Two segments of a line with hole at center */}
+      <line x1="25" y1="150" x2="95" y2="100" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      <line x1="105" y1="100" x2="175" y2="60" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      <circle cx="100" cy="100" r="4" fill="oklch(0.145 0 0)" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      <text x="100" y="190" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">limit exists, value missing</text>
+    </g>
+    {/* Panel 2: Jump */}
+    <g>
+      <text x="300" y="20" fill="oklch(0.985 0 0)" fontSize="13" textAnchor="middle" fontWeight="600">Jump</text>
+      <line x1="220" y1="170" x2="380" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      <line x1="220" y1="40" x2="220" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      {/* Lower piece left of x=300 */}
+      <line x1="225" y1="135" x2="295" y2="125" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      <circle cx="295" cy="125" r="3.5" fill="oklch(0.145 0 0)" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      {/* Upper piece right of x=300, with filled circle */}
+      <circle cx="305" cy="75" r="3.5" fill="oklch(0.65 0.2 264)" />
+      <line x1="305" y1="75" x2="375" y2="65" stroke="oklch(0.65 0.2 264)" strokeWidth="2" />
+      <text x="300" y="190" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">left ≠ right limit</text>
+    </g>
+    {/* Panel 3: Infinite */}
+    <g>
+      <text x="500" y="20" fill="oklch(0.985 0 0)" fontSize="13" textAnchor="middle" fontWeight="600">Infinite</text>
+      <line x1="420" y1="170" x2="580" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      <line x1="420" y1="40" x2="420" y2="170" stroke="oklch(0.5 0 0)" strokeWidth="1" />
+      {/* 1/x²-like blow-up at x=500 */}
+      <path d="M 425 165 Q 480 160 495 50" stroke="oklch(0.65 0.2 264)" strokeWidth="2" fill="none" />
+      <path d="M 505 50 Q 520 160 575 165" stroke="oklch(0.65 0.2 264)" strokeWidth="2" fill="none" />
+      <line x1="500" y1="40" x2="500" y2="170" stroke="oklch(0.7 0.18 30)" strokeWidth="1" strokeDasharray="3 3" opacity="0.7" />
+      <text x="500" y="190" fill="oklch(0.708 0 0)" fontSize="10" textAnchor="middle">blows up to ±∞</text>
+    </g>
+  </svg>
+  <figcaption className="mt-2 text-sm text-muted-foreground italic">Three flavors of discontinuity: a hole that can be patched, a jump that can't, and an infinite blow-up.</figcaption>
+</figure>
+
+## Continuity on an Interval
+
+$f$ is **continuous on an interval** if it's continuous at every point of the interval. We say $f$ is **continuous everywhere** if it's continuous on $(-\infty, \infty)$.
+
+**Familiar continuous functions:**
+- Polynomials (continuous everywhere)
+- $\sin x$, $\cos x$, $e^x$ (continuous everywhere)
+- $\ln x$ (continuous on $(0, \infty)$)
+- Rational functions (continuous wherever the denominator is nonzero)
+
+**Combinations preserve continuity:** sums, products, compositions of continuous functions are continuous.
+
+## Why Continuity Matters: Two Big Theorems
+
+**Intermediate Value Theorem (IVT):**
+
+If $f$ is continuous on $[a, b]$ and $N$ is between $f(a)$ and $f(b)$, then there exists $c \in (a, b)$ with $f(c) = N$.
+
+In words: **a continuous function takes every intermediate value**.
+
+This is the basis of root-finding (bisection method), existence theorems, and many constructive arguments. If you can show $f(a) < 0 < f(b)$, there *must* be a root in between.
+
+**Extreme Value Theorem (EVT):**
+
+If $f$ is continuous on a closed interval $[a, b]$, then $f$ attains both a maximum and a minimum on $[a, b]$.
+
+This guarantees that optimization problems on closed intervals have solutions. Without continuity (or without closure), the maximum might not exist.
+
+## The Derivation: Why "Limit = Value" Is the Right Definition
+
+Suppose we want a function to behave nicely. What's the simplest condition?
+
+If you imagine zooming in on the graph at $x = a$, you'd want the function values to *converge* to a single point (no oscillation, no jump, no gap). That's the limit existing.
+
+Furthermore, the function value at $a$ should be the destination, not a separate "stranded" point. That's $f(a) = $ (the limit).
+
+This pair of conditions is exactly continuity. Anything weaker (limit exists but $f(a)$ disagrees) gives a removable hole; anything weaker still (limit doesn't exist) gives a jump or essential break.
+
+## Common Misconceptions
+
+**Misconception 1: "If $f$ is defined at $a$, it's continuous there."**
+
+False. The Heaviside function $H(0) = 1$, fully defined, but discontinuous because the left limit (0) disagrees with the value (1).
+
+**Misconception 2: "If $f$ has a formula, it's continuous on its domain."**
+
+True for elementary functions but not in general. Piecewise functions like
+
+$$f(x) = \begin{cases}x+1 & x < 0 \\ x^2 & x \geq 0\end{cases}$$
+
+have a clean formula but are discontinuous at $x = 0$ (left limit 1, right limit 0, value 0).
+
+**Misconception 3: "Continuity at $a$ is the same as differentiability at $a$."**
+
+Differentiability is stronger. $f(x) = |x|$ is continuous at 0 but has no derivative there (sharp corner). Every differentiable function is continuous, but not vice versa.
+
+**Misconception 4: "If $f$ is continuous everywhere except at one point, removing that point makes it continuous."**
+
+Removing a single point from the domain just shrinks the domain. Continuity is asked at points *in* the domain, so the answer depends on whether the new function is defined or not at the removed point.
+
+## Engineering Connection
+
+- **Thermal contact resistance:** at a metal-metal interface, temperature can be modeled as discontinuous (a "jump" $\Delta T$ across the gap), with the jump quantifying contact resistance. The limit-from-each-side determines the boundary condition.
+- **Shock waves in fluid dynamics:** density and velocity have jump discontinuities across a shock. Conservation laws (Rankine-Hugoniot conditions) relate the left-side and right-side limits.
+- **Phase transitions:** at the melting point of a material, properties like density change discontinuously. Recognizing the discontinuity matters for numerical simulation.
+- **Step inputs in control systems:** a sudden change in setpoint is a jump discontinuity. The system's response depends entirely on the *one-sided* limits before and after the step.
+
+In every case, the language of continuity (and discontinuity) is precisely what makes the engineering analysis well-defined.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Is $f(x) = \dfrac{x^2 - 4}{x - 2}$ continuous at $x = 2$? If not, classify the discontinuity.
+</ExQ>
+<ExA>
+$f(2)$ is undefined ($0/0$). However, $\lim_{x\to 2}f = 4$.
+
+Since the limit exists but $f(2)$ does not, this is a **removable discontinuity**. Defining $f(2) = 4$ would make it continuous.
+</ExA>
+
+<ExQ>
+For what value of $c$ is $f(x) = \begin{cases}x^2 + 1 & x \leq 1\\ cx + 2 & x > 1\end{cases}$ continuous at $x = 1$?
+</ExQ>
+<ExA>
+For continuity, the left limit and right limit must agree at $x = 1$:
+
+Left: $\lim_{x\to 1^-}(x^2+1) = 2$. Right: $\lim_{x\to 1^+}(cx+2) = c+2$.
+
+Set equal: $c + 2 = 2 \implies \boxed{c = 0}$.
+</ExA>
+
+### Application
+
+<ExQ>
+Use the Intermediate Value Theorem to show that $f(x) = x^3 + x - 1$ has a root in $[0, 1]$.
+</ExQ>
+<ExA>
+$f$ is a polynomial, hence continuous on $[0, 1]$.
+
+$f(0) = -1 < 0$, $f(1) = 1 > 0$. Zero is between $-1$ and $1$.
+
+By IVT, there exists $c \in (0, 1)$ with $f(c) = 0$. ✓
+
+(Numerically, $c \approx 0.6824$.)
+</ExA>
+
+<ExQ>
+A heating element is modeled as $T(t) = \begin{cases} 20 + 5t & 0 \leq t < 10 \\ 70 & t \geq 10\end{cases}$ (°C). Is $T$ continuous? Where? Sketch and check.
+</ExQ>
+<ExA>
+At $t = 10$:
+- Left limit: $20 + 5(10) = 70$
+- Right limit: $70$
+- Value: $T(10) = 70$ (using the second branch since $t \geq 10$)
+
+All three agree → continuous at $t = 10$. The piecewise definition was deliberately set up so the heating phase smoothly meets the steady-state phase.
+
+So $T$ is continuous on $[0, \infty)$.
+</ExA>
+
+### Challenge
+
+<ExQ>
+Show that the equation $\cos x = x$ has at least one solution in $[0, \pi/2]$.
+</ExQ>
+<ExA>
+Define $g(x) = \cos x - x$. This is continuous (sum of continuous functions).
+
+$g(0) = \cos 0 - 0 = 1 > 0$.
+$g(\pi/2) = \cos(\pi/2) - \pi/2 = -\pi/2 < 0$.
+
+By IVT, since $g$ is continuous and changes sign on $[0, \pi/2]$, there exists $c$ with $g(c) = 0$, i.e., $\cos c = c$. ✓
+</ExA>
+
+<ExQ>
+Find values of $a$ and $b$ making $f(x) = \begin{cases}x^2 & x \leq -1 \\ ax + b & -1 < x < 2 \\ 3x - 1 & x \geq 2\end{cases}$ continuous everywhere.
+</ExQ>
+<ExA>
+At $x = -1$: $\lim_{x\to -1^-}x^2 = 1$, $\lim_{x\to -1^+}(ax+b) = -a+b$. Set equal: $-a + b = 1$.
+
+At $x = 2$: $\lim_{x\to 2^-}(ax+b) = 2a+b$, $\lim_{x\to 2^+}(3x-1) = 5$. Set equal: $2a + b = 5$.
+
+Solve: $(2a+b)-(-a+b) = 5 - 1 \implies 3a = 4 \implies a = 4/3$.
+Then $b = 1 + a = 7/3$.
+
+$$\boxed{a = \frac{4}{3}, \quad b = \frac{7}{3}}$$
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** Every function with a graph that you can "draw without lifting the pen" is continuous. Justify.
+</ExQ>
+<ExA>
+**True (informally), but with caveats.**
+
+This is the intuitive characterization of continuity for graphs of single-variable functions on a connected domain. Mathematically rigorous? Not quite — pathological functions (like Weierstrass's nowhere-differentiable but everywhere-continuous function) are continuous but their graphs are too rough to draw.
+
+For the kinds of functions you encounter in engineering, the pen test is reliable. But continuity has a **rigorous** $\varepsilon$-$\delta$ definition that holds even when intuition fails.
+</ExA>
+
+<ExQ>
+**Sketch a function** that is defined everywhere on $[0, 2]$, has a removable discontinuity at $x = 1$, and is continuous at every other point.
+</ExQ>
+<ExA>
+Example: $f(x) = \begin{cases}x^2 & x \neq 1 \\ 5 & x = 1\end{cases}$.
+
+$\lim_{x\to 1}f = 1$ but $f(1) = 5$. Removable: redefining $f(1) = 1$ patches it.
+
+Sketch: parabola $y = x^2$ on $[0, 2]$, with one isolated point at $(1, 5)$ floating above the curve.
+
+Anywhere else, $f$ matches $x^2$, which is continuous.
+</ExA>
+
+<ExQ>
+**Conceptual:** If $f$ is continuous on $[a, b]$ and $f(a)f(b) < 0$, what does the IVT guarantee? What does it NOT guarantee?
+</ExQ>
+<ExA>
+**Guarantees:** at least one $c \in (a, b)$ with $f(c) = 0$ — there exists a root.
+
+**Does NOT guarantee:**
+- Uniqueness — there could be 1, 3, 5, ... or even infinitely many roots
+- That you can find $c$ algebraically
+- The location of $c$ to better than the interval $(a, b)$
+
+IVT is an **existence** theorem, not a constructive one. Bisection method uses IVT to *narrow down* the interval iteratively.
+</ExA>
+
+<ExQ>
+**Counterexample needed.** The Extreme Value Theorem requires the interval to be **closed** ($[a, b]$). Give a specific continuous function on the **open** interval $(0, 1)$ that has no maximum.
+</ExQ>
+<ExA>
+$f(x) = x$ on $(0, 1)$ has no maximum: $\sup f = 1$, but $f$ never attains $1$ (since $1 \notin (0, 1)$).
+
+For every $x_0 \in (0, 1)$, we can find $x_1 = (x_0 + 1)/2 > x_0$, also in $(0, 1)$.
+
+So *closure* is essential for EVT — without it, the supremum might be unattained.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Bisection method.** A bar will fail at temperature $T_f$ where $\sigma(T_f) = \sigma_{\text{max}}$. We model $\sigma(T) = 100 - 0.5T - 0.001T^3$ MPa. Use the IVT and bisection to argue $T_f$ is between $40°$C and $60°$C if $\sigma_{\text{max}} = 50$ MPa.
+</ExQ>
+<ExA>
+Define $g(T) = \sigma(T) - 50 = 50 - 0.5T - 0.001T^3$. We want $g(T_f) = 0$.
+
+$g(40) = 50 - 20 - 64 = -34 < 0$.
+
+Wait: $0.001 \times 40^3 = 64$, so $g(40) = 50 - 20 - 64 = -34$. Negative.
+
+$g(60)$: $0.001 \times 60^3 = 216$. $g(60) = 50 - 30 - 216 = -196$. Also negative!
+
+Hmm, both negative. Try smaller: $g(20) = 50 - 10 - 8 = 32 > 0$, and $g(40) = -34 < 0$.
+
+By IVT, there is $T_f \in (20, 40)°$C with $g(T_f) = 0$. Bisection: try $30$: $g(30) = 50 - 15 - 27 = 8 > 0$. So $T_f \in (30, 40)$. Refine to $35$: $g(35) = 50 - 17.5 - 42.9 = -10.4 < 0$. So $T_f \in (30, 35)$. And so on.
+
+This is **how every numerical root-finder works** — and it's IVT in action.
+</ExA>
+
+<ExQ>
+**Stress jump (interface).** A bar consists of two materials joined at $x = 1$ m. The stress is $\sigma(x) = 100 + 20x$ MPa for $x < 1$ and $\sigma(x) = 200 - 80(x-1)$ MPa for $x \geq 1$. Is the stress field continuous at $x = 1$? If discontinuous, what physical phenomenon does it model?
+</ExQ>
+<ExA>
+$\lim_{x\to 1^-}\sigma = 100 + 20 = 120$ MPa.
+$\sigma(1) = 200$ MPa (right branch at $x=1$).
+
+Different ⟹ **discontinuous**. The jump is $80$ MPa.
+
+**Physical meaning:** the two materials must satisfy *equilibrium* (force balance) at the interface, which means $\sigma$ values can differ if there's a step change in cross-section, OR there's an interface traction. In a real bonded interface, $\sigma$ should be continuous (equilibrium of internal forces). A discontinuity would imply an unbalanced external force — perhaps a clamp or applied load at the interface.
+
+Engineering analysis interprets these discontinuities physically: continuity is a **constitutive constraint**, not just a math nicety.
+</ExA>
+
+<ExQ>
+**Multi-condition continuity.** Find all values of $a, b, c$ making $f(x) = \begin{cases}\dfrac{\sin(ax)}{x} & x < 0 \\ b & x = 0 \\ x^2 + cx + 1 & x > 0\end{cases}$ continuous everywhere AND have $f'(0)$ exist (differentiable at 0).
+</ExQ>
+<ExA>
+**Continuity at 0:**
+- Left limit: $\lim_{x\to 0^-}\dfrac{\sin(ax)}{x} = a$
+- Right limit: $\lim_{x\to 0^+}(x^2 + cx + 1) = 1$
+- Value: $b$
+
+For continuity: $a = 1$ and $b = 1$.
+
+**Differentiability at 0:** left and right derivatives must match.
+
+Right: $f(x) = x^2 + cx + 1$, $f'(0^+) = c$.
+
+Left: $f(x) = \sin(x)/x$ for $x < 0$ (using $a = 1$). Use Taylor: $\sin x/x = 1 - x^2/6 + O(x^4)$, so $f(x) = 1 - x^2/6 + O(x^4)$. Then $f'(0^-) = 0$.
+
+Match: $c = 0$.
+
+$$\boxed{a = 1,\ b = 1,\ c = 0}$$
+
+Check: with these, $f(x) = \begin{cases}\sin x/x & x < 0\\ 1 & x = 0\\ x^2 + 1 & x > 0\end{cases}$ is continuous and differentiable at $0$.
+</ExA>

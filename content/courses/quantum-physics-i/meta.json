@@ -1,0 +1,49 @@
+{
+  "title": "Quantum Physics I",
+  "description": "Wave-particle duality, the Schrödinger equation, bound states, and the foundations of modern physics — based on MIT 8.04.",
+  "level": "advanced",
+  "area": "Physics",
+  "tags": ["Quantum", "Physics", "MIT 8.04"],
+  "chapters": [
+    {
+      "title": "Foundations of Quantum Mechanics",
+      "slug": "01-foundations",
+      "order": 1,
+      "lessons": [
+        { "slug": "01-wave-particle-duality", "title": "Wave-Particle Duality", "order": 1 },
+        { "slug": "02-uncertainty", "title": "The Heisenberg Uncertainty Principle", "order": 2 },
+        { "slug": "practice", "title": "Chapter 1 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "The Schrödinger Equation",
+      "slug": "02-schrodinger",
+      "order": 2,
+      "lessons": [
+        { "slug": "01-wavefunctions", "title": "Wavefunctions and Probability", "order": 1 },
+        { "slug": "02-schrodinger-equation", "title": "Time-Dependent and Time-Independent Forms", "order": 2 },
+        { "slug": "practice", "title": "Chapter 2 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Bound States",
+      "slug": "03-bound-states",
+      "order": 3,
+      "lessons": [
+        { "slug": "01-infinite-well", "title": "Particle in an Infinite Square Well", "order": 1 },
+        { "slug": "02-harmonic-oscillator", "title": "Quantum Harmonic Oscillator", "order": 2 },
+        { "slug": "practice", "title": "Chapter 3 Practice Problems", "order": 3 }
+      ]
+    },
+    {
+      "title": "Applications and Operators",
+      "slug": "04-applications",
+      "order": 4,
+      "lessons": [
+        { "slug": "01-operators-observables", "title": "Operators, Eigenvalues, and Observables", "order": 1 },
+        { "slug": "02-tunneling", "title": "Quantum Tunneling", "order": 2 },
+        { "slug": "practice", "title": "Chapter 4 Practice Problems", "order": 3 }
+      ]
+    }
+  ]
+}

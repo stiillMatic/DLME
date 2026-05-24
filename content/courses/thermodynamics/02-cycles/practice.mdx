@@ -1,0 +1,47 @@
+---
+title: Chapter 2 Practice — Thermodynamic Cycles
+description: Practice on Carnot, Rankine, and Brayton cycles.
+---
+
+# Chapter 2 Practice — Thermodynamic Cycles
+
+<ExQ>
+**1.** Carnot engine $T_H = 700$ K, $T_L = 350$ K. Efficiency?
+</ExQ>
+<ExA>
+$\eta = 1 - 350/700 = 50\%$.
+</ExA>
+
+<ExQ>
+**2.** A Rankine cycle has $h_1 = 3500, h_2 = 2200, h_3 = 200, h_4 = 210$ kJ/kg. Find $\eta_{\text{thermal}}$.
+</ExQ>
+<ExA>
+$w_{\text{net}} = (h_1 - h_2) - (h_4 - h_3) = 1300 - 10 = 1290$.
+$q_{\text{in}} = h_1 - h_4 = 3290$.
+$\eta = 1290/3290 = 39.2\%$.
+</ExA>
+
+<ExQ>
+**3.** Brayton cycle (gas turbine), pressure ratio 10, $\gamma = 1.4$. Find ideal efficiency.
+</ExQ>
+<ExA>
+$\eta = 1 - (1/r_p)^{(\gamma-1)/\gamma} = 1 - 0.1^{0.286} = 1 - 0.518 = 48.2\%$.
+</ExA>
+
+<ExQ>
+**4. Engineering.** Refrigerator with COP = 3.5 removes 4 kW from cold space. Find power consumption.
+</ExQ>
+<ExA>
+$W = Q_L/\text{COP} = 4/3.5 = 1.14$ kW.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does adding regenerator improve Brayton efficiency?
+</ExQ>
+<ExA>
+A regenerator preheats compressed air using exhaust heat. This reduces fuel needed in the combustor, raising efficiency.
+
+Limit: regeneration approaches Carnot efficiency for the cycle as $T_{\text{exh}} \to T_{\text{compr,out}}$. Heat would otherwise be wasted; capturing it improves performance.
+
+Used in modern stationary gas turbines and recuperated jet engines.
+</ExA>

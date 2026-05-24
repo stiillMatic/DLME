@@ -1,0 +1,58 @@
+---
+title: Chapter 1 Practice — Stress and Strain
+description: Practice on normal stress, shear stress, strain, Hooke's law, and Mohr's circle.
+---
+
+# Chapter 1 Practice — Stress and Strain
+
+<ExQ>
+**1.** A 25 mm diameter rod under 60 kN tension. Find normal stress.
+</ExQ>
+<ExA>
+$A = \pi(0.0125)^2 = 4.91\times 10^{-4}$ m². $\sigma = 60000/4.91\times 10^{-4} = 122$ MPa.
+</ExA>
+
+<ExQ>
+**2.** Strain 0.002 in steel ($E = 200$ GPa). Find stress.
+</ExQ>
+<ExA>
+$\sigma = E\varepsilon = 200\times 10^9\cdot 0.002 = 400$ MPa. (Above typical yield for mild steel — careful.)
+</ExA>
+
+<ExQ>
+**3. Engineering: Bolt strength.** Bolt of cross-section 80 mm² in single shear under 40 kN load. Find shear stress.
+</ExQ>
+<ExA>
+$\tau = V/A = 40000/8\times 10^{-5} = 500$ MPa.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why does pure compression of a cube produce lateral expansion?
+</ExQ>
+<ExA>
+Poisson's effect: $\varepsilon_{\text{lat}} = -\nu\varepsilon_{\text{axial}}$. With axial compression ($\varepsilon < 0$), lateral strain is positive (expansion).
+
+Volume change: $\Delta V/V \approx \varepsilon(1 - 2\nu)$. For $\nu = 0.5$ (incompressible like rubber), no volume change.
+</ExA>
+
+<ExQ>
+**5. Mohr's circle.** Plane stress: $\sigma_x = 80$, $\sigma_y = 20$, $\tau_{xy} = 40$ MPa. Find principal stresses.
+</ExQ>
+<ExA>
+Center: $(80+20)/2 = 50$. Radius: $\sqrt{((80-20)/2)^2 + 40^2} = \sqrt{900 + 1600} = 50$.
+
+$\sigma_{1,2} = 50 \pm 50 = 100$ and 0.
+
+Max shear: 50 MPa (= radius).
+</ExA>
+
+<ExQ>
+**6. Multi-step.** A bar of length 2 m, area 5 cm², $E = 100$ GPa, under 25 kN. Find elongation.
+</ExQ>
+<ExA>
+$\sigma = 25000/5\times 10^{-4} = 50$ MPa.
+
+$\varepsilon = 50/100000 = 5\times 10^{-4}$.
+
+$\Delta L = \varepsilon L = 5\times 10^{-4}\cdot 2 = 10^{-3}$ m = 1 mm.
+</ExA>

@@ -1,0 +1,134 @@
+---
+title: Wavefunctions and Probability
+description: A complex-valued function encodes everything you can know about a quantum system — and its squared magnitude gives probabilities.
+---
+
+# Wavefunctions and Probability
+
+## The Big Picture
+
+A quantum particle's state is fully described by a **wavefunction** $\psi(x, t)$ — a complex-valued function. Born's rule says $|\psi(x, t)|^2$ is the probability density of finding the particle at position $x$. This single mathematical object replaces the classical "particle has position $x$ and momentum $p$" description, encoding *all* the system's properties (with attendant uncertainty).
+
+## Probabilistic Interpretation
+
+$|\psi(x)|^2\,dx$ = probability of finding the particle in $[x, x + dx]$.
+
+Normalization:
+
+$$\int|\psi(x)|^2\,dx = 1$$
+
+The particle is *somewhere* (probability = 1).
+
+## Expectation Values
+
+$$\langle x\rangle = \int x|\psi|^2\,dx$$
+
+$$\langle p\rangle = \int\psi^*\hat p\psi\,dx = -i\hbar\int\psi^*\frac{\partial\psi}{\partial x}\,dx$$
+
+The expectation values give average measurement results.
+
+## Operators
+
+Position operator: $\hat x = x$ (multiplication).
+Momentum operator: $\hat p = -i\hbar\partial/\partial x$.
+Hamiltonian: $\hat H = \hat p^2/(2m) + V(x) = -(\hbar^2/2m)\partial^2/\partial x^2 + V(x)$.
+
+Each observable corresponds to an operator. Measurement outcomes are eigenvalues of these operators.
+
+## Superposition
+
+The Schrödinger equation is linear → solutions superpose. If $\psi_1$ and $\psi_2$ are valid wavefunctions, so is $c_1\psi_1 + c_2\psi_2$.
+
+This is the source of all quantum interference. Two paths can interfere because their wavefunctions add as complex numbers — phase matters.
+
+## Common Misconceptions
+
+**Misconception 1: "$\psi$ has direct physical meaning."**
+
+$\psi$ itself is complex — not directly observable. Only $|\psi|^2$ and other functionals of $\psi$ have physical meaning.
+
+**Misconception 2: "Particle is at $\langle x\rangle$."**
+
+$\langle x\rangle$ is the average position from many measurements. Each individual measurement returns some specific value, with probability $|\psi(x)|^2$.
+
+**Misconception 3: "After measurement, $\psi$ is gone."**
+
+After measurement, $\psi$ "collapses" to an eigenstate of the measured observable. Future evolution proceeds from this new $\psi$.
+
+## Engineering Connection
+
+- **Quantum dots:** size-dependent wavefunctions → controllable optical/electronic properties.
+- **Tunneling diodes:** wavefunction "leakage" through barriers → fast switching.
+- **STM (scanning tunneling microscope):** images electron wavefunctions at surfaces.
+- **Quantum computing:** qubit state = superposition $\alpha|0\rangle + \beta|1\rangle$ — complex amplitudes encoded in physical systems.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Normalize $\psi(x) = A e^{-x^2/2}$.
+</ExQ>
+<ExA>
+$\int|\psi|^2\,dx = A^2\int e^{-x^2}\,dx = A^2\sqrt\pi$.
+
+Normalize: $A^2 = 1/\sqrt\pi$, so $A = \pi^{-1/4}$.
+
+(Gaussian wavefunction — relevant to ground state of harmonic oscillator.)
+</ExA>
+
+<ExQ>
+**2.** For $\psi(x) = (\alpha/\pi)^{1/4}e^{-\alpha x^2/2}$, find $\langle x\rangle$.
+</ExQ>
+<ExA>
+By symmetry: $|\psi|^2$ is even function, $x|\psi|^2$ is odd → integral is 0.
+
+$\langle x\rangle = 0$. The Gaussian is centered at origin.
+</ExA>
+
+<ExQ>
+**3. Engineering: Quantum dot.** 1D quantum dot of width 5 nm. What's the ground-state expectation value of $x$ for a particle in this well (with $\psi \propto \sin(\pi x/L)$ centered)?
+</ExQ>
+<ExA>
+With well $[0, L]$, $\psi = \sqrt{2/L}\sin(\pi x/L)$.
+
+$\langle x\rangle = (2/L)\int_0^L x\sin^2(\pi x/L)\,dx$.
+
+Use $\sin^2 u = (1-\cos 2u)/2$:
+
+$\langle x\rangle = (2/L)\int_0^L(x/2)(1 - \cos(2\pi x/L))\,dx = (1/L)\cdot L^2/2 - (2/L)\int_0^L(x/2)\cos(2\pi x/L)\,dx$.
+
+The second integral is 0 by integration by parts (odd in shifted coordinate).
+
+So $\langle x\rangle = L/2 = 2.5$ nm — the center of the well, by symmetry.
+</ExA>
+
+<ExQ>
+**4. Conceptual.** Why must $\psi$ be continuous and (typically) differentiable?
+</ExQ>
+<ExA>
+Probability density $|\psi|^2$ must be a well-defined finite function (continuous in most cases).
+
+Schrödinger equation involves $\partial^2\psi/\partial x^2$, requiring $\psi$ and $\partial\psi/\partial x$ to be continuous.
+
+Exceptions: infinite potential barriers (psi = 0 abruptly) and delta-function potentials (psi continuous, derivative jumps). Both are idealizations of real situations.
+
+Boundary conditions are essential for finding allowed wavefunctions — exactly as for classical waves.
+</ExA>
+
+<ExQ>
+**5.** Show that $\hat p\hat x - \hat x\hat p = -i\hbar$ (the canonical commutation relation).
+</ExQ>
+<ExA>
+Apply to test function $f(x)$:
+
+$\hat p\hat x f = -i\hbar\partial_x(xf) = -i\hbar(f + xf') = -i\hbar f + x\hat p f$.
+
+$\hat x\hat p f = x\hat p f$.
+
+Difference: $\hat p\hat x f - \hat x\hat p f = -i\hbar f$.
+
+So $[\hat p, \hat x] = \hat p\hat x - \hat x\hat p = -i\hbar$ (or $[\hat x, \hat p] = i\hbar$).
+
+This non-commutativity is the **mathematical root** of the uncertainty principle. Operators that don't commute have a fundamental "trade-off" between their precise eigenstates.
+</ExA>

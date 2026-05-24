@@ -1,0 +1,208 @@
+---
+title: Optimization with Lagrange Multipliers
+description: Finding extrema of multivariable functions, including constrained optimization — the math behind every engineering design problem.
+---
+
+# Optimization with Lagrange Multipliers
+
+## The Big Picture
+
+Engineering design is fundamentally about **optimization**: maximize strength, minimize weight, optimize efficiency — usually subject to constraints. The mathematical framework for this is multivariable optimization. Critical points and the Hessian classify unconstrained extrema. **Lagrange multipliers** handle constrained problems elegantly. Together, they form the conceptual foundation of calculus of variations, optimal control, machine learning loss minimization, and structural optimization.
+
+## Intuition First — Tangent Surfaces
+
+For unconstrained optimization, we find where the surface $z = f(x, y)$ is "flat" — where the tangent plane is horizontal. That's where $\nabla f = \mathbf{0}$.
+
+For constrained optimization (must stay on a curve $g = 0$), we look for points where $f$'s level curves are *tangent* to the constraint curve. At these tangency points, the gradients $\nabla f$ and $\nabla g$ are parallel — moving along the constraint won't increase $f$ further.
+
+This parallelism is the geometric core of Lagrange multipliers.
+
+## Unconstrained Optimization
+
+### Critical Points
+
+A critical point is where $\nabla f = \mathbf{0}$.
+
+### Second Derivative Test (Hessian)
+
+For $f(x, y)$ with critical point $P$, define the **Hessian**:
+
+$$H = \begin{pmatrix}f_{xx} & f_{xy}\\ f_{xy} & f_{yy}\end{pmatrix}$$
+
+Its determinant: $D = f_{xx}f_{yy} - f_{xy}^2$.
+
+| $D$ | $f_{xx}$ | Classification |
+|---|---|---|
+| $> 0$ | $> 0$ | Local **minimum** |
+| $> 0$ | $< 0$ | Local **maximum** |
+| $< 0$ | (any) | **Saddle point** |
+| $= 0$ | (any) | Inconclusive |
+
+**Why?** The Hessian eigenvalues tell you the curvatures along principal directions. If both positive: bowl (min). Both negative: dome (max). One of each: saddle.
+
+## Constrained Optimization
+
+We want to optimize $f(x, y, z)$ subject to $g(x, y, z) = 0$.
+
+### Lagrange's Theorem
+
+At an extremum, $\nabla f = \lambda\nabla g$ for some scalar $\lambda$ (the **Lagrange multiplier**).
+
+Equivalently, defining the **Lagrangian** $\mathcal{L} = f - \lambda g$, set $\nabla\mathcal{L} = \mathbf{0}$:
+
+$$\nabla f - \lambda\nabla g = \mathbf{0}, \quad g = 0$$
+
+This gives $n + 1$ equations in $n + 1$ unknowns ($x, y, z, \lambda$).
+
+### Multiple Constraints
+
+For two constraints $g_1 = 0$ and $g_2 = 0$:
+
+$$\nabla f = \lambda_1\nabla g_1 + \lambda_2\nabla g_2$$
+
+The gradient of $f$ lies in the span of constraint gradients.
+
+## Geometric Picture
+
+Imagine level curves of $f$ overlaid on the constraint curve $g = 0$. As you walk along $g = 0$, $f$ changes. At an extremum, the constraint curve is *tangent* to a level curve of $f$ — the gradients align.
+
+If you keep walking, you'd cross to a higher (or lower) level curve, but tangency says: at that exact point, you're momentarily not changing $f$.
+
+## Worked Example
+
+**Problem:** Find the extrema of $f(x, y) = x^2 + y^2$ on the constraint $x + y = 1$.
+
+**Lagrange:** $\nabla f = \lambda\nabla g$, $\nabla f = \langle 2x, 2y\rangle$, $\nabla g = \langle 1, 1\rangle$.
+
+Set $2x = \lambda$ and $2y = \lambda$, so $x = y$.
+
+Apply constraint: $x + x = 1 \Rightarrow x = y = 1/2$.
+
+$f(1/2, 1/2) = 1/2$.
+
+**Interpretation:** the closest point on line $x + y = 1$ to the origin is $(1/2, 1/2)$, with squared distance $1/2$ (so distance $1/\sqrt 2$). This recovers a standard geometry result via calculus.
+
+## Common Misconceptions
+
+**Misconception 1: "Lagrange multipliers are just a calculation trick."**
+
+The multiplier $\lambda$ has physical meaning: it's the **shadow price** — the rate of change of the optimum value with respect to the constraint level. In economics, $\lambda$ is marginal cost. In mechanics, it can represent a constraint force.
+
+**Misconception 2: "$\nabla f = \mathbf{0}$ on a constraint."**
+
+No — generally $\nabla f \neq \mathbf{0}$ at the constrained optimum. Only its component *along* the constraint must vanish.
+
+**Misconception 3: "Lagrange multiplier $\lambda$ is dimensionless."**
+
+$\lambda$ has units of $f / g$. If $f$ is energy (J) and $g$ is volume (m³), $\lambda$ has units of pressure (Pa) — the constraint "shadow price" in units of energy per unit volume.
+
+**Misconception 4: "Critical points are always extrema."**
+
+Could be saddle points (in unconstrained problems) or local-but-not-global extrema. Check the Hessian or compare with boundary values.
+
+## Engineering Connection
+
+- **Structural optimization:** minimize weight subject to stress constraint. Lagrange multiplier = sensitivity of optimal weight to allowable stress.
+- **Constrained machine learning:** SVM (support vector machines) is solved via Lagrange duality.
+- **Thermodynamics:** entropy maximization subject to energy constraint gives the Boltzmann distribution; multiplier = inverse temperature.
+- **Fluid dynamics:** incompressibility ($\nabla\cdot\mathbf{v} = 0$) acts as a constraint; the corresponding multiplier is the pressure field.
+- **Chemical equilibrium:** Gibbs free energy minimization subject to mass conservation; multipliers are chemical potentials.
+
+The Lagrange multiplier is more than math — it's a way of converting constraints into prices/forces.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Find the critical points of $f(x, y) = x^2 - 4xy + y^2 + 6y$ and classify them.
+</ExQ>
+<ExA>
+$f_x = 2x - 4y = 0$ and $f_y = -4x + 2y + 6 = 0$.
+
+From first: $x = 2y$. Substitute: $-8y + 2y + 6 = 0 \Rightarrow y = 1$, $x = 2$.
+
+Hessian: $f_{xx} = 2$, $f_{yy} = 2$, $f_{xy} = -4$.
+
+$D = 4 - 16 = -12 < 0$ → **saddle point** at $(2, 1)$.
+</ExA>
+
+<ExQ>
+Find the maximum of $f(x, y) = xy$ subject to $x^2 + y^2 = 8$.
+</ExQ>
+<ExA>
+Lagrange: $\nabla f = \langle y, x\rangle$, $\nabla g = \langle 2x, 2y\rangle$.
+
+$y = 2\lambda x$, $x = 2\lambda y \Rightarrow y = 2\lambda(2\lambda y) = 4\lambda^2 y$.
+
+If $y \neq 0$: $4\lambda^2 = 1 \Rightarrow \lambda = \pm 1/2$. Then $y = \pm x$.
+
+Constraint: $x^2 + x^2 = 8 \Rightarrow x = \pm 2$, $y = \pm 2$.
+
+$f(2, 2) = 4$, $f(-2, -2) = 4$, $f(2, -2) = -4$, $f(-2, 2) = -4$.
+
+**Max** $= 4$ at $(2, 2)$ or $(-2, -2)$.
+</ExA>
+
+<ExQ>
+**Engineering optimization.** Minimize the surface area $A = 2(xy + yz + xz)$ of a closed rectangular box with fixed volume $V = xyz = 1$.
+</ExQ>
+<ExA>
+Lagrange: $\nabla A = \langle 2(y+z), 2(x+z), 2(x+y)\rangle$, $\nabla g = \langle yz, xz, xy\rangle$.
+
+$\nabla A = \lambda\nabla g$:
+$2(y + z) = \lambda yz$
+$2(x + z) = \lambda xz$
+$2(x + y) = \lambda xy$
+
+By symmetry, $x = y = z$. With constraint $xyz = 1$: $x = y = z = 1$.
+
+Surface area: $A(1, 1, 1) = 6$.
+
+**Interpretation:** the cube minimizes surface area for fixed volume — classical engineering result.
+</ExA>
+
+<ExQ>
+**Conceptual.** A factory's profit $f(x, y)$ depends on labor $x$ and capital $y$. Total budget is constrained: $x + 2y = 100$. The Lagrange multiplier at the optimum is $\lambda = 0.5$. Interpret what $\lambda = 0.5$ means.
+</ExQ>
+<ExA>
+$\lambda$ is the **marginal value** of relaxing the budget constraint.
+
+Specifically: if the budget were $100 + d$ instead of $100$, the optimal profit would increase by approximately $0.5\,d$.
+
+So $\lambda = 0.5$ means: each additional unit of budget yields 0.5 units of profit. This guides decisions about whether to seek more funding ($\lambda > $ funding cost) or not.
+
+This "shadow price" interpretation is what makes Lagrange multipliers indispensable in operations research and engineering economics.
+</ExA>
+
+<ExQ>
+**Reasoning.** Why does the second derivative test fail when $D = 0$?
+</ExQ>
+<ExA>
+$D = 0$ means the Hessian has at least one zero eigenvalue, indicating that the function is "flat" along some direction at the critical point.
+
+In that direction, the second-order Taylor expansion can't determine the behavior — higher-order terms matter.
+
+Examples: $f = x^4$ has $f_{xx}(0) = 0$ but $0$ is a min (need 4th-order). $f = x^3$ has $f_{xx}(0) = 0$ but $0$ is a saddle. The 2nd-order test alone is insufficient.
+
+In practice, look at the function locally: examine values along different directions or use higher-order Taylor.
+</ExA>
+
+<ExQ>
+**Multi-step.** A cylindrical can holds 1 L of liquid. Material costs are $\$0.02$/cm² for the side and $\$0.05$/cm² for the top and bottom. Find the dimensions minimizing cost.
+</ExQ>
+<ExA>
+Volume: $\pi r^2 h = 1000$ cm³ (1 L).
+
+Cost: $C = 0.02(2\pi r h) + 0.05(2\pi r^2) = 0.04\pi r h + 0.1\pi r^2$.
+
+Substitute $h = 1000/(\pi r^2)$: $C = 40/r + 0.1\pi r^2$.
+
+$dC/dr = -40/r^2 + 0.2\pi r = 0 \Rightarrow r^3 = 200/\pi \approx 63.66 \Rightarrow r \approx 3.99$ cm.
+
+Then $h = 1000/(\pi\cdot 15.9) \approx 20.0$ cm.
+
+So **$r \approx 4$ cm, $h \approx 20$ cm** — a tall, narrow can. (Cheaper sides than top/bottom favors more height.)
+
+This is the kind of constrained optimization that engineering design relies on daily.
+</ExA>

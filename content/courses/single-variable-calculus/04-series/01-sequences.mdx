@@ -1,0 +1,329 @@
+---
+title: Sequences and Series
+description: Infinite sums, when they make sense, and how to test for convergence.
+---
+
+# Sequences and Series
+
+## The Big Picture
+
+Adding finitely many numbers is trivial. But what about adding *infinitely* many — like $1 + 1/2 + 1/4 + 1/8 + \cdots$? This isn't just abstract: in engineering, we routinely encounter infinite sums. A vibrating string is a sum of infinitely many modes; a Fourier series sums infinitely many sinusoids; numerical methods sum infinite series and must know when to stop. The deep question is: **when does an infinite sum equal a finite number?** That's the theory of series.
+
+## Intuition First — Zeno's Paradox Revisited
+
+Zeno claimed motion is impossible because to walk to a wall, you first cover half the distance, then half of what's left, then half of *that*, and so on — infinitely many steps in finite time. So how can you ever arrive?
+
+The mathematical answer: even though there are infinitely many steps, their total length is finite:
+
+$$\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \cdots = 1$$
+
+This *converges*. The infinite sum has a finite total. Zeno's paradox dissolves once you accept that "infinitely many things" can add up to a finite quantity — and that's exactly what convergent series capture.
+
+Not every infinite sum is so well-behaved. $1 + 1 + 1 + \cdots$ obviously diverges. So does $1 + 1/2 + 1/3 + 1/4 + \cdots$ (the harmonic series, surprisingly slowly). Knowing *which* sums converge is the heart of this lesson.
+
+## Sequences
+
+A **sequence** is an ordered list of numbers $a_1, a_2, a_3, \ldots$, often given by a formula $a_n$.
+
+A sequence **converges** to $L$ if $\lim_{n\to\infty} a_n = L$. The same idea as a function limit, but for integer arguments.
+
+**Examples.**
+- $a_n = 1/n \to 0$ (converges)
+- $a_n = (-1)^n$ — alternates between $1$ and $-1$ (diverges)
+- $a_n = (1 + 1/n)^n \to e$ (converges, classic)
+
+## Series
+
+A **series** is the sum of a sequence:
+
+$$\sum_{n=1}^\infty a_n = a_1 + a_2 + a_3 + \cdots$$
+
+The **partial sums** are $S_N = \sum_{n=1}^N a_n$. The series converges to $S$ if the sequence of partial sums $\{S_N\}$ converges to $S$. Otherwise, the series diverges.
+
+So a series is *defined* via the convergence of its partial sums — there's no separate "infinite addition" operation.
+
+## The Geometric Series
+
+The most important series in engineering:
+
+$$\sum_{n=0}^\infty r^n = 1 + r + r^2 + r^3 + \cdots = \frac{1}{1 - r} \quad \text{if } |r| < 1$$
+
+If $|r| \geq 1$, the series diverges.
+
+**Derivation:** the partial sum $S_N = 1 + r + \cdots + r^{N-1}$ satisfies $S_N - rS_N = 1 - r^N$, so $S_N = (1 - r^N)/(1 - r)$. As $N \to \infty$, $r^N \to 0$ (since $|r| < 1$), giving $1/(1-r)$.
+
+This is the *only* common series with a clean closed-form sum. Most others can only be summed numerically or expressed via special functions.
+
+## Convergence Tests
+
+How do we tell if a complicated series converges?
+
+### 1. The $n$-th Term Test (Necessary Condition)
+
+If $\lim_{n\to\infty}a_n \neq 0$, the series **diverges**. (If the terms don't shrink, the sum can't settle.)
+
+But $a_n \to 0$ does NOT guarantee convergence. The harmonic series $\sum 1/n$ has $a_n \to 0$ yet diverges.
+
+### 2. The Comparison Test
+
+If $0 \leq a_n \leq b_n$ and $\sum b_n$ converges, then $\sum a_n$ converges.
+
+Conversely, if $a_n \geq b_n \geq 0$ and $\sum b_n$ diverges, then $\sum a_n$ diverges.
+
+**Reference series:** $\sum 1/n^p$ converges if $p > 1$, diverges if $p \leq 1$ (the *p-series test*).
+
+### 3. The Ratio Test
+
+If $\lim_{n\to\infty}|a_{n+1}/a_n| = L$:
+- $L < 1$: series converges (absolutely)
+- $L > 1$: series diverges
+- $L = 1$: inconclusive
+
+Especially useful for series with factorials or exponentials.
+
+### 4. The Integral Test
+
+For positive, decreasing $a_n = f(n)$: $\sum_{n=1}^\infty a_n$ converges if and only if $\int_1^\infty f(x)\,dx$ converges.
+
+This is how we prove the harmonic series diverges: $\int_1^\infty 1/x\,dx = \ln x \to \infty$.
+
+### 5. The Alternating Series Test
+
+If $a_n > 0$, $a_n \to 0$, and $a_n$ is decreasing, then $\sum (-1)^n a_n$ converges.
+
+The alternating harmonic series $1 - 1/2 + 1/3 - 1/4 + \cdots = \ln 2$ converges by this test.
+
+## Worked Examples
+
+**Example 1.** Does $\displaystyle\sum_{n=1}^\infty \frac{n}{n+1}$ converge?
+
+Test the $n$-th term: $a_n = n/(n+1) \to 1 \neq 0$. **Diverges** by the $n$-th term test.
+
+**Example 2.** Does $\displaystyle\sum_{n=1}^\infty \frac{2^n}{n!}$ converge?
+
+Ratio test: $\dfrac{a_{n+1}}{a_n} = \dfrac{2^{n+1}/(n+1)!}{2^n/n!} = \dfrac{2}{n+1} \to 0 < 1$. **Converges**.
+
+**Example 3.** Does $\displaystyle\sum_{n=1}^\infty \frac{1}{n^2}$ converge?
+
+By the integral test: $\int_1^\infty 1/x^2\,dx = 1$ (finite). Or by p-series test with $p = 2 > 1$. **Converges**.
+
+(Famously, this sums to $\pi^2/6$ — the Basel problem.)
+
+## Common Misconceptions
+
+**Misconception 1: "$a_n \to 0$ means $\sum a_n$ converges."**
+
+Not enough. The harmonic series shows terms can shrink to zero too slowly to give convergence. Always confirm with another test.
+
+**Misconception 2: "Adding infinitely many small things must be small."**
+
+Counterexample: $\sum 1/n$ grows without bound, even though every term is small. The number of terms can compensate for their smallness.
+
+**Misconception 3: "Convergence depends on early terms."**
+
+Convergence is a *tail* property — only the behavior for large $n$ matters. Adding or removing finitely many terms changes the *sum*, not whether it converges.
+
+**Misconception 4: "I can rearrange a convergent series freely."**
+
+Only for *absolutely convergent* series ($\sum |a_n|$ converges). Conditionally convergent series (like the alternating harmonic) can be rearranged to give *any* sum (Riemann's theorem). Order matters.
+
+**Misconception 5: "If a test is inconclusive, the series doesn't converge."**
+
+It just means *that* test doesn't decide. Try another test.
+
+## Engineering Connection
+
+- **Numerical iteration:** Newton's method, fixed-point iteration, and other root-finding schemes generate sequences. Convergence ensures the algorithm produces an answer.
+- **Damping in dynamics:** the geometric series $1 + e^{-\zeta} + e^{-2\zeta} + \cdots = 1/(1-e^{-\zeta})$ appears in repeated impulse responses of damped systems.
+- **Fourier series:** any periodic function can be written as $\sum (a_n\cos n\omega t + b_n\sin n\omega t)$. Convergence of this series is essential — the Gibbs phenomenon (overshoot at jump discontinuities) is what happens when convergence is conditional.
+- **Power series:** Taylor approximations $f(x) = \sum f^{(n)}(0)x^n/n!$ are convergent series. The radius of convergence tells you the range of $x$ where the approximation is valid.
+- **Probability:** discrete distributions sum probabilities $\sum p(k) = 1$ — must converge.
+
+In every numerical computation involving "infinitely many" terms, knowing whether the sum converges (and how fast) determines whether the computation is reliable.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Sum the geometric series $1 + 1/3 + 1/9 + 1/27 + \cdots$.
+</ExQ>
+<ExA>
+$r = 1/3$, $|r| < 1$:
+$$\sum_{n=0}^\infty(1/3)^n = \frac{1}{1 - 1/3} = \boxed{\frac{3}{2}}$$
+</ExA>
+
+<ExQ>
+Does $\displaystyle\sum_{n=1}^\infty\frac{n}{2n+1}$ converge?
+</ExQ>
+<ExA>
+$a_n = n/(2n+1) \to 1/2 \neq 0$. **Diverges** by $n$-th term test.
+</ExA>
+
+### Application
+
+<ExQ>
+Use the ratio test to determine if $\displaystyle\sum_{n=1}^\infty \frac{n!}{n^n}$ converges.
+</ExQ>
+<ExA>
+$$\frac{a_{n+1}}{a_n} = \frac{(n+1)!/(n+1)^{n+1}}{n!/n^n} = \frac{(n+1)\cdot n^n}{(n+1)^{n+1}} = \left(\frac{n}{n+1}\right)^n = \frac{1}{(1+1/n)^n}$$
+
+As $n\to\infty$: $(1 + 1/n)^n \to e$, so the ratio $\to 1/e \approx 0.368 < 1$.
+
+**Converges.**
+</ExA>
+
+<ExQ>
+Determine whether $\displaystyle\sum_{n=1}^\infty\frac{1}{\sqrt{n}}$ converges.
+</ExQ>
+<ExA>
+This is a $p$-series with $p = 1/2 < 1$. **Diverges**.
+
+Equivalently: by integral test, $\int_1^\infty x^{-1/2}\,dx = 2\sqrt{x}|_1^\infty = \infty$.
+</ExA>
+
+<ExQ>
+Compute the sum of the alternating series $\displaystyle\sum_{n=0}^\infty \frac{(-1)^n}{2^n}$.
+</ExQ>
+<ExA>
+Geometric with $r = -1/2$, $|r| < 1$:
+$$\sum_{n=0}^\infty(-1/2)^n = \frac{1}{1 - (-1/2)} = \frac{1}{3/2} = \boxed{\frac{2}{3}}$$
+</ExA>
+
+### Challenge
+
+<ExQ>
+Show that $\displaystyle\sum_{n=2}^\infty\frac{1}{n\ln n}$ diverges using the integral test.
+</ExQ>
+<ExA>
+Let $f(x) = 1/(x\ln x)$. This is positive and decreasing for $x \geq 2$.
+
+$$\int_2^\infty\frac{dx}{x\ln x}$$
+
+Substitute $u = \ln x$, $du = dx/x$:
+
+$$\int_{\ln 2}^\infty \frac{du}{u} = \ln u\bigg|_{\ln 2}^\infty = \infty$$
+
+By the integral test, the series **diverges**. (Astonishingly slowly — even slower than the harmonic series.)
+</ExA>
+
+<ExQ>
+A vibrating beam emits energy in modes with amplitudes $a_n = 1/n^2$. The total energy is proportional to $\sum a_n^2$. Compute the convergence properties: does this series converge?
+</ExQ>
+<ExA>
+$a_n^2 = 1/n^4$, a $p$-series with $p = 4 > 1$. **Converges**.
+
+(Specifically, $\sum 1/n^4 = \pi^4/90 \approx 1.0823$.)
+
+This rapid convergence is why higher modes contribute negligibly to total energy — only a handful of modes matter for engineering accuracy. It's the mathematical justification for *modal truncation* in finite-element analysis.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** If $\sum a_n$ converges, then $a_n \to 0$. Is the converse true? Justify with an example.
+</ExQ>
+<ExA>
+**True (forward):** if $\sum a_n$ converges, then $a_n \to 0$ (necessary condition).
+
+**Converse FALSE:** $a_n \to 0$ does not imply $\sum a_n$ converges. Counterexample: harmonic series $\sum 1/n$ has $a_n = 1/n \to 0$ but **diverges**.
+
+The terms shrink, but too slowly. This is one of the most important conceptual points in the theory of series.
+</ExA>
+
+<ExQ>
+**Why does the $p$-series boundary occur at $p = 1$?** Use the integral test to explain.
+</ExQ>
+<ExA>
+$\sum 1/n^p$ converges iff $\int_1^\infty x^{-p}\,dx$ converges.
+
+Compute $\int_1^\infty x^{-p}\,dx$:
+- $p > 1$: $= \dfrac{x^{1-p}}{1-p}\bigg|_1^\infty = \dfrac{1}{p-1}$ (finite)
+- $p = 1$: $= \ln x|_1^\infty = \infty$
+- $p < 1$: integrand decays too slowly, integral diverges.
+
+The boundary $p = 1$ is exactly where the antiderivative changes form (logarithm vs. power), and where the decay just barely fails to be integrable. Understanding this boundary is essential for engineering convergence analysis.
+</ExA>
+
+<ExQ>
+**Comparison reasoning.** Without computing exact sums, determine which converges and which diverges:
+(a) $\sum_{n=1}^\infty\dfrac{n}{n^2 + 1}$
+(b) $\sum_{n=1}^\infty\dfrac{1}{n^2 + 1}$
+(c) $\sum_{n=1}^\infty\dfrac{1}{2^n + n}$
+</ExQ>
+<ExA>
+(a) For large $n$: $a_n \sim 1/n$ — behaves like harmonic. **Diverges.**
+
+(b) For large $n$: $a_n \sim 1/n^2$ — $p$-series with $p = 2$. **Converges.**
+
+(c) Comparison: $a_n \leq 1/2^n$, geometric with $r = 1/2$. **Converges.**
+
+The skill: identify the **dominant term** for large $n$ and compare to a known reference series.
+</ExA>
+
+<ExQ>
+**Conditional vs. absolute.** Show that $\sum (-1)^{n+1}/n$ converges but $\sum 1/n$ diverges. What's the deeper conceptual point?
+</ExQ>
+<ExA>
+**Alternating sum:** $|a_n| = 1/n$ decreasing to 0, alternating signs. By alternating series test, $\sum (-1)^{n+1}/n$ converges (in fact, to $\ln 2$).
+
+**Absolute sum:** $\sum 1/n$ is the harmonic series, **diverges**.
+
+So $\sum a_n$ converges but $\sum |a_n|$ diverges → **conditional convergence**.
+
+**Deeper point:** for conditionally convergent series, **rearrangement of terms can change the sum** (Riemann's theorem). Order matters! For absolutely convergent series, you can rearrange freely.
+
+This subtle distinction matters when summing infinite Fourier or Taylor series in non-standard order.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Geometric decay in damping.** A bouncing ball loses 20% of its energy on each bounce. Energy after $n$ bounces is $E_n = (0.8)^n E_0$. Total energy *dissipated* over all bounces is $\sum_{n=0}^\infty (0.2)\cdot(0.8)^n E_0$. Compute this sum.
+</ExQ>
+<ExA>
+$$\sum_{n=0}^\infty 0.2(0.8)^n E_0 = 0.2 E_0 \cdot\frac{1}{1-0.8} = 0.2 E_0\cdot 5 = E_0$$
+
+**All initial energy is eventually dissipated** — as expected by energy conservation. The geometric series neatly captures this.
+
+This kind of "infinite-step accounting" is fundamental in heat transfer (multiple reflections in radiation), control systems (settling response), and stochastic processes.
+</ExA>
+
+<ExQ>
+**Fourier coefficients.** A square wave's Fourier series is $f(x) = \dfrac{4}{\pi}\sum_{n=0}^\infty\dfrac{\sin((2n+1)x)}{2n+1}$. How fast do the coefficients decay? What does this say about pointwise vs. uniform convergence at jump discontinuities?
+</ExQ>
+<ExA>
+Coefficients: $b_{2n+1} = \dfrac{4}{\pi(2n+1)}$ — decay like $1/n$. **Slow decay** — only conditionally convergent.
+
+This slow convergence is why Fourier reconstructions of jump discontinuities (like the Gibbs phenomenon) show overshoot near jumps. The series converges pointwise but **not uniformly** in neighborhoods of jumps.
+
+For engineering: when reconstructing a signal with sharp transitions, expect ringing artifacts. This is fundamental to digital signal processing and the choice of windowing functions.
+</ExA>
+
+<ExQ>
+**Time constant convergence.** A first-order system has step response $y(t) = 1 - e^{-t/\tau}$. After how many time constants $\tau$ has the system reached 99% of steady state? Use the partial-sum interpretation to bound the error.
+</ExQ>
+<ExA>
+We need $1 - e^{-t/\tau} \geq 0.99$, i.e., $e^{-t/\tau} \leq 0.01$, i.e., $t/\tau \geq \ln 100 \approx 4.6$.
+
+So **after about $4.6\tau$**, the system has settled to within 1% of steady state.
+
+The Taylor expansion of $e^{-t/\tau}$ converges for all $t$, but the rate of approach to zero is geometric — fast in absolute terms once $t \gg \tau$. Engineers commonly use the rule "settled after 5τ" because it's both simple and conservative.
+</ExA>
+
+<ExQ>
+**Telescope a sum.** Compute $\sum_{n=1}^N\dfrac{1}{n(n+1)}$ in closed form, then take $N\to\infty$. (Hint: partial fractions.)
+</ExQ>
+<ExA>
+Partial fractions: $\dfrac{1}{n(n+1)} = \dfrac{1}{n} - \dfrac{1}{n+1}$.
+
+$$\sum_{n=1}^N\left(\frac{1}{n} - \frac{1}{n+1}\right) = \left(1 - \frac{1}{2}\right) + \left(\frac{1}{2} - \frac{1}{3}\right) + \cdots + \left(\frac{1}{N} - \frac{1}{N+1}\right)$$
+
+Telescoping: most terms cancel, leaving $1 - \dfrac{1}{N+1}$.
+
+$$\sum_{n=1}^\infty\frac{1}{n(n+1)} = \lim_{N\to\infty}\left(1 - \frac{1}{N+1}\right) = 1$$
+
+**Telescoping series** are exact, computable infinite sums — useful in network analysis (sum of cascade gains) and probability theory.
+</ExA>

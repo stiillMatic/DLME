@@ -1,0 +1,137 @@
+---
+title: Chirality and Stereoisomerism
+description: Molecules that are non-superimposable mirror images — drugs, sugars, and the asymmetry of life itself.
+---
+
+# Chirality and Stereoisomerism
+
+## The Big Picture
+
+Some molecules are **chiral** — they exist in two non-superimposable mirror-image forms (like your hands). The two forms (**enantiomers**) have identical physical properties except for how they rotate polarized light and how they interact with other chiral things. In biology, this asymmetry is everywhere — natural amino acids are all "L," sugars are mostly "D," and drug enantiomers can have completely different effects.
+
+## Chirality
+
+A **chiral center** in organic chemistry is typically a carbon with **four different** substituents. Such a carbon is **stereogenic**.
+
+A molecule is **chiral** if it has no improper rotation axis (most commonly, no mirror plane).
+
+## Enantiomers vs Diastereomers
+
+| Type | Relationship |
+|---|---|
+| Enantiomers | Non-superimposable mirror images |
+| Diastereomers | Stereoisomers that are not mirror images |
+| Constitutional isomers | Different atom connectivity |
+
+For $n$ chiral centers, up to $2^n$ stereoisomers possible (often fewer due to symmetry — e.g., meso compounds).
+
+## R/S Notation (Cahn-Ingold-Prelog)
+
+1. Rank the four substituents by priority (higher atomic number = higher rank).
+2. Orient the molecule with lowest-priority group pointing away.
+3. Look at remaining three: clockwise = **R**; counterclockwise = **S**.
+
+## Optical Activity
+
+Chiral molecules rotate plane-polarized light. Two enantiomers rotate in opposite directions.
+
+- (+) or **d**-: clockwise (dextrorotatory)
+- (−) or **l**-: counterclockwise (levorotatory)
+
+Optical rotation magnitude depends on concentration, path length, wavelength, temperature.
+
+Note: (+) vs (−) is independent of R/S — must measure empirically.
+
+## Biological Significance
+
+Most biomolecules are chiral. Cells produce and recognize only one enantiomer:
+- Amino acids: L-form (almost all, glycine is achiral)
+- Sugars: D-form (D-glucose dominant in metabolism)
+- DNA helix: right-handed
+
+This homochirality is one of biology's deepest mysteries.
+
+## Common Misconceptions
+
+**Misconception 1: "Chiral = asymmetric."**
+
+Chirality requires absence of *improper symmetry elements* (mirror planes, inversion centers). A molecule can have *some* symmetry and still be chiral.
+
+**Misconception 2: "All chiral molecules have a stereogenic center."**
+
+Some chiral molecules have axial chirality (allenes, biaryls) or planar chirality (substituted ferrocenes) without a single stereogenic carbon.
+
+**Misconception 3: "Enantiomers have identical properties."**
+
+Identical in **achiral** environments — same melting point, boiling point, density. Different in **chiral** environments: optical rotation, biological activity, interactions with other chiral molecules.
+
+## Engineering Connection
+
+- **Drug development:** thalidomide tragedy showed enantiomers can have opposite effects (one sedative, one teratogenic).
+- **Pharmaceutical manufacturing:** chiral synthesis or chiral chromatography to separate enantiomers.
+- **Asymmetric catalysis:** Nobel-prize-winning catalysts that produce one enantiomer selectively.
+- **Flavor and fragrance:** (R)-carvone smells like spearmint, (S)-carvone smells like caraway. Same molecule, different smell!
+- **Liquid crystals (LCDs):** cholesteric phases use chirality to twist molecules.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Is 2-bromobutane chiral?
+</ExQ>
+<ExA>
+C2 has four substituents: H, Br, CH₃, CH₂CH₃ — all different. **Yes, chiral**.
+
+Exists as (R)- and (S)-2-bromobutane enantiomers.
+</ExA>
+
+<ExQ>
+**2.** Is 2-bromopropane chiral?
+</ExQ>
+<ExA>
+C2 has H, Br, CH₃, CH₃ — two methyls identical. **Not chiral**.
+
+No stereogenic center. The molecule has a mirror plane.
+</ExA>
+
+<ExQ>
+**3.** Lactic acid CH₃CH(OH)COOH. Identify the stereocenter and assign priorities.
+</ExQ>
+<ExA>
+Central C has: OH, COOH, CH₃, H.
+
+Priorities (by atomic number / mass): OH > COOH (O > C, but at first atom both 6... wait COOH starts with C-OOH, OH starts with O). Actually: OH has O directly; COOH starts with C. So OH > COOH.
+
+Priorities: 1. OH 2. COOH 3. CH₃ 4. H.
+
+Orient with H behind; if 1→2→3 is clockwise: R-lactic acid. Counterclockwise: S-lactic acid.
+
+(Natural lactic acid in muscles is L = S form.)
+</ExA>
+
+<ExQ>
+**4. Engineering: Drug enantiomers.** Ibuprofen is sold as a racemic mixture. Only one enantiomer is active. Why is it still effective?
+</ExQ>
+<ExA>
+S-ibuprofen is the active form (binds to COX enzyme). R-ibuprofen is less active.
+
+Fortunately, the body **interconverts** R-ibuprofen to S-ibuprofen via metabolism. So racemic mixture works.
+
+For drugs without such interconversion (like thalidomide), enantioselective synthesis or separation is critical.
+
+This biological metabolism is part of "chiral switching" — converting racemic drugs to single-enantiomer products.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Two enantiomers have the same density, boiling point, and most physical properties. Yet they can taste different. Why?
+</ExQ>
+<ExA>
+Taste receptors are **chiral proteins**. They distinguish enantiomers because protein binding sites are themselves asymmetric.
+
+When (R) molecule binds, makes specific contacts. (S) molecule cannot match the same contacts in the chiral pocket.
+
+This is why (R)-carvone smells like spearmint and (S)-carvone like caraway — same atoms, different shape, different receptor interaction.
+
+Biology is chiral throughout; achiral measurements miss the most relevant differences.
+</ExA>

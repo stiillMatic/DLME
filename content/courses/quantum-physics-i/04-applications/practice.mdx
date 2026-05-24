@@ -1,0 +1,65 @@
+---
+title: Chapter 4 Practice — Operators and Tunneling
+description: Practice on quantum operators and tunneling.
+---
+
+# Chapter 4 Practice — Operators and Tunneling
+
+<ExQ>
+**1.** $\hat O = i\partial/\partial x$. Is this Hermitian?
+</ExQ>
+<ExA>
+Test on test functions, with assumed boundary terms vanishing:
+
+$\int\psi^*(i\partial_x\phi)\,dx$. Integration by parts: $\int\partial_x(i\psi^*)\phi\,dx \cdot (-1) = -\int i\partial_x\psi^*\phi\,dx = \int(-i\partial_x\psi)^*\phi\,dx$.
+
+So $\hat O = i\partial_x$ is anti-Hermitian (conjugate gives $-\hat O$, not $\hat O$).
+
+Correct momentum: $\hat p = -i\hbar\partial_x$ (with the $i$ outside derivative, conjugating gives back $-i\cdot(-1) = i$, then with $\partial_x$ change of sign...).
+
+Actually $\hat p = -i\hbar\partial_x$: $\int\psi^*(-i\hbar\partial_x\phi)\,dx = i\hbar\int\partial_x\psi^*\phi\,dx = \int(-i\hbar\partial_x\psi)^*\phi\,dx$ ✓ Hermitian.
+</ExA>
+
+<ExQ>
+**2.** Two operators commute. What can we say?
+</ExQ>
+<ExA>
+Compatible observables — can be simultaneously precisely measured. Share complete set of common eigenstates.
+
+Example: $\hat L^2$ and $\hat L_z$ commute — angular momentum eigenstates are labeled by both $l$ and $m$.
+</ExA>
+
+<ExQ>
+**3.** Electron tunneling through 2 nm barrier with $V_0 - E = 0.5$ eV. Estimate $T$.
+</ExQ>
+<ExA>
+$\kappa = \sqrt{2m_e \cdot 0.5\text{eV}}/\hbar \approx 3.62\times 10^9$ m⁻¹.
+
+$T \approx e^{-2\kappa L} = e^{-14.5} \approx 5\times 10^{-7}$.
+
+Small but measurable. Tunnel diodes/STM operate in this range.
+</ExA>
+
+<ExQ>
+**4. Engineering: Alpha decay.** Alpha particle inside heavy nucleus tunnels through Coulomb barrier. If $T$ doubles, what fractional reduction in barrier width occurred?
+</ExQ>
+<ExA>
+$T \propto e^{-2\kappa L}$. Doubling $T$: $-2\kappa\Delta L = -\ln 2$, $\Delta L = \ln 2/(2\kappa) \approx 0.35/\kappa$.
+
+For alpha: $\kappa \approx 10^{15}$ m⁻¹ (heavy mass, ~MeV barrier). $\Delta L \approx 3.5\times 10^{-16}$ m.
+
+So sub-femtometer changes in barrier characteristics give factor-of-2 lifetime changes. This is why alpha decay half-lives span 30 orders of magnitude across isotopes.
+</ExA>
+
+<ExQ>
+**5. Conceptual.** Why does tunneling not violate conservation of energy?
+</ExQ>
+<ExA>
+The particle has energy $E$ before, during (mathematically), and after the barrier — same energy.
+
+Inside the barrier, classically the kinetic energy would be negative — but the wavefunction is exponentially decaying (not oscillating), and the *expectation value* of kinetic energy is well-defined and positive.
+
+No energy is borrowed. The wavefunction simply has non-zero amplitude in classically forbidden regions — pure wave behavior, not particle "leaking."
+
+This is a coherent quantum effect, not a classical paradox.
+</ExA>

@@ -1,0 +1,141 @@
+---
+title: Separable Equations
+description: The simplest first-order ODEs and how to solve them by separating variables.
+---
+
+# Separable Equations
+
+## The Big Picture
+
+Differential equations describe how quantities change in time or space. **Separable equations** are the simplest important class: those where the rate $dy/dx$ factors as $f(x)g(y)$. We can split the equation into "all $y$ on one side, all $x$ on the other," then integrate. Many real-world systems — exponential growth/decay, Newton's cooling, RC discharge, isothermal compression — are described by separable ODEs. Master this technique and you've unlocked a substantial fraction of practical engineering modeling.
+
+## Intuition First — Splitting the Variables
+
+A separable equation has the form:
+
+$$\frac{dy}{dx} = f(x)\,g(y)$$
+
+The trick: rearrange to put $y$ and its differential on one side, $x$ and its differential on the other:
+
+$$\frac{dy}{g(y)} = f(x)\,dx$$
+
+Now both sides are functions of *single variables*, so each can be integrated independently. The result is an implicit relation between $x$ and $y$.
+
+This works because the chain rule effectively allows treating $dy/dx$ as a fraction of differentials.
+
+## The Method
+
+1. **Identify** the equation as separable: $dy/dx = f(x)g(y)$.
+2. **Separate:** $dy/g(y) = f(x)dx$.
+3. **Integrate:** $\int dy/g(y) = \int f(x)dx + C$.
+4. **Solve** for $y$ if possible (otherwise leave implicit).
+5. **Apply initial condition** to determine $C$.
+
+## Worked Example
+
+**Newton's law of cooling:** $dT/dt = -k(T - T_\infty)$. Find $T(t)$ given $T(0) = T_0$.
+
+Separate: $\dfrac{dT}{T - T_\infty} = -k\,dt$.
+
+Integrate: $\ln|T - T_\infty| = -kt + C$.
+
+Exponentiate: $T - T_\infty = A e^{-kt}$ (where $A = \pm e^C$).
+
+Apply IC: $T(0) - T_\infty = A \Rightarrow A = T_0 - T_\infty$.
+
+$$T(t) = T_\infty + (T_0 - T_\infty)e^{-kt}$$
+
+The classic exponential approach to thermal equilibrium.
+
+## Implicit Solutions
+
+Sometimes the integrated form can't be solved explicitly for $y(x)$:
+
+$dy/dx = x/y \Rightarrow y\,dy = x\,dx \Rightarrow y^2/2 = x^2/2 + C$, i.e., $y^2 - x^2 = C'$.
+
+This is a hyperbola — a perfectly valid solution, just not in $y = f(x)$ form.
+
+## Common Misconceptions
+
+**Misconception 1: "Every first-order ODE is separable."**
+
+Not every first-order ODE separates. The equation $dy/dx = x + y$ doesn't separate — but it can be solved by other techniques (linear ODE, integrating factor — next lesson).
+
+**Misconception 2: "Treating $dy/dx$ as a fraction is a hack."**
+
+It's a *legitimate* manipulation rooted in the chain rule. Leibniz invented this notation precisely so it would behave fraction-like in many contexts. Just be aware that not all manipulations carry over (e.g., higher derivatives).
+
+**Misconception 3: "Forgetting $+C$ is a small error."**
+
+The constant captures the initial state. Without it, you've lost a degree of freedom; without ICs to fix it, the solution is incomplete. In physics: $C$ is your initial position, voltage, temperature, etc.
+
+**Misconception 4: "I should always solve for $y$."**
+
+Many real ODEs have implicit solutions. Force-fitting an explicit form can introduce errors. Sometimes the implicit form is the natural answer.
+
+## Engineering Connection
+
+- **Radioactive decay:** $dN/dt = -\lambda N$ → $N(t) = N_0 e^{-\lambda t}$.
+- **Logistic growth (population):** $dP/dt = rP(1 - P/K)$ → S-shaped growth curves.
+- **RC circuit charging:** $V_C(t) = V_0(1 - e^{-t/RC})$.
+- **Drag-limited terminal velocity:** $m\,dv/dt = mg - cv^2$ — separable.
+- **Mixing problems:** salt concentration in a tank with inflow and outflow.
+
+In each case, separation reduces a dynamical question to two integrals.
+
+---
+
+## Practice Problems
+
+<ExQ>
+Solve $dy/dx = xy$ with $y(0) = 1$.
+</ExQ>
+<ExA>
+Separate: $dy/y = x\,dx \Rightarrow \ln|y| = x^2/2 + C$.
+
+Exponentiate: $y = Ae^{x^2/2}$. IC: $A = 1$.
+
+$\boxed{y = e^{x^2/2}}$
+</ExA>
+
+<ExQ>
+Solve $dy/dx = -y/(x+1)$, $y(0) = 2$.
+</ExQ>
+<ExA>
+$dy/y = -dx/(x+1) \Rightarrow \ln|y| = -\ln|x+1| + C \Rightarrow y = A/(x+1)$.
+
+IC: $y(0) = 2 = A \Rightarrow y = 2/(x+1)$.
+</ExA>
+
+<ExQ>
+**Engineering: RC discharge.** A capacitor discharges through a resistor: $dV/dt = -V/(RC)$. Find $V(t)$ if $V(0) = 10$ V, $RC = 0.5$ s.
+</ExQ>
+<ExA>
+$V(t) = V_0 e^{-t/(RC)} = 10 e^{-2t}$ V.
+
+After 1 s: $V \approx 10 e^{-2} \approx 1.35$ V (about 13.5% of initial). Standard RC time-constant analysis.
+</ExA>
+
+<ExQ>
+**Conceptual.** Why does the equation $dy/dx = y^2 - 1$ have **constant** solutions $y = 1$ and $y = -1$?
+</ExQ>
+<ExA>
+At $y = \pm 1$: $dy/dx = 0$, so $y$ doesn't change. These are **equilibria**.
+
+In the phase-line picture: $y = 1$ is unstable (small perturbations grow), $y = -1$ is stable (perturbations decay).
+
+Equilibrium analysis is the cornerstone of stability theory in dynamics and control.
+</ExA>
+
+<ExQ>
+**Multi-step.** A tank holds 100 L of water with 5 kg of salt. Pure water flows in at 4 L/min; mixed solution flows out at the same rate. Find the salt concentration after 10 minutes.
+</ExQ>
+<ExA>
+Let $S(t)$ = salt amount (kg). $dS/dt = -$ (outflow rate)·(concentration) $= -4\cdot S/100 = -S/25$.
+
+Separable: $S(t) = S_0 e^{-t/25} = 5 e^{-t/25}$.
+
+At $t = 10$: $S = 5e^{-0.4} \approx 3.35$ kg.
+
+Concentration: $3.35/100 = 0.0335$ kg/L = 33.5 g/L.
+</ExA>

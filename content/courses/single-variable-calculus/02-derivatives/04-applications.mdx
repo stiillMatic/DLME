@@ -1,0 +1,341 @@
+---
+title: Applications — Optimization and Related Rates
+description: Using the derivative to find maxima and minima, and to relate the rates of change of connected quantities.
+---
+
+# Applications: Optimization and Related Rates
+
+## The Big Picture
+
+Two of the most powerful applications of differentiation in engineering are **optimization** (finding the best design) and **related rates** (linking how one quantity changes when another does). Both reduce to a single mathematical fact: at a max or min, the derivative is zero; and if quantities are linked by an equation, their rates of change are linked by the chain rule. Engineering design and physical reasoning rely on these two ideas constantly.
+
+## Intuition First — Slopes Tell You Where to Stop
+
+Picture the graph of a function as a hilly landscape. Walking along it, the *slope* tells you which way is uphill (positive) or downhill (negative). At the top of a hill or the bottom of a valley, the slope is momentarily *zero* — you've stopped going up or down.
+
+This is the core of optimization: **find where $f'(x) = 0$**, and you've found a candidate for a maximum or minimum. The second derivative tells you which.
+
+For related rates, the intuition is different: imagine two gears meshing. If gear A turns faster, gear B must turn faster too — the relationship between angles forces a relationship between angular *velocities*. Differentiation of the constraint gives you that relationship.
+
+## Critical Points and Extrema
+
+A **critical point** of $f$ is a point where $f'(x) = 0$ or $f'(x)$ doesn't exist.
+
+**Fermat's Theorem:** if $f$ has a local max or min at an interior point $c$, and $f'(c)$ exists, then $f'(c) = 0$.
+
+This is the *necessary* condition for an extremum (interior). It's not sufficient — $f(x) = x^3$ has $f'(0) = 0$ but no extremum there.
+
+## Classifying Critical Points
+
+**First Derivative Test:** look at the sign of $f'$ on either side of the critical point $c$.
+- $f' > 0$ before, $f' < 0$ after → local **max**
+- $f' < 0$ before, $f' > 0$ after → local **min**
+- Same sign before and after → not an extremum (saddle / inflection)
+
+**Second Derivative Test:** if $f'(c) = 0$, evaluate $f''(c)$.
+- $f''(c) > 0$ → local **min** (curve concave up, like a bowl)
+- $f''(c) < 0$ → local **max** (curve concave down, like a dome)
+- $f''(c) = 0$ → inconclusive (use first derivative test)
+
+## Optimization on Closed Intervals
+
+To find the absolute maximum and minimum of a continuous $f$ on $[a, b]$:
+
+1. Find all critical points of $f$ in $(a, b)$.
+2. Evaluate $f$ at each critical point and at both endpoints.
+3. The largest value is the absolute max; the smallest is the absolute min.
+
+The Extreme Value Theorem guarantees these exist — *because* the function is continuous and the interval closed.
+
+## A Worked Optimization Example
+
+**Problem:** A rectangular box with a square base and open top is to hold 32 m³. Find the dimensions that minimize surface area.
+
+**Setup.** Let $x$ = side of base, $h$ = height. Volume: $x^2 h = 32 \Rightarrow h = 32/x^2$. Surface area (no top):
+
+$$S = x^2 + 4xh = x^2 + 4x\cdot\frac{32}{x^2} = x^2 + \frac{128}{x}$$
+
+This is now a 1D optimization in $x > 0$.
+
+**Differentiate and set to zero.**
+$$S'(x) = 2x - \frac{128}{x^2} = 0 \implies 2x = \frac{128}{x^2} \implies x^3 = 64 \implies x = 4$$
+
+**Check second derivative.**
+$$S''(x) = 2 + \frac{256}{x^3} \implies S''(4) = 2 + 4 = 6 > 0$$
+
+Local min ✓. (Boundaries: as $x \to 0$ or $x \to \infty$, $S \to \infty$, so this is the absolute min.)
+
+**Answer:** $x = 4$ m, $h = 32/16 = 2$ m. Minimum surface area = $16 + 32 = 48$ m².
+
+## Related Rates: The Recipe
+
+Related-rates problems share a structure:
+
+1. Write down all the variables and their meanings.
+2. Identify the *constraint equation* relating them (geometry, conservation, etc.).
+3. Differentiate the constraint with respect to **time** (using chain rule — variables are functions of $t$).
+4. Plug in known values *after* differentiating, not before.
+5. Solve for the rate you want.
+
+**Common pitfall:** plugging in numerical values before differentiating. If you do, the chain rule terms turn into zero (constants don't change), and you lose the relationship.
+
+## A Worked Related-Rates Example
+
+**Problem:** Air leaks out of a spherical balloon at $50$ cm³/min. Find how fast the radius is shrinking when $r = 5$ cm.
+
+**Setup.** $V = \tfrac{4}{3}\pi r^3$. Both depend on $t$.
+
+**Differentiate w.r.t. $t$:**
+$$\frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}$$
+
+**Plug in:** $dV/dt = -50$ (negative because volume is shrinking). $r = 5$:
+
+$$-50 = 4\pi(25)\,\frac{dr}{dt} \implies \frac{dr}{dt} = -\frac{50}{100\pi} = -\frac{1}{2\pi} \approx -0.159\ \text{cm/min}$$
+
+The radius shrinks at about 0.16 cm/min when $r = 5$ cm. (As $r$ decreases further, the rate of shrinkage accelerates — radius decreases faster as the balloon gets smaller.)
+
+## Common Misconceptions
+
+**Misconception 1: "$f'(c) = 0$ means $c$ is a max or min."**
+
+Necessary, not sufficient. $f(x) = x^3$ has $f'(0) = 0$ but $0$ is neither — it's an inflection. Always classify.
+
+**Misconception 2: "Maximum is the largest critical point value."**
+
+You must also check **endpoints**. The absolute max on $[a, b]$ might be $f(a)$ or $f(b)$, not at an interior critical point. Especially common in design problems where the extreme of a feasible range is the answer.
+
+**Misconception 3: "I can plug in values before differentiating in related rates."**
+
+Don't. Once you've plugged in a numerical value for, say, $r = 5$, you've turned $r$ into a constant. Its time derivative is then $0$, destroying the relationship. Always differentiate first, plug in last.
+
+**Misconception 4: "Critical points where $f'$ doesn't exist don't count."**
+
+They do — at corners, cusps, or vertical tangents, the function can have an extremum even though the derivative doesn't exist. Don't ignore these.
+
+## Engineering Connection
+
+Optimization and related rates are at the core of engineering practice:
+
+- **Beam design:** minimize weight subject to a stress constraint. Reduces to setting $dW/dx = 0$ where $W$ is weight and $x$ is a design variable.
+- **Heat exchanger design:** optimize tube length, diameter, and number of passes to maximize heat transfer per unit cost.
+- **Control systems:** find the gain that minimizes overshoot — solve $d(\text{overshoot})/dK = 0$.
+- **Hydraulic systems:** if water level changes at known rate, how fast does pressure at a sensor change? — related rates via the chain rule on $P = \rho g h$.
+- **Robotic kinematics:** if a joint angle changes, how fast does the end effector move? — related rates on the geometric relationship.
+
+In structural and mechanical optimization, the *Karush-Kuhn-Tucker (KKT) conditions* generalize "$f' = 0$" to constrained problems with multiple variables — but the spirit is identical.
+
+---
+
+## Practice Problems
+
+### Warm-up
+
+<ExQ>
+Find the critical points of $f(x) = x^3 - 3x^2 + 2$ and classify them.
+</ExQ>
+<ExA>
+$f'(x) = 3x^2 - 6x = 3x(x-2)$. Critical points: $x = 0, 2$.
+
+$f''(x) = 6x - 6$.
+
+At $x = 0$: $f''(0) = -6 < 0$ → local **max**, $f(0) = 2$.
+
+At $x = 2$: $f''(2) = 6 > 0$ → local **min**, $f(2) = 8 - 12 + 2 = -2$.
+</ExA>
+
+<ExQ>
+A square sheet of metal of side 12 cm has a square corner cut from each corner of side $x$. The flaps fold up to form an open-top box. What $x$ maximizes the box volume?
+</ExQ>
+<ExA>
+Box dimensions: base $(12 - 2x) \times (12 - 2x)$, height $x$.
+
+$$V(x) = x(12 - 2x)^2$$
+
+$V'(x) = (12-2x)^2 + x\cdot 2(12-2x)\cdot(-2) = (12-2x)[(12-2x) - 4x] = (12-2x)(12-6x)$
+
+$V'(x) = 0$ at $x = 6$ or $x = 2$. Domain $x \in (0, 6)$, so $x = 2$.
+
+Check: $V''(2) < 0$ → max. $V(2) = 2(8)^2 = \boxed{128\ \text{cm}^3}$.
+</ExA>
+
+### Application
+
+<ExQ>
+Find the absolute max and min of $f(x) = x^3 - 12x + 5$ on $[-3, 3]$.
+</ExQ>
+<ExA>
+$f'(x) = 3x^2 - 12 = 3(x-2)(x+2)$. Critical points: $x = \pm 2$ (both inside $[-3, 3]$).
+
+Evaluate at all candidates:
+- $f(-3) = -27 + 36 + 5 = 14$
+- $f(-2) = -8 + 24 + 5 = 21$
+- $f(2) = 8 - 24 + 5 = -11$
+- $f(3) = 27 - 36 + 5 = -4$
+
+**Absolute max:** $f(-2) = 21$. **Absolute min:** $f(2) = -11$.
+</ExA>
+
+<ExQ>
+A 3-meter ladder is sliding down a wall. The bottom moves outward at 0.4 m/s. How fast is the angle the ladder makes with the ground decreasing when the bottom is 1 m from the wall?
+</ExQ>
+<ExA>
+Let $\theta$ = angle, $x$ = distance from wall, ladder length = 3.
+
+$\cos\theta = x/3 \implies x = 3\cos\theta$.
+
+Differentiate w.r.t. time:
+$$\frac{dx}{dt} = -3\sin\theta\,\frac{d\theta}{dt}$$
+
+When $x = 1$: $\cos\theta = 1/3$, so $\sin\theta = \sqrt{1 - 1/9} = \sqrt{8/9} = 2\sqrt{2}/3$.
+
+$$0.4 = -3\cdot\frac{2\sqrt{2}}{3}\cdot\frac{d\theta}{dt} \implies \frac{d\theta}{dt} = -\frac{0.4}{2\sqrt{2}} = -\frac{0.2}{\sqrt{2}} = -\frac{\sqrt{2}}{10}\ \text{rad/s}$$
+
+About $-0.141$ rad/s — the angle is decreasing at 0.141 rad/s.
+</ExA>
+
+### Challenge
+
+<ExQ>
+A cylindrical can must hold 500 mL = 500 cm³. Find the dimensions (radius and height) that minimize the surface area (top, bottom, and sides).
+</ExQ>
+<ExA>
+Surface area $S = 2\pi r^2 + 2\pi r h$. Volume constraint: $\pi r^2 h = 500 \Rightarrow h = 500/(\pi r^2)$.
+
+$$S(r) = 2\pi r^2 + 2\pi r\cdot\frac{500}{\pi r^2} = 2\pi r^2 + \frac{1000}{r}$$
+
+$S'(r) = 4\pi r - 1000/r^2 = 0 \Rightarrow r^3 = 250/\pi \Rightarrow r = (250/\pi)^{1/3} \approx 4.30$ cm.
+
+$h = 500/(\pi r^2) = 500/(\pi \cdot 18.49) \approx 8.60$ cm.
+
+Note $h = 2r$ — the optimal can has height equal to its diameter. This is why beverage cans are often **not** at the minimum: aspect ratio is constrained by handling and shelf design, not just material.
+</ExA>
+
+<ExQ>
+The temperature of a cooling block is $T(t) = 100\,e^{-0.05t} + 25$ (°C, $t$ in min). Find the time at which the cooling rate $|dT/dt|$ equals 1 °C/min.
+</ExQ>
+<ExA>
+$T'(t) = 100\cdot(-0.05)\,e^{-0.05t} = -5e^{-0.05t}$
+
+Set $|T'| = 1$: $5e^{-0.05t} = 1 \Rightarrow e^{-0.05t} = 0.2 \Rightarrow -0.05t = \ln 0.2 \approx -1.609$.
+
+$t \approx \boxed{32.2\ \text{min}}$
+
+This is essentially Newton's law of cooling: rate of cooling decreases exponentially as the block approaches ambient temperature.
+</ExA>
+
+### Conceptual
+
+<ExQ>
+**True or False.** A critical point of $f$ is always a local maximum or minimum. Justify.
+</ExQ>
+<ExA>
+**False.** A critical point is *necessary* for an extremum but not *sufficient*.
+
+Counterexample: $f(x) = x^3$ has $f'(0) = 0$, so $x = 0$ is a critical point. But $f$ is increasing through $x = 0$ — neither max nor min. It's a *saddle* (inflection with horizontal tangent).
+
+To classify a critical point, you need additional info: first derivative test (sign of $f'$ on either side) or second derivative test ($f''$ at the point).
+</ExA>
+
+<ExQ>
+**Sketch.** Sketch $f(x)$ on $[-2, 4]$ given: $f(-2) = 1$, $f(4) = 3$, $f'(0) = 0$ (local min), $f'(2) = 0$ (local max), $f''(x) > 0$ on $(-2, 1)$, $f''(x) < 0$ on $(1, 4)$.
+</ExQ>
+<ExA>
+Reading the cues:
+- $f''>0$ on $(-2, 1)$ means **concave up** there.
+- $f''<0$ on $(1, 4)$ means **concave down** there.
+- Inflection at $x = 1$.
+- Local min at $x = 0$ (concave up + critical), local max at $x = 2$ (concave down + critical).
+
+Sketch: starts at $(-2, 1)$, dips into a valley near $x=0$ (local min, value below 1), rises to inflection at $x=1$, peaks at local max near $x=2$, descends to $(4, 3)$.
+
+This kind of "graph from descriptions" exercise builds the intuition for reading derivatives.
+</ExA>
+
+<ExQ>
+**Endpoints matter.** Find the maximum of $f(x) = x^2 - 4x + 7$ on $[0, 5]$. Then on $(0, 5)$. Then on $[1, 3]$. Discuss why each answer differs.
+</ExQ>
+<ExA>
+$f'(x) = 2x - 4 = 0$ at $x = 2$. $f(2) = 3$ (local min, since $f''>0$).
+
+**On $[0, 5]$ (closed):** Compare $f(0) = 7$, $f(2) = 3$, $f(5) = 12$. Max = $12$ at $x = 5$.
+
+**On $(0, 5)$ (open):** $f$ approaches but doesn't attain the boundary values. $\sup f = 12$, but **no max exists** because the open interval excludes the endpoint where the max would be.
+
+**On $[1, 3]$:** $f(1) = 4$, $f(2) = 3$, $f(3) = 4$. Max = $4$, attained at *both* endpoints.
+
+**Lesson:** EVT requires closure. Always check endpoints, even if there are interior critical points.
+</ExA>
+
+<ExQ>
+**Sensitivity reasoning.** A function $f(x) = e^{-x^2/(2\sigma^2)}$ models a sensor's response. For what value of $x$ is the sensitivity (the derivative magnitude) maximized? Without using calculus, describe the answer's structure.
+</ExQ>
+<ExA>
+$f'(x) = -\dfrac{x}{\sigma^2}e^{-x^2/(2\sigma^2)}$. We want to maximize $|f'|$, i.e., $\dfrac{|x|}{\sigma^2}e^{-x^2/(2\sigma^2)}$.
+
+Take derivative w.r.t. $x$ (or set up symmetrically): solving gives $x = \pm\sigma$.
+
+**Without calculus:** the bell curve is steepest at its inflection points, which are $x = \pm\sigma$. (Distance one standard deviation from the mean.)
+
+This is why **operating points are often chosen at $\pm\sigma$** — that's where the system is most responsive (highest derivative magnitude). Useful in sensor design and controller tuning.
+</ExA>
+
+### Engineering Synthesis
+
+<ExQ>
+**Beam strength optimization.** A rectangular beam of cross-section $b \times h$ cut from a circular log of radius $R$ satisfies $b^2 + h^2 = (2R)^2$. Strength is proportional to $S = bh^2$. Find the dimensions that maximize $S$.
+</ExQ>
+<ExA>
+From constraint: $h^2 = 4R^2 - b^2$. Substitute:
+$S(b) = b(4R^2 - b^2) = 4R^2 b - b^3$.
+
+$S'(b) = 4R^2 - 3b^2 = 0 \Rightarrow b = 2R/\sqrt{3}$.
+
+$h^2 = 4R^2 - 4R^2/3 = 8R^2/3 \Rightarrow h = 2R\sqrt{2/3}$.
+
+Ratio: $h/b = \sqrt{2}$. So **height : width = $\sqrt{2} : 1$**.
+
+This is the classical answer for the strongest rectangular beam from a circular log — a textbook engineering optimization with a clean ratio.
+</ExA>
+
+<ExQ>
+**Pipe flow optimization.** The friction loss in a pipe scales as $h_f = f\,L\,V^2/(2gD)$. The cost is proportional to $L\,D^2$. For a given total mass flow $\dot m = \rho V\pi D^2/4$, find the diameter $D$ that minimizes $h_f$ for fixed $L$ and $\dot m$.
+</ExQ>
+<ExA>
+From $\dot m = \rho V\pi D^2/4$: $V = 4\dot m/(\rho\pi D^2)$.
+
+So $V^2 = 16\dot m^2/(\rho^2\pi^2 D^4)$.
+
+$h_f = \dfrac{f L}{2gD}\cdot\dfrac{16\dot m^2}{\rho^2\pi^2 D^4} = \dfrac{8 f L \dot m^2}{g\rho^2\pi^2}\cdot\dfrac{1}{D^5}$.
+
+For fixed $\dot m$ and $L$: $h_f \propto 1/D^5$. So **larger diameter always reduces friction loss** — there's no interior minimum.
+
+The real engineering tradeoff: cost (which grows with $D$) vs. friction loss (which decreases with $D$). The optimal economic diameter comes from a *combined* objective. The math here just shows that the friction-only objective is monotonic.
+</ExA>
+
+<ExQ>
+**Ladder around corner.** A corridor of width 2 m meets perpendicular to a corridor of width 1 m. What is the longest straight ladder that can be carried around the corner horizontally?
+</ExQ>
+<ExA>
+At angle $\theta$ from one wall, the ladder length spans $L(\theta) = 2/\sin\theta + 1/\cos\theta$.
+
+Minimize $L$ over $\theta \in (0, \pi/2)$: $dL/d\theta = -2\cos\theta/\sin^2\theta + \sin\theta/\cos^2\theta = 0$
+
+$\sin^3\theta/\cos^3\theta = 2 \Rightarrow \tan^3\theta = 2 \Rightarrow \tan\theta = 2^{1/3}$.
+
+So $\sin\theta = 2^{1/3}/\sqrt{1 + 2^{2/3}}$, $\cos\theta = 1/\sqrt{1+2^{2/3}}$.
+
+$L_{\min} = 2\sqrt{1 + 2^{2/3}}/2^{1/3} + \sqrt{1 + 2^{2/3}} = \sqrt{1+2^{2/3}}(2^{2/3} + 1)$ ... arithmetic gives $L_{\min} = (2^{2/3} + 1)^{3/2} \approx 4.16$ m.
+
+The longest ladder that fits is the **minimum** of this expression — a counter-intuitive but classic result. Showing this requires both calculus and careful geometry.
+</ExA>
+
+<ExQ>
+**Multi-rate cascade.** A water tank drains through a hole; the water level $h(t)$ obeys $\dfrac{dh}{dt} = -k\sqrt{h}$ for $k > 0$. The cross-section area is $A$, so volume $V = Ah$. Find $\dfrac{dV}{dt}$ and explain why it is *not* constant despite $A$ being constant.
+</ExQ>
+<ExA>
+$V = Ah \Rightarrow \dfrac{dV}{dt} = A\dfrac{dh}{dt} = -Ak\sqrt{h}$.
+
+So $\dot V$ depends on $h$, not just on $A$. Even though $A$ (the geometry) doesn't change, the *driving head* $h$ does — Torricelli's theorem says drain rate scales as $\sqrt{h}$.
+
+The chain (height $\to$ velocity $\to$ flow $\to$ volume change rate) is fundamentally nonlinear. Real engineering: drain time depends on tank geometry AND the height-vs-time profile. Setting $\dot V$ constant would require a non-cylindrical tank with shape designed to compensate.
+</ExA>

@@ -1,0 +1,126 @@
+---
+title: Pressure and Hydrostatics
+description: Why pressure changes with depth — and how to compute forces on submerged surfaces.
+---
+
+# Pressure and Hydrostatics
+
+## The Big Picture
+
+In a static fluid, pressure varies with depth due to gravity. This single principle — the **hydrostatic equation** — underlies the design of dams, tanks, submarines, and barometers. Understanding it deeply means recognizing that pressure is *isotropic* (same in all directions at a point), that it depends only on depth (not lateral position), and that the resulting forces on surfaces can be computed by integrating over area.
+
+## The Hydrostatic Equation
+
+For a fluid at rest in a gravitational field:
+
+$$\frac{dp}{dz} = -\rho g$$
+
+(Sign: $z$ increases upward, pressure decreases.)
+
+For incompressible fluid (constant $\rho$):
+
+$$p(z) = p_0 - \rho g z$$
+
+Equivalently, **at depth $h$ below the surface**:
+$$p = p_{\text{atm}} + \rho g h$$
+
+## Pascal's Principle
+
+Pressure applied to an enclosed fluid is transmitted **undiminished** to every part of the fluid.
+
+Mathematical: at any depth, an external pressure increase adds equally to the pressure everywhere at that depth.
+
+This is the basis of **hydraulic systems** — small force on a small piston, large force on a large piston.
+
+## Force on Submerged Surfaces
+
+For a flat surface submerged in fluid:
+
+$$F = p_c\,A$$
+
+where $p_c$ is the pressure at the **centroid** of the surface, $A$ is the area.
+
+The **center of pressure** (where the resultant force acts) is *below* the centroid for a vertical surface.
+
+## Buoyancy (Archimedes' Principle)
+
+A submerged body experiences an upward force equal to the weight of fluid displaced:
+
+$$F_B = \rho_f g V_{\text{disp}}$$
+
+This is a direct consequence of pressure variation with depth — pressure on the bottom of an object exceeds pressure on the top.
+
+## Common Misconceptions
+
+**Misconception 1: "Pressure depends on volume of fluid above."**
+
+Pressure depends only on **depth**, not on volume or shape of container. A thin tube and a wide pool of the same height give the same bottom pressure.
+
+**Misconception 2: "Pressure is a vector."**
+
+Pressure is a *scalar* — same in all directions at a point. The *force* it produces is a vector, perpendicular to the surface.
+
+**Misconception 3: "Buoyancy depends on the body's mass."**
+
+It depends on the **fluid displaced**, not the body's weight. A heavy steel rock and a light foam ball of the same volume submerged at the same depth experience the same buoyant force.
+
+## Engineering Connection
+
+- **Dam design:** total horizontal force from water = $\frac{1}{2}\rho g h^2 \cdot \text{width}$, plus moment about base.
+- **Submarine ballast:** controlling depth via flooding/blowing tanks adjusts buoyancy.
+- **Manometers:** measuring pressure differences via height of liquid columns.
+- **Hydraulic jacks:** force amplification through area ratios.
+- **Tank wall thickness:** sized to resist hydrostatic pressure at maximum depth.
+
+---
+
+## Practice Problems
+
+<ExQ>
+**1.** Pressure at 10 m depth in fresh water? ($\rho = 1000$ kg/m³)
+</ExQ>
+<ExA>
+$p = \rho g h = 1000\cdot 9.81\cdot 10 = 98.1$ kPa (gauge).
+
+Absolute: $p_{\text{atm}} + 98.1 \approx 199$ kPa.
+</ExA>
+
+<ExQ>
+**2.** A submarine at 200 m depth in seawater ($\rho = 1025$). Pressure on hull?
+</ExQ>
+<ExA>
+$p = 1025\cdot 9.81\cdot 200 = 2.01$ MPa $\approx 20$ atm.
+
+Plus 1 atm atmospheric → 21 atm total. (Submarines withstand ~30+ atm at deeper depths.)
+</ExA>
+
+<ExQ>
+**3. Engineering: Dam.** A dam holds water up to height 20 m, width 100 m. Find total force on the dam.
+</ExQ>
+<ExA>
+Force per unit width: $\tfrac{1}{2}\rho g h^2 = 0.5\cdot 1000\cdot 9.81\cdot 400 = 1.96$ MN/m.
+
+Total: $100\cdot 1.96 = 196$ MN. (Massive — dams must be enormous.)
+</ExA>
+
+<ExQ>
+**4. Conceptual.** A boat carries a stone. Stone is dropped overboard. Does water level rise, fall, or stay the same?
+</ExQ>
+<ExA>
+**Falls.** When in the boat: stone displaces water of weight = stone's weight. When sunk: stone displaces water of *volume* = stone's volume.
+
+Since stone is denser than water, weight > volume × $\rho_w g$, so volume displaced decreases when sunk → water level falls.
+
+Classical paradox — counter-intuitive!
+</ExA>
+
+<ExQ>
+**5. Hydraulic press.** Small piston area 5 cm², large piston 200 cm². Force 10 N on small. Find force on large.
+</ExQ>
+<ExA>
+Pressure: $p = 10/(5\times 10^{-4}) = 20$ kPa.
+
+Force on large: $F = pA = 20\times 10^3\cdot 200\times 10^{-4} = 400$ N.
+
+40× amplification — hydraulic jacks, brakes, presses use this principle.
+</ExA>

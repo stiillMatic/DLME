@@ -1,0 +1,63 @@
+---
+title: Backpropagation
+description: How gradients flow backward so the network can learn.
+---
+
+# Backpropagation
+
+Backpropagation is the algorithm that computes **how much each weight contributed to the loss**, so we can nudge them in the right direction.
+
+## The Chain Rule
+
+If the loss $\mathcal{L}$ depends on $z$ which depends on $w$:
+
+$$
+\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial z} \cdot \frac{\partial z}{\partial w}
+$$
+
+For a multi-layer network, you repeatedly apply the chain rule from the output back to the input — hence "back" propagation.
+
+## Gradient Descent Update
+
+Once you have $\frac{\partial \mathcal{L}}{\partial w}$ for every weight, you update:
+
+$$
+w \leftarrow w - \eta \frac{\partial \mathcal{L}}{\partial w}
+$$
+
+where $\eta$ is the **learning rate** — how big a step to take.
+
+## PyTorch Autograd
+
+PyTorch computes all gradients automatically:
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+model = nn.Linear(5, 1)
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+criterion = nn.MSELoss()
+
+for x_batch, y_batch in dataloader:
+    optimizer.zero_grad()          # clear old gradients
+    pred = model(x_batch)          # forward pass
+    loss = criterion(pred, y_batch)
+    loss.backward()                # compute gradients (backprop)
+    optimizer.step()               # update weights
+```
+
+## ME Intuition
+
+Think of the loss surface as a hilly terrain. Gradient descent is like rolling a ball downhill — always moving in the direction that decreases elevation (loss) the fastest. The learning rate controls how big each step is; too large and you overshoot, too small and training is very slow.
+
+## What You've Learned So Far
+
+- **Neurons**: weighted sums + nonlinearities
+- **Forward propagation**: data flows input → output
+- **Loss**: measures prediction error
+- **Backpropagation**: gradients flow output → input
+- **Gradient descent**: weights update to reduce loss
+
+You now have everything needed to train a neural network. The next course will apply these ideas to real ME datasets.
