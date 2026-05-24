@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "me-foundations",
+    "title": "ME Fundamentals",
+    "description": "Core math and classical mechanics for any mechanical engineering student starting out.",
+    "duration": "~12 weeks",
+    "level": "beginner",
+    "courses": [
+      "single-variable-calculus",
+      "linear-algebra",
+      "classical-mechanics",
+      "solid-mechanics"
+    ]
+  },
+  {
+    "slug": "deep-learning-for-engineers",
+    "title": "Deep Learning for Engineers",
+    "description": "From calculus prerequisites to neural networks, framed with ME applications throughout.",
+    "duration": "~10 weeks",
+    "level": "intermediate",
+    "courses": [
+      "single-variable-calculus",
+      "linear-algebra",
+      "deep-learning-fundamentals"
+    ]
+  },
+  {
+    "slug": "applied-mathematics",
+    "title": "Applied Math Sequence",
+    "description": "The complete 3-semester calculus sequence plus linear algebra and ODEs — the engineer's math toolkit.",
+    "duration": "~16 weeks",
+    "level": "intermediate",
+    "courses": [
+      "single-variable-calculus",
+      "calculus-2",
+      "calculus-3",
+      "linear-algebra",
+      "differential-equations"
+    ]
+  },
+  {
+    "slug": "advanced-physics",
+    "title": "Advanced Physics",
+    "description": "From classical mechanics through waves to quantum mechanics — the physics depth track.",
+    "duration": "~12 weeks",
+    "level": "advanced",
+    "courses": [
+      "classical-mechanics",
+      "electromagnetism",
+      "physics-iii-vibrations-waves",
+      "quantum-physics-i"
+    ]
+  }
+]

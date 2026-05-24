@@ -1,149 +1,147 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getAllCourses, getAllArticles } from "@/lib/content";
+import { getAllCourses } from "@/lib/content";
+import { getAllPaths } from "@/lib/learning-paths";
+import LearningPathCard from "@/components/LearningPathCard";
+import SubjectAreaCard from "@/components/SubjectAreaCard";
+import StatsBar from "@/components/StatsBar";
+import RiemannDemo from "@/components/Interactive/RiemannDemo";
+
+const AREA_META: Record<string, { icon: string; description: string }> = {
+  Mathematics: { icon: "📐", description: "Calculus, linear algebra, ODEs, and the math foundations." },
+  Physics: { icon: "⚛️", description: "Classical mechanics, E&M, waves, and quantum physics." },
+  Chemistry: { icon: "⚗️", description: "Atomic structure, bonding, thermodynamics, and kinetics." },
+  "Core ME": { icon: "⚙️", description: "Solid & fluid mechanics, dynamics, thermo, heat transfer, materials." },
+  "Deep Learning": { icon: "🧠", description: "Neural networks built up from the math, with ME applications." },
+};
+
+const AREA_ORDER = ["Mathematics", "Physics", "Chemistry", "Core ME", "Deep Learning"];
 
 export default function HomePage() {
-  const courses = getAllCourses().slice(0, 3);
-  const articles = getAllArticles().slice(0, 3);
+  const courses = getAllCourses();
+  const paths = getAllPaths();
+
+  const areaCounts: Record<string, number> = {};
+  let totalLessons = 0;
+  for (const c of courses) {
+    const area = (c as typeof c & { area?: string }).area ?? "Other";
+    areaCounts[area] = (areaCounts[area] ?? 0) + 1;
+    for (const ch of c.chapters) totalLessons += ch.lessons.length;
+  }
 
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border px-4 py-24 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
+      <section className="relative overflow-hidden border-b border-border px-4 py-20 text-center sm:py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />
         <div className="relative mx-auto max-w-3xl">
           <Badge variant="secondary" className="mb-4">
-            For Mechanical Engineers
+            MIT-level STEM curriculum
           </Badge>
           <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Master Deep Learning.
-            <br />
-            Apply it to{" "}
-            <span className="text-primary">Engineering.</span>
+            From integral calculus to{" "}
+            <span className="text-primary">neural networks.</span>
           </h1>
           <p className="mb-8 text-lg text-muted-foreground">
-            Structured courses and practical articles that bridge the gap between
-            deep learning theory and mechanical engineering applications — from
-            FEA surrogate models to CFD acceleration.
+            A complete, structured learning path for mechanical engineering students —
+            with interactive demos, click-to-reveal practice problems, and progress
+            tracking. Free.
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link href="/courses">
-              <Button size="lg">Browse Courses</Button>
+              <Button size="lg">Browse all courses</Button>
             </Link>
-            <Link href="/sign-up">
+            <Link href="#paths">
               <Button size="lg" variant="outline">
-                Create free account
+                See learning paths
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="border-b border-border px-4 py-16">
+      {/* Stats */}
+      <StatsBar
+        stats={[
+          { value: courses.length, label: "Courses" },
+          { value: totalLessons, label: "Lessons" },
+          { value: "9", label: "Interactive demos" },
+          { value: "500+", label: "Practice problems" },
+        ]}
+      />
+
+      {/* Learning Paths */}
+      <section id="paths" className="border-b border-border px-4 py-16">
         <div className="mx-auto max-w-5xl">
-          <div className="grid gap-6 sm:grid-cols-3">
-            {[
-              {
-                icon: "📐",
-                title: "ME-Focused Examples",
-                desc: "Every concept is grounded in mechanics: stress prediction, flow fields, vibration analysis.",
-              },
-              {
-                icon: "📈",
-                title: "Track Your Progress",
-                desc: "Mark lessons complete and bookmark resources. Your learning history is always saved.",
-              },
-              {
-                icon: "🔄",
-                title: "Always Growing",
-                desc: "New courses and articles added regularly. Follow the full journey from basics to deployment.",
-              },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="flex flex-col gap-2 rounded-lg border border-border p-5">
-                <span className="text-2xl">{icon}</span>
-                <h3 className="font-semibold text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground">{desc}</p>
-              </div>
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-bold text-foreground">Learning paths</h2>
+            <p className="mt-2 text-muted-foreground">
+              Curated course sequences. Not sure where to start? Pick one.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {paths.map((p) => (
+              <LearningPathCard key={p.slug} path={p} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Courses preview */}
-      {courses.length > 0 && (
-        <section className="border-b border-border px-4 py-16">
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-8 flex items-end justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground">Courses</h2>
-                <p className="mt-1 text-muted-foreground">Structured paths from fundamentals to applications</p>
-              </div>
-              <Link href="/courses" className="text-sm text-primary hover:underline">
-                View all →
-              </Link>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {courses.map((c) => (
-                <Card key={c.slug} className="flex flex-col">
-                  <CardHeader>
-                    <div className="mb-2 flex flex-wrap gap-1">
-                      {c.tags.slice(0, 2).map((t) => (
-                        <Badge key={t} variant="secondary" className="text-xs">
-                          {t}
-                        </Badge>
-                      ))}
-                    </div>
-                    <CardTitle className="text-base">{c.title}</CardTitle>
-                    <CardDescription className="text-sm">{c.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="mt-auto pt-0">
-                    <Link href={`/courses/${c.slug}`}>
-                      <Button variant="outline" size="sm" className="w-full">
-                        Start learning
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+      {/* Subject areas */}
+      <section className="border-b border-border px-4 py-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-bold text-foreground">Browse by subject</h2>
+            <p className="mt-2 text-muted-foreground">
+              Pick the discipline you want to dive into.
+            </p>
           </div>
-        </section>
-      )}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {AREA_ORDER.filter((a) => areaCounts[a]).map((area) => (
+              <SubjectAreaCard
+                key={area}
+                area={area}
+                icon={AREA_META[area].icon}
+                description={AREA_META[area].description}
+                courseCount={areaCounts[area]}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Articles preview */}
-      {articles.length > 0 && (
-        <section className="px-4 py-16">
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-8 flex items-end justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground">Articles</h2>
-                <p className="mt-1 text-muted-foreground">Deep dives and practical guides</p>
-              </div>
-              <Link href="/articles" className="text-sm text-primary hover:underline">
-                View all →
-              </Link>
-            </div>
-            <div className="flex flex-col divide-y divide-border">
-              {articles.map((a) => (
-                <Link
-                  key={a.slug}
-                  href={`/articles/${a.slug}`}
-                  className="flex flex-col gap-1 py-4 hover:opacity-80 transition-opacity sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div>
-                    <p className="font-medium text-foreground">{a.title}</p>
-                    <p className="text-sm text-muted-foreground">{a.description}</p>
-                  </div>
-                  <span className="text-xs text-muted-foreground whitespace-nowrap">{a.date}</span>
-                </Link>
-              ))}
-            </div>
+      {/* Try it now — interactive demo on landing */}
+      <section className="border-b border-border px-4 py-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl font-bold text-foreground">Try it now</h2>
+            <p className="mt-2 text-muted-foreground">
+              Drag the slider — watch the Riemann sum converge to the integral.
+              Lessons are full of widgets like this.
+            </p>
           </div>
-        </section>
-      )}
+          <RiemannDemo />
+        </div>
+      </section>
+
+      {/* Footer CTAs */}
+      <section className="px-4 py-16 text-center">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">Ready to start?</h2>
+        <p className="mb-6 text-muted-foreground">
+          Create a free account to track progress and bookmark lessons.
+        </p>
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <Link href="/sign-up">
+            <Button size="lg">Create free account</Button>
+          </Link>
+          <Link href="/articles">
+            <Button size="lg" variant="ghost">
+              Browse articles →
+            </Button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
