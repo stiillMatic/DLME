@@ -8,19 +8,28 @@ import { useLessonId } from "./LessonContext";
 type Props = {
   children: React.ReactNode;
   id?: string;
-  answer?: number;
-  tol?: number;
+  answer?: number | string;
+  tol?: number | string;
   unit?: string;
 };
+
+function toNum(v: number | string | undefined): number | null {
+  if (v === undefined) return null;
+  if (typeof v === "number") return Number.isFinite(v) ? v : null;
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? n : null;
+}
 
 export default function ExQ({
   children,
   id,
   answer,
-  tol = 0.001,
+  tol,
   unit,
 }: Props) {
-  const numericMode = typeof answer === "number" && !!id;
+  const answerNum = toNum(answer);
+  const tolNum = toNum(tol) ?? 0.001;
+  const numericMode = answerNum !== null && !!id;
   const lessonId = useLessonId();
   const [value, setValue] = useState("");
   const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
@@ -55,7 +64,7 @@ export default function ExQ({
       setStatus("wrong");
       return;
     }
-    const correct = Math.abs(parsed - (answer as number)) <= tol;
+    const correct = Math.abs(parsed - (answerNum as number)) <= tolNum;
     setStatus(correct ? "correct" : "wrong");
     setAttempts((a) => a + 1);
     void logAttempt(parsed, correct);
