@@ -29,3 +29,21 @@ CREATE POLICY "user_progress_own" ON user_progress
 CREATE POLICY "bookmarks_own" ON bookmarks
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
+
+-- W3: Auto-scored numeric practice attempts
+CREATE TABLE IF NOT EXISTS practice_attempts (
+  id            BIGSERIAL PRIMARY KEY,
+  user_id       UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  lesson_id     TEXT NOT NULL,
+  question_id   TEXT NOT NULL,
+  submitted     NUMERIC NOT NULL,
+  is_correct    BOOLEAN NOT NULL,
+  attempted_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS practice_attempts_user_lesson
+  ON practice_attempts (user_id, lesson_id);
+
+ALTER TABLE practice_attempts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "practice_attempts_own" ON practice_attempts
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);

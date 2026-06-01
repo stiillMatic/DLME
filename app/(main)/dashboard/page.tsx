@@ -12,6 +12,7 @@ export default async function DashboardPage() {
   let user = null;
   let completedLessons: string[] = [];
   let bookmarks: { content_id: string; content_type: string }[] = [];
+  let attempts: { lesson_id: string; is_correct: boolean }[] = [];
 
   try {
     const supabase = await createServerSupabaseClient();
@@ -19,15 +20,30 @@ export default async function DashboardPage() {
     user = userData.user;
     if (!user) redirect("/sign-in?next=/dashboard");
 
-    const [{ data: progress }, { data: bmarks }] = await Promise.all([
+    const [{ data: progress }, { data: bmarks }, { data: atts }] = await Promise.all([
       supabase.from("user_progress").select("lesson_id").eq("user_id", user.id),
       supabase.from("bookmarks").select("content_id, content_type").eq("user_id", user.id),
+      supabase.from("practice_attempts").select("lesson_id, is_correct").eq("user_id", user.id),
     ]);
     completedLessons = (progress ?? []).map((r) => r.lesson_id);
     bookmarks = bmarks ?? [];
+    attempts = atts ?? [];
   } catch {
     redirect("/sign-in?next=/dashboard");
   }
+
+  // Aggregate practice attempts per lesson
+  const attemptStats = new Map<string, { right: number; total: number }>();
+  for (const a of attempts) {
+    const cur = attemptStats.get(a.lesson_id) ?? { right: 0, total: 0 };
+    cur.total += 1;
+    if (a.is_correct) cur.right += 1;
+    attemptStats.set(a.lesson_id, cur);
+  }
+  const totalAttempts = attempts.length;
+  const totalRight = attempts.filter((a) => a.is_correct).length;
+  const overallAccuracy =
+    totalAttempts > 0 ? Math.round((totalRight / totalAttempts) * 100) : 0;
 
   const courses = getAllCourses();
   const articles = getAllArticles();
@@ -84,6 +100,57 @@ export default async function DashboardPage() {
               );
             })}
           </div>
+        )}
+      </section>
+
+      {/* Practice accuracy */}
+      <section className="mb-10">
+        <h2 className="mb-4 text-xl font-semibold text-foreground">Practice</h2>
+        {totalAttempts === 0 ? (
+          <p className="text-muted-foreground">
+            No practice attempts yet. Look for exercises with a Check button on
+            any lesson.
+          </p>
+        ) : (
+          <>
+            <p className="mb-3 text-sm text-muted-foreground">
+              Total attempted:{" "}
+              <span className="text-foreground">{totalAttempts}</span> · Accuracy:{" "}
+              <span className="text-foreground">{overallAccuracy}%</span>
+            </p>
+            <div className="flex flex-col divide-y divide-border rounded-lg border border-border overflow-hidden">
+              {[...attemptStats.entries()].map(([lid, s]) => {
+                const pct = Math.round((s.right / s.total) * 100);
+                const parts = lid.split("/");
+                let title = lid;
+                let href = "#";
+                if (parts.length === 3) {
+                  const [cs, chs, ls] = parts;
+                  href = `/courses/${cs}/${chs}/${ls}`;
+                  const c = courses.find((c) => c.slug === cs);
+                  const ch = c?.chapters.find(
+                    (ch) =>
+                      (ch.slug ?? ch.title.toLowerCase().replace(/\s+/g, "-")) ===
+                      chs
+                  );
+                  const l = ch?.lessons.find((l) => l.slug === ls);
+                  title = l?.title ?? ls;
+                }
+                return (
+                  <Link
+                    key={lid}
+                    href={href}
+                    className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
+                  >
+                    <span className="text-sm text-foreground">{title}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {s.right} / {s.total} · {pct}%
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
         )}
       </section>
 

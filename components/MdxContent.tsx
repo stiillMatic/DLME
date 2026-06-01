@@ -4,6 +4,7 @@ import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import ExQ from "./ExQ";
 import ExA from "./ExA";
+import { LessonProvider } from "./LessonContext";
 import SHMDemo from "./Interactive/SHMDemo";
 import TaylorDemo from "./Interactive/TaylorDemo";
 import RiemannDemo from "./Interactive/RiemannDemo";
@@ -44,11 +45,19 @@ const options = {
   },
 };
 
-export default function MdxContent({ source }: { source: string }) {
-  return (
+export default function MdxContent({
+  source,
+  lessonId,
+}: {
+  source: string;
+  lessonId?: string;
+}) {
+  const inner = (
     <div className="prose">
       {/* @ts-expect-error async RSC */}
       <MDXRemote source={source} options={options} components={components} />
     </div>
   );
+  if (!lessonId) return inner;
+  return <LessonProvider lessonId={lessonId}>{inner}</LessonProvider>;
 }

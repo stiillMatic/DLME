@@ -64,6 +64,7 @@ Code blocks: fenced with language tag
 
 - `user_progress (user_id, lesson_id, completed_at)` — tracks completed lessons
 - `bookmarks (user_id, content_id, content_type)` — lesson and article bookmarks
+- `practice_attempts (user_id, lesson_id, question_id, submitted, is_correct, attempted_at)` — auto-scored numeric exercise attempts
 
 ## Environment Variables
 
@@ -164,6 +165,8 @@ Every new `.mdx` lesson should follow this seven-part structure (established and
    - Engineering Synthesis (multi-step real scenarios)
    - Challenge (mastery-level, for key chapters)
 
+   **Auto-scored numeric questions**: when an exercise has a single numeric answer, add `id="<stable-slug>"` and `answer={<num>}` (optionally `tol`, `unit`) to `<ExQ>`. Students get immediate ✅/❌ feedback and the attempt is logged for signed-in users via `practice_attempts`. Example: `<ExQ id="svc-lim-1" answer={21}>...</ExQ>`.
+
 Each chapter also has a `practice.mdx` with 20+ mixed problems including a Challenge Set.
 
 ## Known Pitfalls (Don't Repeat These)
@@ -217,7 +220,7 @@ The current week's specific plan lives at `.claude/plans/streamed-marinating-lak
 | W1 | 1A | Build slider primitives + SHM/Taylor/Riemann demos | ✅ Done |
 | W2 | 1A (expand) | DerivativeSecant, DampedOscillator, GaussianUncertainty, FourierSquareWave, QuantumWell, RCCharging demos | ✅ Done |
 | W2.5 | infra + design | git init + Learning Paths data + Landing/Courses redesign with paths, stats bar, area cards, embedded demo | ✅ Done (push pending) |
-| W3 | 1B | Auto-scored numeric questions | ⏳ Next |
+| W3 | 1B | Auto-scored numeric questions (ExQ numeric mode + practice_attempts table + dashboard accuracy) | ✅ Done |
 | W4 | 1C | Streak + daily challenge | ⏳ Planned |
 | W5 | 2D | First 3B1B-style animation | ⏳ Planned |
 

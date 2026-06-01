@@ -98,7 +98,7 @@ export default async function LessonPage({ params }: Props) {
         />
       </div>
 
-      <MdxContent source={contentSource} />
+      <MdxContent source={contentSource} lessonId={lessonId} />
 
       <div className="mt-12 flex justify-between gap-4 border-t border-border pt-6">
         {prev ? (
