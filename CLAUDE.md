@@ -165,7 +165,7 @@ Every new `.mdx` lesson should follow this seven-part structure (established and
    - Engineering Synthesis (multi-step real scenarios)
    - Challenge (mastery-level, for key chapters)
 
-   **Auto-scored numeric questions**: when an exercise has a single numeric answer, add `id="<stable-slug>"` and `answer={<num>}` (optionally `tol`, `unit`) to `<ExQ>`. Students get immediate ✅/❌ feedback and the attempt is logged for signed-in users via `practice_attempts`. Example: `<ExQ id="svc-lim-1" answer={21}>...</ExQ>`.
+   **Auto-scored numeric questions**: when an exercise has a single numeric answer, add `id="<stable-slug>"` and `answer="<num>"` (optionally `tol`, `unit`) to `<ExQ>`. Students get immediate ✅/❌ feedback and the attempt is logged for signed-in users via `practice_attempts`. Example: `<ExQ id="svc-lim-1" answer="21">...</ExQ>`. **Use string values (`answer="21"`), NOT JSX expressions (`answer={21}`)** — see Known Pitfalls.
 
 Each chapter also has a `practice.mdx` with 20+ mixed problems including a Challenge Set.
 
@@ -181,6 +181,8 @@ Each chapter also has a `practice.mdx` with 20+ mixed problems including a Chall
 - **Auth-dependent pages need `export const dynamic = "force-dynamic"`** to avoid build-time crashes when Supabase isn't reachable.
 - **`getCourse()` reads `meta.json` synchronously** — keep meta.json valid JSON or build crashes.
 - **Client-component MDX widgets** (with `useState`, event handlers, etc.) must be marked `"use client"` AND registered in `components/MdxContent.tsx`'s components map. Otherwise React hooks fail silently and the widget renders as plain HTML. Interactive demos live under `components/Interactive/`.
+- **`next-mdx-remote/rsc` silently drops JSX expression props** like `answer={21}` — only string attributes survive into the RSC payload. Pass numbers as strings (`answer="21"`) and parse inside the component. This bit W3: the `<ExQ>` Check button didn't render because `answer` arrived `undefined`.
+- **Supabase free-tier projects pause after ~7 days of inactivity** and can eventually be deleted. A long-running local dev server does NOT keep the project alive (W3 dev server ran 45 days while the DB paused → DNS NXDOMAIN). After a restore, the `public` schema may come back without role grants: tables return `42501 permission denied for table` to `anon`/`authenticated`. Fix: `GRANT SELECT, INSERT, UPDATE, DELETE ON public.<table> TO authenticated, anon;` + `GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated, anon;` then `NOTIFY pgrst, 'reload schema';`. Open the Supabase Dashboard ~weekly to keep the project active.
 
 ---
 
